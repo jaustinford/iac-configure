@@ -1,0 +1,20 @@
+---
+- name: ssl_deploy - copy ssl certificates
+  copy:
+    content: "{{ item.content }}"
+    dest: "{{ item.dest }}"
+    mode: "{{ item.mode }}"
+  become: true
+  no_log: true
+  notify: main - systemctl restart nginx
+  with_items:
+    - content: |
+        {{ discovered_tls.content | from_json | json_query('outputs.tls_certificate_pem.value') }}
+        {{ discovered_tls.content | from_json | json_query('outputs.tls_issuer_pem.value') }}
+      dest: /etc/nginx/nginx.crt
+      mode: '0644'
+
+    - content: |
+        {{ discovered_tls.content | from_json | json_query('outputs.tls_private_key_pem.value') }}
+      dest: /etc/nginx/nginx.crt.key
+      mode: '0600'

@@ -1,0 +1,8 @@
+{
+    "baseURL": "/",
+    "address": "",
+    "port": 80,
+    "log": "stdout",
+    "database": "/database.db",
+    "root": "/tvault"
+}

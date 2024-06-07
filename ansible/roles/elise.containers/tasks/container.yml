@@ -1,0 +1,25 @@
+---
+- name: "container - deploy {{ item.name }} container"
+  community.docker.docker_container:
+    name: "{{ item.name }}"
+    image: "{{ item.image }}"
+    pull: "{{ item.pull }}"
+    command: "{{ item.command }}"
+    docker_host: "tcp://{{ item.docker_host }}:2375"
+    restart_policy: "{{ item.restart_policy }}"
+    detach: "{{ item.detach }}"
+    labels: "{{ item.labels }}"
+    state: "{{ item.state }}"
+    shm_size: "{{ item.shm_size }}"
+    devices: "{{ item.devices }}"
+    capabilities: "{{ item.capabilities }}"
+    network_mode: "{{ item.network_mode }}"
+    dns_servers: "{{ item.dns_servers }}"
+    dns_search_domains: "{{ item.dns_search_domains }}"
+    env: "{{ item.env }}"
+    ports: "{{ item.ports }}"
+    volumes: "{{ item.volumes }}"
+  no_log: true
+
+- include_tasks: wait.yml
+  when: item.wait_for_port != "0"

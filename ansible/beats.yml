@@ -1,0 +1,4 @@
+---
+- hosts: elysianskies_onprem:elysianskies_linode
+  roles:
+    - elise.beats

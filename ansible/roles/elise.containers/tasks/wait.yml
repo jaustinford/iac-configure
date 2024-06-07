@@ -1,0 +1,5 @@
+---
+- name: "wait - {{ item.name }} on {{ item.docker_host }}:{{ item.wait_for_port }}"
+  wait_for:
+    host: "{{ item.docker_host }}"
+    port: "{{ item.wait_for_port }}"

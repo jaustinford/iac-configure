@@ -1,0 +1,25 @@
+---
+- name: main - install additional packages
+  apt:
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+    update_cache: yes
+  become: true
+  with_items:
+    - "{{ ubuntu.additional_packages }}"
+
+- name: main - configure user sudoers
+  copy:
+    content: |
+      {{ ansible_user }}    ALL=(ALL) NOPASSWD: ALL
+    dest: "/etc/sudoers.d/{{ ansible_user }}"
+    owner: root
+    group: root
+    mode: '0750'
+  become: true
+
+- include_tasks: gateway.yml
+  when: ansible_system_vendor != "Linode"
+
+- include_tasks: hosts.yml
+  when: ansible_system_vendor != "Linode"

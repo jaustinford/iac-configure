@@ -1,0 +1,21 @@
+---
+- name: main - create local .docker directory
+  file:
+    path: /root/.docker
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: main - manage local docker configuration
+  template:
+    src: config.json
+    dest: /root/.docker/config.json
+    owner: root
+    group: root
+    mode: '0600'
+
+- include_tasks: container.yml
+  no_log: true
+  with_items:
+    - "{{ containers }}"

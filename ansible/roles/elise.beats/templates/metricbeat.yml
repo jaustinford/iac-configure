@@ -1,0 +1,118 @@
+---
+output:
+  elasticsearch:
+    username: elastic
+    password: {{ secrets.elasticsearch.password }}
+    pipeline: elysianskies-geoip-pipeline
+    hosts:
+{% if ansible_system_vendor == "Linode" %}
+      - http://localhost:{{ external_ports.elasticsearch_db }}
+{% else %}
+      - http://{{ assignments.elasticsearch.networking.teine.ipv4 }}:{{ external_ports.elasticsearch_db }}
+{% endif %}
+
+setup:
+  dashboards:
+    enabled: true
+  kibana:
+{% if ansible_system_vendor == "Linode" %}
+    host: http://localhost:{{ external_ports.kibana_web }}
+{% else %}
+    host: http://{{ assignments.kibana.networking.teine.ipv4 }}:{{ external_ports.kibana_web }}
+{% endif %}
+
+logging:
+  level: info
+  to_files: true
+  to_syslog: false
+  json: true
+  files:
+    path: /var/log/metricbeat
+    name: metricbeat
+    keepfiles: "3"
+    permissions: "0644"
+
+metricbeat:
+  config:
+    modules:
+      path: ${path.config}/modules.d/*.yml
+  modules:
+{% if ansible_system_vendor != "Linode" %}
+    - module: docker
+      metricsets:
+        - container
+        - cpu
+        - diskio
+        - healthcheck
+        - info
+        - memory
+        - network
+      hosts:
+        - unix://var/run/docker.sock
+      period: {{ beats.refresh_interval }}
+      enabled: true
+
+{% endif %}
+    - module: system
+      metricsets:
+        - core
+        - cpu
+        - diskio
+        - filesystem
+        - fsstat
+        - load
+        - memory
+        - network
+        - process
+        - process_summary
+        - service
+        - socket
+        - socket_summary
+        - uptime
+      period: {{ beats.refresh_interval }}
+      enabled: true
+      processes:
+        - .*
+      filesystem:
+        ignore_types:
+          - autofs
+          - binfmt_misc
+          - bpf
+          - cgroup2
+          - configfs
+          - debugfs
+          - devpts
+          - devtmpfs
+          - efivarfs
+          - fusectl
+          - hugetlbfs
+          - mqueue
+          - nsfs
+          - overlay
+          - proc
+          - pstore
+          - ramfs
+          - rpc_pipefs
+          - securityfs
+          - squashfs
+          - sysfs
+          - tmpfs
+          - tracefs
+          - vfat
+      cpu:
+        metrics:
+          - percentages
+          - normalized_percentages
+      core:
+        metrics:
+          - percentages
+{% if ansible_hostname + "-teine.home.elysianskies.com" == assignments.nginx.networking.teine.fqdn %}
+
+    - module: nginx
+      metricsets:
+        - stubstatus
+      hosts:
+        - https://nginx.{{ assignments.nginx.networking.teine.fqdn }}
+      period: {{ beats.refresh_interval }}
+      enabled: true
+{% endif %}

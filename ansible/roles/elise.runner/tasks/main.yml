@@ -1,0 +1,39 @@
+---
+- name: main - discover registered runner
+  command: |
+    /bin/bash -c '
+      if [ ! -z "$(docker ps --quiet --filter status=running --filter name=runner)" ]; then
+        docker exec runner \
+          /bin/bash -c "
+            if [ -z \"\$(grep {{ runner.description }} /etc/gitlab-runner/config.toml)\" ]; then
+              echo \"unregistered\"
+            else
+              echo \"registered\"
+            fi
+          "
+      fi
+    '
+  register: is_registered
+  when:
+    - ansible_hostname + "-teine.home.elysianskies.com" == assignments.runner.networking.teine.fqdn
+
+- name: main - register gitlab runner
+  command: |
+    docker exec runner \
+      gitlab-runner register \
+        --non-interactive \
+        --url {{ runner.url }} \
+        --clone-url {{ runner.clone_url }} \
+        --executor {{ runner.executor }} \
+        --registration-token {{ secrets.gitlab.registration_token }} \
+        --docker-image {{ runner.docker_image }} \
+        --description {{ runner.description }} \
+        --tag-list {{ runner.tag_list }} \
+        --docker-privileged={{ runner.docker_privileged }} \
+        --run-untagged={{ runner.run_untagged }} \
+        --docker-volumes {{ runner.docker_volume_1 }} \
+        --docker-volumes {{ runner.docker_volume_2 }} \
+        --docker-volumes {{ runner.docker_volume_3 }}
+  when:
+    - ansible_hostname + "-teine.home.elysianskies.com" == assignments.runner.networking.teine.fqdn
+    - is_registered.stdout == "unregistered"

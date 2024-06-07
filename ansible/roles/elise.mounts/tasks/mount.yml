@@ -1,0 +1,19 @@
+---
+- name: "mount - ensure {{ item.path }} path"
+  file:
+    path: "{{ item.path }}"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0755'
+  become: true
+
+- name: "mount - mount {{ item.path }} volume"
+  ansible.posix.mount:
+    fstype: "{{ item.fstype }}"
+    src: "{{ item.src }}"
+    opts: "{{ item.opts }}"
+    path: "{{ item.path }}"
+    state: "{{ item.state }}"
+  become: true
+  no_log: true

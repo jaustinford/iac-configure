@@ -1,0 +1,66 @@
+---
+- name: "tunnels - create tunnel-{{ item.name }} directory"
+  file:
+    state: directory
+    path: "/root/tunnel-{{ item.name }}"
+    owner: root
+    group: root
+    mode: '0775'
+  become: true
+  when: item.host == ansible_hostname + "-teine.home.elysianskies.com"
+
+- name: "tunnels - create tunnel-{{ item.name }} file"
+  copy:
+    content: |
+      #!/usr/bin/env bash
+
+      autossh -N -T \
+          -o ServerAliveInterval=30 \
+          -o ServerAliveCountMax=960 \
+          -o ExitOnForwardFailure=yes \
+          -o StrictHostKeyChecking=no \
+          -o UserKnownHostsFile=/dev/null \
+          -i /root/ssh.key \
+          -R {{ item.external_port }}:{{ item.ipv4 }}:{{ item.internal_port }} \
+          root@portal.elysianskies.com
+    dest: "/root/tunnel-{{ item.name }}/tunnel-{{ item.name }}.sh"
+    owner: root
+    group: root
+    mode: '0750'
+  become: true
+  notify: "main - systemctl restart tunnel-{{ item.name }}"
+  when: item.host == ansible_hostname + "-teine.home.elysianskies.com"
+
+- name: "tunnels - create tunnel-{{ item.name }} systemd unit"
+  copy:
+    dest: /lib/systemd/system/tunnel-{{ item.name }}.service
+    content: |
+      [Unit]
+      Description={{ item.description }}
+      After=network.target auditd.service
+
+      [Service]
+      WorkingDirectory=/root/tunnel-{{ item.name }}
+      ExecStart=/root/tunnel-{{ item.name }}/tunnel-{{ item.name }}.sh
+      KillMode=control-group
+      Type=simple
+      StandardOutput=append:/dev/null
+      StandardError=append:/dev/null
+
+      [Install]
+      WantedBy=multi-user.target
+      Alias=tunnel-{{ item.name }}.service
+  become: true
+  notify: "main - systemctl restart tunnel-{{ item.name }}"
+  when: item.host == ansible_hostname + "-teine.home.elysianskies.com"
+
+- meta: flush_handlers
+
+- name: "tunnels - configure tunnel-{{ item.name }} service"
+  systemd: 
+    name: "tunnel-{{ item.name }}"
+    enabled: no
+    daemon_reload: yes
+    state: "{{ item.state }}"
+  become: true
+  when: item.host == ansible_hostname + "-teine.home.elysianskies.com"

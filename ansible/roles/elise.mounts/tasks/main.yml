@@ -1,0 +1,5 @@
+---
+- include_tasks: mount.yml
+  no_log: true
+  with_items:
+    - "{{ mounts }}"

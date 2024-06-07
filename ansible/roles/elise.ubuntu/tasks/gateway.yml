@@ -1,0 +1,45 @@
+---
+- name: gateway - enable modprobe iptable_nat
+  community.general.modprobe:
+    name: iptable_nat
+    state: present
+  become: true
+
+- name: "gateway - masquerade postrouting chain for {{ gateway.external_interface }}"
+  iptables:
+    table: nat
+    chain: POSTROUTING
+    out_interface: "{{ gateway.external_interface }}"
+    jump: MASQUERADE
+  become: true
+
+- name: "gateway - accept {{ gateway.internal_interface }} on forward chain"
+  iptables:
+    table: filter
+    chain: FORWARD
+    in_interface: "{{ gateway.internal_interface }}"
+    jump: ACCEPT
+  become: true
+
+- name: "gateway - accept {{ gateway.internal_interface }} and {{ gateway.external_interface }} on forward chain"
+  iptables:
+    table: filter
+    chain: FORWARD
+    in_interface: "{{ gateway.internal_interface }}"
+    out_interface: "{{ gateway.external_interface }}"
+    jump: ACCEPT
+  become: true
+
+- name: "gateway - accept {{ gateway.internal_interface }} and {{ gateway.external_interface }} on return forward chain"
+  iptables:
+    table: filter
+    chain: FORWARD
+    in_interface: "{{ gateway.external_interface }}"
+    out_interface: "{{ gateway.internal_interface }}"
+    match:
+      - state
+    ctstate:
+      - RELATED
+      - ESTABLISHED
+    jump: ACCEPT
+  become: true

@@ -1,0 +1,56 @@
+---
+output:
+  elasticsearch:
+    username: elastic
+    password: {{ secrets.elasticsearch.password }}
+    pipeline: elysianskies-geoip-pipeline
+    hosts:
+{% if ansible_system_vendor == "Linode" %}
+      - http://localhost:{{ external_ports.elasticsearch_db }}
+{% else %}
+      - http://{{ assignments.elasticsearch.networking.teine.ipv4 }}:{{ external_ports.elasticsearch_db }}
+{% endif %}
+
+setup:
+  dashboards:
+    enabled: true
+  kibana:
+{% if ansible_system_vendor == "Linode" %}
+    host: http://localhost:{{ external_ports.kibana_web }}
+{% else %}
+    host: http://{{ assignments.kibana.networking.teine.ipv4 }}:{{ external_ports.kibana_web }}
+{% endif %}
+
+logging:
+  level: info
+  to_files: true
+  to_syslog: false
+  json: true
+  files:
+    path: /var/log/filebeat
+    name: filebeat
+    keepfiles: "3"
+    permissions: "0644"
+
+filebeat:
+  config:
+    modules:
+      path: ${path.config}/modules.d/*.yml
+  modules:
+    - module: system
+      syslog:
+        enabled: true
+        var:
+          paths:
+            - /var/log/syslog*
+      auth:
+        enabled: true
+        var:
+          paths:
+            - /var/log/auth.log*
+  inputs:
+    - type: container
+      paths:
+        - /var/lib/docker/containers/*/*.log
+      processors:
+        - add_docker_metadata: ~

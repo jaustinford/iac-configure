@@ -1,0 +1,20 @@
+---
+.trigger_rules: &trigger_rules
+  - ansible/*
+  - ansible/*/*
+  - ansible/*/*/*
+  - ansible/*/*/*/*
+  - ansible/*/*/*/*/*
+  - Dockerfile
+  - ssh.key
+
+build_docker_ansible:
+  stage: integrate
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push"
+      changes: *trigger_rules
+  script:
+    - |
+      DOCKER_BUILDKIT=1 docker build . \
+          --tag "$ELISE_CI_NEXUS_HOSTED/elise/elysianskies-configure:$CI_COMMIT_REF_SLUG"
+    - docker push "$ELISE_CI_NEXUS_HOSTED/elise/elysianskies-configure:$CI_COMMIT_REF_SLUG"

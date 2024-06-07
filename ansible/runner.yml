@@ -1,0 +1,4 @@
+---
+- hosts: elysianskies_onprem
+  roles:
+    - elise.runner

@@ -1,0 +1,75 @@
+---
+- name: main - add apt repository key
+  get_url:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    dest: /etc/apt/trusted.gpg.d/docker.asc
+  become: true
+
+- name: main - add docker apt repository
+  copy:
+    content: deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/docker.asc] https://download.docker.com/linux/ubuntu/ jammy stable
+    dest: /etc/apt/sources.list.d/docker.list
+  become: true
+
+- name: main - install docker packages
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  become: true
+  with_items:
+    - "{{ docker.ubuntu_packages }}"
+
+- name: main - create local .docker directory
+  file:
+    path: "/home/{{ ansible_user }}/.docker"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0755'
+
+- name: main - manage local docker configuration
+  template:
+    src: config.json
+    dest: /home/{{ ansible_user }}/.docker/config.json
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0600'
+
+- name: main - manage docker configuration
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+  become: true
+  notify: main - systemctl restart docker
+  with_items:
+    - src: docker.service
+      dest: /lib/systemd/system/docker.service
+      owner: root
+      group: root
+      mode: '0644'
+
+    - src: daemon.json
+      dest: /etc/docker/daemon.json
+      owner: root
+      group: root
+      mode: '0644'
+
+- meta: flush_handlers
+
+- name: main - ensure docker daemon
+  systemd:
+    name: docker
+    state: started
+    enabled: yes
+  become: true
+
+- name: main - add user to docker group
+  user:
+    name: "{{ ansible_user }}"
+    groups: docker
+    append: yes
+  become: true

@@ -1,0 +1,13 @@
+---
+glusterfs:
+  peers:
+    - "{{ docker_hosts.host_1.networking.uisge.ipv4 }}"
+    - "{{ docker_hosts.host_2.networking.uisge.ipv4 }}"
+
+  dfs:
+    name: elysianskies_dfs
+    state: started
+    bricks: /mnt/dfs_lvm/elysianskies_dfs
+    replicas: 2
+    transport: tcp
+    path: /elysianskies/application_data

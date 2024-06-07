@@ -1,0 +1,16 @@
+---
+cluster:
+  name: esones
+
+network:
+  host: 0.0.0.0
+
+node:
+  name: localhost
+
+xpack:
+  security:
+    enabled: true
+
+discovery:
+  type: single-node

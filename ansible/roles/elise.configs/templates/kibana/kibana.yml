@@ -1,0 +1,18 @@
+---
+server:
+  publicBaseUrl: https://kibana.home.elysianskies.com
+  host: 0.0.0.0
+
+elasticsearch:
+  username: kibana_system
+  password: {{ secrets.elasticsearch.password }}
+  hosts:
+    - http://{{ assignments.elasticsearch.networking.teine.ipv4 }}:{{ external_ports.elasticsearch_db }}
+
+xpack:
+  encryptedSavedObjects:
+    encryptionKey: {{ secrets.kibana.encryption_keys.encrypted_saved_objects }}
+  reporting:
+    encryptionKey: {{ secrets.kibana.encryption_keys.reporting }}
+  security:
+    encryptionKey: {{ secrets.kibana.encryption_keys.security }}

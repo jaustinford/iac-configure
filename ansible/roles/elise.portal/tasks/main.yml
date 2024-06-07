@@ -1,0 +1,54 @@
+---
+- name: main - set hostname
+  hostname:
+    name: portal
+  become: true
+  notify: main - reboot
+
+- meta: flush_handlers
+
+- name: main - install nginx
+  apt:
+    name: nginx
+    state: present
+    update_cache: yes
+  become: true
+
+- include_tasks: ssl_discover.yml
+
+- name: main - configure nginx
+  copy:
+    content: |
+      server {
+          server_name                home.elysianskies.com *.home.elysianskies.com;
+          listen                     443 ssl;
+          ssl_certificate            /etc/nginx/nginx.crt;
+          ssl_certificate_key        /etc/nginx/nginx.crt.key;
+          proxy_set_header Host      $host;
+          proxy_set_header X-Real-IP $remote_addr;
+
+          location / {
+              proxy_pass https://127.0.0.1:{{ external_ports.nginx_web }};
+          }
+      }
+    dest: /etc/nginx/conf.d/default.conf
+    owner: root
+    group: root
+    mode: '0755'
+  notify: main - systemctl restart nginx
+  become: true
+
+- name: main - ensure nginx daemon
+  systemd:
+    name: nginx
+    state: started
+    enabled: yes
+  become: true
+
+- name: main - ensure ssh gateway ports
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^ # GatewayPorts'
+    line: GatewayPorts yes
+  become: true
+  notify: main - systemctl restart ssh

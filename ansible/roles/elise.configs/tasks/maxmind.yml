@@ -1,0 +1,40 @@
+---
+- name: "maxmind - download {{ item }} database"
+  get_url:
+    url: "https://download.maxmind.com/app/geoip_download?edition_id={{ item }}&license_key={{ secrets.maxmind.license_key }}&suffix=tar.gz"
+    dest: "/home/{{ ansible_user }}/geoip"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0644'
+
+- name: "maxmind - discover {{ item }} directory"
+  command: |
+    /bin/bash -c '
+      find /home/{{ ansible_user }}/geoip -type f -name '*.tar.gz' \
+        | grep '{{ item }}' \
+        | sort \
+        | tail -1 \
+        | cut -d '/' -f5 \
+        | cut -d '.' -f1
+    '
+  register: db_directory
+
+- name: "maxmind - unarchive {{ item }} database"
+  unarchive:
+    src: "/home/{{ ansible_user }}/geoip/{{ db_directory.stdout }}.tar.gz"
+    dest: "/home/{{ ansible_user }}/geoip"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0644'
+    remote_src: yes
+  become: true
+
+- name: "maxmind - move {{ item }} database"
+  copy:
+    src: "/home/{{ ansible_user }}/geoip/{{ db_directory.stdout }}/{{ item }}.mmdb"
+    dest: "/elysianskies/application_data/nginx/geoip/{{ item }}.mmdb"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0644'
+    remote_src: yes
+  become: true

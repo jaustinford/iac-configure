@@ -1,0 +1,595 @@
+---
+globals:
+  restart_policy: unless-stopped
+  pull: no
+  detach: yes
+  labels:
+    elysianskies_container: "true"
+  shm_size: 64M
+  network_mode: bridge
+  dns_servers:
+    - "{{ assignments.pihole.networking.talamh.ipv4 }}"
+    - 172.16.14.4
+    - 8.8.8.8
+  dns_search_domains:
+    - home.elysianskies.com
+  application_directory: /elysianskies/application_data
+  configuration_directory: /elysianskies/configurations
+
+containers:
+  - name: nexus
+    image: sonatype/nexus3:3.68.1
+    pull: "{{ globals.pull }}"
+    command:
+      - /opt/sonatype/nexus/bin/nexus
+      - run
+    docker_host: "{{ assignments.nexus.networking.teine.ipv4 }}"
+    restart_policy: "{{ globals.restart_policy }}"
+    detach: "{{ globals.detach }}"
+    labels: "{{ globals.labels }}"
+    state: "{{ assignments.nexus.state.containers }}"
+    shm_size: "{{ globals.shm_size }}"
+    devices: []
+    capabilities: []
+    network_mode: "{{ globals.network_mode }}"
+    dns_servers: "{{ globals.dns_servers }}"
+    dns_search_domains: "{{ globals.dns_search_domains }}"
+    env: {}
+    ports:
+      - "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_web }}:8081/tcp"
+      - "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}:{{ external_ports.nexus_docker_hosted }}/tcp"
+      - "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}:{{ external_ports.nexus_docker_proxy }}/tcp"
+    volumes:
+      - "{{ globals.application_directory }}/nexus/data:/nexus-data:rw"
+    wait_for_port: "{{ external_ports.nexus_docker_proxy }}"
+
+  - name: pihole
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/pihole/pihole:2024.03.2"
+    pull: "{{ globals.pull }}"
+    command: null
+    docker_host: "{{ assignments.pihole.networking.teine.ipv4 }}"
+    restart_policy: "{{ globals.restart_policy }}"
+    detach: "{{ globals.detach }}"
+    labels: "{{ globals.labels }}"
+    state: "{{ assignments.pihole.state.containers }}"
+    shm_size: "{{ globals.shm_size }}"
+    devices: []
+    capabilities:
+      - net_admin
+    network_mode: "{{ globals.network_mode }}"
+    dns_servers: "{{ globals.dns_servers }}"
+    dns_search_domains: "{{ globals.dns_search_domains }}"
+    env:
+      WEBPASSWORD: "{{ secrets.pihole.webpassword }}"
+      ServerIP: "{{ assignments.pihole.networking.teine.ipv4 }}"
+      ADMIN_EMAIL: j.austin.ford@gmail.com
+      TEMPERATUREUNIT: F
+      WEBTHEME: default-dark
+      PIHOLE_DNS_1: "{{ globals.dns_servers[2] }}"
+    ports:
+      - "{{ assignments.pihole.networking.talamh.ipv4 }}:53:53/udp"
+      - "{{ assignments.pihole.networking.uisge.ipv4 }}:53:53/udp"
+      - "{{ assignments.pihole.networking.teine.ipv4 }}:{{ external_ports.pihole_web }}:80/tcp"
+    volumes:
+      - "{{ globals.application_directory }}/pihole/data:/etc/pihole:rw"
+      - "{{ globals.application_directory }}/pihole/dnsmasq.d:/etc/dnsmasq.d:rw"
+    wait_for_port: "{{ external_ports.pihole_web }}"
+
+  - name: plex
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/plexinc/pms-docker:1.40.2.8395-c67dce28e"
+    pull: "{{ globals.pull }}"
+    command: null
+    docker_host: "{{ assignments.plex.networking.teine.ipv4 }}"
+    restart_policy: "{{ globals.restart_policy }}"
+    detach: "{{ globals.detach }}"
+    labels: "{{ globals.labels }}"
+    state: "{{ assignments.plex.state.containers }}"
+    shm_size: "{{ globals.shm_size }}"
+    devices: []
+    capabilities: []
+    network_mode: "{{ globals.network_mode }}"
+    dns_servers: "{{ globals.dns_servers }}"
+    dns_search_domains: "{{ globals.dns_search_domains }}"
+    env:
+      PLEX_CLAIM: "{{ secrets.plex.plex_claim }}"
+      ADVERTISE_IP: https://plex.home.elysianskies.com:443
+      ALLOWED_NETWORKS: 172.16.14.0/27,172.16.17.0/29
+    ports:
+      - "{{ assignments.plex.networking.talamh.ipv4 }}:{{ external_ports.plex_web }}:32400/tcp"
+      - "{{ assignments.plex.networking.teine.ipv4 }}:{{ external_ports.plex_web }}:32400/tcp"
+    volumes:
+      - "{{ globals.application_directory }}/plex/Application Support:/config/Library/Application Support:rw"
+      - /tmp/transcode:/transcode:rw
+      - /mnt/tvault/video/plex_libraries:/plex_libraries:ro
+    wait_for_port: "0"
+
+  - name: tautulli
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/linuxserver/tautulli:amd64-v2.13.4-ls121"
+    pull: "{{ globals.pull }}"
+    command: null
+    docker_host: "{{ assignments.tautulli.networking.teine.ipv4 }}"
+    restart_policy: "{{ globals.restart_policy }}"
+    detach: "{{ globals.detach }}"
+    labels: "{{ globals.labels }}"
+    state: "{{ assignments.tautulli.state.containers }}"
+    shm_size: "{{ globals.shm_size }}"
+    devices: []
+    capabilities: []
+    network_mode: "{{ globals.network_mode }}"
+    dns_servers: "{{ globals.dns_servers }}"
+    dns_search_domains: "{{ globals.dns_search_domains }}"
+    env: {}
+    ports:
+      - "{{ assignments.tautulli.networking.teine.ipv4 }}:{{ external_ports.tautulli_web }}:8181/tcp"
+    volumes:
+      - "{{ globals.application_directory }}/tautulli/config:/config:rw"
+    wait_for_port: "0"
+
+  - name: filebrowser
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/filebrowser/filebrowser:v2.28.0-amd64-s6"
+    pull: "{{ globals.pull }}"
+    command: null
+    docker_host: "{{ assignments.filebrowser.networking.teine.ipv4 }}"
+    restart_policy: "{{ globals.restart_policy }}"
+    detach: "{{ globals.detach }}"
+    labels: "{{ globals.labels }}"
+    state: "{{ assignments.filebrowser.state.containers }}"
+    shm_size: "{{ globals.shm_size }}"
+    devices: []
+    capabilities: []
+    network_mode: "{{ globals.network_mode }}"
+    dns_servers: "{{ globals.dns_servers }}"
+    dns_search_domains: "{{ globals.dns_search_domains }}"
+    env:
+      PUID: "1000"
+    ports:
+      - "{{ assignments.filebrowser.networking.teine.ipv4 }}:{{ external_ports.filebrowser_web }}:80/tcp"
+    volumes:
+      - "{{ globals.configuration_directory }}/filebrowser/settings.json:/config/settings.json:ro"
+      - "{{ globals.application_directory }}/filebrowser/filebrowser.db:/database/filebrowser.db:rw"
+      - /mnt/tvault:/tvault:rw
+    wait_for_port: "0"
+
+  - name: elasticsearch
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/elastic/elasticsearch:8.13.0"
+    pull: "{{ globals.pull }}"
+    command:
+      - eswrapper
+    docker_host: "{{ assignments.elasticsearch.networking.teine.ipv4 }}"
+    restart_policy: "{{ globals.restart_policy }}"
+    detach: "{{ globals.detach }}"
+    labels: "{{ globals.labels }}"
+    state: "{{ assignments.elasticsearch.state.containers }}"
+    shm_size: "{{ globals.shm_size }}"
+    devices: []
+    capabilities: []
+    network_mode: "{{ globals.network_mode }}"
+    dns_servers: "{{ globals.dns_servers }}"
+    dns_search_domains: "{{ globals.dns_search_domains }}"
+    env:
+      ES_JAVA_OPTS: -Xms4g -Xmx4g
+    ports:
+      - "{{ assignments.elasticsearch.networking.teine.ipv4 }}:{{ external_ports.elasticsearch_db }}:9200/tcp"
+    volumes:
+      - "{{ globals.configuration_directory }}/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro"
+      - "{{ globals.application_directory }}/elasticsearch/data:/usr/share/elasticsearch/data:rw"
+    wait_for_port: "0"
+
+  - name: kibana
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/elastic/kibana:8.13.0"
+    pull: "{{ globals.pull }}"
+    command:
+      - /usr/local/bin/kibana-docker
+    docker_host: "{{ assignments.kibana.networking.teine.ipv4 }}"
+    restart_policy: "{{ globals.restart_policy }}"
+    detach: "{{ globals.detach }}"
+    labels: "{{ globals.labels }}"
+    state: "{{ assignments.kibana.state.containers }}"
+    shm_size: "{{ globals.shm_size }}"
+    devices: []
+    capabilities: []
+    network_mode: "{{ globals.network_mode }}"
+    dns_servers: "{{ globals.dns_servers }}"
+    dns_search_domains: "{{ globals.dns_search_domains }}"
+    env: {}
+    ports:
+      - "{{ assignments.kibana.networking.teine.ipv4 }}:{{ external_ports.kibana_web }}:5601/tcp"
+    volumes:
+      - "{{ globals.configuration_directory }}/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml:ro"
+    wait_for_port: "0"
+
+  - name: zoneminder
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/dlandon/zoneminder:latest"
+    pull: "{{ globals.pull }}"
+    command:
+      - /sbin/my_init
+    docker_host: "{{ assignments.zoneminder.networking.teine.ipv4 }}"
+    restart_policy: "{{ globals.restart_policy }}"
+    detach: "{{ globals.detach }}"
+    labels: "{{ globals.labels }}"
+    state: "{{ assignments.zoneminder.state.containers }}"
+    shm_size: 4G
+    devices:
+      - /dev/video0
+      - /dev/video2
+    capabilities: []
+    network_mode: "{{ globals.network_mode }}"
+    dns_servers: "{{ globals.dns_servers }}"
+    dns_search_domains: "{{ globals.dns_search_domains }}"
+    env: {}
+    ports:
+      - "{{ assignments.zoneminder.networking.teine.ipv4 }}:{{ external_ports.zoneminder_web }}:80/tcp"
+    volumes:
+      - "{{ globals.application_directory }}/zoneminder/config:/config:rw"
+      - "{{ globals.application_directory }}/zoneminder/recordings:/zm_recordings:rw"
+      - "{{ globals.configuration_directory }}/zoneminder/ssmtp.conf:/etc/ssmtp/ssmtp.conf:ro"
+      - "{{ globals.configuration_directory }}/zoneminder/revaliases:/etc/ssmtp/revaliases:ro"
+    wait_for_port: "0"
+
+  - name: expressvpn
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/dperson/openvpn-client:amd64"
+    pull: "{{ globals.pull }}"
+    command:
+      - -d
+    docker_host: "{{ assignments.expressvpn.networking.teine.ipv4 }}"
+    restart_policy: "{{ globals.restart_policy }}"
+    detach: "{{ globals.detach }}"
+    labels: "{{ globals.labels }}"
+    state: "{{ assignments.expressvpn.state.containers }}"
+    shm_size: "{{ globals.shm_size }}"
+    devices:
+      - /dev/net/tun
+    capabilities:
+      - net_admin
+    network_mode: "{{ globals.network_mode }}"
+    dns_servers: "{{ globals.dns_servers }}"
+    dns_search_domains: "{{ globals.dns_search_domains }}"
+    env: {}
+    ports:
+      - "{{ assignments.expressvpn.networking.teine.ipv4 }}:{{ external_ports.expressvpn_squid }}:3128/tcp"
+      - "{{ assignments.expressvpn.networking.teine.ipv4 }}:{{ external_ports.expressvpn_deluge }}:8112/tcp"
+    volumes:
+      - "{{ globals.configuration_directory }}/expressvpn/vpn:/vpn:ro"
+    wait_for_port: "0"
+
+  - name: squid
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/sameersbn/squid:3.5.27-2"
+    pull: "{{ globals.pull }}"
+    command: null
+    docker_host: "{{ assignments.squid.networking.teine.ipv4 }}"
+    restart_policy: "{{ globals.restart_policy }}"
+    detach: "{{ globals.detach }}"
+    labels: "{{ globals.labels }}"
+    state: "{{ assignments.squid.state.containers }}"
+    shm_size: "{{ globals.shm_size }}"
+    devices: []
+    capabilities: []
+    network_mode: container:expressvpn
+    dns_servers: []
+    dns_search_domains: []
+    env: {}
+    ports: []
+    volumes:
+      - "{{ globals.configuration_directory }}/squid/squid.conf:/etc/squid/squid.conf:ro"
+    wait_for_port: "0"
+
+  - name: deluge
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/linuxserver/deluge:version-2.0.3-2201906121747ubuntu18.04.1"
+    pull: "{{ globals.pull }}"
+    command: null
+    docker_host: "{{ assignments.deluge.networking.teine.ipv4 }}"
+    restart_policy: "{{ globals.restart_policy }}"
+    detach: "{{ globals.detach }}"
+    labels: "{{ globals.labels }}"
+    state: "{{ assignments.deluge.state.containers }}"
+    shm_size: "{{ globals.shm_size }}"
+    devices: []
+    capabilities: []
+    network_mode: container:expressvpn
+    dns_servers: []
+    dns_search_domains: []
+    env:
+      PUID: "1000"
+    ports: []
+    volumes:
+      - /mnt/tvault/deluge:/downloads:rw
+      - "{{ globals.configuration_directory }}/deluge/auth:/config/auth:ro"
+      - "{{ globals.configuration_directory }}/deluge/core.conf:/config/core.conf:ro"
+      - "{{ globals.configuration_directory }}/deluge/hostlist.conf:/config/hostlist.conf:ro"
+      - "{{ globals.configuration_directory }}/deluge/web.conf:/config/web.conf:ro"
+      - "{{ globals.application_directory }}/deluge/plugins:/config/plugins:rw"
+    wait_for_port: "0"
+
+  - name: gitlab
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/gitlab/gitlab-ee:16.11.1-ee.0"
+    pull: "{{ globals.pull }}"
+    command:
+      - /assets/wrapper
+    docker_host: "{{ assignments.gitlab.networking.teine.ipv4 }}"
+    restart_policy: "{{ globals.restart_policy }}"
+    detach: "{{ globals.detach }}"
+    labels: "{{ globals.labels }}"
+    state: "{{ assignments.gitlab.state.containers }}"
+    shm_size: 4G
+    devices: []
+    capabilities: []
+    network_mode: "{{ globals.network_mode }}"
+    dns_servers: "{{ globals.dns_servers }}"
+    dns_search_domains: "{{ globals.dns_search_domains }}"
+    env:
+      GITLAB_OMNIBUS_CONFIG: external_url "http://gitlab.home.elysianskies.com"
+      GITLAB_ROOT_PASSWORD: "{{ secrets.gitlab.root_password }}"
+    ports:
+      - "{{ assignments.gitlab.networking.teine.ipv4 }}:{{ external_ports.gitlab_web }}:80/tcp"
+    volumes:
+      - "{{ globals.application_directory }}/gitlab/config:/etc/gitlab:rw"
+      - "{{ globals.application_directory }}/gitlab/logs:/var/log/gitlab:rw"
+      - "{{ globals.application_directory }}/gitlab/data:/var/opt/gitlab:rw"
+    wait_for_port: "0"
+
+  - name: runner
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/gitlab/gitlab-runner:v16.11.0"
+    pull: "{{ globals.pull }}"
+    command:
+      - run
+      - --user=gitlab-runner
+      - --working-directory=/home/gitlab-runner
+    docker_host: "{{ assignments.runner.networking.teine.ipv4 }}"
+    restart_policy: "{{ globals.restart_policy }}"
+    detach: "{{ globals.detach }}"
+    labels: "{{ globals.labels }}"
+    state: "{{ assignments.runner.state.containers }}"
+    shm_size: "{{ globals.shm_size }}"
+    devices: []
+    capabilities: []
+    network_mode: "{{ globals.network_mode }}"
+    dns_servers: "{{ globals.dns_servers }}"
+    dns_search_domains: "{{ globals.dns_search_domains }}"
+    env: {}
+    ports: []
+    volumes:
+      - "{{ globals.application_directory }}/runner/config:/etc/gitlab-runner:rw"
+      - /var/run/docker.sock:/var/run/docker.sock:rw
+      - /home/{{ ansible_user }}/.docker/config.json:/root/.docker/config.json:rw
+    wait_for_port: "0"
+
+  - name: openvpnas
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/linuxserver/openvpn-as:2.9.0-5c5bd120-Ubuntu18-ls124"
+    pull: "{{ globals.pull }}"
+    command: null
+    docker_host: "{{ assignments.openvpnas.networking.teine.ipv4 }}"
+    restart_policy: "{{ globals.restart_policy }}"
+    detach: "{{ globals.detach }}"
+    labels: "{{ globals.labels }}"
+    state: "{{ assignments.openvpnas.state.containers }}"
+    shm_size: "{{ globals.shm_size }}"
+    devices: []
+    capabilities:
+      - net_admin
+    network_mode: "{{ globals.network_mode }}"
+    dns_servers: "{{ globals.dns_servers }}"
+    dns_search_domains: "{{ globals.dns_search_domains }}"
+    env: {}
+    ports:
+      - "{{ assignments.openvpnas.networking.teine.ipv4 }}:{{ external_ports.openvpnas_web }}:943/tcp"
+      - "{{ assignments.openvpnas.networking.teine.ipv4 }}:{{ external_ports.openvpnas_vpn }}:1194/tcp"
+    volumes:
+      - "{{ globals.application_directory }}/openvpnas/config:/config:rw"
+    wait_for_port: "0"
+
+  - name: docs
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/elysianskies-docs:main"
+    pull: yes
+    command:
+      - mkdocs
+      - serve
+    docker_host: "{{ assignments.docs.networking.teine.ipv4 }}"
+    restart_policy: "{{ globals.restart_policy }}"
+    detach: "{{ globals.detach }}"
+    labels: "{{ globals.labels }}"
+    state: "{{ assignments.docs.state.containers }}"
+    shm_size: "{{ globals.shm_size }}"
+    devices: []
+    capabilities: []
+    network_mode: "{{ globals.network_mode }}"
+    dns_servers: "{{ globals.dns_servers }}"
+    dns_search_domains: "{{ globals.dns_search_domains }}"
+    env: {}
+    ports:
+      - "{{ assignments.docs.networking.teine.ipv4 }}:{{ external_ports.docs_web }}:8000/tcp"
+    volumes: []
+    wait_for_port: "0"
+
+  - name: resume
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/elysianskies-static-resume:main"
+    pull: yes
+    command:
+      - httpd-foreground
+    docker_host: "{{ assignments.resume.networking.teine.ipv4 }}"
+    restart_policy: "{{ globals.restart_policy }}"
+    detach: "{{ globals.detach }}"
+    labels: "{{ globals.labels }}"
+    state: "{{ assignments.resume.state.containers }}"
+    shm_size: "{{ globals.shm_size }}"
+    devices: []
+    capabilities: []
+    network_mode: "{{ globals.network_mode }}"
+    dns_servers: "{{ globals.dns_servers }}"
+    dns_search_domains: "{{ globals.dns_search_domains }}"
+    env: {}
+    ports:
+      - "{{ assignments.resume.networking.teine.ipv4 }}:{{ external_ports.resume_web }}:80/tcp"
+    volumes: []
+    wait_for_port: "0"
+
+  - name: fourohfour
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/elysianskies-static-fourohfour:main"
+    pull: yes
+    command:
+      - httpd-foreground
+    docker_host: "{{ assignments.fourohfour.networking.teine.ipv4 }}"
+    restart_policy: "{{ globals.restart_policy }}"
+    detach: "{{ globals.detach }}"
+    labels: "{{ globals.labels }}"
+    state: "{{ assignments.fourohfour.state.containers }}"
+    shm_size: "{{ globals.shm_size }}"
+    devices: []
+    capabilities: []
+    network_mode: "{{ globals.network_mode }}"
+    dns_servers: "{{ globals.dns_servers }}"
+    dns_search_domains: "{{ globals.dns_search_domains }}"
+    env: {}
+    ports:
+      - "{{ assignments.fourohfour.networking.teine.ipv4 }}:{{ external_ports.fourohfour_web }}:80/tcp"
+    volumes: []
+    wait_for_port: "0"
+
+  - name: fiveohx
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/elysianskies-static-fiveohx:main"
+    pull: yes
+    command:
+      - httpd-foreground
+    docker_host: "{{ assignments.fiveohx.networking.teine.ipv4 }}"
+    restart_policy: "{{ globals.restart_policy }}"
+    detach: "{{ globals.detach }}"
+    labels: "{{ globals.labels }}"
+    state: "{{ assignments.fiveohx.state.containers }}"
+    shm_size: "{{ globals.shm_size }}"
+    devices: []
+    capabilities: []
+    network_mode: "{{ globals.network_mode }}"
+    dns_servers: "{{ globals.dns_servers }}"
+    dns_search_domains: "{{ globals.dns_search_domains }}"
+    env: {}
+    ports:
+      - "{{ assignments.fiveohx.networking.teine.ipv4 }}:{{ external_ports.fiveohx_web }}:80/tcp"
+    volumes: []
+    wait_for_port: "0"
+
+  - name: fourohthree
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/elysianskies-static-fourohthree:main"
+    pull: yes
+    command:
+      - httpd-foreground
+    docker_host: "{{ assignments.fourohthree.networking.teine.ipv4 }}"
+    restart_policy: "{{ globals.restart_policy }}"
+    detach: "{{ globals.detach }}"
+    labels: "{{ globals.labels }}"
+    state: "{{ assignments.fourohthree.state.containers }}"
+    shm_size: "{{ globals.shm_size }}"
+    devices: []
+    capabilities: []
+    network_mode: "{{ globals.network_mode }}"
+    dns_servers: "{{ globals.dns_servers }}"
+    dns_search_domains: "{{ globals.dns_search_domains }}"
+    env: {}
+    ports:
+      - "{{ assignments.fourohthree.networking.teine.ipv4 }}:{{ external_ports.fourohthree_web }}:80/tcp"
+    volumes: []
+    wait_for_port: "0"
+
+  - name: keycloak
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/keycloak/keycloak:24.0.4"
+    pull: "{{ globals.pull }}"
+    command:
+      - start
+    docker_host: "{{ assignments.keycloak.networking.teine.ipv4 }}"
+    restart_policy: "{{ globals.restart_policy }}"
+    detach: "{{ globals.detach }}"
+    labels: "{{ globals.labels }}"
+    state: "{{ assignments.keycloak.state.containers }}"
+    shm_size: "{{ globals.shm_size }}"
+    devices: []
+    capabilities: []
+    network_mode: "{{ globals.network_mode }}"
+    dns_servers: "{{ globals.dns_servers }}"
+    dns_search_domains: "{{ globals.dns_search_domains }}"
+    env:
+      KC_HOSTNAME: keycloak.home.elysianskies.com
+      KC_PROXY: edge
+      KC_HTTP_ENABLED: "true"
+      KEYCLOAK_ADMIN: "{{ secrets.keycloak.user }}"
+      KEYCLOAK_ADMIN_PASSWORD: "{{ secrets.keycloak.password }}"
+    ports:
+      - "{{ assignments.keycloak.networking.teine.ipv4 }}:{{ external_ports.keycloak_web }}:8080/tcp"
+    volumes:
+      - "{{ globals.application_directory }}/keycloak/data:/opt/keycloak/data:rw"
+    wait_for_port: "0"
+
+  - name: redis
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/bitnami/redis:7.2.4-debian-11-r19"
+    pull: "{{ globals.pull }}"
+    command:
+      - /opt/bitnami/scripts/redis/run.sh
+    docker_host: "{{ assignments.redis.networking.teine.ipv4 }}"
+    restart_policy: "{{ globals.restart_policy }}"
+    detach: "{{ globals.detach }}"
+    labels: "{{ globals.labels }}"
+    state: "{{ assignments.redis.state.containers }}"
+    shm_size: "{{ globals.shm_size }}"
+    devices: []
+    capabilities: []
+    network_mode: "{{ globals.network_mode }}"
+    dns_servers: "{{ globals.dns_servers }}"
+    dns_search_domains: "{{ globals.dns_search_domains }}"
+    env:
+      REDIS_PASSWORD: "{{ secrets.redis.password }}"
+    ports:
+      - "{{ assignments.redis.networking.teine.ipv4 }}:{{ external_ports.redis_db }}:6379/tcp"
+    volumes:
+      - "{{ globals.application_directory }}/keycloak/data:/opt/jboss/keycloak/standalone/data:rw"
+    wait_for_port: "0"
+
+  - name: oauth
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/bitnami/oauth2-proxy:7.4.0"
+    pull: "{{ globals.pull }}"
+    command:
+      - --config=/etc/oauth2-proxy.cfg
+      - --upstream=http://0.0.0.0:8080/
+      - --http-address=0.0.0.0:4180
+    docker_host: "{{ assignments.oauth.networking.teine.ipv4 }}"
+    restart_policy: "{{ globals.restart_policy }}"
+    detach: "{{ globals.detach }}"
+    labels: "{{ globals.labels }}"
+    state: "{{ assignments.oauth.state.containers }}"
+    shm_size: "{{ globals.shm_size }}"
+    devices: []
+    capabilities: []
+    network_mode: "{{ globals.network_mode }}"
+    dns_servers: "{{ globals.dns_servers }}"
+    dns_search_domains: "{{ globals.dns_search_domains }}"
+    env: {}
+    ports:
+      - "{{ assignments.oauth.networking.teine.ipv4 }}:{{ external_ports.oauth_web }}:4180/tcp"
+    volumes:
+      - "{{ globals.configuration_directory }}/oauth/oauth2-proxy.cfg:/etc/oauth2-proxy.cfg:ro"
+    wait_for_port: "0"
+
+  - name: nginx
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/anroe/nginx-geoip2:1.22.1-geoip2-3.4"
+    pull: "{{ globals.pull }}"
+    command:
+      - nginx
+      - -g
+      - daemon off;
+    docker_host: "{{ assignments.nginx.networking.teine.ipv4 }}"
+    restart_policy: "{{ globals.restart_policy }}"
+    detach: "{{ globals.detach }}"
+    labels: "{{ globals.labels }}"
+    state: "{{ assignments.nginx.state.containers }}"
+    shm_size: "{{ globals.shm_size }}"
+    devices: []
+    capabilities: []
+    network_mode: "{{ globals.network_mode }}"
+    dns_servers: "{{ globals.dns_servers }}"
+    dns_search_domains: "{{ globals.dns_search_domains }}"
+    env: {}
+    ports:
+      - "{{ assignments.nginx.networking.teine.ipv4 }}:443:443/tcp"
+    volumes:
+      - "{{ globals.configuration_directory }}/nginx/nginx.crt:/etc/nginx/nginx.crt:ro"
+      - "{{ globals.configuration_directory }}/nginx/nginx.crt.key:/etc/nginx/nginx.crt.key:ro"
+      - "{{ globals.configuration_directory }}/nginx/nginx.conf:/etc/nginx/nginx.conf:ro"
+      - "{{ globals.configuration_directory }}/nginx/conf.d:/etc/nginx/conf.d:ro"
+      - "{{ globals.application_directory }}/nginx/geoip:/etc/nginx/geoip:rw"
+    wait_for_port: "0"

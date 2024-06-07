@@ -1,0 +1,16 @@
+---
+- hosts: elysianskies_onprem
+  gather_facts: yes
+  roles:
+    - elise.mounts
+    - elise.glusterfs
+    - elise.docker
+    - elise.configs
+
+- hosts: localhost
+  roles:
+    - elise.containers
+  vars_files:
+    - group_vars/all.yml
+    - group_vars/secrets.yml
+    - group_vars/elysianskies_onprem.yml

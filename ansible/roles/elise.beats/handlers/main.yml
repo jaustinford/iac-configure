@@ -1,0 +1,12 @@
+---
+- name: main - systemctl restart filebeat
+  systemd:
+    name: filebeat
+    state: restarted
+  become: true
+
+- name: main - systemctl restart metricbeat
+  systemd:
+    name: metricbeat
+    state: restarted
+  become: true

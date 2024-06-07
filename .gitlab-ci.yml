@@ -1,0 +1,15 @@
+---
+stages:
+  - integrate
+  - deploy
+
+default:
+  tags:
+    - elysianskies_runner
+
+variables:
+  ELISE_CI_NEXUS_HOSTED: docker01-teine.home.elysianskies.com:32501
+
+include:
+  - local: ci/build.yml
+  - local: ci/ansible.yml

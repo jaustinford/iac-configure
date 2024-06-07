@@ -1,0 +1,4 @@
+---
+- hosts: portal.elysianskies.com
+  roles:
+    - elise.portal

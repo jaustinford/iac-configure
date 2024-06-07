@@ -1,0 +1,6 @@
+---
+- hosts: elysianskies_onprem:elysianskies_linode
+  gather_facts: yes
+  roles:
+    - elise.ssh
+    - elise.ubuntu

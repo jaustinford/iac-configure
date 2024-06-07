@@ -1,0 +1,27 @@
+---
+ubuntu:
+  additional_packages:
+    - name: net-tools
+      state: present
+
+    - name: dnsutils
+      state: present
+
+    - name: htop
+      state: present
+
+    - name: software-properties-common
+      state: present
+
+    - name: jq
+      state: present
+
+    - name: autossh
+      state: present
+
+    - name: cifs-utils
+      state: present
+
+gateway:
+  internal_interface: eno1
+  external_interface: enp1s0f1

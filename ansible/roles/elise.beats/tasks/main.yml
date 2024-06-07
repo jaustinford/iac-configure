@@ -1,0 +1,4 @@
+---
+- include_tasks: beats.yml
+  with_items:
+    - "{{ beats.packages }}"

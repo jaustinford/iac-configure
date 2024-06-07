@@ -1,0 +1,48 @@
+---
+- name: main - install glusterfs-server package
+  apt:
+    name: glusterfs-server
+    state: present
+    update_cache: yes
+  become: true
+
+- name: main - ensure glusterd daemon
+  systemd:
+    name: glusterd
+    state: started
+    enabled: yes
+  become: true
+
+- name: main - join glusterfs peers
+  gluster.gluster.gluster_peer:
+    state: present
+    nodes: "{{ glusterfs.peers }}"
+  become: true
+
+- name: main - manage glusterfs volume
+  gluster.gluster.gluster_volume:
+    name: "{{ glusterfs.dfs.name }}"
+    state: "{{ glusterfs.dfs.state }}"
+    bricks: "{{ glusterfs.dfs.bricks }}"
+    replicas: "{{ glusterfs.dfs.replicas }}"
+    transport: "{{ glusterfs.dfs.transport }}"
+    cluster: "{{ glusterfs.peers }}"
+  become: true
+
+- name: main - ensure glusterfs mount path
+  file:
+    path: "{{ glusterfs.dfs.path }}"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0755'
+  become: true
+
+- name: main - mount glusterfs volume
+  ansible.posix.mount:
+    fstype: glusterfs
+    src: "{{ ansible_eno1.ipv4.address }}:{{ glusterfs.dfs.name}}"
+    opts: defaults
+    path: "{{ glusterfs.dfs.path }}"
+    state: mounted
+  become: true

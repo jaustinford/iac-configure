@@ -1,0 +1,9 @@
+---
+- name: "directories - copy container directory {{ item.path }}"
+  file:
+    path: "/elysianskies/configurations/{{ item.path }}"
+    state: "{{ item.state }}"
+    mode: '0755'
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+  become: true
