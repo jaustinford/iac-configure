@@ -15,16 +15,16 @@
   copy:
     dest: /etc/apt/sources.list
     content: |
-      deb https://nexus.{{ assignments.nginx.networking.teine.fqdn }}/repository/{{ ubuntu.apt.proxy }}/ {{ ubuntu.apt.distro }} main restricted
-      deb https://nexus.{{ assignments.nginx.networking.teine.fqdn }}/repository/{{ ubuntu.apt.proxy }}/ {{ ubuntu.apt.distro }}-updates main restricted
-      deb https://nexus.{{ assignments.nginx.networking.teine.fqdn }}/repository/{{ ubuntu.apt.proxy }}/ {{ ubuntu.apt.distro }} universe
-      deb https://nexus.{{ assignments.nginx.networking.teine.fqdn }}/repository/{{ ubuntu.apt.proxy }}/ {{ ubuntu.apt.distro }}-updates universe
-      deb https://nexus.{{ assignments.nginx.networking.teine.fqdn }}/repository/{{ ubuntu.apt.proxy }}/ {{ ubuntu.apt.distro }} multiverse
-      deb https://nexus.{{ assignments.nginx.networking.teine.fqdn }}/repository/{{ ubuntu.apt.proxy }}/ {{ ubuntu.apt.distro }}-updates multiverse
-      deb https://nexus.{{ assignments.nginx.networking.teine.fqdn }}/repository/{{ ubuntu.apt.proxy }}/ {{ ubuntu.apt.distro }}-backports main restricted universe multiverse
-      deb https://nexus.{{ assignments.nginx.networking.teine.fqdn }}/repository/{{ ubuntu.apt.proxy }}/ {{ ubuntu.apt.distro }}-security main restricted
-      deb https://nexus.{{ assignments.nginx.networking.teine.fqdn }}/repository/{{ ubuntu.apt.proxy }}/ {{ ubuntu.apt.distro }}-security universe
-      deb https://nexus.{{ assignments.nginx.networking.teine.fqdn }}/repository/{{ ubuntu.apt.proxy }}/ {{ ubuntu.apt.distro }}-security multiverse
+      deb {{ apt_host }} {{ ubuntu.apt.distro }} main restricted
+      deb {{ apt_host }} {{ ubuntu.apt.distro }}-updates main restricted
+      deb {{ apt_host }} {{ ubuntu.apt.distro }} universe
+      deb {{ apt_host }} {{ ubuntu.apt.distro }}-updates universe
+      deb {{ apt_host }} {{ ubuntu.apt.distro }} multiverse
+      deb {{ apt_host }} {{ ubuntu.apt.distro }}-updates multiverse
+      deb {{ apt_host }} {{ ubuntu.apt.distro }}-backports main restricted universe multiverse
+      deb {{ apt_host }} {{ ubuntu.apt.distro }}-security main restricted
+      deb {{ apt_host }} {{ ubuntu.apt.distro }}-security universe
+      deb {{ apt_host }} {{ ubuntu.apt.distro }}-security multiverse
     owner: root
     group: root
     mode: '0644'

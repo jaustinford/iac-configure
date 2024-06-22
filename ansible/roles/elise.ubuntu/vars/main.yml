@@ -1,8 +1,10 @@
 ---
 ubuntu:
   apt:
-    proxy: elysianskies_apt_proxy
+    mirror_proxy: "https://nexus.{{ assignments.nginx.networking.teine.fqdn }}/repository/elysianskies_apt_proxy/"
+    mirror_original: http://us.archive.ubuntu.com/ubuntu/
     distro: jammy
+    enabled: yes
   additional_packages:
     - name: net-tools
       state: present

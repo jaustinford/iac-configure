@@ -1,5 +1,7 @@
 ---
 - include_tasks: apt.yml
+  vars:
+    apt_host: "{{ ubuntu.apt.mirror_proxy if ubuntu.apt.enabled else ubuntu.apt.mirror_original }}"
   when: ansible_system_vendor != "Linode"
 
 - name: main - install additional packages
