@@ -1,28 +1,28 @@
 {
     "auths": {
         "{{ docker_hosts.host_1.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}": {
-            "auth": "{{ secrets.nexus.docker_auth }}"
+            "auth": "{{ ( secrets.nexus.username + ':' + secrets.nexus.password ) | b64encode }}"
         },
         "{{ docker_hosts.host_1.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}": {
-            "auth": "{{ secrets.nexus.docker_auth }}"
+            "auth": "{{ ( secrets.nexus.username + ':' + secrets.nexus.password ) | b64encode }}"
         },
         "{{ docker_hosts.host_2.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}": {
-            "auth": "{{ secrets.nexus.docker_auth }}"
+            "auth": "{{ ( secrets.nexus.username + ':' + secrets.nexus.password ) | b64encode }}"
         },
         "{{ docker_hosts.host_2.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}": {
-            "auth": "{{ secrets.nexus.docker_auth }}"
+            "auth": "{{ ( secrets.nexus.username + ':' + secrets.nexus.password ) | b64encode }}"
         },
         "{{ docker_hosts.host_1.networking.teine.fqdn }}:{{ external_ports.nexus_docker_hosted }}": {
-            "auth": "{{ secrets.nexus.docker_auth }}"
+            "auth": "{{ ( secrets.nexus.username + ':' + secrets.nexus.password ) | b64encode }}"
         },
         "{{ docker_hosts.host_1.networking.teine.fqdn }}:{{ external_ports.nexus_docker_proxy }}": {
-            "auth": "{{ secrets.nexus.docker_auth }}"
+            "auth": "{{ ( secrets.nexus.username + ':' + secrets.nexus.password ) | b64encode }}"
         },
         "{{ docker_hosts.host_2.networking.teine.fqdn }}:{{ external_ports.nexus_docker_hosted }}": {
-            "auth": "{{ secrets.nexus.docker_auth }}"
+            "auth": "{{ ( secrets.nexus.username + ':' + secrets.nexus.password ) | b64encode }}"
         },
         "{{ docker_hosts.host_2.networking.teine.fqdn }}:{{ external_ports.nexus_docker_proxy }}": {
-            "auth": "{{ secrets.nexus.docker_auth }}"
+            "auth": "{{ ( secrets.nexus.username + ':' + secrets.nexus.password ) | b64encode }}"
         }
     }
 }

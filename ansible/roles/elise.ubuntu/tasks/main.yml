@@ -1,4 +1,7 @@
 ---
+- include_tasks: apt.yml
+  when: ansible_system_vendor != "Linode"
+
 - name: main - install additional packages
   apt:
     name: "{{ item.name }}"

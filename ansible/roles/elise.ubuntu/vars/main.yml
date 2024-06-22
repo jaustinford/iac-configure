@@ -1,5 +1,8 @@
 ---
 ubuntu:
+  apt:
+    proxy: elysianskies_apt_proxy
+    distro: jammy
   additional_packages:
     - name: net-tools
       state: present
