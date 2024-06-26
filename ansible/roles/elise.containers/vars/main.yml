@@ -301,7 +301,7 @@ containers:
     wait_for_port: "0"
 
   - name: gitlab
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/gitlab/gitlab-ee:16.11.1-ee.0"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/gitlab/gitlab-ee:17.1.1-ee.0"
     pull: "{{ globals.pull }}"
     command:
       - /assets/wrapper
@@ -328,7 +328,7 @@ containers:
     wait_for_port: "0"
 
   - name: runner
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/gitlab/gitlab-runner:v16.11.0"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/gitlab/gitlab-runner:v17.1.0"
     pull: "{{ globals.pull }}"
     command:
       - run
