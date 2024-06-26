@@ -508,7 +508,7 @@ containers:
       KC_HOSTNAME: keycloak.home.elysianskies.com
       KC_PROXY: edge
       KC_HTTP_ENABLED: "true"
-      KEYCLOAK_ADMIN: "{{ secrets.keycloak.user }}"
+      KEYCLOAK_ADMIN: "{{ secrets.keycloak.username }}"
       KEYCLOAK_ADMIN_PASSWORD: "{{ secrets.keycloak.password }}"
     ports:
       - "{{ assignments.keycloak.networking.teine.ipv4 }}:{{ external_ports.keycloak_web }}:8080/tcp"
