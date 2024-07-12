@@ -301,7 +301,7 @@ containers:
     wait_for_port: "{{ external_ports.expressvpn_deluge }}"
 
   - name: gitlab
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/gitlab/gitlab-ee:17.1.1-ee.0"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/gitlab/gitlab-ee:17.1.2-ee.0"
     pull: "{{ globals.pull }}"
     command:
       - /assets/wrapper
