@@ -1,18 +1,18 @@
 ---
-.trigger_rules: &trigger_rules
-  - ansible/*
-  - ansible/*/*
-  - ansible/*/*/*
-  - ansible/*/*/*/*
-  - ansible/*/*/*/*/*
-  - Dockerfile
-  - ssh.key
-
 build_docker_ansible:
   stage: integrate
   rules:
     - if: $CI_PIPELINE_SOURCE == "push"
-      changes: *trigger_rules
+      changes:
+        - ansible/*
+        - ansible/*/*
+        - ansible/*/*/*
+        - ansible/*/*/*/*
+        - ansible/*/*/*/*/*
+        - Dockerfile
+        - ssh.key
+  needs:
+    - secret_detection
   script:
     - |
       DOCKER_BUILDKIT=1 docker build . \

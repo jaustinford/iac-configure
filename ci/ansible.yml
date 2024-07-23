@@ -1,19 +1,8 @@
 ---
-.trigger_rules: &trigger_rules
-  - ansible/*
-  - ansible/*/*
-  - ansible/*/*/*
-  - ansible/*/*/*/*
-  - ansible/*/*/*/*/*
-  - Dockerfile
-  - ssh.key
-
 playbook_site:
   image:
     name: $ELISE_CI_NEXUS_HOSTED/elise/elysianskies-configure:$CI_COMMIT_REF_SLUG
   stage: deploy
-  rules:
-    - changes: *trigger_rules
   script:
     - echo "$ELISE_PROJECT_VAULT_PASSWORD" > /root/.vault.password
     - |

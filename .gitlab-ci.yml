@@ -1,5 +1,6 @@
 ---
 stages:
+  - test
   - integrate
   - deploy
 
@@ -11,5 +12,6 @@ variables:
   ELISE_CI_NEXUS_HOSTED: docker01-teine.home.elysianskies.com:32501
 
 include:
+  - template: Jobs/Secret-Detection.gitlab-ci.yml
   - local: ci/build.yml
   - local: ci/ansible.yml
