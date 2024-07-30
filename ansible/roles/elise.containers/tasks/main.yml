@@ -6,6 +6,7 @@
     owner: root
     group: root
     mode: '0755'
+  changed_when: false
 
 - name: MAIN - manage local docker configuration
   ansible.builtin.template:
@@ -13,7 +14,8 @@
     dest: /root/.docker/config.json
     owner: root
     group: root
-    mode: '0644'
+    mode: '0600'
+  changed_when: false
 
 - name: MAIN - include container tasks
   ansible.builtin.include_tasks: container.yml
