@@ -7,7 +7,7 @@
 lint_site:
   image:
     name: $ELISE_CI_NEXUS_HOSTED/elise/elysianskies-configure:$CI_COMMIT_REF_SLUG
-  stage: deploy
+  stage: test
   script:
     - *prepare_ansible
     - |
