@@ -18,6 +18,7 @@
         | cut -d '.' -f1
     '
   register: db_directory
+  changed_when: false
 
 - name: MAXMIND - unarchive database
   ansible.builtin.unarchive:

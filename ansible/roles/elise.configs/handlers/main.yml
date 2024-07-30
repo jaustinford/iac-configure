@@ -6,6 +6,7 @@
         docker restart nexus
       fi
     '
+  changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.nexus.networking.teine.fqdn
 
@@ -16,6 +17,7 @@
         docker restart pihole
       fi
     '
+  changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.pihole.networking.teine.fqdn
 
@@ -26,6 +28,7 @@
         docker restart plex
       fi
     '
+  changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.plex.networking.teine.fqdn
 
@@ -36,6 +39,7 @@
         docker restart tautulli
       fi
     '
+  changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.tautulli.networking.teine.fqdn
 
@@ -46,6 +50,7 @@
         docker restart filebrowser
       fi
     '
+  changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.filebrowser.networking.teine.fqdn
 
@@ -56,6 +61,7 @@
         docker restart elasticsearch
       fi
     '
+  changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.elasticsearch.networking.teine.fqdn
 
@@ -66,6 +72,7 @@
         docker restart kibana
       fi
     '
+  changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.kibana.networking.teine.fqdn
 
@@ -76,6 +83,7 @@
         docker restart zoneminder
       fi
     '
+  changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.zoneminder.networking.teine.fqdn
 
@@ -86,6 +94,7 @@
         docker restart expressvpn squid deluge
       fi
     '
+  changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.expressvpn.networking.teine.fqdn
 
@@ -96,6 +105,7 @@
         docker restart squid
       fi
     '
+  changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.squid.networking.teine.fqdn
 
@@ -106,6 +116,7 @@
         docker restart deluge
       fi
     '
+  changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.deluge.networking.teine.fqdn
 
@@ -116,6 +127,7 @@
         docker restart gitlab
       fi
     '
+  changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.gitlab.networking.teine.fqdn
 
@@ -126,6 +138,7 @@
         docker restart runner
       fi
     '
+  changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.runner.networking.teine.fqdn
 
@@ -138,6 +151,7 @@
         sudo systemctl start tunnel-openvpnas
       fi
     '
+  changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.openvpnas.networking.teine.fqdn
 
@@ -148,6 +162,7 @@
         docker restart resume
       fi
     '
+  changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.resume.networking.teine.fqdn
 
@@ -158,6 +173,7 @@
         docker restart fourohfour
       fi
     '
+  changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.fourohfour.networking.teine.fqdn
 
@@ -168,6 +184,7 @@
         docker restart fiveohx
       fi
     '
+  changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.fiveohx.networking.teine.fqdn
 
@@ -178,6 +195,7 @@
         docker restart fourohthree
       fi
     '
+  changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.fourohthree.networking.teine.fqdn
 
@@ -188,6 +206,7 @@
         docker restart keycloak
       fi
     '
+  changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.keycloak.networking.teine.fqdn
 
@@ -198,6 +217,7 @@
         docker restart redis
       fi
     '
+  changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.redis.networking.teine.fqdn
 
@@ -208,6 +228,7 @@
         docker restart oauth
       fi
     '
+  changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.oauth.networking.teine.fqdn
 
@@ -220,5 +241,6 @@
         sudo systemctl start tunnel-nginx
       fi
     '
+  changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.nginx.networking.teine.fqdn

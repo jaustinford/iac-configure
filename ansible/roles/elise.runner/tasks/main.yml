@@ -14,6 +14,7 @@
       fi
     '
   register: is_registered
+  changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.runner.networking.teine.fqdn
 
@@ -34,6 +35,7 @@
         --docker-volumes {{ runner.docker_volume_1 }} \
         --docker-volumes {{ runner.docker_volume_2 }} \
         --docker-volumes {{ runner.docker_volume_3 }}
+  changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.runner.networking.teine.fqdn
     - is_registered.stdout == "unregistered"
