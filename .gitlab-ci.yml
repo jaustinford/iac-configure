@@ -1,6 +1,7 @@
 ---
 stages:
   - test
+  - lint
   - integrate
   - deploy
 
