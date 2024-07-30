@@ -1,6 +1,6 @@
 ---
-- name: main - copy ssh key
-  template:
+- name: MAIN - copy ssh key
+  ansible.builtin.template:
     src: /root/ssh.key
     dest: /root/ssh.key
     owner: root
@@ -8,6 +8,7 @@
     mode: '0600'
   become: true
 
-- include_tasks: tunnels.yml
+- name: MAIN - include tunnels tasks
+  ansible.builtin.include_tasks: tunnels.yml
   with_items:
     - "{{ tunnels }}"

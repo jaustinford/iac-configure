@@ -1,6 +1,6 @@
 ---
-- name: "directories - copy container directory {{ item.path }}"
-  file:
+- name: "DIRECTORIES - copy container directory {{ item.path }}"
+  ansible.builtin.file:
     path: "/elysianskies/configurations/{{ item.path }}"
     state: "{{ item.state }}"
     mode: '0755'

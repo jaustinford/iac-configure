@@ -1,4 +1,5 @@
 ---
-- hosts: portal.elysianskies.com
+- name: PORTAL - apply elise.portal role
+  hosts: portal.elysianskies.com
   roles:
     - elise.portal

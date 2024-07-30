@@ -1,12 +1,12 @@
 ---
-- name: ssl_deploy - copy ssl certificates
-  copy:
+- name: SSL_DEPLOY - copy ssl certificates
+  ansible.builtin.copy:
     content: "{{ item.content }}"
     dest: "{{ item.dest }}"
     mode: "{{ item.mode }}"
   become: true
   no_log: true
-  notify: main - systemctl restart nginx
+  notify: MAIN - systemctl restart nginx
   with_items:
     - content: |
         {{ discovered_tls.content | from_json | json_query('outputs.tls_certificate_pem.value') }}

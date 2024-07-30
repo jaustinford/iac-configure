@@ -1,13 +1,15 @@
 ---
-- hosts: elysianskies_onprem
-  gather_facts: yes
+- name: ELYSIANSKIES - apply elise.mounts, elise.glusterfs, elise.docker, and elise.configs roles
+  hosts: elysianskies_onprem
+  gather_facts: true
   roles:
     - elise.mounts
     - elise.glusterfs
     - elise.docker
     - elise.configs
 
-- hosts: localhost
+- name: ELYSIANSKIES - apply elise.containers role
+  hosts: localhost
   roles:
     - elise.containers
   vars_files:

@@ -1,6 +1,6 @@
 ---
-- name: "mount - ensure {{ item.path }} path"
-  file:
+- name: "MOUNT - ensure mount path {{ item.path }}"
+  ansible.builtin.file:
     path: "{{ item.path }}"
     state: directory
     owner: "{{ ansible_user }}"
@@ -8,7 +8,7 @@
     mode: '0755'
   become: true
 
-- name: "mount - mount {{ item.path }} volume"
+- name: "MOUNT - mount volume {{ item.path }}"
   ansible.posix.mount:
     fstype: "{{ item.fstype }}"
     src: "{{ item.src }}"

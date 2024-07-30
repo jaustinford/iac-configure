@@ -1,6 +1,6 @@
 ---
-- name: main - docker restart nexus
-  command: |
+- name: MAIN - docker restart nexus
+  ansible.builtin.command: |
     /bin/bash -c '
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=nexus)" ]; then
         docker restart nexus
@@ -9,8 +9,8 @@
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.nexus.networking.teine.fqdn
 
-- name: main - docker restart pihole
-  command: |
+- name: MAIN - docker restart pihole
+  ansible.builtin.command: |
     /bin/bash -c '
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=pihole)" ]; then
         docker restart pihole
@@ -19,8 +19,8 @@
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.pihole.networking.teine.fqdn
 
-- name: main - docker restart plex
-  command: |
+- name: MAIN - docker restart plex
+  ansible.builtin.command: |
     /bin/bash -c '
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=plex)" ]; then
         docker restart plex
@@ -29,8 +29,8 @@
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.plex.networking.teine.fqdn
 
-- name: main - docker restart tautulli
-  command: |
+- name: MAIN - docker restart tautulli
+  ansible.builtin.command: |
     /bin/bash -c '
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=tautulli)" ]; then
         docker restart tautulli
@@ -39,8 +39,8 @@
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.tautulli.networking.teine.fqdn
 
-- name: main - docker restart filebrowser
-  command: |
+- name: MAIN - docker restart filebrowser
+  ansible.builtin.command: |
     /bin/bash -c '
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=filebrowser)" ]; then
         docker restart filebrowser
@@ -49,8 +49,8 @@
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.filebrowser.networking.teine.fqdn
 
-- name: main - docker restart elasticsearch
-  command: |
+- name: MAIN - docker restart elasticsearch
+  ansible.builtin.command: |
     /bin/bash -c '
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=elasticsearch)" ]; then
         docker restart elasticsearch
@@ -59,8 +59,8 @@
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.elasticsearch.networking.teine.fqdn
 
-- name: main - docker restart kibana
-  command: |
+- name: MAIN - docker restart kibana
+  ansible.builtin.command: |
     /bin/bash -c '
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=kibana)" ]; then
         docker restart kibana
@@ -69,8 +69,8 @@
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.kibana.networking.teine.fqdn
 
-- name: main - docker restart zoneminder
-  command: |
+- name: MAIN - docker restart zoneminder
+  ansible.builtin.command: |
     /bin/bash -c '
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=zoneminder)" ]; then
         docker restart zoneminder
@@ -79,8 +79,8 @@
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.zoneminder.networking.teine.fqdn
 
-- name: main - docker restart expressvpn
-  command: |
+- name: MAIN - docker restart expressvpn
+  ansible.builtin.command: |
     /bin/bash -c '
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=expressvpn)" ]; then
         docker restart expressvpn squid deluge
@@ -89,8 +89,8 @@
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.expressvpn.networking.teine.fqdn
 
-- name: main - docker restart squid
-  command: |
+- name: MAIN - docker restart squid
+  ansible.builtin.command: |
     /bin/bash -c '
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=squid)" ]; then
         docker restart squid
@@ -99,8 +99,8 @@
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.squid.networking.teine.fqdn
 
-- name: main - docker restart deluge
-  command: |
+- name: MAIN - docker restart deluge
+  ansible.builtin.command: |
     /bin/bash -c '
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=deluge)" ]; then
         docker restart deluge
@@ -109,8 +109,8 @@
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.deluge.networking.teine.fqdn
 
-- name: main - docker restart gitlab
-  command: |
+- name: MAIN - docker restart gitlab
+  ansible.builtin.command: |
     /bin/bash -c '
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=gitlab)" ]; then
         docker restart gitlab
@@ -119,8 +119,8 @@
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.gitlab.networking.teine.fqdn
 
-- name: main - docker restart runner
-  command: |
+- name: MAIN - docker restart runner
+  ansible.builtin.command: |
     /bin/bash -c '
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=runner)" ]; then
         docker restart runner
@@ -129,8 +129,8 @@
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.runner.networking.teine.fqdn
 
-- name: main - docker restart openvpnas
-  command: |
+- name: MAIN - docker restart openvpnas
+  ansible.builtin.command: |
     /bin/bash -c '
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=openvpnas)" ]; then
         sudo systemctl stop tunnel-openvpnas
@@ -141,8 +141,8 @@
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.openvpnas.networking.teine.fqdn
 
-- name: main - docker restart resume
-  command: |
+- name: MAIN - docker restart resume
+  ansible.builtin.command: |
     /bin/bash -c '
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=resume)" ]; then
         docker restart resume
@@ -151,8 +151,8 @@
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.resume.networking.teine.fqdn
 
-- name: main - docker restart fourohfour
-  command: |
+- name: MAIN - docker restart fourohfour
+  ansible.builtin.command: |
     /bin/bash -c '
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=fourohfour)" ]; then
         docker restart fourohfour
@@ -161,8 +161,8 @@
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.fourohfour.networking.teine.fqdn
 
-- name: main - docker restart fiveohx
-  command: |
+- name: MAIN - docker restart fiveohx
+  ansible.builtin.command: |
     /bin/bash -c '
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=fiveohx)" ]; then
         docker restart fiveohx
@@ -171,8 +171,8 @@
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.fiveohx.networking.teine.fqdn
 
-- name: main - docker restart fourohthree
-  command: |
+- name: MAIN - docker restart fourohthree
+  ansible.builtin.command: |
     /bin/bash -c '
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=fourohthree)" ]; then
         docker restart fourohthree
@@ -181,8 +181,8 @@
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.fourohthree.networking.teine.fqdn
 
-- name: main - docker restart keycloak
-  command: |
+- name: MAIN - docker restart keycloak
+  ansible.builtin.command: |
     /bin/bash -c '
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=keycloak)" ]; then
         docker restart keycloak
@@ -191,8 +191,8 @@
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.keycloak.networking.teine.fqdn
 
-- name: main - docker restart redis
-  command: |
+- name: MAIN - docker restart redis
+  ansible.builtin.command: |
     /bin/bash -c '
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=redis)" ]; then
         docker restart redis
@@ -201,8 +201,8 @@
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.redis.networking.teine.fqdn
 
-- name: main - docker restart oauth
-  command: |
+- name: MAIN - docker restart oauth
+  ansible.builtin.command: |
     /bin/bash -c '
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=oauth)" ]; then
         docker restart oauth
@@ -211,8 +211,8 @@
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.oauth.networking.teine.fqdn
 
-- name: main - docker restart nginx
-  command: |
+- name: MAIN - docker restart nginx
+  ansible.builtin.command: |
     /bin/bash -c '
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=nginx)" ]; then
         sudo systemctl stop tunnel-nginx

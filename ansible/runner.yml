@@ -1,4 +1,5 @@
 ---
-- hosts: elysianskies_onprem
+- name: RUNNER - apply elise.runner role
+  hosts: elysianskies_onprem
   roles:
     - elise.runner

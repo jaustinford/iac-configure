@@ -1,50 +1,56 @@
 ---
-- name: main - add apt repository key
-  get_url:
+- name: MAIN - add apt repository key
+  ansible.builtin.get_url:
     url: https://download.docker.com/linux/ubuntu/gpg
     dest: /etc/apt/trusted.gpg.d/docker.asc
+    owner: root
+    group: root
+    mode: '0644'
   become: true
 
-- name: main - add docker apt repository
-  copy:
+- name: MAIN - add docker apt repository
+  ansible.builtin.copy:
     content: deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/docker.asc] https://download.docker.com/linux/ubuntu/ jammy stable
     dest: /etc/apt/sources.list.d/docker.list
+    owner: root
+    group: root
+    mode: '0644'
   become: true
 
-- name: main - install docker packages
-  apt:
+- name: MAIN - install docker packages
+  ansible.builtin.apt:
     name: "{{ item }}"
     state: present
-    update_cache: yes
+    update_cache: true
   become: true
   with_items:
     - "{{ docker.ubuntu_packages }}"
 
-- name: main - create local .docker directory
-  file:
+- name: MAIN - create local .docker directory
+  ansible.builtin.file:
     path: "/home/{{ ansible_user }}/.docker"
     state: directory
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     mode: '0755'
 
-- name: main - manage local docker configuration
-  template:
+- name: MAIN - manage local docker configuration
+  ansible.builtin.template:
     src: config.json
     dest: /home/{{ ansible_user }}/.docker/config.json
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     mode: '0600'
 
-- name: main - manage docker configuration
-  template:
+- name: MAIN - manage docker configuration
+  ansible.builtin.template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     owner: "{{ item.owner }}"
     group: "{{ item.group }}"
     mode: "{{ item.mode }}"
   become: true
-  notify: main - systemctl restart docker
+  notify: MAIN - systemctl restart docker
   with_items:
     - src: docker.service
       dest: /lib/systemd/system/docker.service
@@ -58,18 +64,19 @@
       group: root
       mode: '0644'
 
-- meta: flush_handlers
+- name: MAIN - flush handlers
+  ansible.builtin.meta: flush_handlers
 
-- name: main - ensure docker daemon
-  systemd:
+- name: MAIN - ensure docker daemon
+  ansible.builtin.systemd:
     name: docker
     state: started
-    enabled: yes
+    enabled: true
   become: true
 
-- name: main - add user to docker group
-  user:
+- name: MAIN - add user to docker group
+  ansible.builtin.user:
     name: "{{ ansible_user }}"
     groups: docker
-    append: yes
+    append: true
   become: true

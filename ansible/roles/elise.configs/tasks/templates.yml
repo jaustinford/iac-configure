@@ -1,10 +1,10 @@
 ---
-- name: "templates - copy container template {{ item.path }}"
-  template:
+- name: "TEMPLATES - copy container template {{ item.path }}"
+  ansible.builtin.template:
     src: "{{ item.src }}"
     dest: "/elysianskies/configurations/{{ item.path }}"
     mode: '0755'
     owner: "{{ item.owner }}"
     group: "{{ item.group }}"
   become: true
-  notify: "main - docker restart {{ item.path.split('/')[0] }}"
+  notify: "MAIN - docker restart {{ item.path.split('/')[0] }}"

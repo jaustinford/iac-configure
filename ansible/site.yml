@@ -1,7 +1,18 @@
 ---
-- import_playbook: general.yml
-- import_playbook: elysianskies.yml
-- import_playbook: runner.yml
-- import_playbook: portal.yml
-- import_playbook: tunnels.yml
-- import_playbook: beats.yml
+- name: SITE - import general playbook
+  import_playbook: general.yml
+
+- name: SITE - import elysianskies playbook
+  import_playbook: elysianskies.yml
+
+- name: SITE - import runner playbook
+  import_playbook: runner.yml
+
+- name: SITE - import portal playbook
+  import_playbook: portal.yml
+
+- name: SITE - import tunnels playbook
+  import_playbook: tunnels.yml
+
+- name: SITE - import beats playbook
+  import_playbook: beats.yml

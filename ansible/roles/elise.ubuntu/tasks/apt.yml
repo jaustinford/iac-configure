@@ -1,6 +1,6 @@
 ---
-- name: apt - create nexus auth file
-  copy:
+- name: APT - create nexus auth file
+  ansible.builtin.copy:
     dest: /etc/apt/auth.conf.d/elysianskies_nexus.conf
     content: |
       machine https://nexus.{{ assignments.nginx.networking.teine.fqdn }}
@@ -11,8 +11,8 @@
     mode: '0600'
   become: true
 
-- name: apt - override /etc/apt/sources.list
-  copy:
+- name: APT - override /etc/apt/sources.list
+  ansible.builtin.copy:
     dest: /etc/apt/sources.list
     content: |
       deb {{ apt_host }} {{ ubuntu.apt.distro }} main restricted

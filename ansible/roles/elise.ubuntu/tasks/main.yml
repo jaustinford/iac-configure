@@ -1,20 +1,21 @@
 ---
-- include_tasks: apt.yml
+- name: MAIN - include apt tasks
+  ansible.builtin.include_tasks: apt.yml
   vars:
     apt_host: "{{ ubuntu.apt.mirror_proxy if ubuntu.apt.enabled else ubuntu.apt.mirror_original }}"
   when: ansible_system_vendor != "Linode"
 
-- name: main - install additional packages
-  apt:
+- name: MAIN - install additional packages
+  ansible.builtin.apt:
     name: "{{ item.name }}"
     state: "{{ item.state }}"
-    update_cache: yes
+    update_cache: true
   become: true
   with_items:
     - "{{ ubuntu.additional_packages }}"
 
-- name: main - configure user sudoers
-  copy:
+- name: MAIN - configure user sudoers
+  ansible.builtin.copy:
     content: |
       {{ ansible_user }}    ALL=(ALL) NOPASSWD: ALL
     dest: "/etc/sudoers.d/{{ ansible_user }}"
@@ -23,8 +24,10 @@
     mode: '0750'
   become: true
 
-- include_tasks: gateway.yml
+- name: MAIN - include gateway tasks
+  ansible.builtin.include_tasks: gateway.yml
   when: ansible_system_vendor != "Linode"
 
-- include_tasks: hosts.yml
+- name: MAIN - include hosts tasks
+  ansible.builtin.include_tasks: hosts.yml
   when: ansible_system_vendor != "Linode"

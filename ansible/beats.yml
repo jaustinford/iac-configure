@@ -1,4 +1,5 @@
 ---
-- hosts: elysianskies_onprem:elysianskies_linode
+- name: BEATS - apply elise.beats role
+  hosts: elysianskies_onprem:elysianskies_linode
   roles:
     - elise.beats

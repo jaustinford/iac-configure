@@ -279,8 +279,8 @@ expressvpn_servers:
         - newzealand
 
   islands:
-      guam:
-        - guam
+    guam:
+      - guam
 
 ###############################################
 # africa

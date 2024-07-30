@@ -1,6 +1,6 @@
 ---
-- name: "beats - download {{ item.name }} packages"
-  uri:
+- name: BEATS - download packages
+  ansible.builtin.uri:
     url: "{{ beats.download_url }}/{{ item.name }}/{{ item.name }}-{{ beats.version }}-amd64.deb"
     method: GET
     dest: "/tmp/{{ item.name }}-{{ beats.version }}-amd64.deb"
@@ -8,28 +8,29 @@
       - 200
       - 304
 
-- name: "beats - install {{ item.name }} packages"
-  apt:
+- name: BEATS - install packages
+  ansible.builtin.apt:
     deb: "/tmp/{{ item.name }}-{{ beats.version }}-amd64.deb"
     state: "{{ item.package_state }}"
-    update_cache: yes
+    update_cache: true
   become: true
 
-- name: "beats - copy {{ item.name }} templates"
-  template:
+- name: BEATS - copy templates
+  ansible.builtin.template:
     src: "{{ item.name }}.yml"
     dest: "/etc/{{ item.name }}/{{ item.name }}.yml"
     owner: root
     group: root
     mode: '0755'
   become: true
-  notify: "main - systemctl restart {{ item.name }}"
+  notify: "MAIN - systemctl restart {{ item.name }}"
 
-- meta: flush_handlers
+- name: BEATS - flush handlers
+  ansible.builtin.meta: flush_handlers
 
-- name: "beats - ensure {{ item.name }} daemon"
-  systemd:
+- name: BEATS - ensure daemon
+  ansible.builtin.systemd:
     name: "{{ item.name }}"
     state: "{{ item.service_state }}"
-    enabled: yes
+    enabled: true
   become: true

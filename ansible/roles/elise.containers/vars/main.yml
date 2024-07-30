@@ -1,8 +1,8 @@
 ---
 containers_globals:
   restart_policy: unless-stopped
-  pull: no
-  detach: yes
+  pull: false
+  detach: true
   labels:
     elysianskies_container: "true"
   shm_size: 64M
@@ -379,7 +379,7 @@ containers:
 
   - name: docs
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/elysianskies-docs:main"
-    pull: yes
+    pull: true
     command:
       - mkdocs
       - serve
@@ -402,7 +402,7 @@ containers:
 
   - name: resume
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/elysianskies-static-resume:main"
-    pull: yes
+    pull: true
     command:
       - httpd-foreground
     docker_host: "{{ assignments.resume.networking.teine.ipv4 }}"
@@ -424,7 +424,7 @@ containers:
 
   - name: fourohfour
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/elysianskies-static-fourohfour:main"
-    pull: yes
+    pull: true
     command:
       - httpd-foreground
     docker_host: "{{ assignments.fourohfour.networking.teine.ipv4 }}"
@@ -446,7 +446,7 @@ containers:
 
   - name: fiveohx
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/elysianskies-static-fiveohx:main"
-    pull: yes
+    pull: true
     command:
       - httpd-foreground
     docker_host: "{{ assignments.fiveohx.networking.teine.ipv4 }}"
@@ -468,7 +468,7 @@ containers:
 
   - name: fourohthree
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/elysianskies-static-fourohthree:main"
-    pull: yes
+    pull: true
     command:
       - httpd-foreground
     docker_host: "{{ assignments.fourohthree.networking.teine.ipv4 }}"

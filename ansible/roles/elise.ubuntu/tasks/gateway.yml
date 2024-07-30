@@ -1,28 +1,28 @@
 ---
-- name: gateway - enable modprobe iptable_nat
+- name: GATEWAY - enable modprobe iptable_nat
   community.general.modprobe:
     name: iptable_nat
     state: present
   become: true
 
-- name: "gateway - masquerade postrouting chain for {{ gateway.external_interface }}"
-  iptables:
+- name: GATEWAY - masquerade postrouting chain for external interface
+  ansible.builtin.iptables:
     table: nat
     chain: POSTROUTING
     out_interface: "{{ gateway.external_interface }}"
     jump: MASQUERADE
   become: true
 
-- name: "gateway - accept {{ gateway.internal_interface }} on forward chain"
-  iptables:
+- name: GATEWAY - accept internal interface on forward chain
+  ansible.builtin.iptables:
     table: filter
     chain: FORWARD
     in_interface: "{{ gateway.internal_interface }}"
     jump: ACCEPT
   become: true
 
-- name: "gateway - accept {{ gateway.internal_interface }} and {{ gateway.external_interface }} on forward chain"
-  iptables:
+- name: GATEWAY - accept internal interface and external interface on forward chain
+  ansible.builtin.iptables:
     table: filter
     chain: FORWARD
     in_interface: "{{ gateway.internal_interface }}"
@@ -30,8 +30,8 @@
     jump: ACCEPT
   become: true
 
-- name: "gateway - accept {{ gateway.internal_interface }} and {{ gateway.external_interface }} on return forward chain"
-  iptables:
+- name: GATEWAY - accept internal interface and external interface on return forward chain
+  ansible.builtin.iptables:
     table: filter
     chain: FORWARD
     in_interface: "{{ gateway.external_interface }}"

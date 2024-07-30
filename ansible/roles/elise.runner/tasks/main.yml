@@ -1,6 +1,6 @@
 ---
-- name: main - discover registered runner
-  command: |
+- name: MAIN - discover registered runner
+  ansible.builtin.command: |
     /bin/bash -c '
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=runner)" ]; then
         docker exec runner \
@@ -17,8 +17,8 @@
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.runner.networking.teine.fqdn
 
-- name: main - register gitlab runner
-  command: |
+- name: MAIN - register gitlab runner
+  ansible.builtin.command: |
     docker exec runner \
       gitlab-runner register \
         --non-interactive \

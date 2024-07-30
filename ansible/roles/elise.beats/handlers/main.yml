@@ -1,12 +1,12 @@
 ---
-- name: main - systemctl restart filebeat
-  systemd:
+- name: MAIN - systemctl restart filebeat
+  ansible.builtin.systemd:
     name: filebeat
     state: restarted
   become: true
 
-- name: main - systemctl restart metricbeat
-  systemd:
+- name: MAIN - systemctl restart metricbeat
+  ansible.builtin.systemd:
     name: metricbeat
     state: restarted
   become: true

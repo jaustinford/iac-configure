@@ -1,5 +1,6 @@
 ---
-- include_tasks: mount.yml
+- name: MAIN - include mount tasks
+  ansible.builtin.include_tasks: mount.yml
   no_log: true
   with_items:
     - "{{ mounts }}"

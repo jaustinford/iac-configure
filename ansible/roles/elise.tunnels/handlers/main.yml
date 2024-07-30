@@ -1,28 +1,28 @@
 ---
-- name: main - systemctl restart tunnel-nginx
-  systemd:
+- name: MAIN - systemctl restart tunnel-nginx
+  ansible.builtin.systemd:
     name: tunnel-nginx
     state: restarted
-    daemon_reload: yes
+    daemon_reload: true
   become: true
 
-- name: main - systemctl restart tunnel-openvpnas
-  systemd:
+- name: MAIN - systemctl restart tunnel-openvpnas
+  ansible.builtin.systemd:
     name: tunnel-openvpnas
     state: restarted
-    daemon_reload: yes
+    daemon_reload: true
   become: true
 
-- name: main - systemctl restart tunnel-elasticsearch
-  systemd:
+- name: MAIN - systemctl restart tunnel-elasticsearch
+  ansible.builtin.systemd:
     name: tunnel-elasticsearch
     state: restarted
-    daemon_reload: yes
+    daemon_reload: true
   become: true
 
-- name: main - systemctl restart tunnel-kibana
-  systemd:
+- name: MAIN - systemctl restart tunnel-kibana
+  ansible.builtin.systemd:
     name: tunnel-kibana
     state: restarted
-    daemon_reload: yes
+    daemon_reload: true
   become: true

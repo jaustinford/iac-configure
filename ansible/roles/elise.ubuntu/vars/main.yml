@@ -4,7 +4,7 @@ ubuntu:
     mirror_proxy: "https://nexus.{{ assignments.nginx.networking.teine.fqdn }}/repository/elysianskies_apt_proxy/"
     mirror_original: http://us.archive.ubuntu.com/ubuntu/
     distro: jammy
-    enabled: yes
+    enabled: true
   additional_packages:
     - name: net-tools
       state: present

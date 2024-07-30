@@ -1,21 +1,22 @@
 ---
-- name: main - create local .docker directory
-  file:
+- name: MAIN - create local .docker directory
+  ansible.builtin.file:
     path: /root/.docker
     state: directory
     owner: root
     group: root
     mode: '0755'
 
-- name: main - manage local docker configuration
-  template:
+- name: MAIN - manage local docker configuration
+  ansible.builtin.template:
     src: config.json
     dest: /root/.docker/config.json
     owner: root
     group: root
     mode: '0600'
 
-- include_tasks: container.yml
+- name: MAIN - include container tasks
+  ansible.builtin.include_tasks: container.yml
   no_log: true
   with_items:
     - "{{ containers }}"

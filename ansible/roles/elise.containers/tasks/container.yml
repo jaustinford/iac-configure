@@ -1,5 +1,5 @@
 ---
-- name: "container - deploy {{ item.name }} container"
+- name: "CONTAINER - deploy container {{ item.name }}"
   community.docker.docker_container:
     name: "{{ item.name }}"
     image: "{{ item.image }}"
@@ -21,5 +21,6 @@
     volumes: "{{ item.volumes }}"
   no_log: true
 
-- include_tasks: wait.yml
+- name: CONTAINER - include wait tasks
+  ansible.builtin.include_tasks: wait.yml
   when: item.wait_for_port != "0"

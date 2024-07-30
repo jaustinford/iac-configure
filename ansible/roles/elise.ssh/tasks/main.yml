@@ -1,5 +1,5 @@
 ---
-- name: main - copy authorized_keys
+- name: MAIN - copy authorized_keys
   ansible.posix.authorized_key:
     user: "{{ ansible_user }}"
     state: "{{ item.state }}"
@@ -7,15 +7,15 @@
   with_items:
     - "{{ ssh.authorized_keys }}"
 
-- name: main - upload templates
-  template:
+- name: MAIN - upload templates
+  ansible.builtin.template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     owner: "{{ item.owner }}"
     group: "{{ item.group }}"
     mode: "{{ item.mode }}"
   become: true
-  notify: main - systemctl restart ssh
+  notify: MAIN - systemctl restart ssh
   when: ansible_system_vendor != "Linode"
   with_items:
     - src: sshd_config
