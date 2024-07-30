@@ -18,4 +18,3 @@ RUN \
 WORKDIR /etc/ansible
 
 COPY ansible ./
-COPY ssh.key /root/ssh.key
