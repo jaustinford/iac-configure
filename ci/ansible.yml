@@ -8,6 +8,8 @@ lint_site:
   image:
     name: $ELISE_CI_NEXUS_HOSTED/elise/elysianskies-configure:$CI_COMMIT_REF_SLUG
   stage: lint
+  needs:
+    - secret_detection
   script:
     - *prepare_ansible
     - |
