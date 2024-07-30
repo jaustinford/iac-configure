@@ -4,7 +4,7 @@ playbook_site:
     name: $ELISE_CI_NEXUS_HOSTED/elise/elysianskies-configure:$CI_COMMIT_REF_SLUG
   stage: deploy
   script:
-    - echo "$ELISE_PROJECT_VAULT_PASSWORD" > /root/.vault.password
+    - echo "$ELISE_GROUP_VAULT_PASSWORD" > /root/.vault.password
     - |
       ansible-vault decrypt \
           --vault-password-file /root/.vault.password \
