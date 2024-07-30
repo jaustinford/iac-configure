@@ -2,7 +2,7 @@
 ssh:
   authorized_keys:
     - state: present
-      key: >+
+      key: |-
         ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCw5PQecme+/
         WsJYSh0bjEiawrsnIwvxZe7QWuCMdDUJgYNwz0yR3IdVlPBd1
         gf+PCD3qz9SkwTpGsoyYHptjjUw/TYRvEEQaC2x5OwZIuprcT
