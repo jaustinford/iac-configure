@@ -2,20 +2,20 @@
 ssh:
   authorized_keys:
     - state: present
-      key: >-
-        ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCw5PQecme+/
-        WsJYSh0bjEiawrsnIwvxZe7QWuCMdDUJgYNwz0yR3IdVlPBd1
-        gf+PCD3qz9SkwTpGsoyYHptjjUw/TYRvEEQaC2x5OwZIuprcT
-        FYztGvDDmEX5giZdNy6Aq9uGrtnzQZRd2T8JSLi/5jLJ7HWz/
-        b1IO2puj4g/E++njPeP4Hh0FI5SPgUzdLP0GHPCAXvZXz3O9Q
-        S9kbZ28ICZ4OVjTy2WBaHsfz5XLZ4mdjZIJKp1j2zyPe3WGUh
-        YKOpoA1clk6T7ZPGZDwRUAZDHB4A8HZHepmAwVsHATad/Jq4P
-        fBHzsB4DhNrp7vez5C/51WI+jJJBvkQqALxgti6D12770WCHK
-        fxD5kFR4xzSZoXEt6RZ2oz+7wb+F5HXGGDsufP7rCDsAHU3ci
-        u8riV5J8dRY/PwQEUO5YMwxQAEIStrThDJxh3TIU2dou9u3yK
-        dsWA8ZWULe7uJj5uR0x2SLNX1H7jnZJwBeasPFSfaGPifkJNk
-        AzuFLKsY9shMSLmLaLfgQ4vZtFyboAVvVZfMw1I5wKGhBCT5P
-        JJ4VwuO1YX8gz7GWwc+FD/omwX6uH3LMMaCb9RKMcETXw1aB1
-        CXEA1t3qSkIQ/G7jSdDKlPZiIvPJOGeFRZTwepvtdoBYL2kmx
-        /UcS3BFZxXkdKN8C+p9/vg+sX9A+WE1BaBTw== austin@ely
-        sianskies.com
+      key: >
+       ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCw5PQecme+/
+       WsJYSh0bjEiawrsnIwvxZe7QWuCMdDUJgYNwz0yR3IdVlPBd1
+       gf+PCD3qz9SkwTpGsoyYHptjjUw/TYRvEEQaC2x5OwZIuprcT
+       FYztGvDDmEX5giZdNy6Aq9uGrtnzQZRd2T8JSLi/5jLJ7HWz/
+       b1IO2puj4g/E++njPeP4Hh0FI5SPgUzdLP0GHPCAXvZXz3O9Q
+       S9kbZ28ICZ4OVjTy2WBaHsfz5XLZ4mdjZIJKp1j2zyPe3WGUh
+       YKOpoA1clk6T7ZPGZDwRUAZDHB4A8HZHepmAwVsHATad/Jq4P
+       fBHzsB4DhNrp7vez5C/51WI+jJJBvkQqALxgti6D12770WCHK
+       fxD5kFR4xzSZoXEt6RZ2oz+7wb+F5HXGGDsufP7rCDsAHU3ci
+       u8riV5J8dRY/PwQEUO5YMwxQAEIStrThDJxh3TIU2dou9u3yK
+       dsWA8ZWULe7uJj5uR0x2SLNX1H7jnZJwBeasPFSfaGPifkJNk
+       AzuFLKsY9shMSLmLaLfgQ4vZtFyboAVvVZfMw1I5wKGhBCT5P
+       JJ4VwuO1YX8gz7GWwc+FD/omwX6uH3LMMaCb9RKMcETXw1aB1
+       CXEA1t3qSkIQ/G7jSdDKlPZiIvPJOGeFRZTwepvtdoBYL2kmx
+       /UcS3BFZxXkdKN8C+p9/vg+sX9A+WE1BaBTw== austin@ely
+       sianskies.com
