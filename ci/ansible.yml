@@ -1,10 +1,7 @@
 ---
 ansible_lint:
   image:
-    name: $ELISE_CI_NEXUS_PROXY/cytopia/ansible-lint:latest-manifest-linux-amd64
-    entrypoint:
-      - /bin/sh
-      - -c
+    name: $ELISE_CI_NEXUS_PROXY/pipelinecomponents/ansible-lint:0.72.0
   stage: lint
   variables:
     ANSIBLE_CONFIG: $CI_PROJECT_DIR/ansible/ansible.cfg
@@ -12,7 +9,7 @@ ansible_lint:
     - secret_detection
   script:
     - echo "$ELISE_GROUP_VAULT_PASSWORD" > /root/.vault.password
-    - ansible-lint $CI_PROJECT_DIR/ansible/site.yml
+    - ansible-lint ansible/site.yml
 
 ansible_playbook:
   image:
