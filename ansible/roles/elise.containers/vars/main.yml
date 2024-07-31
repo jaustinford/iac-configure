@@ -378,7 +378,7 @@ containers:
     wait_for_port: "{{ external_ports.openvpnas_vpn }}"
 
   - name: docs
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/elysianskies-docs:main"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/docs:main"
     pull: true
     command:
       - mkdocs
@@ -401,7 +401,7 @@ containers:
     wait_for_port: "{{ external_ports.docs_web }}"
 
   - name: resume
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/elysianskies-static-resume:main"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/static-website-resume:main"
     pull: true
     command:
       - httpd-foreground
@@ -423,7 +423,7 @@ containers:
     wait_for_port: "{{ external_ports.resume_web }}"
 
   - name: fourohfour
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/elysianskies-static-fourohfour:main"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/static-website-fourohfour:main"
     pull: true
     command:
       - httpd-foreground
@@ -445,7 +445,7 @@ containers:
     wait_for_port: "{{ external_ports.fourohfour_web }}"
 
   - name: fiveohx
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/elysianskies-static-fiveohx:main"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/static-website-fiveohx:main"
     pull: true
     command:
       - httpd-foreground
@@ -467,7 +467,7 @@ containers:
     wait_for_port: "{{ external_ports.fiveohx_web }}"
 
   - name: fourohthree
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/elysianskies-static-fourohthree:main"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/static-website-fourohthree:main"
     pull: true
     command:
       - httpd-foreground
