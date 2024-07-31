@@ -6,6 +6,8 @@ ansible_lint:
       - /bin/sh
       - -c
   stage: lint
+  variables:
+    ANSIBLE_CONFIG: $CI_PROJECT_DIR/ansible/ansible.cfg
   needs:
     - secret_detection
   script:
