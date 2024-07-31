@@ -12,7 +12,6 @@ RUN \
     pip3 install \
         ansible==8.7.0 \
         ansible-core==2.15.11 \
-        ansible-lint==6.22.2 \
         requests \
         jmespath
 
