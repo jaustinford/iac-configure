@@ -1,19 +1,5 @@
 ---
-stages:
-  - test
-  - lint
-  - integrate
-  - deploy
-
-default:
-  tags:
-    - elysianskies_runner
-
-variables:
-  ELISE_CI_NEXUS_HOSTED: docker01-teine.home.elysianskies.com:32501
-  ELISE_CI_NEXUS_PROXY: docker01-teine.home.elysianskies.com:32502
-
 include:
-  - template: Jobs/Secret-Detection.gitlab-ci.yml
-  - local: ci/build.yml
-  - local: ci/ansible.yml
+  - project: elise/shared-cicd
+    ref: main
+    file: .gitlab-ci.yml
