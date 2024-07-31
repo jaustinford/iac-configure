@@ -1,5 +1,0 @@
----
-collections:
-  - name: gluster.gluster
-    version: 1.0.2
-    source: https://galaxy.ansible.com
