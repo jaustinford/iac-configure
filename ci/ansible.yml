@@ -10,7 +10,7 @@ ansible_lint:
     - secret_detection
   script:
     - echo "$ELISE_GROUP_VAULT_PASSWORD" > /root/.vault.password
-    - ansible-lint ansible/site.yml
+    - ansible-lint $CI_PROJECT_DIR/ansible/site.yml
 
 ansible_playbook:
   image:
