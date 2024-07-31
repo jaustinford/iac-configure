@@ -10,7 +10,7 @@ ansible_lint:
   script:
     - echo "$ELISE_GROUP_VAULT_PASSWORD" > /root/.vault.password
     - cd ansible
-    - ansible-galaxy install -r roles/requirements.yml
+    - ansible-galaxy install gluster.gluster
     - ansible-lint --force-color site.yml
 
 ansible_playbook:
