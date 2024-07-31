@@ -1,0 +1,4 @@
+---
+collections:
+  - name: gluster.gluster
+    version: 1.0.2
