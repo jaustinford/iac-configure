@@ -1,7 +1,7 @@
 ---
 ansible_lint:
   image:
-    name: registry.gitlab.com/pipelinecomponents/ansible-lint:0.72.0
+    name: $ELISE_CI_NEXUS_PROXY/registry.gitlab.com/pipelinecomponents/ansible-lint:0.72.0
   stage: lint
   variables:
     ANSIBLE_CONFIG: $CI_PROJECT_DIR/ansible/ansible.cfg
