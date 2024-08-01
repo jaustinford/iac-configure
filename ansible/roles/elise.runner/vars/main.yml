@@ -7,7 +7,6 @@ runner:
   description: elysianskies_runner
   docker_privileged: "true"
   docker_volumes:
-    - /cache
     - /var/run/docker.sock:/var/run/docker.sock:rw
     - "/home/{{ ansible_user }}/.docker/config.json:/root/.docker/config.json:ro"
     - /mnt/tvault/elysianskies/tfstate:/tfstate:rw
