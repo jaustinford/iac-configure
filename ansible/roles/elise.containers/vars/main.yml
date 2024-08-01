@@ -348,6 +348,7 @@ containers:
     env: {}
     ports: []
     volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:rw
       - "{{ containers_globals.application_directory }}/runner/config:/etc/gitlab-runner:rw"
       # - "{{ containers_globals.application_directory }}/runner/cache:/cache:rw"
       # - "/home/{{ ansible_user }}/.docker:/root/.docker:ro"
