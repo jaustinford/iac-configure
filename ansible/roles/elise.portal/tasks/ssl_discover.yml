@@ -2,7 +2,7 @@
 - name: SSL_DISCOVER - discover deployed nginx certificate
   delegate_to: localhost
   ansible.builtin.uri:
-    url: "http://{{ assignments.gitlab.networking.teine.fqdn }}:{{ external_ports.gitlab_web }}/api/v4/projects/2/terraform/state/certificates_portal_nginx"
+    url: "http://{{ assignments.gitlab.networking.teine.fqdn }}:{{ external_ports.gitlab_web }}/api/v4/projects/2/terraform/state/portal_nginx"
     headers:
       PRIVATE-TOKEN: "{{ secrets.gitlab.pat_api }}"
     method: GET
