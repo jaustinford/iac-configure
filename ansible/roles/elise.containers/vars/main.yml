@@ -348,8 +348,10 @@ containers:
     env: {}
     ports: []
     volumes:
+      - "{{ containers_globals.application_directory }}/runner/cache:/cache:rw"
       - "{{ containers_globals.application_directory }}/runner/config:/etc/gitlab-runner:rw"
       - /var/run/docker.sock:/var/run/docker.sock:rw
+      - "/home/{{ ansible_user }}/.docker:/root/.docker:ro"
     wait_for_port: "0"
 
   - name: openvpnas
