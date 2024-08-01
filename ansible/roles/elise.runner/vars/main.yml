@@ -8,5 +8,4 @@ runner:
   docker_privileged: "true"
   docker_volumes:
     - /var/run/docker.sock:/var/run/docker.sock:rw
-    - "/home/{{ ansible_user }}/.docker:/root/.docker:ro"
     - /mnt/tvault/elysianskies/tfstate:/tfstate:rw
