@@ -3,7 +3,7 @@
   ansible.builtin.hostname:
     name: portal
   become: true
-  notify: main - reboot
+  notify: MAIN - reboot
 
 - name: MAIN - flush handlers
   ansible.builtin.meta: flush_handlers
