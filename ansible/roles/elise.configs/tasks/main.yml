@@ -23,7 +23,6 @@
 
 - name: MAIN - include ssl_deploy tasks
   ansible.builtin.include_tasks: ssl_deploy.yml
-  when: "{{ lookup('ansible.builtin.file', '/tfstate/portal_nginx.json') }}"
 
 - name: MAIN - ensure geoip download directory
   ansible.builtin.file:
