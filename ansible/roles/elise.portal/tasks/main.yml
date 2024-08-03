@@ -15,8 +15,9 @@
     update_cache: true
   become: true
 
-- name: MAIN - include ssl_discover tasks
-  ansible.builtin.include_tasks: ssl_discover.yml
+- name: MAIN - include ssl_deploy tasks
+  ansible.builtin.include_tasks: ssl_deploy.yml
+  when: "{{ lookup('ansible.builtin.file', '/tfstate/portal_nginx.json') }}"
 
 - name: MAIN - configure nginx
   ansible.builtin.copy:

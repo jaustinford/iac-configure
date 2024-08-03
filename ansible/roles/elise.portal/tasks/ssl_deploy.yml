@@ -9,12 +9,12 @@
   notify: MAIN - systemctl restart nginx
   with_items:
     - content: |
-        {{ discovered_tls.content | from_json | json_query('outputs.certificate_certificate_pem.value') }}
-        {{ discovered_tls.content | from_json | json_query('outputs.certificate_issuer_pem.value') }}
+        {{ lookup('ansible.builtin.file', '/tfstate/portal_nginx.json')["outputs"]["certificate_certificate_pem"]["value"] }}
+        {{ lookup('ansible.builtin.file', '/tfstate/portal_nginx.json')["outputs"]["certificate_issuer_pem"]["value"] }}
       dest: /etc/nginx/nginx.crt
       mode: '0644'
 
     - content: |
-        {{ discovered_tls.content | from_json | json_query('outputs.certificate_private_key_pem.value') }}
+        {{ lookup('ansible.builtin.file', '/tfstate/portal_nginx.json')["outputs"]["certificate_private_key_pem"]["value"] }}
       dest: /etc/nginx/nginx.crt.key
       mode: '0600'
