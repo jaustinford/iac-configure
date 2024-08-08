@@ -2,7 +2,7 @@
 - name: SSL_DEPLOY - fetch ssl certificate
   delegate_to: localhost
   ansible.builtin.debug:
-    msg: "{{ lookup('ansible.builtin.file', '/tfstate/portal_nginx.json') }}"
+    msg: "{{ lookup('ansible.builtin.file', '/tfstate/nginx_certificate.json') }}"
   no_log: true
   register: ssl_certificate
 
