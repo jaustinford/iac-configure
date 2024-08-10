@@ -13,7 +13,7 @@
     mode: "{{ item.mode }}"
   become: true
   no_log: true
-  notify: MAIN - systemctl restart nginx
+  notify: MAIN - docker restart nginx
   with_items:
     - content: |
         {{ ssl_certificate.msg.outputs.certificate_certificate_pem.value }}
