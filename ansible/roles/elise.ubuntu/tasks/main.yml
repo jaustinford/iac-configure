@@ -1,8 +1,16 @@
 ---
+- name: MAIN - discover nexus
+  ansible.builtin.uri:
+    url: "{{ ubuntu.apt.mirror_proxy }}"
+    status_code:
+      - 401
+      - 404
+  register: discovered_nexus
+
 - name: MAIN - include apt tasks
   ansible.builtin.include_tasks: apt.yml
   vars:
-    apt_host: "{{ ubuntu.apt.mirror_proxy if ubuntu.apt.enabled else ubuntu.apt.mirror_original }}"
+    apt_host: "{{ ubuntu.apt.mirror_proxy if discovered_nexus.status == 401 else ubuntu.apt.mirror_original }}"
   when: ansible_system_vendor != "Linode"
 
 - name: MAIN - install additional packages
