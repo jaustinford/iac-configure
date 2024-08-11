@@ -1,21 +1,6 @@
-# elysianskies-configure
+# iac-configure
 
- > started : 23.04.2024
+This project uses Ansible to configure the host and container infrastructure that comprises the lab. The pipeline executes a single `ansible_playbook` job which runs the [`site.yml`](https://gitlab.home.elysianskies.com/elise/infrastructure/iac-configure/-/blob/main/ansible/site.yml?ref_type=heads) playbook. Per Ansible's documentation, this is intended as the entrypoint playbook to launch the entire stack so that the full infrastructure is executed every time.
 
-_building the image_
-
-```bash
- docker build -t elysianskies-configure:main .
- ```
-
- _executing site playbook_
-
- ```bash
- docker run --interactive --rm elysianskies-configure:main //bin/bash -c "echo '${LOCAL_VAULT_PASSWORD}' > //root/.vault.password ; ansible-playbook //etc/ansible/site.yml"
- ```
-
-_managing the vault files_
-
- ```bash
- docker run --interactive --rm elysianskies-configure:main //bin/bash -c "echo '${LOCAL_VAULT_PASSWORD}' > //root/.vault.password ; ansible-vault decrypt //etc/ansible/group_vars/all.yml --output -"
- ```
+### references
+- [Ansible Best Practices](https://docs.ansible.com/ansible/2.8/user_guide/playbooks_best_practices.html)
