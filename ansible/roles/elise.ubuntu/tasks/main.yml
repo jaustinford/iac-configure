@@ -1,5 +1,5 @@
 ---
-- name: MAIN - discover nexus
+- name: MAIN - discover nexus apt repository
   ansible.builtin.uri:
     url: "{{ ubuntu.apt.mirror_proxy }}"
     status_code:
