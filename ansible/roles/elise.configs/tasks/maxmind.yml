@@ -7,6 +7,11 @@
     group: "{{ ansible_user }}"
     mode: '0644'
 
+- name: MAXMIND - rotate old geoip databases
+  ansible.builtin.command: |
+    find /home/{{ ansible_user }}/geoip -ctime +7 -exec rm -rf {} \;
+  changed_when: false  
+
 - name: MAXMIND - discover directory
   ansible.builtin.command: |
     /bin/bash -c '
