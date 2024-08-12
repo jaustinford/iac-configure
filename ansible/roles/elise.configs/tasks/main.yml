@@ -38,7 +38,7 @@
 - name: MAIN - include maxmind tasks
   ansible.builtin.include_tasks: maxmind.yml
   when:
-    - maxmind.download == "yes"
+    - maxmind.download == "true"
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.nginx.networking.teine.fqdn
   with_items:
     - GeoLite2-ASN
