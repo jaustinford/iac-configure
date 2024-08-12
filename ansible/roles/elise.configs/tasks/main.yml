@@ -24,31 +24,7 @@
 - name: MAIN - include ssl_deploy tasks
   ansible.builtin.include_tasks: ssl_deploy.yml
 
-- name: MAIN - ensure geoip download directory
-  ansible.builtin.file:
-    path: "/home/{{ ansible_user }}/geoip"
-    state: directory
-    mode: '0755'
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-  become: true
-  when:
-    - ansible_hostname + "-teine.home.elysianskies.com" == assignments.nginx.networking.teine.fqdn
-
-- name: MAIN - rotate old geoip databases
-  ansible.builtin.command: |
-    find /home/{{ ansible_user }}/geoip -ctime +{{ maxmind.rotate_after_days }} -exec rm -rf {} \;
-  changed_when: false
-  become: true
-  when:
-    - ansible_hostname + "-teine.home.elysianskies.com" == assignments.nginx.networking.teine.fqdn
-
 - name: MAIN - include maxmind tasks
   ansible.builtin.include_tasks: maxmind.yml
   when:
-    - maxmind.download == "true"
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.nginx.networking.teine.fqdn
-  with_items:
-    - GeoLite2-ASN
-    - GeoLite2-City
-    - GeoLite2-Country
