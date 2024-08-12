@@ -14,8 +14,8 @@
   changed_when: false
   become: true
 
-- name: MAXMIND - include maxmind tasks
-  ansible.builtin.include_tasks: maxmind.yml
+- name: MAXMIND - include geoip tasks
+  ansible.builtin.include_tasks: geoip.yml
   when:
     - maxmind.download == "true"
   with_items:
