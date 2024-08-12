@@ -10,14 +10,12 @@
 
 - name: MAXMIND - rotate old geoip databases
   ansible.builtin.command: |
-    find /home/{{ ansible_user }}/geoip -ctime +{{ maxmind.rotate_after_days }} -exec rm -rf {} \;
+    find /home/{{ ansible_user }}/MAXMIND -ctime +{{ maxmind.rotate_after_days }} -exec rm -rf {} \;
   changed_when: false
   become: true
 
 - name: MAXMIND - include geoip tasks
   ansible.builtin.include_tasks: geoip.yml
-  when:
-    - maxmind.download == "true"
   with_items:
     - GeoLite2-ASN
     - GeoLite2-City

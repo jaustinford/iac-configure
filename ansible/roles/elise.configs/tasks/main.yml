@@ -28,3 +28,4 @@
   ansible.builtin.include_tasks: maxmind.yml
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.nginx.networking.teine.fqdn
+    - maxmind.download == "true"
