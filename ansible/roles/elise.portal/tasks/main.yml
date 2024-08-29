@@ -28,6 +28,7 @@
           ssl_certificate_key        /etc/nginx/nginx.crt.key;
           proxy_set_header Host      $host;
           proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Portal  true;
 
           location / {
               proxy_pass https://127.0.0.1:{{ external_ports.nginx_web }};

@@ -69,6 +69,7 @@ containers:
     ports:
       - "{{ assignments.pihole.networking.talamh.ipv4 }}:53:53/udp"
       - "{{ assignments.pihole.networking.uisge.ipv4 }}:53:53/udp"
+      - "{{ assignments.pihole.networking.teine.ipv4 }}:53:53/udp"
       - "{{ assignments.pihole.networking.teine.ipv4 }}:{{ external_ports.pihole_web }}:80/tcp"
     volumes:
       - "{{ containers_globals.application_directory }}/pihole/data:/etc/pihole:rw"
