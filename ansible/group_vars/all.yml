@@ -50,6 +50,7 @@ assignments:
   fourohfour: "{{ docker_hosts.host_2 }}"
   fiveohx: "{{ docker_hosts.host_1 }}"
   fourohthree: "{{ docker_hosts.host_2 }}"
+  barbossa: "{{ docker_hosts.host_2 }}"
   keycloak: "{{ docker_hosts.host_1 }}"
   redis: "{{ docker_hosts.host_2 }}"
   oauth: "{{ docker_hosts.host_1 }}"
