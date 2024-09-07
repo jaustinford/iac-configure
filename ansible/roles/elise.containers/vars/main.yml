@@ -518,8 +518,8 @@ containers:
       PLEX_TOKEN: "{{ secrets.plex.token }}"
     ports: []
     volumes:
-      - /mnt/tvault/deluge/completed:/completed:rw
-      - /mnt/tvault/video/plex_libraries:/libraries:rw
+      - /mnt/tvault/deluge:/downloads:rw
+      - /mnt/tvault/video/plex_libraries:/plex_libraries:rw
     wait_for_port: "0"
 
   - name: keycloak
