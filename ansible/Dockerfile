@@ -17,4 +17,4 @@ RUN \
 
 WORKDIR /etc/ansible
 
-COPY ansible ./
+COPY . ./
