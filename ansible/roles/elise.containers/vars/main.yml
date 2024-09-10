@@ -393,7 +393,7 @@ containers:
       - "{{ assignments.openvpnas.networking.teine.ipv4 }}:{{ external_ports.openvpnas_vpn }}:1194/tcp"
     volumes:
       - "{{ containers_globals.application_directory }}/openvpnas/openvpn:/openvpn:rw"
-    wait_for_port: "{{ external_ports.openvpnas_web }}"
+    wait_for_port: "{{ external_ports.openvpnas_vpn }}"
 
   - name: docs
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/docs:main"
