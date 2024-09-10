@@ -3,6 +3,8 @@
   ansible.builtin.uri:
     url: "{{ ubuntu.apt.mirror_proxy }}"
     status_code:
+      - -1
+      - 200
       - 401
       - 404
   register: discovered_nexus
