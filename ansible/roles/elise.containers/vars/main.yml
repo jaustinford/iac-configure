@@ -373,7 +373,9 @@ containers:
   - name: openvpnas
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/openvpn/openvpn-as:2.14.0-b90cb316-Ubuntu22"
     pull: "{{ containers_globals.pull }}"
-    command: null
+    command:
+      - /usr/local/openvpn_as/scripts/openvpnas
+      - --nodaemon
     docker_host: "{{ assignments.openvpnas.networking.teine.ipv4 }}"
     restart_policy: "{{ containers_globals.restart_policy }}"
     detach: "{{ containers_globals.detach }}"
