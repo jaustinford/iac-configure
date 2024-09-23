@@ -47,7 +47,7 @@ containers:
     wait_for_port: "{{ external_ports.nexus_docker_proxy }}"
 
   - name: pihole
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/pihole/pihole:2024.03.2"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/pihole/pihole:2024.07.0"
     pull: "{{ containers_globals.pull }}"
     command: null
     docker_host: "{{ assignments.pihole.networking.teine.ipv4 }}"
@@ -81,7 +81,7 @@ containers:
     wait_for_port: "{{ external_ports.pihole_web }}"
 
   - name: plex
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/plexinc/pms-docker:1.40.2.8395-c67dce28e"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/plexinc/pms-docker:1.41.0.8992-8463ad060"
     pull: "{{ containers_globals.pull }}"
     command: null
     docker_host: "{{ assignments.plex.networking.teine.ipv4 }}"
@@ -110,7 +110,7 @@ containers:
     wait_for_port: "{{ external_ports.plex_web }}"
 
   - name: tautulli
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/linuxserver/tautulli:amd64-v2.13.4-ls121"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/linuxserver/tautulli:amd64-v2.14.5-ls156"
     pull: "{{ containers_globals.pull }}"
     command: null
     docker_host: "{{ assignments.tautulli.networking.teine.ipv4 }}"
@@ -133,7 +133,7 @@ containers:
     wait_for_port: "{{ external_ports.tautulli_web }}"
 
   - name: filebrowser
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/filebrowser/filebrowser:v2.28.0-amd64-s6"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/filebrowser/filebrowser:v2.31.1-amd64"
     pull: "{{ containers_globals.pull }}"
     command: null
     docker_host: "{{ assignments.filebrowser.networking.teine.ipv4 }}"
@@ -153,8 +153,8 @@ containers:
     ports:
       - "{{ assignments.filebrowser.networking.teine.ipv4 }}:{{ external_ports.filebrowser_web }}:80/tcp"
     volumes:
-      - "{{ containers_globals.configuration_directory }}/filebrowser/settings.json:/config/settings.json:ro"
-      - "{{ containers_globals.application_directory }}/filebrowser/filebrowser.db:/database/filebrowser.db:rw"
+      - "{{ containers_globals.configuration_directory }}/filebrowser/settings.json:/.filebrowser.json:ro"
+      - "{{ containers_globals.application_directory }}/filebrowser/filebrowser.db:/database.db:rw"
       - /mnt/tvault:/tvault:rw
     wait_for_port: "{{ external_ports.filebrowser_web }}"
 
@@ -287,7 +287,7 @@ containers:
     wait_for_port: "{{ external_ports.expressvpn_squid }}"
 
   - name: deluge
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/linuxserver/deluge:version-2.0.3-2201906121747ubuntu18.04.1"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/linuxserver/deluge:2.1.1"
     pull: "{{ containers_globals.pull }}"
     command: null
     docker_host: "{{ assignments.deluge.networking.teine.ipv4 }}"
@@ -308,14 +308,14 @@ containers:
     volumes:
       - /mnt/tvault/deluge:/downloads:rw
       - "{{ containers_globals.configuration_directory }}/deluge/auth:/config/auth:ro"
-      - "{{ containers_globals.configuration_directory }}/deluge/core.conf:/config/core.conf:ro"
+      - "{{ containers_globals.configuration_directory }}/deluge/core.conf:/defaults/core.conf:ro"
       - "{{ containers_globals.configuration_directory }}/deluge/hostlist.conf:/config/hostlist.conf:ro"
       - "{{ containers_globals.configuration_directory }}/deluge/web.conf:/config/web.conf:ro"
       - "{{ containers_globals.application_directory }}/deluge/plugins:/config/plugins:rw"
     wait_for_port: "{{ external_ports.expressvpn_deluge }}"
 
   - name: gitlab
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/gitlab/gitlab-ee:17.1.2-ee.0"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/gitlab/gitlab-ee:17.4.0-ee.0"
     pull: "{{ containers_globals.pull }}"
     command:
       - /assets/wrapper
@@ -343,7 +343,7 @@ containers:
     wait_for_port: "{{ external_ports.gitlab_web }}"
 
   - name: runner
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/gitlab/gitlab-runner:v17.1.1"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/gitlab/gitlab-runner:v17.4.0"
     pull: "{{ containers_globals.pull }}"
     command:
       - run
@@ -546,7 +546,7 @@ containers:
     wait_for_port: "0"
 
   - name: keycloak
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/keycloak/keycloak:24.0.4"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/keycloak/keycloak:25.0.6"
     pull: "{{ containers_globals.pull }}"
     command:
       - start
