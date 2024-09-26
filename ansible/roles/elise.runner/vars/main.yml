@@ -10,3 +10,4 @@ runner:
     - /var/run/docker.sock:/var/run/docker.sock:rw
     - "/home/{{ ansible_user }}/.docker:/root/.docker:ro"
     - /mnt/tvault/elysianskies/tfstate:/tfstate:rw
+    - /mnt/tvault/video/plex_libraries:/plex_libraries:rw
