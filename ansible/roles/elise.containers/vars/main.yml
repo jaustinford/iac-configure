@@ -522,7 +522,7 @@ containers:
       - --config-file
       - barbossa.yml
       - --operating-mode
-      - ingest
+      - ingest-media
       - --verbose
     docker_host: "{{ assignments.barbossa.networking.teine.ipv4 }}"
     restart_policy: "{{ containers_globals.restart_policy }}"
