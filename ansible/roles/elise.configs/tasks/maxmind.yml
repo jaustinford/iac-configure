@@ -8,13 +8,22 @@
     group: "{{ ansible_user }}"
   become: true
 
-- name: MAXMIND - rotate old geoip databases
-  ansible.builtin.command: |
-    find /home/{{ ansible_user }}/geoip \
-        -ctime +{{ maxmind.rotate_after_days }} \
-        -exec rm -rf {} \; || true
-  changed_when: false
+- name: MAXMIND - find old geoip databases
+  ansible.builtin.find:
+    paths: "/home/{{ ansible_user }}/geoip"
+    recurse: true
+    file_type: any
+    age: "{{ maxmind.rotate_after_days }}d"
   become: true
+  register: old_geoip_files
+
+- name: MAXMIND - remove old geoip databases
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: absent
+  become: true
+  with_items:
+    - "{{ old_geoip_files.files }}"
 
 - name: MAXMIND - include geoip tasks
   ansible.builtin.include_tasks: geoip.yml

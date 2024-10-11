@@ -546,7 +546,7 @@ containers:
     wait_for_port: "0"
 
   - name: keycloak
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/keycloak/keycloak:25.0.6"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/keycloak/keycloak:26.0.0-0"
     pull: "{{ containers_globals.pull }}"
     command:
       - start
@@ -566,6 +566,7 @@ containers:
       KC_HOSTNAME: keycloak.home.elysianskies.com
       KC_PROXY: edge
       KC_HTTP_ENABLED: "true"
+      KC_PROXY_HEADERS: xforwarded
       KEYCLOAK_ADMIN: "{{ secrets.keycloak.username }}"
       KEYCLOAK_ADMIN_PASSWORD: "{{ secrets.keycloak.password }}"
     ports:
