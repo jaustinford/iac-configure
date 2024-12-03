@@ -29,8 +29,4 @@ nginx:
     country:
       - United States
     city:
-      - Denver
-      - Parker
-      - Lone Tree
-      - Greenwood Village
-      - Strasburg
+      - Littleton
