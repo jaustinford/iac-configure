@@ -27,5 +27,5 @@ ubuntu:
       state: present
 
 gateway:
-  internal_interface: eno1
+  internal_interface: enp1s0f0
   external_interface: enp1s0f1
