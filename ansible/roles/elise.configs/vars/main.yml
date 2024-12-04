@@ -29,4 +29,9 @@ nginx:
     country:
       - United States
     city:
+      - Denver
+      - Arvada
+      - Westminster
+      - Broomfield
+      - Thornton
       - Littleton
