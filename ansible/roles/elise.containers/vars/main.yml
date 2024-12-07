@@ -242,7 +242,7 @@ containers:
     pull: "{{ containers_globals.pull }}"
     command:
       - -d
-      - -f
+      - -f ""
     docker_host: "{{ assignments.expressvpn.networking.teine.ipv4 }}"
     restart_policy: "{{ containers_globals.restart_policy }}"
     detach: "{{ containers_globals.detach }}"
