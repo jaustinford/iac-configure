@@ -249,7 +249,7 @@ containers:
       - /etc/openvpn/up.sh
       - --down
       - /etc/openvpn/down.sh
-      - --dhcp-option 
+      - --dhcp-option
       - 'DOMAIN-ROUTE .'
       - --down-pre
     docker_host: "{{ assignments.expressvpn.networking.teine.ipv4 }}"
