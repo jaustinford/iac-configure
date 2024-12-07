@@ -241,16 +241,11 @@ containers:
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/dperson/openvpn-client:amd64"
     pull: "{{ containers_globals.pull }}"
     command:
-      - --config
-      - /vpn/vpn.conf
-      - --script-security
-      - 2
-      - --up
-      - /etc/openvpn/up.sh
-      - --down
-      - /etc/openvpn/down.sh
-      - --dhcp-option
-      - 'DOMAIN-ROUTE .'
+      - --config=/vpn/vpn.conf
+      - --script-security=2
+      - --up=/etc/openvpn/up.sh
+      - --down=/etc/openvpn/down.sh
+      - --dhcp-option='DOMAIN-ROUTE .'
       - --down-pre
     docker_host: "{{ assignments.expressvpn.networking.teine.ipv4 }}"
     restart_policy: "{{ containers_globals.restart_policy }}"
