@@ -308,7 +308,7 @@ containers:
     volumes:
       - /mnt/tvault/deluge:/downloads:rw
       - "{{ containers_globals.configuration_directory }}/deluge/auth:/config/auth:ro"
-      - "{{ containers_globals.configuration_directory }}/deluge/core.conf:/defaults/core.conf:ro"
+      - "{{ containers_globals.configuration_directory }}/deluge/core.conf:/config/core.conf:ro"
       - "{{ containers_globals.configuration_directory }}/deluge/hostlist.conf:/config/hostlist.conf:ro"
       - "{{ containers_globals.configuration_directory }}/deluge/web.conf:/config/web.conf:ro"
       - "{{ containers_globals.application_directory }}/deluge/plugins:/config/plugins:rw"
