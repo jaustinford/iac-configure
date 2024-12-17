@@ -81,7 +81,7 @@ containers:
     wait_for_port: "{{ external_ports.pihole_web }}"
 
   - name: plex
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/plexinc/pms-docker:1.41.0.8992-8463ad060"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/plexinc/pms-docker:1.41.3.9292-bc7397402"
     pull: "{{ containers_globals.pull }}"
     command: null
     docker_host: "{{ assignments.plex.networking.teine.ipv4 }}"
@@ -315,7 +315,7 @@ containers:
     wait_for_port: "{{ external_ports.expressvpn_deluge }}"
 
   - name: gitlab
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/gitlab/gitlab-ee:17.4.0-ee.0"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/gitlab/gitlab-ee:17.5.4-ee.0"
     pull: "{{ containers_globals.pull }}"
     command:
       - /assets/wrapper
@@ -343,7 +343,7 @@ containers:
     wait_for_port: "{{ external_ports.gitlab_web }}"
 
   - name: runner
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/gitlab/gitlab-runner:v17.4.0"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/gitlab/gitlab-runner:v17.5.4"
     pull: "{{ containers_globals.pull }}"
     command:
       - run
