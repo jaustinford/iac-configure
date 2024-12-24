@@ -12,5 +12,8 @@
   become: true
 
 - name: MAIN - reboot
-  ansible.builtin.reboot:
-  become: true
+  delegate_to: localhost
+  community.general.linode:
+    api_key: "{{ secrets.linode.token }}"
+    name: portal
+    state: restarted

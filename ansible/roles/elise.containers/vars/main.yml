@@ -8,7 +8,6 @@ containers_globals:
   shm_size: 64M
   network_mode: bridge
   dns_servers:
-    - "{{ assignments.pihole.networking.talamh.ipv4 }}"
     - 172.16.14.4
     - 8.8.8.8
   dns_search_domains:
@@ -69,7 +68,7 @@ containers:
       ADMIN_EMAIL: j.austin.ford@gmail.com
       TEMPERATUREUNIT: F
       WEBTHEME: default-dark
-      PIHOLE_DNS_1: "{{ containers_globals.dns_servers[2] }}"
+      PIHOLE_DNS_1: "{{ containers_globals.dns_servers[1] }}"
     ports:
       - "{{ assignments.pihole.networking.talamh.ipv4 }}:53:53/udp"
       - "{{ assignments.pihole.networking.uisge.ipv4 }}:53:53/udp"
