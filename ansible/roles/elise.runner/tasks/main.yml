@@ -28,7 +28,6 @@
         --executor {{ runner.executor }} \
         --token {{ secrets.gitlab.runner_authentication_token }} \
         --docker-image {{ runner.docker_image }} \
-        --runner-timeout {{ runner.timeout }} \
         --description {{ runner.description }} \
         --docker-privileged={{ runner.docker_privileged }} \
     {% for docker_volume in runner.docker_volumes %}
