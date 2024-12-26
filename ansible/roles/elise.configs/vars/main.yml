@@ -29,9 +29,12 @@ nginx:
     country:
       - United States
     city:
-      - Denver
       - Arvada
-      - Westminster
+      - Aurora
       - Broomfield
-      - Thornton
+      - Denver
+      - Greenwood Village
       - Littleton
+      - Parker
+      - Thornton
+      - Westminster
