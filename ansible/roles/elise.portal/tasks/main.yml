@@ -25,8 +25,8 @@
     owner: root
     group: root
     mode: '0755'
-  notify: MAIN - systemctl restart nginx
   become: true
+  notify: MAIN - systemctl restart nginx
 
 - name: MAIN - ensure nginx daemon
   ansible.builtin.systemd:
