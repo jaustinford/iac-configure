@@ -1,4 +1,8 @@
 ---
+- name: MAIN - include hosts tasks
+  ansible.builtin.include_tasks: hosts.yml
+  when: ansible_system_vendor != "Linode"
+
 - name: MAIN - discover nexus apt repository
   ansible.builtin.uri:
     url: "{{ ubuntu.apt.mirror_proxy }}"
@@ -34,8 +38,4 @@
 
 - name: MAIN - include gateway tasks
   ansible.builtin.include_tasks: gateway.yml
-  when: ansible_system_vendor != "Linode"
-
-- name: MAIN - include hosts tasks
-  ansible.builtin.include_tasks: hosts.yml
   when: ansible_system_vendor != "Linode"

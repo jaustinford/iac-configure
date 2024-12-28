@@ -1,7 +1,7 @@
 ---
 ubuntu:
   apt:
-    mirror_proxy: "http://{{ assignments.nexus.networking.teine.fqdn }}:{{ external_ports.nexus_web }}/repository/elysianskies_apt_proxy/"
+    mirror_proxy: "https://nexus.{{ assignments.nginx.networking.teine.fqdn }}/repository/elysianskies_apt_proxy/"
     mirror_original: http://us.archive.ubuntu.com/ubuntu/
     distro: jammy
   additional_packages:
