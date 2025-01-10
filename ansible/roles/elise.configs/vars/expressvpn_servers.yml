@@ -8,30 +8,31 @@ expressvpn_servers:
   north_america:
     main:
       united_states:
-        - usa-sanfrancisco
-        - usa-seattle
-        - usa-chicago
+        - usa-albuquerque
         - usa-atlanta
-        - usa-washingtondc
-        - usa-newjersey-1
-        - usa-newjersey2
-        - usa-newjersey-3
-        - usa-newyork
-        - usa-miami
-        - usa-miami-2
+        - usa-chicago
+        - usa-dallas
+        - usa-dallas-2
+        - usa-denver
+        - usa-houston
+        - usa-lincolnpark
         - usa-losangeles
         - usa-losangeles-2
         - usa-losangeles-3
         - usa-losangeles5
+        - usa-miami
+        - usa-miami-2
+        - usa-newyork
+        - usa-newjersey-1
+        - usa-newjersey2
+        - usa-newjersey-3
         - usa-phoenix
-        - usa-albuquerque
-        - usa-dallas
-        - usa-dallas-2
-        - usa-tampa-1
-        - usa-lincolnpark
         - usa-saltlakecity
+        - usa-sanfrancisco
         - usa-santa-monica
-        - usa-denver
+        - usa-seattle
+        - usa-tampa-1
+        - usa-washingtondc
       canada:
         - canada-montreal
         - canada-toronto
