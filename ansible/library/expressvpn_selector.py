@@ -30,6 +30,18 @@ def concatentate_servers():
 
     return evpn_servers
 
+def find_item(item_name: str, target_list: list):
+    """
+    Find server item in list.
+    """
+
+    for target_item in target_list:
+        if list(target_item)[0] == item_name:
+            selection_list = target_item[item_name]
+            break
+
+    return selection_list
+
 def randomize_continent(evpn_servers: list):
     """
     Select random server given no
@@ -52,25 +64,13 @@ def randomize_continent(evpn_servers: list):
 
     return selected_server
 
-def find_region(continent_name: str, evpn_servers: list):
-    """
-    Find region given 'continent_name'
-    """
-
-    for evpn_server in evpn_servers:
-        if list(evpn_server)[0] == continent_name:
-            random_region_list = evpn_server[continent_name]
-            break
-
-    return random_region_list
-
 def randomize_region(continent_name: str, evpn_servers: list):
     """
     Select random server given
     'continent_name'.
     """
 
-    random_region_list = find_region(continent_name, evpn_servers)
+    random_region_list = find_item(continent_name, evpn_servers)
 
     random_region_object = random.choice(random_region_list)
     random_region_key    = list(random_region_object)[0]
@@ -84,26 +84,14 @@ def randomize_region(continent_name: str, evpn_servers: list):
 
     return selected_server
 
-def find_country(region_name: str, random_region_list: list):
-    """
-    Find country given 'region_name'
-    """
-
-    for region_object in random_region_list:
-        if list(region_object)[0] == region_name:
-            random_country_list = region_object[region_name]
-            break
-
-    return random_country_list
-
 def randomize_country(continent_name: str, region_name: str, evpn_servers: list):
     """
     Select random server given
     'continent_name' and 'region_name'.
     """
 
-    random_region_list  = find_region(continent_name, evpn_servers)
-    random_country_list = find_country(region_name, random_region_list)
+    random_region_list  = find_item(continent_name, evpn_servers)
+    random_country_list = find_item(region_name, random_region_list)
 
     random_country_object = random.choice(random_country_list)
     random_country_key    = list(random_country_object)[0]
@@ -113,18 +101,6 @@ def randomize_country(continent_name: str, region_name: str, evpn_servers: list)
 
     return selected_server
 
-def find_server(country_name: str, random_country_list: list):
-    """
-    Find server given 'country_name'
-    """
-
-    for country_object in random_country_list:
-        if list(country_object)[0] == country_name:
-            random_server_list = country_object[country_name]
-            break
-
-    return random_server_list
-
 def randomize_server(continent_name: str, region_name: str, country_name: str, evpn_servers: list):
     """
     Select random server given
@@ -132,9 +108,9 @@ def randomize_server(continent_name: str, region_name: str, country_name: str, e
     and 'country_name'.
     """
 
-    random_region_list  = find_region(continent_name, evpn_servers)
-    random_country_list = find_country(region_name, random_region_list)
-    random_server_list  = find_server(country_name, random_country_list)
+    random_region_list  = find_item(continent_name, evpn_servers)
+    random_country_list = find_item(region_name, random_region_list)
+    random_server_list  = find_item(country_name, random_country_list)
 
     selected_server = random.choice(random_server_list)
 
