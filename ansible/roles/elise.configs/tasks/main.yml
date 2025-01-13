@@ -10,7 +10,7 @@
 
 - name: "MAIN - resolve expressvpn server"
   delegate_to: localhost
-  expressvpn.selector:
+  expressvpn_selector:
     continent: "{{ lookup('env', 'ELISE_PROJECT_EXPRESSVPN_CONTINENT') }}"
     region: "{{ lookup('env', 'ELISE_PROJECT_EXPRESSVPN_REGION') }}"
     country: "{{ lookup('env', 'ELISE_PROJECT_EXPRESSVPN_COUNTRY') }}"
