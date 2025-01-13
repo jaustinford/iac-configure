@@ -214,7 +214,7 @@ def main():
             "selected_server": selected_server
         }
 
-    module.exit_json(result)
+    module.exit_json(**result)
 
 if __name__ == "__main__":
     main()
