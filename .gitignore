@@ -1,2 +1,2 @@
 .env
-ansible/library/*/__pycache__
+ansible/library/__pycache__
