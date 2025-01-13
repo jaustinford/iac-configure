@@ -166,11 +166,6 @@ def main():
         }
     }
 
-    result = {
-        "changed": False,
-        "selected_server": ""
-    }
-
     module = AnsibleModule(
         argument_spec=module_args,
         supports_check_mode=True
@@ -214,10 +209,12 @@ def main():
                     selected_server = selector_server
 
     if selected_server:
-        result["changed"] = True
-        result["selected_server"] = selected_server
+        result = {
+            "changed": False,
+            "selected_server": selected_server
+        }
 
-    module.exit_json(**result)
+    module.exit_json(result)
 
 if __name__ == "__main__":
     main()
