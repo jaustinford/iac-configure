@@ -168,7 +168,7 @@ def main():
 
     result = {
         "changed": False,
-        "message": ""
+        "selected_server": ""
     }
 
     module = AnsibleModule(
@@ -215,9 +215,7 @@ def main():
 
     if selected_server:
         result["changed"] = True
-        result["message"] = "ExpressVPN server has been selected."
-
-        print(selected_server)
+        result["selected_server"] = selected_server
 
     module.exit_json(**result)
 
