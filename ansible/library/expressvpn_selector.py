@@ -147,24 +147,31 @@ def main():
     selection process.
     """
 
-    module_args = {
-        "continent": {
-            "type": "str",
-            "required": True
-        },
-        "region": {
-            "type": "str",
-            "required": False
-        },
-        "country": {
-            "type": "str",
-            "required": False
-        },
-        "server": {
-            "type": "str",
-            "required": False
-        }
-    }
+    module_args = dict(
+        continent=dict(type="str", required=True),
+        region=dict(type="str", required=True),
+        country=dict(type="str", required=True),
+        server=dict(type="str", required=True)
+    )
+
+    # module_args = {
+    #     "continent": {
+    #         "type": "str",
+    #         "required": True
+    #     },
+    #     "region": {
+    #         "type": "str",
+    #         "required": False
+    #     },
+    #     "country": {
+    #         "type": "str",
+    #         "required": False
+    #     },
+    #     "server": {
+    #         "type": "str",
+    #         "required": False
+    #     }
+    # }
 
     # result = {
     #     "changed": False,
