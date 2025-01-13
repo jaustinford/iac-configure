@@ -147,36 +147,29 @@ def main():
     selection process.
     """
 
-    module_args = dict(
-        continent=dict(type="str", required=True),
-        region=dict(type="str", required=True),
-        country=dict(type="str", required=True),
-        server=dict(type="str", required=True)
-    )
+    module_args = {
+        "continent": {
+            "type": "str",
+            "required": True
+        },
+        "region": {
+            "type": "str",
+            "required": False
+        },
+        "country": {
+            "type": "str",
+            "required": False
+        },
+        "server": {
+            "type": "str",
+            "required": False
+        }
+    }
 
-    # module_args = {
-    #     "continent": {
-    #         "type": "str",
-    #         "required": True
-    #     },
-    #     "region": {
-    #         "type": "str",
-    #         "required": False
-    #     },
-    #     "country": {
-    #         "type": "str",
-    #         "required": False
-    #     },
-    #     "server": {
-    #         "type": "str",
-    #         "required": False
-    #     }
-    # }
-
-    # result = {
-    #     "changed": False,
-    #     "message": "ExpressVPN module didn't work."
-    # }
+    result = {
+        "changed": False,
+        "message": "ExpressVPN module didn't work."
+    }
 
     module = AnsibleModule(
         argument_spec=module_args,
@@ -184,10 +177,12 @@ def main():
     )
 
     selector_continent = module.params["continent"]
-    selector_region    = module.params["region"]
-    selector_country   = module.params["country"]
-    selector_server    = module.params["server"]
+    # selector_region    = module.params["region"]
+    # selector_country   = module.params["country"]
+    # selector_server    = module.params["server"]
 
+    result["changed"] = True
+    result["message"] = "ExpressVPN server has been selected."
     print(selector_continent)
 
     # evpn_servers = concatentate_servers()
