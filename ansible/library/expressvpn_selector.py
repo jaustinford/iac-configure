@@ -166,10 +166,10 @@ def main():
         }
     }
 
-    result = {
-        "changed": False,
-        "message": "ExpressVPN module didn't work."
-    }
+    # result = {
+    #     "changed": False,
+    #     "message": "ExpressVPN module didn't work."
+    # }
 
     module = AnsibleModule(
         argument_spec=module_args,
@@ -181,43 +181,45 @@ def main():
     selector_country   = module.params["country"]
     selector_server    = module.params["server"]
 
-    evpn_servers = concatentate_servers()
+    print(selector_continent)
 
-    if selector_continent == "random":
-        selected_server = randomize_continent(evpn_servers)
+    # evpn_servers = concatentate_servers()
 
-    else:
-        if selector_region == "random":
-            selected_server = randomize_region(
-                selector_continent,
-                evpn_servers
-            )
+    # if selector_continent == "random":
+    #     selected_server = randomize_continent(evpn_servers)
 
-        else:
-            if selector_country == "random":
-                selected_server = randomize_country(
-                    selector_continent,
-                    selector_region,
-                    evpn_servers
-                )
+    # else:
+    #     if selector_region == "random":
+    #         selected_server = randomize_region(
+    #             selector_continent,
+    #             evpn_servers
+    #         )
 
-            else:
-                if selector_server == "random":
-                    selected_server = randomize_server(
-                        selector_continent,
-                        selector_region,
-                        selector_country,
-                        evpn_servers
-                    )
+    #     else:
+    #         if selector_country == "random":
+    #             selected_server = randomize_country(
+    #                 selector_continent,
+    #                 selector_region,
+    #                 evpn_servers
+    #             )
 
-                else:
-                    selected_server = selector_server
+    #         else:
+    #             if selector_server == "random":
+    #                 selected_server = randomize_server(
+    #                     selector_continent,
+    #                     selector_region,
+    #                     selector_country,
+    #                     evpn_servers
+    #                 )
 
-    if selected_server:
-        result["changed"] = True
-        result["message"] = "ExpressVPN server has been selected."
+    #             else:
+    #                 selected_server = selector_server
 
-    print(selected_server)
+    # if selected_server:
+    #     result["changed"] = True
+    #     result["message"] = "ExpressVPN server has been selected."
+
+    # print(selected_server)
 
 if __name__ == "__main__":
     main()
