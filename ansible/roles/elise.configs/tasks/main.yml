@@ -9,12 +9,12 @@
   become: true
 
 - name: "MAIN - resolve expressvpn server"
-  delegate_to: localhost
   expressvpn_selector:
     continent: north_america
     region: main
     country: united_states
     server: random
+  when: inventory_hostname == assignments.expressvpn.networking.teine.fqdn
   register: expressvpn_selected_server
 
 - name: MAIN - include directories tasks
