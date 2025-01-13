@@ -140,78 +140,90 @@ def randomize_server(continent_name: str, region_name: str, country_name: str, e
 
     return selected_server
 
-module_args = {
-    "continent": {
-        "type": "str",
-        "required": True
-    },
-    "region": {
-        "type": "str",
-        "required": False
-    },
-    "country": {
-        "type": "str",
-        "required": False
-    },
-    "server": {
-        "type": "str",
-        "required": False
+def main():
+    """
+    Parse Ansible args, read object containing
+    possible server selections and direct to
+    selection process.
+    """
+
+    module_args = {
+        "continent": {
+            "type": "str",
+            "required": True
+        },
+        "region": {
+            "type": "str",
+            "required": False
+        },
+        "country": {
+            "type": "str",
+            "required": False
+        },
+        "server": {
+            "type": "str",
+            "required": False
+        }
     }
-}
 
-result = {
-    "changed": False,
-    "message": "ExpressVPN module didn't work."
-}
+    result = {
+        "changed": False,
+        "message": "ExpressVPN module didn't work."
+    }
 
-module = AnsibleModule(
-    argument_spec=module_args,
-    supports_check_mode=True
-)
+    module = AnsibleModule(
+        argument_spec=module_args,
+        supports_check_mode=True
+    )
 
-selector_continent = module.params["continent"]
-# selector_region    = module.params["region"]
-# selector_country   = module.params["country"]
-# selector_server    = module.params["server"]
+    selector_continent = module.params["continent"]
+    # selector_region    = module.params["region"]
+    # selector_country   = module.params["country"]
+    # selector_server    = module.params["server"]
 
-result["changed"] = True
-result["message"] = "ExpressVPN server has been selected."
-print(selector_continent)
+    result["changed"] = True
+    result["message"] = "ExpressVPN server has been selected."
+    print(selector_continent)
 
-# evpn_servers = concatentate_servers()
+    module.exit_json(**result)
 
-# if selector_continent == "random":
-#     selected_server = randomize_continent(evpn_servers)
+    # evpn_servers = concatentate_servers()
 
-# else:
-#     if selector_region == "random":
-#         selected_server = randomize_region(
-#             selector_continent,
-#             evpn_servers
-#         )
+    # if selector_continent == "random":
+    #     selected_server = randomize_continent(evpn_servers)
 
-#     else:
-#         if selector_country == "random":
-#             selected_server = randomize_country(
-#                 selector_continent,
-#                 selector_region,
-#                 evpn_servers
-#             )
+    # else:
+    #     if selector_region == "random":
+    #         selected_server = randomize_region(
+    #             selector_continent,
+    #             evpn_servers
+    #         )
 
-#         else:
-#             if selector_server == "random":
-#                 selected_server = randomize_server(
-#                     selector_continent,
-#                     selector_region,
-#                     selector_country,
-#                     evpn_servers
-#                 )
+    #     else:
+    #         if selector_country == "random":
+    #             selected_server = randomize_country(
+    #                 selector_continent,
+    #                 selector_region,
+    #                 evpn_servers
+    #             )
 
-#             else:
-#                 selected_server = selector_server
+    #         else:
+    #             if selector_server == "random":
+    #                 selected_server = randomize_server(
+    #                     selector_continent,
+    #                     selector_region,
+    #                     selector_country,
+    #                     evpn_servers
+    #                 )
 
-# if selected_server:
-#     result["changed"] = True
-#     result["message"] = "ExpressVPN server has been selected."
+    #             else:
+    #                 selected_server = selector_server
 
-# print(selected_server)
+    # if selected_server:
+    #     result["changed"] = True
+    #     result["message"] = "ExpressVPN server has been selected."
+
+    # print(selected_server)
+
+if __name__ == "__main__":
+    main()
