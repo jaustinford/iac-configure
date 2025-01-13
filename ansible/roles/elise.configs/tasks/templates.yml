@@ -1,5 +1,6 @@
 ---
 - name: "TEMPLATES - resolve expressvpn server"
+  delegate_to: localhost
   expressvpn_selector:
     continent: north_america
     region: main
