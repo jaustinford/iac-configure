@@ -8,6 +8,15 @@
     group: "{{ ansible_user }}"
   become: true
 
+- name: "MAIN - resolve expressvpn server"
+  delegate_to: localhost
+  expressvpn_selector:
+    continent: north_america
+    region: main
+    country: united_states
+    server: random
+  register: expressvpn_selected_server
+
 - name: MAIN - include directories tasks
   ansible.builtin.include_tasks: directories.yml
   when: item.state == 'directory'
