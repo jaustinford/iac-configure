@@ -59,8 +59,8 @@ def randomize_continent(evpn_servers: list):
     random_country_object = random.choice(random_country_list)
     random_country_key    = list(random_country_object)[0]
 
-    random_server_list   = random_country_object[random_country_key]
-    selected_server = random.choice(random_server_list)
+    random_server_list = random_country_object[random_country_key]
+    selected_server    = random.choice(random_server_list)
 
     return selected_server
 
@@ -79,8 +79,8 @@ def randomize_region(continent_name: str, evpn_servers: list):
     random_country_object = random.choice(random_country_list)
     random_country_key    = list(random_country_object)[0]
 
-    random_server_list   = random_country_object[random_country_key]
-    selected_server = random.choice(random_server_list)
+    random_server_list = random_country_object[random_country_key]
+    selected_server    = random.choice(random_server_list)
 
     return selected_server
 
@@ -96,8 +96,8 @@ def randomize_country(continent_name: str, region_name: str, evpn_servers: list)
     random_country_object = random.choice(random_country_list)
     random_country_key    = list(random_country_object)[0]
 
-    random_server_list   = random_country_object[random_country_key]
-    selected_server = random.choice(random_server_list)
+    random_server_list = random_country_object[random_country_key]
+    selected_server    = random.choice(random_server_list)
 
     return selected_server
 
