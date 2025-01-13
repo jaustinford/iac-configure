@@ -18,7 +18,7 @@ def concatentate_servers():
 
     evpn_servers = []
 
-    evpn_file_dir = "/etc/ansible/library/servers"
+    evpn_file_dir = "/etc/ansible/library/evpn_servers"
 
     for evpn_file in os.listdir(evpn_file_dir):
         evpn_path = evpn_file_dir + "/" + evpn_file
@@ -150,7 +150,7 @@ def main():
     module_args = {
         "continent": {
             "type": "str",
-            "required": False
+            "required": True
         },
         "region": {
             "type": "str",
@@ -168,7 +168,7 @@ def main():
 
     result = {
         "changed": False,
-        "message": ""
+        "message": "ExpressVPN module didn't work."
     }
 
     module = AnsibleModule(
