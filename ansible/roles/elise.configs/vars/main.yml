@@ -3,9 +3,6 @@ ssmtp:
   email: j.austin.ford@gmail.com
   email_server: smtp.gmail.com:587
 
-expressvpn:
-  server: "{{ lookup('env', 'ELISE_PROJECT_EXPRESSVPN_SERVER') }}"
-
 deluge:
   add_paused: "false"
   completed_dir: completed

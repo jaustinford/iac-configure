@@ -1,0 +1,21 @@
+---
+africa:
+  - north:
+      - egypt:
+          - egypt
+      - algeria:
+          - algeria
+
+  - south:
+      - south_africa:
+          - southafrica
+
+  - east:
+      - kenya:
+          - kenya
+
+  - west:
+      - ghana:
+          - ghana
+      - morocco:
+          - morocco

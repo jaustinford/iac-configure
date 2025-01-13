@@ -1,0 +1,17 @@
+---
+oceania:
+  - main:
+      - australia:
+          - australia-sydney
+          - australia-sydney-2
+          - australia-adelaide-
+          - australia-melbourne
+          - australia-brisbane
+          - australia-perth
+          - australia-woolloomooloo-2
+      - new_zealand:
+          - newzealand
+
+  - islands:
+      - guam:
+          - guam

@@ -1,4 +1,12 @@
 ---
+- name: "TEMPLATES - resolve expressvpn server"
+  expressvpn_selector:
+    continent: north_america
+    region: main
+    country: united_states
+    server: random
+  register: expressvpn_selected_server
+
 - name: "TEMPLATES - copy container template {{ item.path }}"
   ansible.builtin.template:
     src: "{{ item.src }}"
