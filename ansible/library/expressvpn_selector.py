@@ -18,7 +18,7 @@ def concatentate_servers():
 
     evpn_servers = []
 
-    evpn_file_dir = "servers"
+    evpn_file_dir = "/etc/ansible/library/servers"
 
     for evpn_file in os.listdir(evpn_file_dir):
         evpn_path = evpn_file_dir + "/" + evpn_file
