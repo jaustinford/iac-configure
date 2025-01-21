@@ -2,7 +2,7 @@
 - name: SSL_DEPLOY - fetch ssl certificate
   delegate_to: localhost
   ansible.builtin.debug:
-    msg: "{{ lookup('ansible.builtin.file', '/tfstate/nginx_certificate.json') }}"
+    msg: "{{ lookup('ansible.builtin.file', '/tfstate/elysianskies.json') }}"
   no_log: true
   register: ssl_certificate
 
@@ -16,12 +16,12 @@
   notify: MAIN - docker restart nginx
   with_items:
     - content: |
-        {{ ssl_certificate.msg.outputs.certificate_certificate_pem.value }}
-        {{ ssl_certificate.msg.outputs.certificate_issuer_pem.value }}
+        {{ ssl_certificate.msg.outputs.tls_nginx_certificate_certificate_pem.value }}
+        {{ ssl_certificate.msg.outputs.tls_nginx_certificate_issuer_pem.value }}
       dest: /elysianskies/configurations/nginx/nginx.crt
       mode: '0644'
 
     - content: |
-        {{ ssl_certificate.msg.outputs.certificate_private_key_pem.value }}
+        {{ ssl_certificate.msg.outputs.tls_nginx_certificate_private_key_pem.value }}
       dest: /elysianskies/configurations/nginx/nginx.crt.key
       mode: '0600'
