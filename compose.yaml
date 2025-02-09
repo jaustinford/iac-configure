@@ -9,7 +9,7 @@ services:
     build:
       context: .
       tags:
-        - docker01-teine.home.elysianskies.com:32501/elise/iac-configure:main
+        - nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
     profiles:
       - builder
 
@@ -18,7 +18,7 @@ services:
   ###########################################################
 
   ansible_playbook_site:
-    image: docker01-teine.home.elysianskies.com:32501/elise/iac-configure:main
+    image: nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
     entrypoint: |
       /bin/bash -c "
         echo '${VAULT_PASSWORD}' > /root/.vault.password ;
@@ -59,7 +59,7 @@ services:
   ###########################################################
 
   ansible_vault_secrets_decrypt:
-    image: docker01-teine.home.elysianskies.com:32501/elise/iac-configure:main
+    image: nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
     entrypoint: |
       /bin/bash -c "
         echo '${VAULT_PASSWORD}' > /root/.vault.password ;
@@ -88,7 +88,7 @@ services:
   ###########################################################
 
   ansible_vault_secrets_encrypt:
-    image: docker01-teine.home.elysianskies.com:32501/elise/iac-configure:main
+    image: nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
     entrypoint: |
       /bin/bash -c "
         echo '${VAULT_PASSWORD}' > /root/.vault.password ;
@@ -117,7 +117,7 @@ services:
   ###########################################################
 
   ansible_ping:
-    image: docker01-teine.home.elysianskies.com:32501/elise/iac-configure:main
+    image: nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
     entrypoint: |
       /bin/bash -c "
         echo '${VAULT_PASSWORD}' > /root/.vault.password ;
@@ -140,7 +140,7 @@ services:
   ###########################################################
 
   ansible_tunnels_off:
-    image: docker01-teine.home.elysianskies.com:32501/elise/iac-configure:main
+    image: nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
     entrypoint: |
       /bin/bash -c "
         echo '${VAULT_PASSWORD}' > /root/.vault.password ;
@@ -165,7 +165,7 @@ services:
   ###########################################################
 
   ansible_tunnels_on:
-    image: docker01-teine.home.elysianskies.com:32501/elise/iac-configure:main
+    image: nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
     entrypoint: |
       /bin/bash -c "
         echo '${VAULT_PASSWORD}' > /root/.vault.password ;
@@ -190,7 +190,7 @@ services:
   ###########################################################
 
   ansible_reboot_elysianskies_onprem:
-    image: docker01-teine.home.elysianskies.com:32501/elise/iac-configure:main
+    image: nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
     entrypoint: |
       /bin/bash -c "
         echo '${VAULT_PASSWORD}' > /root/.vault.password ;
@@ -214,7 +214,7 @@ services:
   ###########################################################
 
   ansible_shutdown_elysianskies_onprem:
-    image: docker01-teine.home.elysianskies.com:32501/elise/iac-configure:main
+    image: nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
     entrypoint: |
       /bin/bash -c "
         echo '${VAULT_PASSWORD}' > /root/.vault.password ;
@@ -238,7 +238,7 @@ services:
   ###########################################################
 
   ansible_reboot_elysianskies_linode:
-    image: docker01-teine.home.elysianskies.com:32501/elise/iac-configure:main
+    image: nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
     entrypoint: |
       /bin/bash -c "
         echo '${VAULT_PASSWORD}' > /root/.vault.password ;
@@ -262,7 +262,7 @@ services:
   ###########################################################
 
   ansible_shutdown_elysianskies_linode:
-    image: docker01-teine.home.elysianskies.com:32501/elise/iac-configure:main
+    image: nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
     entrypoint: |
       /bin/bash -c "
         echo '${VAULT_PASSWORD}' > /root/.vault.password ;
