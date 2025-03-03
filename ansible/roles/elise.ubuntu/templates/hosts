@@ -1,0 +1,23 @@
+127.0.0.1 localhost
+127.0.1.1 {{ ansible_hostname }}
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+
+{% for network in ["talamh", "uisge", "teine"] %}
+{%- for host in ["host_1", "host_2"] -%}
+{% if network == "teine" and host == "host_2" %}
+{% set proxied_service_full = [] %}
+{%- for proxied_service_short in ["nexus", "nginx"] -%}
+{{ proxied_service_full.append(proxied_service_short + "." + docker_hosts.host_2.networking.teine.fqdn) }}
+{%- endfor %}
+{{ docker_hosts.host_2.networking.teine.ipv4 }}  {{ docker_hosts.host_2.networking.teine.fqdn }} {{ " ".join(proxied_service_full) }}
+{% else %}
+{{ docker_hosts[host].networking[network].ipv4 }}  {{ docker_hosts[host].networking[network].fqdn }}
+{% endif %}
+{%- endfor %}
+{% endfor %}
