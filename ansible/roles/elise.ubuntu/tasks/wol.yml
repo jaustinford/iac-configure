@@ -1,0 +1,32 @@
+---
+- name: WOL - create systemd unit for wol
+  ansible.builtin.copy:
+    dest: /lib/systemd/system/wol.service
+    content: |
+      [Unit]
+      Description=Configure Wake-up on LAN
+      Requires=network.target
+      After=network.target
+
+      [Service]
+      Type=oneshot
+      ExecStart=/sbin/ethtool --change {{ wol_interface }} wol g
+
+      [Install]
+      WantedBy=multi-user.target
+    owner: root
+    group: root
+    mode: '0644'
+  become: true
+  notify: MAIN - systemctl restart wol
+
+- name: WOL - flush handlers
+  ansible.builtin.meta: flush_handlers
+
+- name: WOL - configure service for wol
+  ansible.builtin.systemd:
+    name: wol
+    enabled: true
+    daemon_reload: true
+    state: started
+  become: true

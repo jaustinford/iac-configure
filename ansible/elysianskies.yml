@@ -1,6 +1,6 @@
 ---
 - name: ELYSIANSKIES - apply elise.mounts, elise.glusterfs, elise.docker, and elise.configs roles
-  hosts: elysianskies_onprem
+  hosts: elysianskies_onprem_docker
   gather_facts: true
   roles:
     - elise.mounts
@@ -15,4 +15,4 @@
   vars_files:
     - group_vars/all.yml
     - group_vars/secrets.yml
-    - group_vars/elysianskies_onprem.yml
+    - group_vars/elysianskies_onprem_docker.yml

@@ -40,3 +40,9 @@
 - name: MAIN - include gateway tasks
   ansible.builtin.include_tasks: gateway.yml
   when: ansible_system_vendor != "Linode"
+
+- name: MAIN - include wol tasks
+  ansible.builtin.include_tasks: wol.yml
+  vars:
+    wol_interface: "{{ gateway.internal_interface }}"
+  when: ansible_system_vendor != "Linode"

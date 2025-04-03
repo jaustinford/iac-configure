@@ -25,7 +25,8 @@ services:
         echo '${B64_SSH_KEY}' | base64 -d > /root/ssh.key ;
         chmod 600 /root/ssh.key ;
         ansible-playbook \\
-            /etc/ansible/site.yml -vv
+            /etc/ansible/site.yml \\
+            -vv
       "
     profiles:
       - site
@@ -66,7 +67,8 @@ services:
         echo '${B64_SSH_KEY}' | base64 -d > /root/ssh.key ;
         chmod 600 /root/ssh.key ;
         ansible-vault decrypt \\
-            /etc/ansible/group_vars/secrets.yml
+            /etc/ansible/group_vars/secrets.yml \\
+            -vv
       "
     profiles:
       - secrets-decrypt
@@ -95,7 +97,8 @@ services:
         echo '${B64_SSH_KEY}' | base64 -d > /root/ssh.key ;
         chmod 600 /root/ssh.key ;
         ansible-vault encrypt \\
-            /etc/ansible/group_vars/secrets.yml
+            /etc/ansible/group_vars/secrets.yml \\
+            -vv
       "
     profiles:
       - secrets-encrypt
@@ -124,7 +127,8 @@ services:
         echo '${B64_SSH_KEY}' | base64 -d > /root/ssh.key ;
         chmod 600 /root/ssh.key ;
         ansible all \\
-            --module-name ansible.builtin.ping
+            --module-name ansible.builtin.ping \\
+            -vv
       "
     profiles:
       - ping
@@ -186,22 +190,23 @@ services:
       - iac_configure
 
   ###########################################################
-  # ansible_reboot_elysianskies_onprem
+  # ansible_reboot_elysianskies_onprem_docker
   ###########################################################
 
-  ansible_reboot_elysianskies_onprem:
+  ansible_reboot_elysianskies_onprem_docker:
     image: nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
     entrypoint: |
       /bin/bash -c "
         echo '${VAULT_PASSWORD}' > /root/.vault.password ;
         echo '${B64_SSH_KEY}' | base64 -d > /root/ssh.key ;
         chmod 600 /root/ssh.key ;
-        ansible elysianskies_onprem \\
+        ansible elysianskies_onprem_docker \\
             --module-name ansible.builtin.reboot \\
-            --become
+            --become \\
+            -vv
       "
     profiles:
-      - reboot-elysianskies-onprem
+      - reboot-elysianskies-onprem-docker
 
     environment:
       - TZ=America/Denver
@@ -210,28 +215,131 @@ services:
       - iac_configure
 
   ###########################################################
-  # ansible_shutdown_elysianskies_onprem
+  # ansible_shutdown_elysianskies_onprem_docker
   ###########################################################
 
-  ansible_shutdown_elysianskies_onprem:
+  ansible_shutdown_elysianskies_onprem_docker:
     image: nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
     entrypoint: |
       /bin/bash -c "
         echo '${VAULT_PASSWORD}' > /root/.vault.password ;
         echo '${B64_SSH_KEY}' | base64 -d > /root/ssh.key ;
         chmod 600 /root/ssh.key ;
-        ansible elysianskies_onprem \\
+        ansible elysianskies_onprem_docker \\
             --module-name community.general.shutdown \\
-            --become
+            --become \\
+            -vv
       "
     profiles:
-      - shutdown-elysianskies-onprem
+      - shutdown-elysianskies-onprem-docker
 
     environment:
       - TZ=America/Denver
 
     networks:
       - iac_configure
+
+  ###########################################################
+  # ansible_wake_elysianskies_onprem_docker
+  ###########################################################
+
+  ansible_wake_elysianskies_onprem_docker:
+    image: nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
+    entrypoint: |
+      /bin/bash -c "
+        echo '${VAULT_PASSWORD}' > /root/.vault.password ;
+        echo '${B64_SSH_KEY}' | base64 -d > /root/ssh.key ;
+        chmod 600 /root/ssh.key ;
+        ansible localhost \\
+            --module-name community.general.wakeonlan \\
+            --args \"mac='68:05:ca:30:e7:44' port=9\" \\
+            -vvv ;
+        ansible localhost \\
+            --module-name community.general.wakeonlan \\
+            --args \"mac='68:05:ca:30:ec:86' port=9\" \\
+            -vvv          
+      "
+    profiles:
+      - wake-elysianskies-onprem-docker
+
+    environment:
+      - TZ=America/Denver
+
+    network_mode: host
+
+  ###########################################################
+  # ansible_reboot_elysianskies_onprem_nas
+  ###########################################################
+
+  ansible_reboot_elysianskies_onprem_nas:
+    image: nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
+    entrypoint: |
+      /bin/bash -c "
+        echo '${VAULT_PASSWORD}' > /root/.vault.password ;
+        echo '${B64_SSH_KEY}' | base64 -d > /root/ssh.key ;
+        chmod 600 /root/ssh.key ;
+        ansible elysianskies_onprem_nas \\
+            --module-name ansible.builtin.reboot \\
+            --become \\
+            -vv
+      "
+    profiles:
+      - reboot-elysianskies-onprem-nas
+
+    environment:
+      - TZ=America/Denver
+
+    networks:
+      - iac_configure
+
+  ###########################################################
+  # ansible_shutdown_elysianskies_onprem_nas
+  ###########################################################
+
+  ansible_shutdown_elysianskies_onprem_nas:
+    image: nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
+    entrypoint: |
+      /bin/bash -c "
+        echo '${VAULT_PASSWORD}' > /root/.vault.password ;
+        echo '${B64_SSH_KEY}' | base64 -d > /root/ssh.key ;
+        chmod 600 /root/ssh.key ;
+        ansible elysianskies_onprem_nas \\
+            --module-name community.general.shutdown \\
+            --become \\
+            -vv
+      "
+    profiles:
+      - shutdown-elysianskies-onprem-nas
+
+    environment:
+      - TZ=America/Denver
+
+    networks:
+      - iac_configure
+
+  ###########################################################
+  # ansible_wake_elysianskies_onprem_nas
+  ###########################################################
+
+  ansible_wake_elysianskies_onprem_nas:
+    image: nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
+    entrypoint: |
+      /bin/bash -c "
+        echo '${VAULT_PASSWORD}' > /root/.vault.password ;
+        echo '${B64_SSH_KEY}' | base64 -d > /root/ssh.key ;
+        chmod 600 /root/ssh.key ;
+        ansible localhost \\
+            --module-name community.general.wakeonlan \\
+            --args \"mac='10:ff:e0:00:8d:6c' port=9\" \\
+            -vvv          
+      "
+    profiles:
+      - wake-elysianskies-onprem-nas
+
+    environment:
+      - TZ=America/Denver
+
+    network_mode: host
 
   ###########################################################
   # ansible_reboot_elysianskies_linode
@@ -246,7 +354,8 @@ services:
         chmod 600 /root/ssh.key ;
         ansible elysianskies_linode \\
             --module-name ansible.builtin.reboot \\
-            --become
+            --become \\
+            -vv
       "
     profiles:
       - reboot-elysianskies-linode
@@ -270,7 +379,8 @@ services:
         chmod 600 /root/ssh.key ;
         ansible elysianskies_linode \\
             --module-name community.general.shutdown \\
-            --become
+            --become \\
+            -vv
       "
     profiles:
       - shutdown-elysianskies-linode
