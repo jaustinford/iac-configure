@@ -19,6 +19,8 @@
     env: "{{ item.env }}"
     ports: "{{ item.ports }}"
     volumes: "{{ item.volumes }}"
+  vars:
+    ansible_python_interpreter: /usr/local/bin/python3
   no_log: true
 
 - name: CONTAINER - include wait tasks
