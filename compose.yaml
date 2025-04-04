@@ -14,10 +14,10 @@ services:
       - builder
 
   ###########################################################
-  # ansible_playbook_site
+  # playbook_site
   ###########################################################
 
-  ansible_playbook_site:
+  playbook_site:
     image: nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
     entrypoint:
       - /bin/bash
@@ -32,6 +32,8 @@ services:
 
     environment:
       - TZ=America/Denver
+      - VAULT_PASSWORD=${VAULT_PASSWORD}
+      - B64_SSH_KEY=${B64_SSH_KEY}
       - ELISE_PROJECT_EXPRESSVPN_CONTINENT=north_america
       - ELISE_PROJECT_EXPRESSVPN_REGION=main
       - ELISE_PROJECT_EXPRESSVPN_COUNTRY=united_states
@@ -55,10 +57,10 @@ services:
       - iac_configure
 
   ###########################################################
-  # ansible_vault_secrets_decrypt
+  # vault_secrets_decrypt
   ###########################################################
 
-  ansible_vault_secrets_decrypt:
+  vault_secrets_decrypt:
     image: nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
     entrypoint:
       - /bin/bash
@@ -86,10 +88,10 @@ services:
       - iac_configure
 
   ###########################################################
-  # ansible_vault_secrets_encrypt
+  # vault_secrets_encrypt
   ###########################################################
 
-  ansible_vault_secrets_encrypt:
+  vault_secrets_encrypt:
     image: nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
     entrypoint:
       - /bin/bash
@@ -117,10 +119,10 @@ services:
       - iac_configure
 
   ###########################################################
-  # ansible_ping
+  # ping
   ###########################################################
 
-  ansible_ping:
+  ping:
     image: nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
     entrypoint:
       - /bin/bash
@@ -142,10 +144,10 @@ services:
       - iac_configure
 
   ###########################################################
-  # ansible_tunnels_off
+  # tunnels_off
   ###########################################################
 
-  ansible_tunnels_off:
+  tunnels_off:
     image: nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
     entrypoint:
       - /bin/bash
@@ -168,10 +170,10 @@ services:
       - iac_configure
 
   ###########################################################
-  # ansible_tunnels_on
+  # tunnels_on
   ###########################################################
 
-  ansible_tunnels_on:
+  tunnels_on:
     image: nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
     entrypoint:
       - /bin/bash
@@ -194,10 +196,10 @@ services:
       - iac_configure
 
   ###########################################################
-  # ansible_reboot_elysianskies_onprem_docker
+  # reboot_elysianskies_onprem_docker
   ###########################################################
 
-  ansible_reboot_elysianskies_onprem_docker:
+  reboot_elysianskies_onprem_docker:
     image: nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
     entrypoint:
       - /bin/bash
@@ -219,10 +221,10 @@ services:
       - iac_configure
 
   ###########################################################
-  # ansible_shutdown_elysianskies_onprem_docker
+  # shutdown_elysianskies_onprem_docker
   ###########################################################
 
-  ansible_shutdown_elysianskies_onprem_docker:
+  shutdown_elysianskies_onprem_docker:
     image: nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
     entrypoint:
       - /bin/bash
@@ -244,10 +246,10 @@ services:
       - iac_configure
 
   ###########################################################
-  # ansible_wake_elysianskies_onprem_docker
+  # wake_elysianskies_onprem_docker
   ###########################################################
 
-  ansible_wake_elysianskies_onprem_docker:
+  wake_elysianskies_onprem_docker:
     image: nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
     entrypoint:
       - /bin/bash
@@ -256,11 +258,11 @@ services:
         /bin/container-init.sh ;
         ansible localhost \
             --module-name community.general.wakeonlan \
-            --args \"mac='68:05:ca:30:e7:44' port=9\" \
+            --args "mac='68:05:ca:30:e7:44' port=9" \
             -vvv ;
         ansible localhost \
             --module-name community.general.wakeonlan \
-            --args \"mac='68:05:ca:30:ec:86' port=9\" \
+            --args "mac='68:05:ca:30:ec:86' port=9" \
             -vvv          
     profiles:
       - wake-elysianskies-onprem-docker
@@ -273,10 +275,10 @@ services:
     network_mode: host
 
   ###########################################################
-  # ansible_reboot_elysianskies_onprem_nas
+  # reboot_elysianskies_onprem_nas
   ###########################################################
 
-  ansible_reboot_elysianskies_onprem_nas:
+  reboot_elysianskies_onprem_nas:
     image: nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
     entrypoint:
       - /bin/bash
@@ -298,10 +300,10 @@ services:
       - iac_configure
 
   ###########################################################
-  # ansible_shutdown_elysianskies_onprem_nas
+  # shutdown_elysianskies_onprem_nas
   ###########################################################
 
-  ansible_shutdown_elysianskies_onprem_nas:
+  shutdown_elysianskies_onprem_nas:
     image: nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
     entrypoint:
       - /bin/bash
@@ -323,10 +325,10 @@ services:
       - iac_configure
 
   ###########################################################
-  # ansible_wake_elysianskies_onprem_nas
+  # wake_elysianskies_onprem_nas
   ###########################################################
 
-  ansible_wake_elysianskies_onprem_nas:
+  wake_elysianskies_onprem_nas:
     image: nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
     entrypoint:
       - /bin/bash
@@ -335,7 +337,7 @@ services:
         /bin/container-init.sh ;
         ansible localhost \
             --module-name community.general.wakeonlan \
-            --args \"mac='10:ff:e0:00:8d:6c' port=9\" \
+            --args "mac='10:ff:e0:00:8d:6c' port=9" \
             -vvv
     profiles:
       - wake-elysianskies-onprem-nas
@@ -346,56 +348,6 @@ services:
       - B64_SSH_KEY=${B64_SSH_KEY}
 
     network_mode: host
-
-  ###########################################################
-  # ansible_reboot_elysianskies_linode
-  ###########################################################
-
-  ansible_reboot_elysianskies_linode:
-    image: nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
-    entrypoint:
-      - /bin/bash
-      - -c
-      - |
-        /bin/container-init.sh ;
-        ansible elysianskies_linode \
-            --module-name ansible.builtin.reboot \
-            --become
-    profiles:
-      - reboot-elysianskies-linode
-
-    environment:
-      - TZ=America/Denver
-      - VAULT_PASSWORD=${VAULT_PASSWORD}
-      - B64_SSH_KEY=${B64_SSH_KEY}
-
-    networks:
-      - iac_configure
-
-  ###########################################################
-  # ansible_shutdown_elysianskies_linode
-  ###########################################################
-
-  ansible_shutdown_elysianskies_linode:
-    image: nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
-    entrypoint:
-      - /bin/bash
-      - -c
-      - |
-        /bin/container-init.sh ;
-        ansible elysianskies_linode \
-            --module-name community.general.shutdown \
-            --become
-    profiles:
-      - shutdown-elysianskies-linode
-
-    environment:
-      - TZ=America/Denver
-      - VAULT_PASSWORD=${VAULT_PASSWORD}
-      - B64_SSH_KEY=${B64_SSH_KEY}
-
-    networks:
-      - iac_configure
 
 ###########################################################
 # resources
