@@ -11,7 +11,6 @@ site:
 execute_modes:
   deploy:
     name: deploy
-    playbooks: "{{ site.playbooks }}"
     state:
       containers: started
       tunnels: started
@@ -22,7 +21,6 @@ execute_modes:
 
   shutdown:
     name: shutdown
-    playbooks: "{{ site.playbooks | reverse }}"
     state:
       containers: stopped
       tunnels: stopped
@@ -33,7 +31,6 @@ execute_modes:
 
   destroy:
     name: destroy
-    playbooks: "{{ site.playbooks | reverse }}"
     state:
       containers: absent
       tunnels: stopped
