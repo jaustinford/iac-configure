@@ -117,7 +117,7 @@ containers:
     restart_policy: "{{ containers_globals.restart_policy }}"
     detach: "{{ containers_globals.detach }}"
     labels: "{{ containers_globals.labels }}"
-    state: "{{ asscontainers_globals.state }}"
+    state: "{{ containers_globals.state }}"
     shm_size: "{{ containers_globals.shm_size }}"
     devices: []
     capabilities: []
@@ -525,7 +525,7 @@ containers:
     restart_policy: "{{ containers_globals.restart_policy }}"
     detach: "{{ containers_globals.detach }}"
     labels: "{{ containers_globals.labels }}"
-    state: "{{ asscontainers_globals.state }}"
+    state: "{{ containers_globals.state }}"
     shm_size: "{{ containers_globals.shm_size }}"
     devices: []
     capabilities: []
@@ -551,7 +551,7 @@ containers:
     restart_policy: "{{ containers_globals.restart_policy }}"
     detach: "{{ containers_globals.detach }}"
     labels: "{{ containers_globals.labels }}"
-    state: "{{ asscontainers_globals.state }}"
+    state: "{{ containers_globals.state }}"
     shm_size: "{{ containers_globals.shm_size }}"
     devices: []
     capabilities: []
