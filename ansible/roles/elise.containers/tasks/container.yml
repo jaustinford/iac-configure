@@ -25,4 +25,4 @@
 
 - name: CONTAINER - include wait tasks
   ansible.builtin.include_tasks: wait.yml
-  when: item.wait_for_port != "0"
+  when: item.wait_for_port != "0" and execute_mode.name == "deploy"

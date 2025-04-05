@@ -34,6 +34,7 @@ services:
       - TZ=America/Denver
       - VAULT_PASSWORD=${VAULT_PASSWORD}
       - B64_SSH_KEY=${B64_SSH_KEY}
+      - PLAYBOOK_SITE_MODE=${PLAYBOOK_SITE_MODE}
       - ELISE_PROJECT_EXPRESSVPN_CONTINENT=north_america
       - ELISE_PROJECT_EXPRESSVPN_REGION=main
       - ELISE_PROJECT_EXPRESSVPN_COUNTRY=united_states
@@ -137,56 +138,6 @@ services:
 
     networks:
       - iac_configure
-
-  ###########################################################
-  # power
-  ###########################################################
-
-  power:
-    image: nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
-    entrypoint:
-      - /bin/bash
-      - -c
-      - |
-        /bin/container-init.sh ;
-        ansible ${POWER_TARGET_GROUP} \
-            --module-name ansible.builtin.${POWER_CYCLE_MODE} \
-            --become
-    profiles:
-      - power
-
-    environment:
-      - TZ=America/Denver
-      - VAULT_PASSWORD=${VAULT_PASSWORD}
-      - B64_SSH_KEY=${B64_SSH_KEY}
-
-    networks:
-      - iac_configure
-
-  ###########################################################
-  # wake
-  ###########################################################
-
-  wake:
-    image: nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
-    entrypoint:
-      - /bin/bash
-      - -c
-      - |
-        /bin/container-init.sh ;
-        ansible localhost \
-            --module-name community.general.wakeonlan \
-            --args "mac='${WAKE_MAC_ADDRESS}' port=9" \
-            -vvv
-    profiles:
-      - wake
-
-    environment:
-      - TZ=America/Denver
-      - VAULT_PASSWORD=${VAULT_PASSWORD}
-      - B64_SSH_KEY=${B64_SSH_KEY}
-
-    network_mode: host
 
 ###########################################################
 # resources

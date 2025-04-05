@@ -1,0 +1,4 @@
+---
+- name: "EXECUTE - import execution playbooks with mode {{ execute_mode.name }}"
+  import_playbook: "{{ item }}.yml"
+  with_items: "{{ execute_mode.playbooks }}"

@@ -1,9 +1,49 @@
 ---
-docker_hosts:
-  host_1:
+site:
+  playbooks:
+    - general
+    - elysianskies
+    - runner
+    - portal
+    - tunnels
+    - beats
+
+execute_modes:
+  deploy:
+    name: deploy
+    playbooks: "{{ site.playbooks }}"
     state:
       containers: started
       tunnels: started
+      beats: started
+    volumes:
+      dfs_lvm: mounted
+      tvault: mounted
+
+  shutdown:
+    name: shutdown
+    playbooks: "{{ site.playbooks | reverse }}"
+    state:
+      containers: stopped
+      tunnels: stopped
+      beats: stopped
+    volumes:
+      dfs_lvm: unmounted
+      tvault: mounted
+
+  destroy:
+    name: destroy
+    playbooks: "{{ site.playbooks | reverse }}"
+    state:
+      containers: absent
+      tunnels: stopped
+      beats: stopped
+    volumes:
+      dfs_lvm: unmounted
+      tvault: mounted
+
+docker_hosts:
+  host_1:
     networking:
       talamh:
         fqdn: docker01-talamh.home.elysianskies.com
@@ -16,9 +56,6 @@ docker_hosts:
         ipv4: 172.16.17.2
 
   host_2:
-    state:
-      containers: started
-      tunnels: started
     networking:
       talamh:
         fqdn: docker02-talamh.home.elysianskies.com

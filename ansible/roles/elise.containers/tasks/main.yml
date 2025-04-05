@@ -1,6 +1,21 @@
 ---
-- name: MAIN - include container tasks
+- name: MAIN - include container tasks in deploy mode
   ansible.builtin.include_tasks: container.yml
   no_log: true
+  when: execute_mode.name == "deploy"
   with_items:
     - "{{ containers }}"
+
+- name: MAIN - include container tasks in shutdown mode
+  ansible.builtin.include_tasks: container.yml
+  no_log: true
+  when: execute_mode.name == "shutdown"
+  with_items:
+    - "{{ containers | reverse }}"
+
+- name: MAIN - include container tasks in destroy mode
+  ansible.builtin.include_tasks: container.yml
+  no_log: true
+  when: execute_mode.name == "destroy"
+  with_items:
+    - "{{ containers | reverse }}"

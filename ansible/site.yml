@@ -1,18 +1,18 @@
 ---
-- name: SITE - import general playbook
-  import_playbook: general.yml
+- name: SITE - import execute playbook in deploy mode
+  import_playbook: execute.yml
+  vars:
+    execute_mode: "{{ execute_modes.deploy }}"
+  when: lookup('env', 'PLAYBOOK_SITE_MODE') == "deploy"
 
-- name: SITE - import elysianskies playbook
-  import_playbook: elysianskies.yml
+- name: SITE - import execute playbook in shutdown mode
+  import_playbook: execute.yml
+  vars:
+    execute_mode: "{{ execute_modes.shutdown }}"
+  when: lookup('env', 'PLAYBOOK_SITE_MODE') == "shutdown"
 
-- name: SITE - import runner playbook
-  import_playbook: runner.yml
-
-- name: SITE - import portal playbook
-  import_playbook: portal.yml
-
-- name: SITE - import tunnels playbook
-  import_playbook: tunnels.yml
-
-- name: SITE - import beats playbook
-  import_playbook: beats.yml
+- name: SITE - import execute playbook in destroy mode
+  import_playbook: execute.yml
+  vars:
+    execute_mode: "{{ execute_modes.destroy }}"
+  when: lookup('env', 'PLAYBOOK_SITE_MODE') == "destroy"

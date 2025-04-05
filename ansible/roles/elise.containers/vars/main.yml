@@ -5,6 +5,7 @@ containers_globals:
   detach: true
   labels:
     elysianskies_container: "true"
+  state: "{{ execute_mode.state.containers }}"
   shm_size: 64M
   network_mode: bridge
   dns_servers:
@@ -28,7 +29,7 @@ containers:
     restart_policy: "{{ containers_globals.restart_policy }}"
     detach: "{{ containers_globals.detach }}"
     labels: "{{ containers_globals.labels }}"
-    state: "{{ assignments.nexus.state.containers }}"
+    state: "{{ containers_globals.state }}"
     shm_size: "{{ containers_globals.shm_size }}"
     devices: []
     capabilities: []
@@ -53,7 +54,7 @@ containers:
     restart_policy: "{{ containers_globals.restart_policy }}"
     detach: "{{ containers_globals.detach }}"
     labels: "{{ containers_globals.labels }}"
-    state: "{{ assignments.pihole.state.containers }}"
+    state: "{{ containers_globals.state }}"
     shm_size: "{{ containers_globals.shm_size }}"
     devices: []
     capabilities:
@@ -87,7 +88,7 @@ containers:
     restart_policy: "{{ containers_globals.restart_policy }}"
     detach: "{{ containers_globals.detach }}"
     labels: "{{ containers_globals.labels }}"
-    state: "{{ assignments.plex.state.containers }}"
+    state: "{{containers_globals.state }}"
     shm_size: "{{ containers_globals.shm_size }}"
     devices: []
     capabilities: []
@@ -116,7 +117,7 @@ containers:
     restart_policy: "{{ containers_globals.restart_policy }}"
     detach: "{{ containers_globals.detach }}"
     labels: "{{ containers_globals.labels }}"
-    state: "{{ assignments.tautulli.state.containers }}"
+    state: "{{ asscontainers_globals.state }}"
     shm_size: "{{ containers_globals.shm_size }}"
     devices: []
     capabilities: []
@@ -139,7 +140,7 @@ containers:
     restart_policy: "{{ containers_globals.restart_policy }}"
     detach: "{{ containers_globals.detach }}"
     labels: "{{ containers_globals.labels }}"
-    state: "{{ assignments.filebrowser.state.containers }}"
+    state: "{{ assigncontainers_globals.state }}"
     shm_size: "{{ containers_globals.shm_size }}"
     devices: []
     capabilities: []
@@ -166,7 +167,7 @@ containers:
     restart_policy: "{{ containers_globals.restart_policy }}"
     detach: "{{ containers_globals.detach }}"
     labels: "{{ containers_globals.labels }}"
-    state: "{{ assignments.elasticsearch.state.containers }}"
+    state: "{{ assignmecontainers_globals.state }}"
     shm_size: "{{ containers_globals.shm_size }}"
     devices: []
     capabilities: []
@@ -192,7 +193,7 @@ containers:
     restart_policy: "{{ containers_globals.restart_policy }}"
     detach: "{{ containers_globals.detach }}"
     labels: "{{ containers_globals.labels }}"
-    state: "{{ assignments.kibana.state.containers }}"
+    state: "{{ containers_globals.state }}"
     shm_size: "{{ containers_globals.shm_size }}"
     devices: []
     capabilities: []
@@ -216,7 +217,7 @@ containers:
     restart_policy: "{{ containers_globals.restart_policy }}"
     detach: "{{ containers_globals.detach }}"
     labels: "{{ containers_globals.labels }}"
-    state: "{{ assignments.zoneminder.state.containers }}"
+    state: "{{ assigcontainers_globals.state }}"
     shm_size: 4G
     devices:
       - /dev/video0
@@ -246,7 +247,7 @@ containers:
     restart_policy: "{{ containers_globals.restart_policy }}"
     detach: "{{ containers_globals.detach }}"
     labels: "{{ containers_globals.labels }}"
-    state: "{{ assignments.expressvpn.state.containers }}"
+    state: "{{ assigcontainers_globals.state }}"
     shm_size: "{{ containers_globals.shm_size }}"
     devices:
       - /dev/net/tun
@@ -272,7 +273,7 @@ containers:
     restart_policy: "{{ containers_globals.restart_policy }}"
     detach: "{{ containers_globals.detach }}"
     labels: "{{ containers_globals.labels }}"
-    state: "{{ assignments.squid.state.containers }}"
+    state: "{{ containers_globals.state }}"
     shm_size: "{{ containers_globals.shm_size }}"
     devices: []
     capabilities: []
@@ -294,7 +295,7 @@ containers:
     restart_policy: "{{ containers_globals.restart_policy }}"
     detach: "{{ containers_globals.detach }}"
     labels: "{{ containers_globals.labels }}"
-    state: "{{ assignments.deluge.state.containers }}"
+    state: "{{ containers_globals.state }}"
     shm_size: "{{ containers_globals.shm_size }}"
     devices: []
     capabilities: []
@@ -323,7 +324,7 @@ containers:
     restart_policy: "{{ containers_globals.restart_policy }}"
     detach: "{{ containers_globals.detach }}"
     labels: "{{ containers_globals.labels }}"
-    state: "{{ assignments.gitlab.state.containers }}"
+    state: "{{ containers_globals.state }}"
     shm_size: 4G
     devices: []
     capabilities: []
@@ -353,7 +354,7 @@ containers:
     restart_policy: "{{ containers_globals.restart_policy }}"
     detach: "{{ containers_globals.detach }}"
     labels: "{{ containers_globals.labels }}"
-    state: "{{ assignments.runner.state.containers }}"
+    state: "{{ containers_globals.state }}"
     shm_size: "{{ containers_globals.shm_size }}"
     devices: []
     capabilities: []
@@ -380,7 +381,7 @@ containers:
     restart_policy: "{{ containers_globals.restart_policy }}"
     detach: "{{ containers_globals.detach }}"
     labels: "{{ containers_globals.labels }}"
-    state: "{{ assignments.openvpnas.state.containers }}"
+    state: "{{ assicontainers_globals.state }}"
     shm_size: "{{ containers_globals.shm_size }}"
     devices: []
     capabilities:
@@ -407,7 +408,7 @@ containers:
     restart_policy: "{{ containers_globals.restart_policy }}"
     detach: "{{ containers_globals.detach }}"
     labels: "{{ containers_globals.labels }}"
-    state: "{{ assignments.docs.state.containers }}"
+    state: "{{containers_globals.state }}"
     shm_size: "{{ containers_globals.shm_size }}"
     devices: []
     capabilities: []
@@ -430,7 +431,7 @@ containers:
     restart_policy: "{{ containers_globals.restart_policy }}"
     detach: "{{ containers_globals.detach }}"
     labels: "{{ containers_globals.labels }}"
-    state: "{{ assignments.resume.state.containers }}"
+    state: "{{ containers_globals.state }}"
     shm_size: "{{ containers_globals.shm_size }}"
     devices: []
     capabilities: []
@@ -453,7 +454,7 @@ containers:
     restart_policy: "{{ containers_globals.restart_policy }}"
     detach: "{{ containers_globals.detach }}"
     labels: "{{ containers_globals.labels }}"
-    state: "{{ assignments.fourohfour.state.containers }}"
+    state: "{{ assigcontainers_globals.state }}"
     shm_size: "{{ containers_globals.shm_size }}"
     devices: []
     capabilities: []
@@ -476,7 +477,7 @@ containers:
     restart_policy: "{{ containers_globals.restart_policy }}"
     detach: "{{ containers_globals.detach }}"
     labels: "{{ containers_globals.labels }}"
-    state: "{{ assignments.fiveohx.state.containers }}"
+    state: "{{ ascontainers_globals.state }}"
     shm_size: "{{ containers_globals.shm_size }}"
     devices: []
     capabilities: []
@@ -499,7 +500,7 @@ containers:
     restart_policy: "{{ containers_globals.restart_policy }}"
     detach: "{{ containers_globals.detach }}"
     labels: "{{ containers_globals.labels }}"
-    state: "{{ assignments.fourohthree.state.containers }}"
+    state: "{{ assigncontainers_globals.state }}"
     shm_size: "{{ containers_globals.shm_size }}"
     devices: []
     capabilities: []
@@ -524,7 +525,7 @@ containers:
     restart_policy: "{{ containers_globals.restart_policy }}"
     detach: "{{ containers_globals.detach }}"
     labels: "{{ containers_globals.labels }}"
-    state: "{{ assignments.barbossa.state.containers }}"
+    state: "{{ asscontainers_globals.state }}"
     shm_size: "{{ containers_globals.shm_size }}"
     devices: []
     capabilities: []
@@ -550,7 +551,7 @@ containers:
     restart_policy: "{{ containers_globals.restart_policy }}"
     detach: "{{ containers_globals.detach }}"
     labels: "{{ containers_globals.labels }}"
-    state: "{{ assignments.keycloak.state.containers }}"
+    state: "{{ asscontainers_globals.state }}"
     shm_size: "{{ containers_globals.shm_size }}"
     devices: []
     capabilities: []
@@ -580,7 +581,7 @@ containers:
     restart_policy: "{{ containers_globals.restart_policy }}"
     detach: "{{ containers_globals.detach }}"
     labels: "{{ containers_globals.labels }}"
-    state: "{{ assignments.redis.state.containers }}"
+    state: "{{ containers_globals.state }}"
     shm_size: "{{ containers_globals.shm_size }}"
     devices: []
     capabilities: []
@@ -607,7 +608,7 @@ containers:
     restart_policy: "{{ containers_globals.restart_policy }}"
     detach: "{{ containers_globals.detach }}"
     labels: "{{ containers_globals.labels }}"
-    state: "{{ assignments.oauth.state.containers }}"
+    state: "{{ containers_globals.state }}"
     shm_size: "{{ containers_globals.shm_size }}"
     devices: []
     capabilities: []
@@ -633,7 +634,7 @@ containers:
     restart_policy: "{{ containers_globals.restart_policy }}"
     detach: "{{ containers_globals.detach }}"
     labels: "{{ containers_globals.labels }}"
-    state: "{{ assignments.nginx.state.containers }}"
+    state: "{{ containers_globals.state }}"
     shm_size: "{{ containers_globals.shm_size }}"
     devices: []
     capabilities: []
