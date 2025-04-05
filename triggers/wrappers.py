@@ -8,6 +8,21 @@ import os
 FILE_PATH   = os.path.abspath(__file__)
 DIR_FILE    = os.path.dirname(FILE_PATH)
 DIR_PROJECT = os.path.dirname(DIR_FILE)
+DIR_ENV     = os.path.join(DIR_PROJECT, "env")
+
+def resolve_env_files(env_directory: str):
+    """
+    Create a string containing a list of
+    known .env files.
+    """
+
+    env_files = ""
+
+    for env_file in os.listdir(env_directory):
+        if env_file.startswith(".env"):
+            env_files += " --env-file=" + os.path.join(env_directory, env_file)
+
+    return env_files
 
 def compose_up(compose_profile: str, compose_method: str):
     """
@@ -22,6 +37,7 @@ def compose_up(compose_profile: str, compose_method: str):
         "docker compose" + \
             " --project-directory=" + DIR_PROJECT + \
             " --profile=" + compose_profile + \
+            resolve_env_files(DIR_ENV) + \
             " " + compose_method
     )
 
@@ -35,19 +51,8 @@ def compose_down(compose_profile: str):
         "docker compose" + \
             " --project-directory=" + DIR_PROJECT + \
             " --profile=" + compose_profile + \
+            resolve_env_files(DIR_ENV) + \
             " down"
-    )
-
-def compose_exec(compose_service: str, compose_command: str):
-    """
-    Execute Docker Compose command
-    inside existing container.
-    """
-
-    os.system(
-        "docker compose" + \
-            " --project-directory=" + DIR_PROJECT + \
-            " exec " + compose_service + " " + compose_command
     )
 
 def compose_logs(compose_profile: str):
@@ -60,6 +65,7 @@ def compose_logs(compose_profile: str):
         "docker compose" + \
             " --project-directory=" + DIR_PROJECT + \
             " --profile=" + compose_profile + \
+            resolve_env_files(DIR_ENV) + \
             " logs \
                 --follow \
                 --timestamps"
