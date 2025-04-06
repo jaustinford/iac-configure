@@ -3,3 +3,4 @@
   ansible.builtin.wait_for:
     host: "{{ item.docker_host }}"
     port: "{{ item.wait_for_port }}"
+    state: started

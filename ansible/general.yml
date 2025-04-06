@@ -1,7 +1,0 @@
----
-- name: GENERAL - apply elise.ssh and elise.ubuntu roles
-  hosts: elysianskies_onprem_docker:elysianskies_linode
-  gather_facts: true
-  roles:
-    - elise.ssh
-    - elise.ubuntu

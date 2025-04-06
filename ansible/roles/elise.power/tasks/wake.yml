@@ -1,13 +1,15 @@
 ---
 - name: WAKE - send wol magic packet
   community.general.wakeonlan:
-    mac: "{{ hostvars[inventory_hostname][wol.interface].macaddress }}"
-    port: 9
+    mac: "{{ wol.mac }}"
+    broadcast: "{{ wol.broadcast }}"
+    port: "{{ wol.port }}"
   changed_when: false
   delegate_to: localhost
 
 - name: WAKE - waiting on host port
   ansible.builtin.wait_for:
-    host: "{{ inventory_hostname }}"
+    host: "{{ ansible_host }}"
     port: "{{ wol.wait_port }}"
+    state: started
   delegate_to: localhost

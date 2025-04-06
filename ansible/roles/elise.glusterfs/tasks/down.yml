@@ -1,0 +1,6 @@
+---
+- name: DOWN - include mount tasks
+  ansible.builtin.include_tasks: mount.yml
+
+- name: DOWN - include service tasks
+  ansible.builtin.include_tasks: service.yml

@@ -1,0 +1,16 @@
+---
+- name: UP - install glusterfs-server package
+  ansible.builtin.apt:
+    name: glusterfs-server
+    state: present
+    update_cache: true
+  become: true
+
+- name: UP - include service tasks
+  ansible.builtin.include_tasks: service.yml
+
+- name: UP - include dfs tasks
+  ansible.builtin.include_tasks: dfs.yml
+
+- name: UP - include mount tasks
+  ansible.builtin.include_tasks: mount.yml

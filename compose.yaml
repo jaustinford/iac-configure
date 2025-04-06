@@ -79,8 +79,7 @@ services:
         volume: 
           subpath: elysianskies/tfstate
 
-    networks:
-      - iac_configure
+    network_mode: host
 
   ###########################################################
   # vault_secrets

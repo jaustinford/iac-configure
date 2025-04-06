@@ -1,6 +1,5 @@
 ---
 - name: TUNNELS - apply elise.tunnels role
   hosts: elysianskies_onprem_docker
-  gather_facts: true
   roles:
     - elise.tunnels

@@ -1,0 +1,6 @@
+---
+wol:
+  mac: 68:05:CA:30:E7:44
+  broadcast: 172.16.17.7
+  port: 9
+  wait_port: 22

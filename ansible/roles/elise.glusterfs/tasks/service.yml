@@ -1,0 +1,7 @@
+---
+- name: SERVICE - ensure glusterd daemon
+  ansible.builtin.systemd:
+    name: glusterd
+    state: "{{ glusterfs.service.state }}"
+    enabled: true
+  become: true

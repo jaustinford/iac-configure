@@ -4,6 +4,3 @@ ansible_password: "{{ secrets.ansible.docker_hosts.remote_password }}"
 ansible_become_password: "{{ secrets.ansible.docker_hosts.remote_password }}"
 ansible_python_interpreter: /usr/bin/python3
 ansible_ssh_private_key_file: /root/ssh.key
-wol:
-  interface: ansible_enp1s0f0
-  wait_port: 22

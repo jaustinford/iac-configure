@@ -1,0 +1,16 @@
+---
+- name: DFS - join glusterfs peers
+  gluster.gluster.gluster_peer:
+    state: present
+    nodes: "{{ glusterfs.peers }}"
+  become: true
+
+- name: DFS - manage glusterfs volume
+  gluster.gluster.gluster_volume:
+    name: "{{ glusterfs.dfs.name }}"
+    state: "{{ glusterfs.dfs.state }}"
+    bricks: "{{ glusterfs.dfs.bricks }}"
+    replicas: "{{ glusterfs.dfs.replicas }}"
+    transport: "{{ glusterfs.dfs.transport }}"
+    cluster: "{{ glusterfs.peers }}"
+  become: true

@@ -1,48 +1,8 @@
 ---
-- name: MAIN - install glusterfs-server package
-  ansible.builtin.apt:
-    name: glusterfs-server
-    state: present
-    update_cache: true
-  become: true
+- name: MAIN - include up tasks
+  ansible.builtin.include_tasks: up.yml
+  when: execute_mode.name == "deploy"
 
-- name: MAIN - ensure glusterd daemon
-  ansible.builtin.systemd:
-    name: glusterd
-    state: started
-    enabled: true
-  become: true
-
-- name: MAIN - join glusterfs peers
-  gluster.gluster.gluster_peer:
-    state: present
-    nodes: "{{ glusterfs.peers }}"
-  become: true
-
-- name: MAIN - manage glusterfs volume
-  gluster.gluster.gluster_volume:
-    name: "{{ glusterfs.dfs.name }}"
-    state: "{{ glusterfs.dfs.state }}"
-    bricks: "{{ glusterfs.dfs.bricks }}"
-    replicas: "{{ glusterfs.dfs.replicas }}"
-    transport: "{{ glusterfs.dfs.transport }}"
-    cluster: "{{ glusterfs.peers }}"
-  become: true
-
-- name: MAIN - ensure glusterfs mount path
-  ansible.builtin.file:
-    path: "{{ glusterfs.dfs.path }}"
-    state: directory
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    mode: '0755'
-  become: true
-
-- name: MAIN - mount glusterfs volume
-  ansible.posix.mount:
-    fstype: glusterfs
-    src: "{{ ansible_eno1.ipv4.address }}:{{ glusterfs.dfs.name }}"
-    opts: defaults
-    path: "{{ glusterfs.dfs.path }}"
-    state: mounted
-  become: true
+- name: MAIN - include down tasks
+  ansible.builtin.include_tasks: down.yml
+  when: execute_mode.name == "shutdown" or execute_mode.name == "destroy"

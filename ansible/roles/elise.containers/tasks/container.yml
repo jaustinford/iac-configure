@@ -1,5 +1,5 @@
 ---
-- name: "CONTAINER - deploy container {{ item.name }}"
+- name: "CONTAINER - docker container {{ item.name }}"
   community.docker.docker_container:
     name: "{{ item.name }}"
     image: "{{ item.image }}"
@@ -26,14 +26,3 @@
 - name: CONTAINER - include wait tasks
   ansible.builtin.include_tasks: wait.yml
   when: execute_mode.name == "deploy" and item.wait_for_port != "0"
-
-- name: CONTAINER - docker prune
-  community.docker.docker_prune:
-    containers: true
-    images: true
-    images_filters:
-      dangling: false
-    networks: true
-    volumes: true
-    builder_cache: true
-  when: execute_mode.prune

@@ -1,17 +1,9 @@
 ---
-site:
-  playbooks:
-    - general
-    - elysianskies
-    - runner
-    - portal
-    - tunnels
-    - beats
-
 execute_modes:
   deploy:
     name: deploy
     state:
+      glusterfs: started
       containers: started
       tunnels: started
       portal:
@@ -19,12 +11,14 @@ execute_modes:
       beats: started
     prune: false
     volumes:
+      app_data: mounted
       dfs_lvm: mounted
       tvault: mounted
 
   shutdown:
     name: shutdown
     state:
+      glusterfs: stopped
       containers: stopped
       tunnels: stopped
       portal:
@@ -32,12 +26,14 @@ execute_modes:
       beats: stopped
     prune: false
     volumes:
+      app_data: unmounted
       dfs_lvm: unmounted
       tvault: unmounted
 
   destroy:
     name: destroy
     state:
+      glusterfs: stopped
       containers: absent
       tunnels: stopped
       portal:
@@ -45,8 +41,9 @@ execute_modes:
       beats: stopped
     prune: true
     volumes:
+      app_data: unmounted
       dfs_lvm: unmounted
-      tvault: mounted
+      tvault: unmounted
 
 docker_hosts:
   host_1:
