@@ -17,6 +17,7 @@ execute_modes:
       portal:
         nginx: started
       beats: started
+    prune: false
     volumes:
       dfs_lvm: mounted
       tvault: mounted
@@ -29,9 +30,10 @@ execute_modes:
       portal:
         nginx: stopped
       beats: stopped
+    prune: false
     volumes:
       dfs_lvm: unmounted
-      tvault: mounted
+      tvault: unmounted
 
   destroy:
     name: destroy
@@ -41,6 +43,7 @@ execute_modes:
       portal:
         nginx: stopped
       beats: stopped
+    prune: true
     volumes:
       dfs_lvm: unmounted
       tvault: mounted

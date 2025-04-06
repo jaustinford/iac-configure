@@ -36,4 +36,4 @@
     networks: true
     volumes: true
     builder_cache: true
-  when: execute_mode.name == "destroy"
+  when: execute_mode.prune
