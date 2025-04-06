@@ -10,6 +10,7 @@
 
       [Service]
       Type=oneshot
+      RemainAfterExit=true
       ExecStart=/sbin/ethtool --change {{ wol_interface }} wol g
 
       [Install]

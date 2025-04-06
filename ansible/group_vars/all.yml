@@ -14,6 +14,8 @@ execute_modes:
     state:
       containers: started
       tunnels: started
+      portal:
+        nginx: started
       beats: started
     volumes:
       dfs_lvm: mounted
@@ -24,6 +26,8 @@ execute_modes:
     state:
       containers: stopped
       tunnels: stopped
+      portal:
+        nginx: stopped
       beats: stopped
     volumes:
       dfs_lvm: unmounted
@@ -34,6 +38,8 @@ execute_modes:
     state:
       containers: absent
       tunnels: stopped
+      portal:
+        nginx: stopped
       beats: stopped
     volumes:
       dfs_lvm: unmounted

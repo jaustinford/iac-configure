@@ -1,4 +1,7 @@
 ---
+- name: DEPLOY - import up playbook
+  import_playbook: up.yml
+
 - name: DEPLOY - import general playbook
   import_playbook: general.yml
 

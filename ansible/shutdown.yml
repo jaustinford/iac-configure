@@ -16,3 +16,6 @@
 
 - name: SHUTDOWN - import general playbook
   import_playbook: general.yml
+
+- name: SHUTDOWN - import down playbook
+  import_playbook: down.yml

@@ -3,3 +3,6 @@ ansible_user: "{{ secrets.ansible.nas_host.remote_username }}"
 ansible_password: "{{ secrets.ansible.nas_host.remote_password }}"
 ansible_become_password: "{{ secrets.ansible.nas_host.remote_password }}"
 ansible_python_interpreter: /usr/local/bin/python3
+wol:
+  interface: ansible_re0
+  port: 445

@@ -16,3 +16,6 @@
 
 - name: DESTROY - import general playbook
   import_playbook: general.yml
+
+- name: DESTROY - import down playbook
+  import_playbook: down.yml

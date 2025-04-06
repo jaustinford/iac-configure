@@ -1,0 +1,12 @@
+---
+- name: UP - apply elise.power role for elysianskies_onprem_nas
+  hosts: elysianskies_onprem_nas
+  gather_facts: true
+  roles:
+    - elise.power
+
+- name: UP - apply elise.power role for elysianskies_onprem_docker
+  hosts: elysianskies_onprem_docker
+  gather_facts: true
+  roles:
+    - elise.power

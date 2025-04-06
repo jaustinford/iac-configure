@@ -31,7 +31,7 @@
 - name: MAIN - ensure nginx daemon
   ansible.builtin.systemd:
     name: nginx
-    state: started
+    state: "{{ nginx.service_state }}"
     enabled: true
   become: true
 

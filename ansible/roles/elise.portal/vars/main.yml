@@ -1,0 +1,3 @@
+---
+nginx:
+  service_state: "{{ execute_mode.state.portal.nginx }}"

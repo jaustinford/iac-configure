@@ -1,0 +1,11 @@
+---
+- name: POWEROFF - shutdown host
+  community.general.shutdown:
+  become: true
+
+- name: POWEROFF - waiting on host port
+  ansible.builtin.wait_for:
+    host: "{{ inventory_hostname }}"
+    port: "{{ wol.port }}"
+    state: stopped
+  delegate_to: localhost
