@@ -9,5 +9,5 @@
 - name: WAKE - waiting on host port
   ansible.builtin.wait_for:
     host: "{{ inventory_hostname }}"
-    port: "{{ wol.port }}"
+    port: "{{ wol.wait_port }}"
   delegate_to: localhost
