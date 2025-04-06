@@ -1,10 +1,28 @@
 ---
-- name: DOWN - apply elise.power role for elysianskies_onprem_docker
-  hosts: elysianskies_onprem_docker
-  roles:
-    - elise.power
+- name: DOWN - gather facts
+  hosts: all
+  gather_facts: true
 
-- name: DOWN - apply elise.power role for elysianskies_onprem_nas
-  hosts: elysianskies_onprem_nas
-  roles:
-    - elise.power
+- name: DOWN - import beats playbook
+  import_playbook: beats.yml
+
+- name: DOWN - import tunnels playbook
+  import_playbook: tunnels.yml
+
+- name: DOWN - import portal playbook
+  import_playbook: portal.yml
+
+- name: DOWN - import containers playbook
+  import_playbook: containers.yml
+
+- name: DOWN - import glusterfs playbook
+  import_playbook: glusterfs.yml
+
+- name: DOWN - import mounts playbook
+  import_playbook: mounts.yml
+
+- name: DOWN - import ubuntu playbook
+  import_playbook: ubuntu.yml
+
+- name: DOWN - import poweroff playbook
+  import_playbook: poweroff.yml

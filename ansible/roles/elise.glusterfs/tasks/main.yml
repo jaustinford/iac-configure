@@ -1,8 +1,8 @@
 ---
 - name: MAIN - include up tasks
   ansible.builtin.include_tasks: up.yml
-  when: execute_mode.name == "deploy"
+  when: execute_mode.name == "up"
 
 - name: MAIN - include down tasks
   ansible.builtin.include_tasks: down.yml
-  when: execute_mode.name == "shutdown" or execute_mode.name == "destroy"
+  when: execute_mode.name == "down"

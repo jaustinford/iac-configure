@@ -1,18 +1,12 @@
 ---
-- name: SITE - import deploy playbook
-  import_playbook: deploy.yml
+- name: SITE - import up playbook
+  import_playbook: up.yml
   vars:
-    execute_mode: "{{ execute_modes.deploy }}"
-  when: lookup('env', 'PLAYBOOK_SITE_MODE') == "deploy"
+    execute_mode: "{{ execute_modes.up }}"
+  when: lookup('env', 'PLAYBOOK_SITE_MODE') == "up"
 
-- name: SITE - import shutdown playbook
-  import_playbook: shutdown.yml
+- name: SITE - import down playbook
+  import_playbook: down.yml
   vars:
-    execute_mode: "{{ execute_modes.shutdown }}"
-  when: lookup('env', 'PLAYBOOK_SITE_MODE') == "shutdown"
-
-- name: SITE - import destroy playbook
-  import_playbook: destroy.yml
-  vars:
-    execute_mode: "{{ execute_modes.destroy }}"
-  when: lookup('env', 'PLAYBOOK_SITE_MODE') == "destroy"
+    execute_mode: "{{ execute_modes.down }}"
+  when: lookup('env', 'PLAYBOOK_SITE_MODE') == "down"

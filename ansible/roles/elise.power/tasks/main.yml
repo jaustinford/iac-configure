@@ -1,8 +1,8 @@
 ---
 - name: MAIN - include wake tasks
   ansible.builtin.include_tasks: wake.yml
-  when: execute_mode.name == "deploy"
+  when: execute_mode.name == "up"
 
 - name: MAIN - include poweroff tasks
   ansible.builtin.include_tasks: poweroff.yml
-  when: execute_mode.name == "shutdown" or execute_mode.name == "destroy"
+  when: execute_mode.name == "down"

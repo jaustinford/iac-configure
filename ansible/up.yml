@@ -1,10 +1,40 @@
 ---
-- name: UP - apply elise.power role for elysianskies_onprem_nas
-  hosts: elysianskies_onprem_nas
-  roles:
-    - elise.power
+- name: UP - import wake playbook
+  import_playbook: wake.yml
 
-- name: UP - apply elise.power role for elysianskies_onprem_docker
-  hosts: elysianskies_onprem_docker
-  roles:
-    - elise.power
+- name: UP - gather facts
+  hosts: all
+  gather_facts: true
+
+- name: UP - import ssh playbook
+  import_playbook: ssh.yml
+
+- name: UP - import ubuntu playbook
+  import_playbook: ubuntu.yml
+
+- name: UP - import mounts playbook
+  import_playbook: mounts.yml
+
+- name: UP - import glusterfs playbook
+  import_playbook: glusterfs.yml
+
+- name: UP - import docker playbook
+  import_playbook: docker.yml
+
+- name: UP - import configs playbook
+  import_playbook: configs.yml
+
+- name: UP - import containers playbook
+  import_playbook: containers.yml
+
+- name: UP - import runner playbook
+  import_playbook: runner.yml
+
+- name: UP - import portal playbook
+  import_playbook: portal.yml
+
+- name: UP - import tunnels playbook
+  import_playbook: tunnels.yml
+
+- name: UP - import beats playbook
+  import_playbook: beats.yml

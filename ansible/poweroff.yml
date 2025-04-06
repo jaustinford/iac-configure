@@ -1,0 +1,10 @@
+---
+- name: POWEROFF - apply elise.power role for elysianskies_onprem_docker
+  hosts: elysianskies_onprem_docker
+  roles:
+    - elise.power
+
+- name: POWEROFF - apply elise.power role for elysianskies_onprem_nas
+  hosts: elysianskies_onprem_nas
+  roles:
+    - elise.power

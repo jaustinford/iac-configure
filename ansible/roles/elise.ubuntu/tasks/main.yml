@@ -27,6 +27,9 @@
   with_items:
     - "{{ ubuntu.additional_packages }}"
 
+- name: MAIN - include pip tasks
+  ansible.builtin.include_tasks: pip.yml
+
 - name: MAIN - configure user sudoers
   ansible.builtin.copy:
     content: |

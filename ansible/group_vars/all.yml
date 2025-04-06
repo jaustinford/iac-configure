@@ -1,7 +1,7 @@
 ---
 execute_modes:
-  deploy:
-    name: deploy
+  up:
+    name: up
     state:
       glusterfs: started
       containers: started
@@ -9,14 +9,13 @@ execute_modes:
       portal:
         nginx: started
       beats: started
-    prune: false
     volumes:
       app_data: mounted
       dfs_lvm: mounted
       tvault: mounted
 
-  shutdown:
-    name: shutdown
+  down:
+    name: down
     state:
       glusterfs: stopped
       containers: stopped
@@ -24,22 +23,6 @@ execute_modes:
       portal:
         nginx: stopped
       beats: stopped
-    prune: false
-    volumes:
-      app_data: unmounted
-      dfs_lvm: unmounted
-      tvault: unmounted
-
-  destroy:
-    name: destroy
-    state:
-      glusterfs: stopped
-      containers: absent
-      tunnels: stopped
-      portal:
-        nginx: stopped
-      beats: stopped
-    prune: true
     volumes:
       app_data: unmounted
       dfs_lvm: unmounted
