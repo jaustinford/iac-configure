@@ -1,0 +1,10 @@
+---
+- name: TFSTATE - apply elise.ssh role
+  hosts: nas-teine.home.elysianskies.com
+  tasks:
+    - name: TFSTATE - fetch tfstate file
+      ansible.builtin.fetch:
+        src: /mnt/tvault/austin/elysianskies/tfstate/elysianskies.json
+        dest: /tmp/elysianskies.json
+        flat: true
+      changed_when: false

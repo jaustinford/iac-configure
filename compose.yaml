@@ -35,8 +35,7 @@ services:
       - VAULT_PASSWORD=${VAULT_PASSWORD}
       - B64_SSH_KEY=${B64_SSH_KEY}
 
-    networks:
-      - iac_configure
+    network_mode: host
 
   ###########################################################
   # playbook_site
@@ -72,13 +71,6 @@ services:
         target: /root/.docker
         read_only: true
 
-      - type: volume
-        source: tvault
-        target: /tfstate
-        read_only: false
-        volume: 
-          subpath: elysianskies/tfstate
-
     network_mode: host
 
   ###########################################################
@@ -109,8 +101,7 @@ services:
         target: /etc/ansible/group_vars
         read_only: false
 
-    networks:
-      - iac_configure
+    network_mode: host
 
   ###########################################################
   # ping
@@ -134,8 +125,7 @@ services:
       - VAULT_PASSWORD=${VAULT_PASSWORD}
       - B64_SSH_KEY=${B64_SSH_KEY}
 
-    networks:
-      - iac_configure
+    network_mode: host
 
   ###########################################################
   # tunnels
@@ -160,20 +150,4 @@ services:
       - VAULT_PASSWORD=${VAULT_PASSWORD}
       - B64_SSH_KEY=${B64_SSH_KEY}
 
-    networks:
-      - iac_configure
-
-###########################################################
-# resources
-###########################################################
-
-volumes:
-  tvault:
-    driver_opts:
-      type: cifs
-      o: username=${TVAULT_USERNAME},password=${TVAULT_PASSWORD},uid=1000,gid=1000,iocharset=utf8
-      device: //172.16.16.4/tvault
-
-networks:
-  iac_configure:
-    name: iac_configure
+    network_mode: host

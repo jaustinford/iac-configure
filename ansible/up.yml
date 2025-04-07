@@ -15,6 +15,9 @@
 - name: UP - import mounts playbook
   import_playbook: mounts.yml
 
+- name: UP - import tfstate playbook
+  import_playbook: tfstate.yml
+
 - name: UP - import glusterfs playbook
   import_playbook: glusterfs.yml
 
