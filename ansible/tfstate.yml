@@ -1,5 +1,5 @@
 ---
-- name: TFSTATE - apply elise.ssh role
+- name: TFSTATE - apply tfstate tasks
   hosts: nas-teine.home.elysianskies.com
   tasks:
     - name: TFSTATE - fetch tfstate file
