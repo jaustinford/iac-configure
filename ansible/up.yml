@@ -2,12 +2,15 @@
 - name: UP - import wake playbook
   import_playbook: wake.yml
 
+- name: UP - import tfstate playbook
+  import_playbook: tfstate.yml
+
+# - name: UP - import linode playbook
+#   import_playbook: linode.yml
+
 - name: UP - gather facts
   hosts: all
   gather_facts: true
-
-- name: UP - import tfstate playbook
-  import_playbook: tfstate.yml
 
 - name: UP - import ssh playbook
   import_playbook: ssh.yml

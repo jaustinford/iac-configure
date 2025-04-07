@@ -1,0 +1,5 @@
+---
+linodes:
+  - instance_label_output_element: instance_portal_instance_label
+    instance_id_output_element: instance_portal_instance_id
+    state: "{{ cycle_mode.state.portal.linode }}"

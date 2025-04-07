@@ -8,6 +8,7 @@ cycle_modes:
       tunnels: started
       portal:
         nginx: started
+        linode: started
       beats: started
     volumes:
       app_data: mounted
@@ -22,6 +23,7 @@ cycle_modes:
       tunnels: stopped
       portal:
         nginx: stopped
+        linode: stopped
       beats: stopped
     volumes:
       app_data: unmounted

@@ -1,0 +1,5 @@
+---
+- name: LINODE - apply elise.linode role
+  hosts: localhost
+  roles:
+    - elise.linode

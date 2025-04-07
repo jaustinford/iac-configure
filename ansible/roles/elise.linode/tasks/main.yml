@@ -1,0 +1,14 @@
+---
+- name: LINODE - fetch elysianskies tfstate
+  ansible.builtin.debug:
+    msg: "{{ lookup('ansible.builtin.file', '/tmp/elysianskies.json') }}"
+  no_log: true
+  register: elysianskies_tfstate
+
+- name: LINODE - manage linode
+  community.general.linode:
+    name: "{{ elysianskies_tfstate.msg.outputs[item.instance_label_output_element].value[0] }}"
+    linode_id: "{{ elysianskies_tfstate.msg.outputs[item.instance_id_output_element].value[0] }}"
+    state: "{{ item.state }}"
+  with_items:
+    - "{{ linodes }}"
