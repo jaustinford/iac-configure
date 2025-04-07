@@ -1,8 +1,8 @@
 ---
 - name: MAIN - include up tasks
   ansible.builtin.include_tasks: up.yml
-  when: execute_mode.name == "up"
+  when: cycle_mode.name == "up"
 
 - name: MAIN - include down tasks
   ansible.builtin.include_tasks: down.yml
-  when: execute_mode.name == "down"
+  when: cycle_mode.name == "down"

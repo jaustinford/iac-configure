@@ -1,5 +1,5 @@
 ---
-execute_modes:
+cycle_modes:
   up:
     name: up
     state:

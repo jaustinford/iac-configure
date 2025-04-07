@@ -6,8 +6,8 @@ beats:
   packages:
     - name: filebeat
       package_state: present
-      service_state: "{{ execute_mode.state.beats }}"
+      service_state: "{{ cycle_mode.state.beats }}"
 
     - name: metricbeat
       package_state: present
-      service_state: "{{ execute_mode.state.beats }}"
+      service_state: "{{ cycle_mode.state.beats }}"

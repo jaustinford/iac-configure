@@ -5,7 +5,7 @@ containers_globals:
   detach: true
   labels:
     elysianskies_container: "true"
-  state: "{{ execute_mode.state.containers }}"
+  state: "{{ cycle_mode.state.containers }}"
   shm_size: 64M
   network_mode: bridge
   dns_servers:

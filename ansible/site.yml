@@ -2,11 +2,11 @@
 - name: SITE - import up playbook
   import_playbook: up.yml
   vars:
-    execute_mode: "{{ execute_modes.up }}"
+    cycle_mode: "{{ cycle_modes.up }}"
   when: lookup('env', 'CYCLE_MODE') == "up"
 
 - name: SITE - import down playbook
   import_playbook: down.yml
   vars:
-    execute_mode: "{{ execute_modes.down }}"
+    cycle_mode: "{{ cycle_modes.down }}"
   when: lookup('env', 'CYCLE_MODE') == "down"

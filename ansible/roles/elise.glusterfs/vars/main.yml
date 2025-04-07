@@ -13,7 +13,7 @@ glusterfs:
     path: /elysianskies/application_data
 
   service:
-    state: "{{ execute_mode.state.glusterfs }}"
+    state: "{{ cycle_mode.state.glusterfs }}"
 
   mount:
-    state: "{{ execute_mode.volumes.app_data }}"
+    state: "{{ cycle_mode.volumes.app_data }}"

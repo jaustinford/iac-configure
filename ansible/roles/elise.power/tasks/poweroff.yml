@@ -2,6 +2,7 @@
 - name: POWEROFF - shutdown host
   community.general.shutdown:
   become: true
+  when: poweroff.enabled
 
 - name: POWEROFF - waiting on host port
   ansible.builtin.wait_for:

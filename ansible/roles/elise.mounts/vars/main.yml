@@ -4,10 +4,10 @@ mounts:
     src: //172.16.16.4/tvault
     opts: "username={{ secrets.tvault.cifs.username }},password={{ secrets.tvault.cifs.password }},uid=1000,gid=1000"
     path: /mnt/tvault
-    state: "{{ execute_mode.volumes.tvault }}"
+    state: "{{ cycle_mode.volumes.tvault }}"
 
   - fstype: ext4
     src: /dev/mapper/ubuntu--vg-dfs_lvm
     opts: defaults
     path: /mnt/dfs_lvm
-    state: "{{ execute_mode.volumes.dfs_lvm }}"
+    state: "{{ cycle_mode.volumes.dfs_lvm }}"

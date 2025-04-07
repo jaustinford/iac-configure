@@ -4,3 +4,6 @@ wol:
   broadcast: 172.16.17.7
   port: 9
   wait_port: 22
+
+poweroff:
+  enabled: true

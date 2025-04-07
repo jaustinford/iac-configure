@@ -2,7 +2,7 @@
 tunnels:
   - name: nginx
     description: web ingress tunnel
-    state: "{{ execute_mode.state.tunnels }}"
+    state: "{{ cycle_mode.state.tunnels }}"
     host: "{{ assignments.nginx.networking.teine.fqdn }}"
     ipv4: "{{ assignments.nginx.networking.teine.ipv4 }}"
     external_port: "{{ external_ports.nginx_web }}"
@@ -10,7 +10,7 @@ tunnels:
 
   - name: openvpnas
     description: openvpnas tunnel
-    state: "{{ execute_mode.state.tunnels }}"
+    state: "{{ cycle_mode.state.tunnels }}"
     host: "{{ assignments.openvpnas.networking.teine.fqdn }}"
     ipv4: "{{ assignments.openvpnas.networking.teine.ipv4 }}"
     external_port: "1194"
@@ -18,7 +18,7 @@ tunnels:
 
   - name: elasticsearch
     description: elasticsearch tunnel
-    state: "{{ execute_mode.state.tunnels }}"
+    state: "{{ cycle_mode.state.tunnels }}"
     host: "{{ assignments.elasticsearch.networking.teine.fqdn }}"
     ipv4: "{{ assignments.elasticsearch.networking.teine.ipv4 }}"
     external_port: "{{ external_ports.elasticsearch_db }}"
@@ -26,7 +26,7 @@ tunnels:
 
   - name: kibana
     description: kibana tunnel
-    state: "{{ execute_mode.state.tunnels }}"
+    state: "{{ cycle_mode.state.tunnels }}"
     host: "{{ assignments.kibana.networking.teine.fqdn }}"
     ipv4: "{{ assignments.kibana.networking.teine.ipv4 }}"
     external_port: "{{ external_ports.kibana_web }}"
