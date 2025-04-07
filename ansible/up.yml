@@ -6,6 +6,9 @@
   hosts: all
   gather_facts: true
 
+- name: UP - import tfstate playbook
+  import_playbook: tfstate.yml
+
 - name: UP - import ssh playbook
   import_playbook: ssh.yml
 
@@ -14,9 +17,6 @@
 
 - name: UP - import mounts playbook
   import_playbook: mounts.yml
-
-- name: UP - import tfstate playbook
-  import_playbook: tfstate.yml
 
 - name: UP - import glusterfs playbook
   import_playbook: glusterfs.yml

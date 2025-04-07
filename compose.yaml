@@ -126,28 +126,3 @@ services:
       - B64_SSH_KEY=${B64_SSH_KEY}
 
     network_mode: host
-
-  ###########################################################
-  # tunnels
-  ###########################################################
-
-  tunnels:
-    image: nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
-    entrypoint:
-      - /bin/bash
-      - -c
-      - |
-        /bin/container-init.sh ;
-        ansible docker02-teine.home.elysianskies.com --become --module-name systemd --args 'state=${TUNNELS_STATE} name=tunnel-nginx' ;
-        ansible docker02-teine.home.elysianskies.com --become --module-name systemd --args 'state=${TUNNELS_STATE} name=tunnel-openvpnas' ;
-        ansible docker02-teine.home.elysianskies.com --become --module-name systemd --args 'state=${TUNNELS_STATE} name=tunnel-elasticsearch' ;
-        ansible docker01-teine.home.elysianskies.com --become --module-name systemd --args 'state=${TUNNELS_STATE} name=tunnel-kibana'
-    profiles:
-      - tunnels
-
-    environment:
-      - TZ=America/Denver
-      - VAULT_PASSWORD=${VAULT_PASSWORD}
-      - B64_SSH_KEY=${B64_SSH_KEY}
-
-    network_mode: host
