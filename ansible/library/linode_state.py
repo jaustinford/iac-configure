@@ -74,7 +74,7 @@ def main():
 
     result = {
         "linode_api": execute_json,
-        "changed": bool(execute_json)
+        "changed": not bool(execute_json)
     }
 
     module.exit_json(**result)
