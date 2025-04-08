@@ -1,7 +1,9 @@
 ---
 containers_globals:
   restart_policy: unless-stopped
-  pull: false
+  pull_images:
+    local: "{{ cycle_mode.pull_local_images }}"
+    remote: false
   detach: true
   labels:
     elysianskies_container: "true"
@@ -21,7 +23,7 @@ containers_globals:
 containers:
   - name: nexus
     image: sonatype/nexus3:3.68.1
-    pull: "{{ containers_globals.pull }}"
+    pull: "{{ containers_globals.pull_images.remote }}"
     command:
       - /opt/sonatype/nexus/bin/nexus
       - run
@@ -48,7 +50,7 @@ containers:
 
   - name: pihole
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/pihole/pihole:2024.07.0"
-    pull: "{{ containers_globals.pull }}"
+    pull: "{{ containers_globals.pull_images.remote }}"
     command: null
     docker_host: "{{ assignments.pihole.networking.teine.ipv4 }}"
     restart_policy: "{{ containers_globals.restart_policy }}"
@@ -82,7 +84,7 @@ containers:
 
   - name: plex
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/plexinc/pms-docker:1.41.3.9292-bc7397402"
-    pull: "{{ containers_globals.pull }}"
+    pull: "{{ containers_globals.pull_images.remote }}"
     command: null
     docker_host: "{{ assignments.plex.networking.teine.ipv4 }}"
     restart_policy: "{{ containers_globals.restart_policy }}"
@@ -111,7 +113,7 @@ containers:
 
   - name: tautulli
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/linuxserver/tautulli:amd64-v2.14.5-ls156"
-    pull: "{{ containers_globals.pull }}"
+    pull: "{{ containers_globals.pull_images.remote }}"
     command: null
     docker_host: "{{ assignments.tautulli.networking.teine.ipv4 }}"
     restart_policy: "{{ containers_globals.restart_policy }}"
@@ -134,7 +136,7 @@ containers:
 
   - name: filebrowser
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/filebrowser/filebrowser:v2.31.1-amd64"
-    pull: "{{ containers_globals.pull }}"
+    pull: "{{ containers_globals.pull_images.remote }}"
     command: null
     docker_host: "{{ assignments.filebrowser.networking.teine.ipv4 }}"
     restart_policy: "{{ containers_globals.restart_policy }}"
@@ -160,7 +162,7 @@ containers:
 
   - name: elasticsearch
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/elastic/elasticsearch:8.13.0"
-    pull: "{{ containers_globals.pull }}"
+    pull: "{{ containers_globals.pull_images.remote }}"
     command:
       - eswrapper
     docker_host: "{{ assignments.elasticsearch.networking.teine.ipv4 }}"
@@ -186,7 +188,7 @@ containers:
 
   - name: kibana
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/elastic/kibana:8.13.0"
-    pull: "{{ containers_globals.pull }}"
+    pull: "{{ containers_globals.pull_images.remote }}"
     command:
       - /usr/local/bin/kibana-docker
     docker_host: "{{ assignments.kibana.networking.teine.ipv4 }}"
@@ -210,7 +212,7 @@ containers:
 
   - name: zoneminder
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/dlandon/zoneminder:latest"
-    pull: "{{ containers_globals.pull }}"
+    pull: "{{ containers_globals.pull_images.remote }}"
     command:
       - /sbin/my_init
     docker_host: "{{ assignments.zoneminder.networking.teine.ipv4 }}"
@@ -239,7 +241,7 @@ containers:
 
   - name: expressvpn
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/dperson/openvpn-client:amd64"
-    pull: "{{ containers_globals.pull }}"
+    pull: "{{ containers_globals.pull_images.remote }}"
     command:
       - -d
       - -f ""
@@ -267,7 +269,7 @@ containers:
 
   - name: squid
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/sameersbn/squid:3.5.27-2"
-    pull: "{{ containers_globals.pull }}"
+    pull: "{{ containers_globals.pull_images.remote }}"
     command: null
     docker_host: "{{ assignments.squid.networking.teine.ipv4 }}"
     restart_policy: "{{ containers_globals.restart_policy }}"
@@ -289,7 +291,7 @@ containers:
 
   - name: deluge
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/linuxserver/deluge:2.1.1"
-    pull: "{{ containers_globals.pull }}"
+    pull: "{{ containers_globals.pull_images.remote }}"
     command: null
     docker_host: "{{ assignments.deluge.networking.teine.ipv4 }}"
     restart_policy: "{{ containers_globals.restart_policy }}"
@@ -317,7 +319,7 @@ containers:
 
   - name: gitlab
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/gitlab/gitlab-ee:17.5.4-ee.0"
-    pull: "{{ containers_globals.pull }}"
+    pull: "{{ containers_globals.pull_images.remote }}"
     command:
       - /assets/wrapper
     docker_host: "{{ assignments.gitlab.networking.teine.ipv4 }}"
@@ -345,7 +347,7 @@ containers:
 
   - name: runner
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/gitlab/gitlab-runner:v17.5.4"
-    pull: "{{ containers_globals.pull }}"
+    pull: "{{ containers_globals.pull_images.remote }}"
     command:
       - run
       - --user=gitlab-runner
@@ -373,7 +375,7 @@ containers:
 
   - name: openvpnas
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/openvpn/openvpn-as:2.14.0-b90cb316-Ubuntu22"
-    pull: "{{ containers_globals.pull }}"
+    pull: "{{ containers_globals.pull_images.remote }}"
     command:
       - /usr/local/openvpn_as/scripts/openvpnas
       - --nodaemon
@@ -400,7 +402,7 @@ containers:
 
   - name: docs
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/docs:main"
-    pull: true
+    pull: "{{ containers_globals.pull_images.local }}"
     command:
       - mkdocs
       - serve
@@ -424,7 +426,7 @@ containers:
 
   - name: resume
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/static-website-resume:main"
-    pull: true
+    pull: "{{ containers_globals.pull_images.local }}"
     command:
       - httpd-foreground
     docker_host: "{{ assignments.resume.networking.teine.ipv4 }}"
@@ -447,7 +449,7 @@ containers:
 
   - name: fourohfour
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/static-website-fourohfour:main"
-    pull: true
+    pull: "{{ containers_globals.pull_images.local }}"
     command:
       - httpd-foreground
     docker_host: "{{ assignments.fourohfour.networking.teine.ipv4 }}"
@@ -470,7 +472,7 @@ containers:
 
   - name: fiveohx
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/static-website-fiveohx:main"
-    pull: true
+    pull: "{{ containers_globals.pull_images.local }}"
     command:
       - httpd-foreground
     docker_host: "{{ assignments.fiveohx.networking.teine.ipv4 }}"
@@ -493,7 +495,7 @@ containers:
 
   - name: fourohthree
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/static-website-fourohthree:main"
-    pull: true
+    pull: "{{ containers_globals.pull_images.local }}"
     command:
       - httpd-foreground
     docker_host: "{{ assignments.fourohthree.networking.teine.ipv4 }}"
@@ -516,7 +518,7 @@ containers:
 
   - name: barbossa
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/barbossa:main"
-    pull: true
+    pull: "{{ containers_globals.pull_images.local }}"
     command:
       - python3
       - src
@@ -544,7 +546,7 @@ containers:
 
   - name: keycloak
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/keycloak/keycloak:26.0.0-0"
-    pull: "{{ containers_globals.pull }}"
+    pull: "{{ containers_globals.pull_images.remote }}"
     command:
       - start
     docker_host: "{{ assignments.keycloak.networking.teine.ipv4 }}"
@@ -574,7 +576,7 @@ containers:
 
   - name: redis
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/bitnami/redis:7.2.4-debian-11-r19"
-    pull: "{{ containers_globals.pull }}"
+    pull: "{{ containers_globals.pull_images.remote }}"
     command:
       - /opt/bitnami/scripts/redis/run.sh
     docker_host: "{{ assignments.redis.networking.teine.ipv4 }}"
@@ -599,7 +601,7 @@ containers:
 
   - name: oauth
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/bitnami/oauth2-proxy:7.4.0"
-    pull: "{{ containers_globals.pull }}"
+    pull: "{{ containers_globals.pull_images.remote }}"
     command:
       - --config=/etc/oauth2-proxy.cfg
       - --upstream=http://0.0.0.0:8080/
@@ -625,7 +627,7 @@ containers:
 
   - name: nginx
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/anroe/nginx-geoip2:1.22.1-geoip2-3.4"
-    pull: "{{ containers_globals.pull }}"
+    pull: "{{ containers_globals.pull_images.remote }}"
     command:
       - nginx
       - -g

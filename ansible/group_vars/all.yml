@@ -10,6 +10,7 @@ cycle_modes:
         nginx: started
         linode: started
       beats: started
+    pull_local_images: true
     volumes:
       app_data: mounted
       dfs_lvm: mounted
@@ -25,6 +26,7 @@ cycle_modes:
         nginx: stopped
         linode: stopped
       beats: stopped
+    pull_local_images: false
     volumes:
       app_data: unmounted
       dfs_lvm: unmounted
