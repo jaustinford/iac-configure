@@ -11,4 +11,4 @@ docker02-teine.home.elysianskies.com ansible_host='172.16.17.3'
 nas-teine.home.elysianskies.com ansible_host='172.16.17.4'
 
 [elysianskies_linode]
-portal.elysianskies.com
+portal.elysianskies.com ansible_host="{{ lookup('file', '/tmp/linode-portal-ip.txt') }}"

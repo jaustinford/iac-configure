@@ -8,3 +8,17 @@
         dest: /tmp/elysianskies.json
         flat: true
       changed_when: false
+
+    - name: TFSTATE - fetch elysianskies tfstate
+      delegate_to: localhost
+      ansible.builtin.debug:
+        msg: "{{ lookup('ansible.builtin.file', '/tmp/elysianskies.json') }}"
+      no_log: true
+      register: elysianskies_tfstate
+
+    - name: TFSTATE - record portal linode ip
+      delegate_to: localhost
+      ansible.builtin.copy:
+        content: "{{ elysianskies_tfstate.msg.outputs.instance_portal_ip_address.value[0] }}"
+        dest: /tmp/linode-portal-ip.txt
+        mode: "0644"
