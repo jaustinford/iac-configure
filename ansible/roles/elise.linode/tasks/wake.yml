@@ -5,7 +5,7 @@
     id: "{{ elysianskies_tfstate.msg.outputs[item.instance_id_output_element].value[0] }}"
     state: "{{ item.state }}"
 
-- name: WAKE - waiting on host port
+- name: "WAKE - waiting on host port {{ item.wait_port }}"
   ansible.builtin.wait_for:
     host: "{{ item.wait_host }}"
     port: "{{ item.wait_port }}"

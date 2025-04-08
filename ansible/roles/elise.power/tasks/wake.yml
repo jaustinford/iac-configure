@@ -1,15 +1,15 @@
 ---
 - name: WAKE - send wol magic packet
+  delegate_to: localhost
   community.general.wakeonlan:
     mac: "{{ wol.mac }}"
     broadcast: "{{ wol.broadcast }}"
     port: "{{ wol.port }}"
   changed_when: false
-  delegate_to: localhost
 
-- name: WAKE - waiting on host port
+- name: "WAKE - waiting on host port {{ wol.wait_port }}"
+  delegate_to: localhost
   ansible.builtin.wait_for:
     host: "{{ ansible_host }}"
     port: "{{ wol.wait_port }}"
     state: started
-  delegate_to: localhost

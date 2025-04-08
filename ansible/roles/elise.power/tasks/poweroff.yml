@@ -4,9 +4,10 @@
   become: true
   when: poweroff.enabled
 
-- name: POWEROFF - waiting on host port
+- name: "POWEROFF - waiting on host port {{ wol.wait_port }}"
+  delegate_to: localhost
   ansible.builtin.wait_for:
     host: "{{ ansible_host }}"
     port: "{{ wol.wait_port }}"
     state: stopped
-  delegate_to: localhost
+  when: poweroff.enabled

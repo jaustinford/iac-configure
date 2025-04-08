@@ -9,8 +9,8 @@ containers_globals:
   shm_size: 64M
   network_mode: bridge
   dns_servers:
-    - 172.16.14.4
-    - 8.8.8.8
+    - "172.16.14.4"
+    - "8.8.8.8"
   dns_search_domains:
     - home.elysianskies.com
   env:
@@ -44,7 +44,7 @@ containers:
       - "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}:{{ external_ports.nexus_docker_proxy }}/tcp"
     volumes:
       - "{{ containers_globals.application_directory }}/nexus/data:/nexus-data:rw"
-    wait_for_port: "{{ external_ports.nexus_docker_proxy }}"
+    wait_port: "{{ external_ports.nexus_docker_proxy }}"
 
   - name: pihole
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/pihole/pihole:2024.07.0"
@@ -78,7 +78,7 @@ containers:
     volumes:
       - "{{ containers_globals.application_directory }}/pihole/data:/etc/pihole:rw"
       - "{{ containers_globals.application_directory }}/pihole/dnsmasq.d:/etc/dnsmasq.d:rw"
-    wait_for_port: "{{ external_ports.pihole_web }}"
+    wait_port: "{{ external_ports.pihole_web }}"
 
   - name: plex
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/plexinc/pms-docker:1.41.3.9292-bc7397402"
@@ -107,7 +107,7 @@ containers:
       - "{{ containers_globals.application_directory }}/plex/Application Support:/config/Library/Application Support:rw"
       - /tmp/transcode:/transcode:rw
       - /mnt/tvault/video/plex_libraries:/plex_libraries:ro
-    wait_for_port: "{{ external_ports.plex_web }}"
+    wait_port: "{{ external_ports.plex_web }}"
 
   - name: tautulli
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/linuxserver/tautulli:amd64-v2.14.5-ls156"
@@ -130,7 +130,7 @@ containers:
       - "{{ assignments.tautulli.networking.teine.ipv4 }}:{{ external_ports.tautulli_web }}:8181/tcp"
     volumes:
       - "{{ containers_globals.application_directory }}/tautulli/config:/config:rw"
-    wait_for_port: "{{ external_ports.tautulli_web }}"
+    wait_port: "{{ external_ports.tautulli_web }}"
 
   - name: filebrowser
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/filebrowser/filebrowser:v2.31.1-amd64"
@@ -156,7 +156,7 @@ containers:
       - "{{ containers_globals.configuration_directory }}/filebrowser/settings.json:/.filebrowser.json:ro"
       - "{{ containers_globals.application_directory }}/filebrowser/filebrowser.db:/database.db:rw"
       - /mnt/tvault:/tvault:rw
-    wait_for_port: "{{ external_ports.filebrowser_web }}"
+    wait_port: "{{ external_ports.filebrowser_web }}"
 
   - name: elasticsearch
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/elastic/elasticsearch:8.13.0"
@@ -182,7 +182,7 @@ containers:
     volumes:
       - "{{ containers_globals.configuration_directory }}/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro"
       - "{{ containers_globals.application_directory }}/elasticsearch/data:/usr/share/elasticsearch/data:rw"
-    wait_for_port: "{{ external_ports.elasticsearch_db }}"
+    wait_port: "{{ external_ports.elasticsearch_db }}"
 
   - name: kibana
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/elastic/kibana:8.13.0"
@@ -206,7 +206,7 @@ containers:
       - "{{ assignments.kibana.networking.teine.ipv4 }}:{{ external_ports.kibana_web }}:5601/tcp"
     volumes:
       - "{{ containers_globals.configuration_directory }}/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml:ro"
-    wait_for_port: "{{ external_ports.kibana_web }}"
+    wait_port: "{{ external_ports.kibana_web }}"
 
   - name: zoneminder
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/dlandon/zoneminder:latest"
@@ -235,7 +235,7 @@ containers:
       - "{{ containers_globals.application_directory }}/zoneminder/recordings:/zm_recordings:rw"
       - "{{ containers_globals.configuration_directory }}/zoneminder/ssmtp.conf:/etc/ssmtp/ssmtp.conf:ro"
       - "{{ containers_globals.configuration_directory }}/zoneminder/revaliases:/etc/ssmtp/revaliases:ro"
-    wait_for_port: "{{ external_ports.zoneminder_web }}"
+    wait_port: "{{ external_ports.zoneminder_web }}"
 
   - name: expressvpn
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/dperson/openvpn-client:amd64"
@@ -263,7 +263,7 @@ containers:
       - "{{ assignments.expressvpn.networking.teine.ipv4 }}:{{ external_ports.expressvpn_deluge }}:8112/tcp"
     volumes:
       - "{{ containers_globals.configuration_directory }}/expressvpn/vpn:/vpn:ro"
-    wait_for_port: "0"
+    wait_port: "0"
 
   - name: squid
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/sameersbn/squid:3.5.27-2"
@@ -285,7 +285,7 @@ containers:
     ports: []
     volumes:
       - "{{ containers_globals.configuration_directory }}/squid/squid.conf:/etc/squid/squid.conf:ro"
-    wait_for_port: "{{ external_ports.expressvpn_squid }}"
+    wait_port: "{{ external_ports.expressvpn_squid }}"
 
   - name: deluge
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/linuxserver/deluge:2.1.1"
@@ -313,7 +313,7 @@ containers:
       - "{{ containers_globals.configuration_directory }}/deluge/hostlist.conf:/config/hostlist.conf:ro"
       - "{{ containers_globals.configuration_directory }}/deluge/web.conf:/config/web.conf:ro"
       - "{{ containers_globals.application_directory }}/deluge/plugins:/config/plugins:rw"
-    wait_for_port: "{{ external_ports.expressvpn_deluge }}"
+    wait_port: "{{ external_ports.expressvpn_deluge }}"
 
   - name: gitlab
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/gitlab/gitlab-ee:17.5.4-ee.0"
@@ -341,7 +341,7 @@ containers:
       - "{{ containers_globals.application_directory }}/gitlab/config:/etc/gitlab:rw"
       - "{{ containers_globals.application_directory }}/gitlab/logs:/var/log/gitlab:rw"
       - "{{ containers_globals.application_directory }}/gitlab/data:/var/opt/gitlab:rw"
-    wait_for_port: "{{ external_ports.gitlab_web }}"
+    wait_port: "{{ external_ports.gitlab_web }}"
 
   - name: runner
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/gitlab/gitlab-runner:v17.5.4"
@@ -369,7 +369,7 @@ containers:
       - "{{ containers_globals.application_directory }}/runner/cache:/cache:rw"
       - /var/run/docker.sock:/var/run/docker.sock:rw
       - "/home/{{ ansible_user }}/.docker:/root/.docker:ro"
-    wait_for_port: "0"
+    wait_port: "0"
 
   - name: openvpnas
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/openvpn/openvpn-as:2.14.0-b90cb316-Ubuntu22"
@@ -396,7 +396,7 @@ containers:
       - "{{ assignments.openvpnas.networking.teine.ipv4 }}:{{ external_ports.openvpnas_vpn }}:1194/tcp"
     volumes:
       - "{{ containers_globals.application_directory }}/openvpnas/openvpn:/openvpn:rw"
-    wait_for_port: "{{ external_ports.openvpnas_vpn }}"
+    wait_port: "{{ external_ports.openvpnas_vpn }}"
 
   - name: docs
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/docs:main"
@@ -420,7 +420,7 @@ containers:
     ports:
       - "{{ assignments.docs.networking.teine.ipv4 }}:{{ external_ports.docs_web }}:8000/tcp"
     volumes: []
-    wait_for_port: "{{ external_ports.docs_web }}"
+    wait_port: "{{ external_ports.docs_web }}"
 
   - name: resume
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/static-website-resume:main"
@@ -443,7 +443,7 @@ containers:
     ports:
       - "{{ assignments.resume.networking.teine.ipv4 }}:{{ external_ports.resume_web }}:80/tcp"
     volumes: []
-    wait_for_port: "{{ external_ports.resume_web }}"
+    wait_port: "{{ external_ports.resume_web }}"
 
   - name: fourohfour
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/static-website-fourohfour:main"
@@ -466,7 +466,7 @@ containers:
     ports:
       - "{{ assignments.fourohfour.networking.teine.ipv4 }}:{{ external_ports.fourohfour_web }}:80/tcp"
     volumes: []
-    wait_for_port: "{{ external_ports.fourohfour_web }}"
+    wait_port: "{{ external_ports.fourohfour_web }}"
 
   - name: fiveohx
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/static-website-fiveohx:main"
@@ -489,7 +489,7 @@ containers:
     ports:
       - "{{ assignments.fiveohx.networking.teine.ipv4 }}:{{ external_ports.fiveohx_web }}:80/tcp"
     volumes: []
-    wait_for_port: "{{ external_ports.fiveohx_web }}"
+    wait_port: "{{ external_ports.fiveohx_web }}"
 
   - name: fourohthree
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/static-website-fourohthree:main"
@@ -512,7 +512,7 @@ containers:
     ports:
       - "{{ assignments.fourohthree.networking.teine.ipv4 }}:{{ external_ports.fourohthree_web }}:80/tcp"
     volumes: []
-    wait_for_port: "{{ external_ports.fourohthree_web }}"
+    wait_port: "{{ external_ports.fourohthree_web }}"
 
   - name: barbossa
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/barbossa:main"
@@ -540,7 +540,7 @@ containers:
     volumes:
       - /mnt/tvault/deluge:/downloads:rw
       - /mnt/tvault/video/plex_libraries:/plex_libraries:rw
-    wait_for_port: "0"
+    wait_port: "0"
 
   - name: keycloak
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/keycloak/keycloak:26.0.0-0"
@@ -570,7 +570,7 @@ containers:
       - "{{ assignments.keycloak.networking.teine.ipv4 }}:{{ external_ports.keycloak_web }}:8080/tcp"
     volumes:
       - "{{ containers_globals.application_directory }}/keycloak/data:/opt/keycloak/data:rw"
-    wait_for_port: "{{ external_ports.keycloak_web }}"
+    wait_port: "{{ external_ports.keycloak_web }}"
 
   - name: redis
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/bitnami/redis:7.2.4-debian-11-r19"
@@ -595,7 +595,7 @@ containers:
       - "{{ assignments.redis.networking.teine.ipv4 }}:{{ external_ports.redis_db }}:6379/tcp"
     volumes:
       - "{{ containers_globals.application_directory }}/keycloak/data:/opt/jboss/keycloak/standalone/data:rw"
-    wait_for_port: "{{ external_ports.redis_db }}"
+    wait_port: "{{ external_ports.redis_db }}"
 
   - name: oauth
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/bitnami/oauth2-proxy:7.4.0"
@@ -621,7 +621,7 @@ containers:
       - "{{ assignments.oauth.networking.teine.ipv4 }}:{{ external_ports.oauth_web }}:4180/tcp"
     volumes:
       - "{{ containers_globals.configuration_directory }}/oauth/oauth2-proxy.cfg:/etc/oauth2-proxy.cfg:ro"
-    wait_for_port: "0"
+    wait_port: "0"
 
   - name: nginx
     image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/anroe/nginx-geoip2:1.22.1-geoip2-3.4"
@@ -651,4 +651,4 @@ containers:
       - "{{ containers_globals.configuration_directory }}/nginx/nginx.conf:/etc/nginx/nginx.conf:ro"
       - "{{ containers_globals.configuration_directory }}/nginx/conf.d:/etc/nginx/conf.d:ro"
       - "{{ containers_globals.application_directory }}/nginx/geoip:/etc/nginx/geoip:rw"
-    wait_for_port: "443"
+    wait_port: "443"
