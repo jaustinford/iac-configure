@@ -38,10 +38,10 @@ services:
     network_mode: host
 
   ###########################################################
-  # playbook_site
+  # site
   ###########################################################
 
-  playbook_site:
+  site:
     image: nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
     entrypoint:
       - /bin/bash
@@ -52,14 +52,14 @@ services:
             /etc/ansible/site.yml \
             -vv
     profiles:
-      - playbook-site
+      - site
 
     environment:
       - TZ=America/Denver
       - VAULT_PASSWORD=${VAULT_PASSWORD}
       - B64_SSH_KEY=${B64_SSH_KEY}
       - CYCLE_MODE=${CYCLE_MODE}
-      - LINODE_API_KEY=${LINODE_API_KEY}
+      - LINODE_TOKEN=${LINODE_TOKEN}
       - ELISE_PROJECT_EXPRESSVPN_CONTINENT=north_america
       - ELISE_PROJECT_EXPRESSVPN_REGION=main
       - ELISE_PROJECT_EXPRESSVPN_COUNTRY=united_states

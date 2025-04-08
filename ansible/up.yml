@@ -5,8 +5,8 @@
 - name: UP - import tfstate playbook
   import_playbook: tfstate.yml
 
-# - name: UP - import linode playbook
-#   import_playbook: linode.yml
+- name: UP - import linode playbook
+  import_playbook: linode.yml
 
 - name: UP - gather facts
   hosts: all
