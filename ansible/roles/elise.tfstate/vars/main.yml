@@ -1,0 +1,4 @@
+---
+linodes:
+  - instance_ip_address_output_element: instance_portal_ip_address
+
