@@ -70,12 +70,11 @@ def main():
             "instances/" + arg_id + "/shutdown"
         )
 
-    execute_json   = json.loads(execute_return)
-    changed_result = bool(execute_json)
+    execute_json = json.loads(execute_return)
 
     result = {
         "linode_api": execute_json,
-        "changed": changed_result
+        "changed": bool(execute_json)
     }
 
     module.exit_json(**result)
