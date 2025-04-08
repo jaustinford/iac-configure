@@ -18,15 +18,13 @@ def api_post(token: str, endpoint: str):
     return the text responses.
     """
 
-    global_headers = {
-        "Authorization": "Bearer " + token,
-        "Accept": "application/json",
-        "Content-Type": "application/json"
-    }
-
     http_return = requests.post(
         LINODE_API_URL + "/" + endpoint,
-        headers=global_headers,
+        headers={
+            "Authorization": "Bearer " + token,
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        },
         timeout=10
     )
 
@@ -72,9 +70,18 @@ def main():
             "instances/" + arg_id + "/shutdown"
         )
 
-    module.exit_json(
-        **json.loads(execute_return)
-    )
+    if execute_return == {}:
+        changed_result = True
+
+    else:
+        changed_result = False
+
+    result = {
+        "linode_api": json.loads(execute_return),
+        "changed": changed_result
+    }
+
+    module.exit_json(**result)
 
 if __name__ == "__main__":
     main()

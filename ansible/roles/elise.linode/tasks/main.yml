@@ -5,10 +5,7 @@
   no_log: true
   register: elysianskies_tfstate
 
-- name: LINODE - manage linode
-  linode_state:
-    token: "{{ lookup('env', 'LINODE_TOKEN') }}"
-    id: "{{ elysianskies_tfstate.msg.outputs[item.instance_id_output_element].value[0] }}"
-    state: "{{ item.state }}"
+- name: LINODE - include wake tasks
+  ansible.builtin.include_tasks: wake.yml
   with_items:
     - "{{ linodes }}"

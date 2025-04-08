@@ -1,0 +1,12 @@
+---
+- name: WAKE - manage linode
+  linode_state:
+    token: "{{ lookup('env', 'LINODE_TOKEN') }}"
+    id: "{{ elysianskies_tfstate.msg.outputs[item.instance_id_output_element].value[0] }}"
+    state: "{{ item.state }}"
+
+- name: WAKE - waiting on host port
+  ansible.builtin.wait_for:
+    host: "{{ item.wait_host }}"
+    port: "{{ item.wait_port }}"
+    state: "{{ item.state }}"
