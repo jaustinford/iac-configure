@@ -70,14 +70,11 @@ def main():
             "instances/" + arg_id + "/shutdown"
         )
 
-    if execute_return == "{}":
-        changed_result = True
-
-    else:
-        changed_result = False
+    execute_json   = json.loads(execute_return)
+    changed_result = bool(execute_json)
 
     result = {
-        "linode_api": json.loads(execute_return),
+        "linode_api": execute_json,
         "changed": changed_result
     }
 
