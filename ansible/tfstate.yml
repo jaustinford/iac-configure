@@ -3,4 +3,3 @@
   hosts: nas-teine.home.elysianskies.com
   roles:
     - elise.tfstate
- 
