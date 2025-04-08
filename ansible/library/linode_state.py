@@ -70,7 +70,7 @@ def main():
             "instances/" + arg_id + "/shutdown"
         )
 
-    if execute_return == {}:
+    if execute_return == "{}":
         changed_result = True
 
     else:
