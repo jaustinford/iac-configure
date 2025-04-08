@@ -26,7 +26,8 @@ def api_post(token: str, endpoint: str):
 
     http_return = requests.post(
         LINODE_API_URL + "/" + endpoint,
-        headers=global_headers
+        headers=global_headers,
+        timeout=10
     )
 
     return http_return.text
