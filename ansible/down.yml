@@ -1,10 +1,10 @@
 ---
+- name: DOWN - import tfstate playbook
+  import_playbook: tfstate.yml
+
 - name: DOWN - gather facts
   hosts: all
   gather_facts: true
-
-- name: DOWN - import tfstate playbook
-  import_playbook: tfstate.yml
 
 - name: DOWN - import beats playbook
   import_playbook: beats.yml
