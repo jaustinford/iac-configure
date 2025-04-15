@@ -12,6 +12,9 @@
   hosts: all
   gather_facts: true
 
+- name: UP - import raspberrypi playbook
+  import_playbook: raspberrypi.yml
+
 - name: UP - import ssh playbook
   import_playbook: ssh.yml
 

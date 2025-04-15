@@ -5,5 +5,8 @@ wol:
   port: 9
   wait_port: 445
 
+lan_interface:
+  teine: re0
+
 poweroff:
   enabled: true

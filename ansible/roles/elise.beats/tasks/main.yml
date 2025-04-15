@@ -1,5 +1,16 @@
 ---
-- name: MAIN - include beats tasks
+- name: MAIN - include beats tasks for amd64
   ansible.builtin.include_tasks: beats.yml
+  vars:
+    os_distro: amd64
+  when: ansible_architecture == "x86_64"
+  with_items:
+    - "{{ beats.packages }}"
+
+- name: MAIN - include beats tasks for arm64
+  ansible.builtin.include_tasks: beats.yml
+  vars:
+    os_distro: arm64
+  when: ansible_architecture == "aarch64"
   with_items:
     - "{{ beats.packages }}"

@@ -1,31 +1,16 @@
 ---
-- name: APT - create nexus auth file
-  ansible.builtin.copy:
-    dest: /etc/apt/auth.conf.d/elysianskies_nexus.conf
-    content: |
-      machine https://nexus.{{ assignments.nginx.networking.teine.fqdn }}
-      login {{ secrets.nexus.username }}
-      password {{ secrets.nexus.password }}
-    owner: root
-    group: root
-    mode: '0600'
-  become: true
+- name: APT - include mirrors tasks
+  ansible.builtin.include_tasks: mirrors.yml
+  vars:
+    apt_host: "{{ apt_object.mirror_proxy if discovered_nexus.status == 200 else apt_object.mirror_original }}"
+  when: ansible_system_vendor != "Linode"
 
-- name: APT - override /etc/apt/sources.list
-  ansible.builtin.copy:
-    dest: /etc/apt/sources.list
-    content: |
-      deb {{ apt_host }} {{ ubuntu.apt.distro }} main restricted
-      deb {{ apt_host }} {{ ubuntu.apt.distro }}-updates main restricted
-      deb {{ apt_host }} {{ ubuntu.apt.distro }} universe
-      deb {{ apt_host }} {{ ubuntu.apt.distro }}-updates universe
-      deb {{ apt_host }} {{ ubuntu.apt.distro }} multiverse
-      deb {{ apt_host }} {{ ubuntu.apt.distro }}-updates multiverse
-      deb {{ apt_host }} {{ ubuntu.apt.distro }}-backports main restricted universe multiverse
-      deb {{ apt_host }} {{ ubuntu.apt.distro }}-security main restricted
-      deb {{ apt_host }} {{ ubuntu.apt.distro }}-security universe
-      deb {{ apt_host }} {{ ubuntu.apt.distro }}-security multiverse
-    owner: root
-    group: root
-    mode: '0644'
+- name: APT - install additional packages
+  ansible.builtin.apt:
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+    update_cache: true
   become: true
+  when: cycle_mode.name == "up"
+  with_items:
+    - "{{ ubuntu.additional_packages }}"

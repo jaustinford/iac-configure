@@ -1,0 +1,12 @@
+---
+- name: ARCH - include apt tasks for amd64
+  ansible.builtin.include_tasks: apt.yml
+  vars:
+    apt_object: "{{ ubuntu.apt[ansible_lsb.codename].amd64 }}"
+  when: ansible_architecture == "x86_64"
+
+- name: ARCH - include apt tasks for arm64
+  ansible.builtin.include_tasks: apt.yml
+  vars:
+    apt_object: "{{ ubuntu.apt[ansible_lsb.codename].arm64 }}"
+  when: ansible_architecture == "aarch64"

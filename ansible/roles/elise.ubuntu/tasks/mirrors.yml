@@ -1,0 +1,19 @@
+---
+- name: MIRRORS - override /etc/apt/sources.list
+  ansible.builtin.copy:
+    dest: /etc/apt/sources.list
+    content: |
+      deb {{ apt_host }} {{ ansible_lsb.codename }} main restricted
+      deb {{ apt_host }} {{ ansible_lsb.codename }}-updates main restricted
+      deb {{ apt_host }} {{ ansible_lsb.codename }} universe
+      deb {{ apt_host }} {{ ansible_lsb.codename }}-updates universe
+      deb {{ apt_host }} {{ ansible_lsb.codename }} multiverse
+      deb {{ apt_host }} {{ ansible_lsb.codename }}-updates multiverse
+      deb {{ apt_host }} {{ ansible_lsb.codename }}-backports main restricted universe multiverse
+      deb {{ apt_host }} {{ ansible_lsb.codename }}-security main restricted
+      deb {{ apt_host }} {{ ansible_lsb.codename }}-security universe
+      deb {{ apt_host }} {{ ansible_lsb.codename }}-security multiverse
+    owner: root
+    group: root
+    mode: '0644'
+  become: true

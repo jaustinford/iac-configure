@@ -1,9 +1,17 @@
 ---
+nexus_proxy: https://nexus.{{ assignments.nginx.networking.teine.fqdn }}
+
 ubuntu:
   apt:
-    mirror_proxy: "https://nexus.{{ assignments.nginx.networking.teine.fqdn }}/repository/elysianskies_apt_proxy/"
-    mirror_original: http://us.archive.ubuntu.com/ubuntu/
-    distro: jammy
+    jammy:
+      amd64:
+        mirror_proxy: "{{ nexus_proxy }}/repository/elysianskies_apt_jammy_amd64_proxy/"
+        mirror_original: http://us.archive.ubuntu.com/ubuntu/
+
+      arm64:
+        mirror_proxy: "{{ nexus_proxy }}/repository/elysianskies_apt_jammy_arm64_proxy/"
+        mirror_original: http://ports.ubuntu.com/
+
   additional_packages:
     - name: net-tools
       state: present
@@ -34,5 +42,5 @@ ubuntu:
       state: present
 
 gateway:
-  internal_interface: enp1s0f0
-  external_interface: enp1s0f1
+  internal_interface: "{{ lan_interface.teine }}"
+  external_interface: "{{ lan_interface.talamh }}"

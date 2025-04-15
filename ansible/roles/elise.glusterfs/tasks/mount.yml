@@ -11,7 +11,7 @@
 - name: MOUNT - mount glusterfs volume
   ansible.posix.mount:
     fstype: glusterfs
-    src: "{{ ansible_eno1.ipv4.address }}:{{ glusterfs.dfs.name }}"
+    src: "{{ ansible_facts[lan_interface.uisge].ipv4.address }}:{{ glusterfs.dfs.name }}"
     opts: defaults
     path: "{{ glusterfs.dfs.path }}"
     state: "{{ glusterfs.mount.state }}"

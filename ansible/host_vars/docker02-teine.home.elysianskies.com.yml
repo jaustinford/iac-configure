@@ -5,5 +5,10 @@ wol:
   port: 9
   wait_port: 22
 
+lan_interface:
+  teine: enp1s0f0
+  talamh: enp1s0f1
+  uisge: eno1
+
 poweroff:
   enabled: true

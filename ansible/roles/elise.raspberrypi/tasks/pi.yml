@@ -1,0 +1,10 @@
+---
+- name: PI - ensure wifi is disabled
+  ansible.builtin.lineinfile:
+    path: /boot/firmware/config.txt
+    line: dtoverlay=disable-wifi
+    owner: root
+    group: root
+    mode: '0755'
+  notify: MAIN - reboot
+  become: true

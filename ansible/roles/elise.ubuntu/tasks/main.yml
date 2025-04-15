@@ -3,30 +3,12 @@
   ansible.builtin.include_tasks: hosts.yml
   when: ansible_system_vendor != "Linode"
 
-- name: MAIN - discover nexus apt repository
-  ansible.builtin.uri:
-    url: "{{ ubuntu.apt.mirror_proxy }}"
-    status_code:
-      - -1
-      - 401
-  register: discovered_nexus
+- name: MAIN - include proxy tasks
+  ansible.builtin.include_tasks: proxy.yml
   when: ansible_system_vendor != "Linode"
 
-- name: MAIN - include apt tasks
-  ansible.builtin.include_tasks: apt.yml
-  vars:
-    apt_host: "{{ ubuntu.apt.mirror_proxy if discovered_nexus.status == 401 else ubuntu.apt.mirror_original }}"
-  when: ansible_system_vendor != "Linode"
-
-- name: MAIN - install additional packages
-  ansible.builtin.apt:
-    name: "{{ item.name }}"
-    state: "{{ item.state }}"
-    update_cache: true
-  become: true
-  when: cycle_mode.name == "up"
-  with_items:
-    - "{{ ubuntu.additional_packages }}"
+- name: MAIN - include arch tasks
+  ansible.builtin.include_tasks: arch.yml
 
 - name: MAIN - include pip tasks
   ansible.builtin.include_tasks: pip.yml
@@ -44,10 +26,10 @@
 
 - name: MAIN - include gateway tasks
   ansible.builtin.include_tasks: gateway.yml
-  when: ansible_system_vendor != "Linode"
+  when: ansible_system_vendor != "Linode" and lazarus_node is not defined
 
 - name: MAIN - include wol tasks
   ansible.builtin.include_tasks: wol.yml
   vars:
     wol_interface: "{{ gateway.internal_interface }}"
-  when: ansible_system_vendor != "Linode"
+  when: ansible_system_vendor != "Linode" and lazarus_node is not defined
