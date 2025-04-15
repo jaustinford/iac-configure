@@ -9,7 +9,7 @@
 
 - name: GIT - download git project
   ansible.builtin.git:
-    repo: "https://{{ secrets.gitlab.root_username }}:{{ secrets.gitlab.root_password }}@gitlab.{{ assignments.nginx.networking.teine.fqdn }}/elise/{{ item }}.git"
+    repo: "https://{{ gitlab_credential }}@gitlab.{{ assignments.nginx.networking.teine.fqdn }}/elise/{{ item }}.git"
     dest: "/home/{{ ansible_user }}/{{ item.split('/')[-1] }}"
     update: true
   when: discovered_gitlab.status == 200
