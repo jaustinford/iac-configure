@@ -2,3 +2,9 @@
 - name: MAIN - include pi tasks
   ansible.builtin.include_tasks: pi.yml
   when: ansible_architecture == "aarch64"
+
+- name: MAIN - include git tasks
+  ansible.builtin.include_tasks: git.yml
+  when: ansible_architecture == "aarch64" and lazarus_node is defined
+  with_items:
+    - infrastructure/iac-configure

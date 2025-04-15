@@ -1,0 +1,15 @@
+---
+- name: GIT - discover gitlab
+  ansible.builtin.uri:
+    url: "https://gitlab.{{ assignments.nginx.networking.teine.fqdn }}"
+    status_code:
+      - 200
+      - -1
+  register: discovered_gitlab
+
+- name: GIT - download git project
+  ansible.builtin.git:
+    repo: "https://{{ secrets.gitlab.root_username }}:{{ secrets.gitlab.root_password }}@gitlab.{{ assignments.nginx.networking.teine.fqdn }}/elise/{{ item }}.git"
+    dest: "/home/{{ ansible_user }}/{{ item.split('/')[-1] }}"
+    update: true
+  when: discovered_gitlab.status == 200

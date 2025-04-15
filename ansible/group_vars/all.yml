@@ -57,6 +57,12 @@ docker_hosts:
         fqdn: docker02-teine.home.elysianskies.com
         ipv4: "172.16.17.3"
 
+  host_3:
+    networking:
+      teine:
+        fqdn: docker03-teine.home.elysianskies.com
+        ipv4: "172.16.17.4"
+
 assignments:
   nexus: "{{ docker_hosts.host_1 }}"
   pihole: "{{ docker_hosts.host_2 }}"
@@ -82,6 +88,7 @@ assignments:
   redis: "{{ docker_hosts.host_2 }}"
   oauth: "{{ docker_hosts.host_1 }}"
   nginx: "{{ docker_hosts.host_2 }}"
+  lazarus: "{{ docker_hosts.host_3 }}"
 
 external_ports:
   nexus_web: "32500"
