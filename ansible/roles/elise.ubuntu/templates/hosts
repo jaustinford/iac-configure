@@ -8,16 +8,12 @@ ff00::0 ip6-mcastprefix
 ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 
-{% for network in ["talamh", "uisge", "teine"] %}
-{%- for host in ["host_1", "host_2"] -%}
-{% if network == "teine" and host == "host_2" %}
-{% set proxied_service_full = [] %}
-{%- for proxied_service_short in ["nexus", "nginx"] -%}
-{{ proxied_service_full.append(proxied_service_short + "." + docker_hosts.host_2.networking.teine.fqdn) }}
-{%- endfor %}
-{{ docker_hosts.host_2.networking.teine.ipv4 }}  {{ docker_hosts.host_2.networking.teine.fqdn }} {{ " ".join(proxied_service_full) }}
-{% else %}
-{{ docker_hosts[host].networking[network].ipv4 }}  {{ docker_hosts[host].networking[network].fqdn }}
-{% endif %}
-{%- endfor %}
-{% endfor %}
+172.16.16.2  docker01-uisge.home.elysianskies.com
+172.16.17.2  docker01-teine.home.elysianskies.com
+172.16.14.2  docker01-talamh.home.elysianskies.com
+
+172.16.16.3  docker02-uisge.home.elysianskies.com
+172.16.17.3  docker02-teine.home.elysianskies.com nexus.docker02-teine.home.elysianskies.com nginx.docker02-teine.home.elysianskies.com gitlab.docker02-teine.home.elysianskies.com
+172.16.14.3  docker02-talamh.home.elysianskies.com
+
+172.16.17.4  docker03-teine.home.elysianskies.com
