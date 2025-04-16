@@ -12,4 +12,5 @@
     repo: "https://{{ gitlab_credential }}@gitlab.{{ assignments.nginx.networking.teine.fqdn }}/elise/{{ item }}.git"
     dest: "/home/{{ ansible_user }}/{{ item.split('/')[-1] }}"
     update: true
+    version: main
   when: discovered_gitlab.status == 200
