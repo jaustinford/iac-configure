@@ -12,6 +12,9 @@
   hosts: all
   gather_facts: true
 
+- name: UP - import gateway playbook
+  import_playbook: gateway.yml
+
 - name: UP - import raspberrypi playbook
   import_playbook: raspberrypi.yml
 

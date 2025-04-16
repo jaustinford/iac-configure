@@ -1,0 +1,4 @@
+---
+gateway:
+  internal_interface: "{{ lan_interface.teine }}"
+  external_interface: "{{ lan_interface.talamh }}"

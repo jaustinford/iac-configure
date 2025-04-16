@@ -1,0 +1,4 @@
+---
+- name: MAIN - include gateway tasks
+  ansible.builtin.include_tasks: gateway.yml
+  when: lazarus_node is not defined
