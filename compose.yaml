@@ -9,7 +9,7 @@ services:
     build:
       context: .
       tags:
-        - nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
+        - docker01-teine.home.elysianskies.com:32501/elise/iac-configure:main
     profiles:
       - builder
 
