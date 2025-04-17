@@ -3,11 +3,11 @@ runner:
   url: "http://{{ assignments.gitlab.networking.teine.ipv4 }}:{{ external_ports.gitlab_web }}"
   clone_url: "http://{{ assignments.gitlab.networking.teine.ipv4 }}:{{ external_ports.gitlab_web }}"
   executor: docker
-  docker_image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/docker:20-dind"
+  docker_image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/docker:28-dind"
   description: elysianskies_runner
   docker_privileged: "true"
   docker_volumes:
     - /var/run/docker.sock:/var/run/docker.sock:rw
-    - "/home/{{ ansible_user }}/.docker:/root/.docker:ro"
+    - "/home/{{ ansible_user }}/.docker:/root/.docker:rw"
     - /mnt/tvault/elysianskies/tfstate:/tfstate:rw
     - /mnt/tvault/video/plex_libraries:/plex_libraries:rw
