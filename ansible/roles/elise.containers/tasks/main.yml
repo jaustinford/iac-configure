@@ -11,4 +11,4 @@
   no_log: true
   when: cycle_mode.name == "down"
   with_items:
-    - "{{ containers | reverse[1:] }}"
+    - "{{ containers[:-1] | reverse }}"
