@@ -665,7 +665,7 @@ containers:
     restart_policy: "{{ containers_globals.restart_policy }}"
     detach: "{{ containers_globals.detach }}"
     labels: "{{ containers_globals.labels }}"
-    state: "{{ containers_globals.state }}"
+    state: started
     shm_size: "{{ containers_globals.shm_size }}"
     devices:
       - /dev/usb/hiddev0
