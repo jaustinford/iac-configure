@@ -5,6 +5,7 @@
     status_code:
       - 200
       - 502
+      - -1
   register: discovered_gitlab
 
 - name: GIT - download git project
