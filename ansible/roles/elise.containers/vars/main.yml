@@ -684,7 +684,7 @@ containers:
       ELISE_PROJECT_EXPRESSVPN_COUNTRY: "{{ lookup('env', 'ELISE_PROJECT_EXPRESSVPN_COUNTRY') }}"
       ELISE_PROJECT_EXPRESSVPN_SERVER: "{{ lookup('env', 'ELISE_PROJECT_EXPRESSVPN_SERVER') }}"
       ELISE_PROJECT_MAXMIND_DOWNLOAD: "{{ lookup('env', 'ELISE_PROJECT_MAXMIND_DOWNLOAD') }}"
-      USER_HOME: "/home/austin"
+      USER_HOME: "/home/{{ ansible_user }}"
     ports: []
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:rw
