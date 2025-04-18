@@ -677,8 +677,13 @@ containers:
     env:
       TZ: "{{ containers_globals.env.TZ }}"
       VAULT_PASSWORD: "{{ lookup('env', 'VAULT_PASSWORD') }}"
-      LINODE_TOKEN: "{{ lookup('env', 'LINODE_TOKEN') }}"
       B64_SSH_KEY: "{{ lookup('env', 'B64_SSH_KEY') }}"
+      LINODE_TOKEN: "{{ lookup('env', 'LINODE_TOKEN') }}"
+      ELISE_PROJECT_EXPRESSVPN_CONTINENT: "{{ lookup('env', 'ELISE_PROJECT_EXPRESSVPN_CONTINENT') }}"
+      ELISE_PROJECT_EXPRESSVPN_REGION: "{{ lookup('env', 'ELISE_PROJECT_EXPRESSVPN_REGION') }}"
+      ELISE_PROJECT_EXPRESSVPN_COUNTRY: "{{ lookup('env', 'ELISE_PROJECT_EXPRESSVPN_COUNTRY') }}"
+      ELISE_PROJECT_EXPRESSVPN_SERVER: "{{ lookup('env', 'ELISE_PROJECT_EXPRESSVPN_SERVER') }}"
+      ELISE_PROJECT_MAXMIND_DOWNLOAD: "{{ lookup('env', 'ELISE_PROJECT_MAXMIND_DOWNLOAD') }}"
     ports: []
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:rw
