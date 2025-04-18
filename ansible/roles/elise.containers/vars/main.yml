@@ -665,7 +665,7 @@ containers:
     restart_policy: "{{ containers_globals.restart_policy }}"
     detach: "{{ containers_globals.detach }}"
     labels: "{{ containers_globals.labels }}"
-    state: started
+    state: "{{ containers_globals.state }}"
     shm_size: "{{ containers_globals.shm_size }}"
     devices:
       - /dev/usb/hiddev0
@@ -676,6 +676,7 @@ containers:
     dns_search_domains: "{{ containers_globals.dns_search_domains }}"
     env:
       TZ: "{{ containers_globals.env.TZ }}"
+      USER_HOME: "/home/{{ ansible_user }}"
       VAULT_PASSWORD: "{{ lookup('env', 'VAULT_PASSWORD') }}"
       B64_SSH_KEY: "{{ lookup('env', 'B64_SSH_KEY') }}"
       LINODE_TOKEN: "{{ lookup('env', 'LINODE_TOKEN') }}"
@@ -684,7 +685,6 @@ containers:
       ELISE_PROJECT_EXPRESSVPN_COUNTRY: "{{ lookup('env', 'ELISE_PROJECT_EXPRESSVPN_COUNTRY') }}"
       ELISE_PROJECT_EXPRESSVPN_SERVER: "{{ lookup('env', 'ELISE_PROJECT_EXPRESSVPN_SERVER') }}"
       ELISE_PROJECT_MAXMIND_DOWNLOAD: "{{ lookup('env', 'ELISE_PROJECT_MAXMIND_DOWNLOAD') }}"
-      USER_HOME: "/home/{{ ansible_user }}"
     ports: []
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:rw
