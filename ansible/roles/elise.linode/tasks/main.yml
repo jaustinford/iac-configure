@@ -5,6 +5,12 @@
   no_log: true
   register: elysianskies_tfstate
 
+- name: LINODE - confirm connectivity to the internet
+  ansible.builtin.wait_for:
+    host: 8.8.8.8
+    port: 443
+    state: started
+
 - name: LINODE - include wake tasks
   ansible.builtin.include_tasks: wake.yml
   with_items:
