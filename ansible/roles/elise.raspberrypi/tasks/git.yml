@@ -14,4 +14,5 @@
     dest: "/home/{{ ansible_user }}/{{ item.split('/')[-1] }}"
     update: true
     version: main
+    force: true
   when: discovered_gitlab.status == 200
