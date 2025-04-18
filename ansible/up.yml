@@ -5,15 +5,15 @@
 - name: UP - import tfstate playbook
   import_playbook: tfstate.yml
 
-- name: UP - import linode playbook
-  import_playbook: linode.yml
-
 - name: UP - gather facts
   hosts: all
   gather_facts: true
 
 - name: UP - import gateway playbook
   import_playbook: gateway.yml
+
+- name: UP - import linode playbook
+  import_playbook: linode.yml
 
 - name: UP - import raspberrypi playbook
   import_playbook: raspberrypi.yml
