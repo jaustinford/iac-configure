@@ -680,6 +680,6 @@ containers:
     ports: []
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:rw
-      - "/home/{{ ansible_user }}/.docker:/root/.docker:ro"
+      - "/home/{{ ansible_user }}/.docker:/root/.docker:rw"
       - "/home/{{ ansible_user }}/iac-configure:/iac-configure:ro"
     wait_port: "0"
