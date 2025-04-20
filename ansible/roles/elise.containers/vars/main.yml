@@ -676,6 +676,7 @@ containers:
     dns_search_domains: "{{ containers_globals.dns_search_domains }}"
     env:
       TZ: "{{ containers_globals.env.TZ }}"
+      USER_HOME: "/home/{{ ansible_user }}"
     ports: []
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:rw
