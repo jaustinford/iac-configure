@@ -10,6 +10,7 @@
     content: "{{ elysianskies_tfstate.msg.outputs[item.output_elements.ip_address].value[0] }}"
     dest: "/tfstate/{{ item.output_elements.ip_address }}.txt"
     mode: '0644'
+  changed_when: false
   with_items:
     - "{{ linodes }}"
 
