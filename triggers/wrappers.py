@@ -30,9 +30,6 @@ def compose_up(compose_profile: str, compose_method: str):
     profile service.
     """
 
-    if compose_method == "build":
-        os.environ["DOCKER_BUILDKIT"] = "1"
-
     os.system(
         "docker compose" + \
             " --project-directory=" + DIR_PROJECT + \
