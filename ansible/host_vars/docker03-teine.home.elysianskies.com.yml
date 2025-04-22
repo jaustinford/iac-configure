@@ -1,14 +1,8 @@
 ---
-wol:
-  mac: "DC:A6:32:E1:29:D6"
-  broadcast: "172.16.17.7"
-  port: 9
-  wait_port: 22
-
 lan_interface:
   teine: eth0
 
-lazarus_node: true
-
 poweroff:
   enabled: false
+
+lazarus_node: true

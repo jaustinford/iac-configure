@@ -1,7 +1,7 @@
 ---
 - name: MAIN - include wake tasks
   ansible.builtin.include_tasks: wake.yml
-  when: cycle_mode.name == "up"
+  when: cycle_mode.name == "up" and wol is defined
 
 - name: MAIN - include poweroff tasks
   ansible.builtin.include_tasks: poweroff.yml

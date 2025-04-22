@@ -1,12 +1,12 @@
 ---
-wol:
-  mac: "10:FF:E0:00:8D:6C"
-  broadcast: "172.16.17.7"
-  port: 9
-  wait_port: 445
-
 lan_interface:
   teine: re0
 
 poweroff:
   enabled: true
+
+wol:
+  mac: "10:FF:E0:00:8D:6C"
+  broadcast: "172.16.17.7"
+  port: 9
+  wait_port: 445
