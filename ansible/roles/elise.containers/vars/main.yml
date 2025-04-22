@@ -677,6 +677,7 @@ containers:
     env:
       TZ: "{{ containers_globals.env.TZ }}"
       USER_HOME: "/home/{{ ansible_user }}"
+      IAC_CONFIGURE_PROJECT_DIR: "/home/{{ ansible_user }}/iac-configure"
     ports: []
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:rw

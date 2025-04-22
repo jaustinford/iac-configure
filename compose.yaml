@@ -23,6 +23,12 @@ services:
       - VAULT_PASSWORD=${VAULT_PASSWORD}
       - B64_SSH_KEY=${B64_SSH_KEY}
 
+    volumes:
+      - type: bind
+        source: ${IAC_CONFIGURE_PROJECT_DIR}/tfstate
+        target: /tfstate
+        read_only: false
+
     network_mode: host
 
   ###########################################################
@@ -61,12 +67,12 @@ services:
         read_only: true
 
       - type: bind
-        source: ansible
+        source: ${IAC_CONFIGURE_PROJECT_DIR}/ansible
         target: /etc/ansible
         read_only: true
 
       - type: bind
-        source: tfstate
+        source: ${IAC_CONFIGURE_PROJECT_DIR}/tfstate
         target: /tfstate
         read_only: false
 
@@ -96,14 +102,9 @@ services:
 
     volumes:
       - type: bind
-        source: /c/Users/austin/workspace/git/gitlab.home.elysianskies.com/elise/infrastructure/iac-configure/ansible/group_vars
+        source: ${IAC_CONFIGURE_PROJECT_DIR}/ansible/group_vars
         target: /etc/ansible/group_vars
         read_only: false
-
-      - type: bind
-        source: ansible
-        target: /etc/ansible
-        read_only: true
 
     network_mode: host
 
@@ -131,7 +132,7 @@ services:
 
     volumes:
       - type: bind
-        source: tfstate
+        source: ${IAC_CONFIGURE_PROJECT_DIR}/tfstate
         target: /tfstate
         read_only: false
 
