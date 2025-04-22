@@ -4,7 +4,7 @@
     src: "{{ item.src }}"
     dest: "/elysianskies/configurations/{{ item.path }}"
     mode: '0755'
-    owner: "{{ item.owner }}"
-    group: "{{ item.group }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
   become: true
   notify: "MAIN - docker restart {{ item.path.split('/')[0] }}"
