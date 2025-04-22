@@ -2,7 +2,7 @@
 - name: WAKE - manage linode
   linode_state:
     token: "{{ lookup('env', 'LINODE_TOKEN') }}"
-    id: "{{ elysianskies_tfstate.msg.outputs[item.instance_id_output_element].value[0] }}"
+    id: "{{ elysianskies_tfstate.msg.outputs[item.output_elements.instance_id].value[0] }}"
     state: "{{ item.state }}"
 
 - name: "WAKE - waiting on host port {{ item.wait_port }}"

@@ -1,6 +1,8 @@
 ---
 linodes:
-  - instance_id_output_element: instance_portal_instance_id
+  - output_elements:
+      instance_id: instance_portal_instance_id
+      ip_address: instance_portal_ip_address
     state: "{{ cycle_mode.state.portal.linode }}"
     wait_host: portal.elysianskies.com
     wait_port: 22

@@ -1,3 +1,4 @@
 env/.env-secrets
 triggers/__pycache__
 ansible/library/__pycache__
+tfstate

@@ -60,6 +60,16 @@ services:
         target: /root/.docker
         read_only: true
 
+      - type: bind
+        source: ansible
+        target: /etc/ansible
+        read_only: true
+
+      - type: bind
+        source: tfstate
+        target: /tfstate
+        read_only: false
+
     network_mode: host
 
   ###########################################################
@@ -90,6 +100,11 @@ services:
         target: /etc/ansible/group_vars
         read_only: false
 
+      - type: bind
+        source: ansible
+        target: /etc/ansible
+        read_only: true
+
     network_mode: host
 
   ###########################################################
@@ -113,5 +128,11 @@ services:
       - TZ=America/Denver
       - VAULT_PASSWORD=${VAULT_PASSWORD}
       - B64_SSH_KEY=${B64_SSH_KEY}
+
+    volumes:
+      - type: bind
+        source: tfstate
+        target: /tfstate
+        read_only: false
 
     network_mode: host

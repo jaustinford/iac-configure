@@ -1,9 +1,17 @@
 ---
 - name: LINODE - fetch elysianskies tfstate
   ansible.builtin.debug:
-    msg: "{{ lookup('ansible.builtin.file', '/tmp/elysianskies.json') }}"
+    msg: "{{ lookup('ansible.builtin.file', '/tfstate/elysianskies.json') }}"
   no_log: true
   register: elysianskies_tfstate
+
+- name: LINODE - create linode ip address files
+  ansible.builtin.copy:
+    content: "{{ elysianskies_tfstate.msg.outputs[item.output_elements.ip_address].value[0] }}"
+    dest: "/tfstate/{{ item.output_elements.ip_address }}.txt"
+    mode: '0644'
+  with_items:
+    - "{{ linodes }}"
 
 - name: LINODE - confirm connectivity to the internet
   ansible.builtin.wait_for:
