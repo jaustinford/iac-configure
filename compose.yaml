@@ -9,7 +9,7 @@ services:
     build:
       context: .
       args:
-        BUILD_ARCH: linux/amd64
+        BUILD_ARCH: ${BUILD_ARCH}
       tags:
         - nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
       cache_from:
