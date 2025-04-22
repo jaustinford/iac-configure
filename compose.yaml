@@ -2,38 +2,6 @@
 services:
 
   ###########################################################
-  # builder
-  ###########################################################
-
-  builder_amd64:
-    build:
-      context: .
-      args:
-        BUILD_ARCH: linux/amd64
-      tags:
-        - nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
-      cache_from:
-        - type=registry,ref=nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:cache-amd64
-      cache_to:
-        - type=registry,ref=nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:cache-amd64,mode=max
-    profiles:
-      - builder
-
-  builder_arm64:
-    build:
-      context: .
-      args:
-        BUILD_ARCH: linux/arm64
-      tags:
-        - nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:main
-      cache_from:
-        - type=registry,ref=nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:cache-arm64
-      cache_to:
-        - type=registry,ref=nexus-hosted.docker02-teine.home.elysianskies.com/elise/iac-configure:cache-arm64,mode=max
-    profiles:
-      - builder
-
-  ###########################################################
   # setup
   ###########################################################
 
