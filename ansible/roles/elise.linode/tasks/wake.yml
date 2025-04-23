@@ -11,5 +11,5 @@
     port: "{{ item.wait_port }}"
     state: "{{ item.state }}"
     connect_timeout: 10
-    delay: 10
-    timeout: 600
+    delay: 5
+    timeout: 300
