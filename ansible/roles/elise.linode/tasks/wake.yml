@@ -7,6 +7,6 @@
 
 - name: "WAKE - waiting on host port {{ item.wait_port }}"
   ansible.builtin.wait_for:
-    host: "{{ item.wait_host }}"
+    host: "{{ elysianskies_tfstate.msg.outputs[item.output_elements.ip_address].value[0] }}"
     port: "{{ item.wait_port }}"
     state: "{{ item.state }}"
