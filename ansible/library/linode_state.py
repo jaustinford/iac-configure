@@ -4,6 +4,7 @@ cycle commands.
 """
 
 import json
+import time
 import requests
 
 from ansible.module_utils.basic import AnsibleModule
@@ -29,6 +30,39 @@ def api_post(token: str, endpoint: str):
     )
 
     return http_return.text
+
+def api_get(token: str, endpoint: str):
+    """
+    Return API data against select
+    endpoints.
+    """
+
+    http_return = requests.get(
+        LINODE_API_URL + "/" + endpoint,
+        headers={
+            "Authorization": "Bearer " + token,
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        },
+        timeout=10
+    )
+
+    return http_return.text
+
+def api_get_instance_status(token: str, instance_id: str):
+    """
+    Use API data to and query the
+    instance status.
+    """
+
+    instance_status = api_get(
+        token,
+        "instances/" + instance_id
+    )
+
+    instance_json = json.loads(instance_status)
+
+    return instance_json["status"]
 
 def main():
     """
@@ -63,6 +97,9 @@ def main():
             arg_token,
             "instances/" + arg_id + "/boot"
         )
+
+        while api_get_instance_status(arg_token, arg_id) != "running":
+            time.sleep(1)
 
     elif arg_state == "stopped":
         execute_return = api_post(
