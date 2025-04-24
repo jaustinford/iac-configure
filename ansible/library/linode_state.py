@@ -55,14 +55,14 @@ def api_get_instance_status(token: str, instance_id: str):
     instance status.
     """
 
-    instance_status = api_get(
+    instance_info = api_get(
         token,
         "instances/" + instance_id
     )
 
-    instance_json = json.loads(instance_status)
+    instance_info_json = json.loads(instance_info)
 
-    return instance_json["status"]
+    return instance_info_json["status"]
 
 def main():
     """
