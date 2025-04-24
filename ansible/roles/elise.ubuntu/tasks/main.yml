@@ -23,9 +23,3 @@
     group: root
     mode: '0750'
   become: true
-
-- name: MAIN - include wol tasks
-  ansible.builtin.include_tasks: wol.yml
-  vars:
-    wol_interface: "{{ lan_interface.teine }}"
-  when: ansible_system_vendor != "Linode" and lazarus_node is not defined

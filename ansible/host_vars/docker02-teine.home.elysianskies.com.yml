@@ -1,14 +1,14 @@
 ---
 lan_interface:
-  teine: enp1s0f0
+  teine: eno1
   talamh: enp1s0f1
-  uisge: eno1
+  uisge: enp1s0f0
 
 poweroff:
   enabled: true
 
 wol:
-  mac: "68:05:CA:30:EC:86"
+  mac: "04:42:1A:06:BB:AF"
   broadcast: "172.16.17.7"
   port: 9
   wait_port: 22
