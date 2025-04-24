@@ -47,7 +47,7 @@ def api_get(token: str, endpoint: str):
         timeout=10
     )
 
-    return http_return.text
+    return json.loads(http_return.text)
 
 def api_get_instance_status(token: str, instance_id: str):
     """
@@ -60,9 +60,7 @@ def api_get_instance_status(token: str, instance_id: str):
         "instances/" + instance_id
     )
 
-    instance_info_json = json.loads(instance_info)
-
-    return instance_info_json["status"]
+    return instance_info["status"]
 
 def main():
     """
