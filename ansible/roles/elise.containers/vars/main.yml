@@ -370,7 +370,7 @@ containers:
       - "{{ containers_globals.application_directory }}/runner/config:/etc/gitlab-runner:rw"
       - "{{ containers_globals.application_directory }}/runner/cache:/cache:rw"
       - /var/run/docker.sock:/var/run/docker.sock:rw
-      - "{{ ansible_user_dir }}/.docker:/root/.docker:rw"
+      - "{{ hostvars[assignments.runner.networking.teine.fqdn].ansible_user_dir }}/.docker:/root/.docker:rw"
     wait_port: "0"
 
   - name: openvpnas
@@ -676,13 +676,13 @@ containers:
     dns_search_domains: "{{ containers_globals.dns_search_domains }}"
     env:
       TZ: "{{ containers_globals.env.TZ }}"
-      USER_HOME: "{{ ansible_user_dir }}"
-      IAC_CONFIGURE_PROJECT_DIR: "{{ ansible_user_dir }}/iac-configure"
+      USER_HOME: "{{ hostvars[assignments.lazarus.networking.teine.fqdn].ansible_user_dir }}"
+      IAC_CONFIGURE_PROJECT_DIR: "{{ hostvars[assignments.lazarus.networking.teine.fqdn].ansible_user_dir }}/iac-configure"
       SKIP_PAUSE: 'yes'
       COMPOSE_PROFILE: site
     ports: []
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:rw
-      - "{{ ansible_user_dir }}/.docker:/root/.docker:rw"
-      - "{{ ansible_user_dir }}/iac-configure:/iac-configure:ro"
+      - "{{ hostvars[assignments.lazarus.networking.teine.fqdn].ansible_user_dir }}/.docker:/root/.docker:rw"
+      - "{{ hostvars[assignments.lazarus.networking.teine.fqdn].ansible_user_dir }}/iac-configure:/iac-configure:ro"
     wait_port: "0"
