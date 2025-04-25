@@ -19,6 +19,7 @@
     host: 8.8.8.8
     port: 443
     state: started
+    delay: 5
 
 - name: LINODE - include wake tasks
   ansible.builtin.include_tasks: wake.yml
