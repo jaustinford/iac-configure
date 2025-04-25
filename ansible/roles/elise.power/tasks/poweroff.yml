@@ -10,5 +10,5 @@
     host: "{{ ansible_host }}"
     port: "{{ wol.wait_port }}"
     state: stopped
-    delay: 5
+    delay: 10
   when: poweroff.enabled

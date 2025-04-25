@@ -4,4 +4,4 @@
     host: "{{ item.docker_host }}"
     port: "{{ item.wait_port }}"
     state: "{{ cycle_mode.state.containers }}"
-    delay: 5
+    delay: 10

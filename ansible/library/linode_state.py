@@ -105,6 +105,9 @@ def main():
             "instances/" + arg_id + "/shutdown"
         )
 
+        while api_get_instance_status(arg_token, arg_id) != "offline":
+            time.sleep(1)
+
     execute_json = json.loads(execute_return)
 
     result = {
