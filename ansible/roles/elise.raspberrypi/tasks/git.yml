@@ -11,7 +11,7 @@
 - name: GIT - download git project
   ansible.builtin.git:
     repo: "https://{{ gitlab_credential }}@gitlab.{{ assignments.nginx.networking.teine.fqdn }}/elise/{{ item }}.git"
-    dest: "/home/{{ ansible_user }}/{{ item.split('/')[-1] }}"
+    dest: "{{ ansible_user_dir }}/{{ item.split('/')[-1] }}"
     update: true
     version: main
     force: true
