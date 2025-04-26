@@ -5,3 +5,7 @@ linodes:
       ip_address: instance_portal_ip_address
     state: "{{ cycle_mode.state.portal.linode }}"
     wait_port: 22
+
+waits:
+  delay: 15
+  sleep: 10

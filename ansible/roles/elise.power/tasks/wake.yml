@@ -13,5 +13,3 @@
     host: "{{ ansible_host }}"
     port: "{{ wol.wait_port }}"
     state: started
-    delay: 15
-    sleep: 10

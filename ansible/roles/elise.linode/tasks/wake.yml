@@ -10,5 +10,5 @@
     host: "{{ elysianskies_tfstate.msg.outputs[item.output_elements.ip_address].value[0] }}"
     port: "{{ item.wait_port }}"
     state: "{{ item.state }}"
-    delay: 15
-    sleep: 10
+    delay: "{{ waits.delay }}"
+    sleep: "{{ waits.sleep }}"
