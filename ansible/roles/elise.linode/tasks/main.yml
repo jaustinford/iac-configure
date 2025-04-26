@@ -19,6 +19,7 @@
     host: 8.8.8.8
     port: 443
     state: started
+    delay: 10
     sleep: 5
 
 - name: LINODE - include wake tasks
