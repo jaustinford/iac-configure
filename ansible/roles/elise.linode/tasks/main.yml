@@ -1,11 +1,13 @@
 ---
 - name: LINODE - fetch elysianskies tfstate
+  delegate_to: localhost
   ansible.builtin.debug:
     msg: "{{ lookup('ansible.builtin.file', '/tfstate/elysianskies.json') }}"
   no_log: true
   register: elysianskies_tfstate
 
 - name: LINODE - create linode ip address files
+  delegate_to: localhost
   ansible.builtin.copy:
     content: "{{ elysianskies_tfstate.msg.outputs[item.output_elements.ip_address].value[0] }}"
     dest: "/tfstate/{{ item.output_elements.ip_address }}.txt"
@@ -13,14 +15,6 @@
   changed_when: false
   with_items:
     - "{{ linodes }}"
-
-- name: LINODE - confirm connectivity to the internet
-  ansible.builtin.wait_for:
-    host: 8.8.8.8
-    port: 443
-    state: started
-    delay: "{{ waits.delay }}"
-    sleep: "{{ waits.sleep }}"
 
 - name: LINODE - include wake tasks
   ansible.builtin.include_tasks: wake.yml
