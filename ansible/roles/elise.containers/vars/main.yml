@@ -685,4 +685,5 @@ containers:
       - /var/run/docker.sock:/var/run/docker.sock:rw
       - "{{ hostvars[assignments.lazarus.networking.teine.fqdn].ansible_user_dir }}/.docker:/root/.docker:rw"
       - "{{ hostvars[assignments.lazarus.networking.teine.fqdn].ansible_user_dir }}/iac-configure:/iac-configure:ro"
+      - "{{ hostvars[assignments.lazarus.networking.teine.fqdn].ansible_user_dir }}/data:/lazarus/data:rw"
     wait_port: "0"
