@@ -680,6 +680,9 @@ containers:
       IAC_CONFIGURE_PROJECT_DIR: "{{ hostvars[assignments.lazarus.networking.teine.fqdn].ansible_user_dir }}/iac-configure"
       SKIP_PAUSE: 'yes'
       COMPOSE_PROFILE: site
+      ELASTICSEARCH_ENDPOINT: "{{ assignments.elasticsearch.networking.teine.ipv4 }}:{{ external_ports.elasticsearch_db }}"
+      ELASTICSEARCH_USERNAME: "{{ secrets.elasticsearch.username }}"
+      ELASTICSEARCH_PASSWORD: "{{ secrets.elasticsearch.password }}"
     ports: []
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:rw
