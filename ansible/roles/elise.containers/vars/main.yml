@@ -49,7 +49,7 @@ containers:
     wait_port: "{{ external_ports.nexus_docker_proxy }}"
 
   - name: pihole
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/pihole/pihole:2024.07.0"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/pihole/pihole:2025.04.0"
     pull: "{{ containers_globals.pull_images.remote }}"
     command: null
     docker_host: "{{ assignments.pihole.networking.teine.ipv4 }}"
@@ -83,7 +83,7 @@ containers:
     wait_port: "{{ external_ports.pihole_web }}"
 
   - name: plex
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/plexinc/pms-docker:1.41.3.9292-bc7397402"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/plexinc/pms-docker:1.41.6.9685-d301f511a"
     pull: "{{ containers_globals.pull_images.remote }}"
     command: null
     docker_host: "{{ assignments.plex.networking.teine.ipv4 }}"
@@ -112,7 +112,7 @@ containers:
     wait_port: "{{ external_ports.plex_web }}"
 
   - name: tautulli
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/linuxserver/tautulli:amd64-v2.14.5-ls156"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/linuxserver/tautulli:amd64-v2.15.2-ls190"
     pull: "{{ containers_globals.pull_images.remote }}"
     command: null
     docker_host: "{{ assignments.tautulli.networking.teine.ipv4 }}"
