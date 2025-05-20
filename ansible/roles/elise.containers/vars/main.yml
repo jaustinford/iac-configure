@@ -83,7 +83,7 @@ containers:
     wait_port: "{{ external_ports.pihole_web }}"
 
   - name: plex
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/plexinc/pms-docker:1.41.6.9685-d301f511a"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/plexinc/pms-docker:1.41.7.9799-5bce000f7"
     pull: "{{ containers_globals.pull_images.remote }}"
     command: null
     docker_host: "{{ assignments.plex.networking.teine.ipv4 }}"
