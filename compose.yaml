@@ -45,6 +45,7 @@ services:
         ansible-playbook \
             /etc/ansible/site.yml \
             -vv
+    privileged: true
     profiles:
       - site
 
@@ -119,7 +120,7 @@ services:
       - |
         /bin/container-init.sh ;
         ansible-playbook /etc/ansible/linode.yml \
-            --extra-vars 'cycle_mode={{ cycle_modes.up }}' ;
+          --extra-vars 'cycle_mode={{ cycle_modes.up }}' ;
         ansible all \
           --module-name ansible.builtin.ping \
           -vv
