@@ -45,7 +45,6 @@ services:
         ansible-playbook \
             /etc/ansible/site.yml \
             -vv
-    privileged: true
     profiles:
       - site
 
