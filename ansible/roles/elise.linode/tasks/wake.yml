@@ -1,7 +1,7 @@
 ---
 - name: WAKE - manage linode
   linode_state:
-    token: "{{ lookup('env', 'LINODE_TOKEN') }}"
+    token: "{{ secrets.linode.token }}"
     id: "{{ elysianskies_tfstate.msg.outputs[item.output_elements.instance_id].value[0] }}"
     state: "{{ item.state }}"
 

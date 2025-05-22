@@ -52,7 +52,6 @@ services:
       - TZ=America/Denver
       - VAULT_PASSWORD=${VAULT_PASSWORD}
       - B64_SSH_KEY=${B64_SSH_KEY}
-      - LINODE_TOKEN=${LINODE_TOKEN}
       - CYCLE_MODE=${CYCLE_MODE}
       - ELISE_PROJECT_EXPRESSVPN_CONTINENT=${ELISE_PROJECT_EXPRESSVPN_CONTINENT}
       - ELISE_PROJECT_EXPRESSVPN_REGION=${ELISE_PROJECT_EXPRESSVPN_REGION}
@@ -119,6 +118,8 @@ services:
       - -c
       - |
         /bin/container-init.sh ;
+        ansible-playbook /etc/ansible/linode.yml \
+            --extra-vars 'cycle_mode={{ cycle_modes.up }}' ;
         ansible all \
           --module-name ansible.builtin.ping \
           -vv
@@ -131,6 +132,11 @@ services:
       - B64_SSH_KEY=${B64_SSH_KEY}
 
     volumes:
+      - type: bind
+        source: ${IAC_CONFIGURE_PROJECT_DIR}/ansible
+        target: /etc/ansible
+        read_only: true
+
       - type: bind
         source: ${IAC_CONFIGURE_PROJECT_DIR}/tfstate
         target: /tfstate
