@@ -12,7 +12,7 @@
   with_items:
     - path: /boot/firmware/config.txt
       line: dtoverlay=disable-wifi
-      regexp: ""
+      regexp: "^"
       owner: root
       group: root
       mode: '0755'
