@@ -11,6 +11,6 @@
     state: "{{ item.state }}"
     update_cache: true
   become: true
-  when: cycle_mode.name == "up"
+  when: cycle_mode.name == "up" and internet_check.status == 200
   with_items:
     - "{{ ubuntu.additional_packages }}"

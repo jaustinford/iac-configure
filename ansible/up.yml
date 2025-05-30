@@ -2,6 +2,17 @@
 - name: UP - import wake playbook
   import_playbook: wake.yml
 
+- name: UP - run connectivity task
+  hosts: all
+  tasks:
+    - name: SITE - determine internet connectivity
+      ansible.builtin.uri:
+        url: "https://www.google.com"
+        status_code:
+          - -1
+          - 200
+      register: internet_check
+
 - name: UP - import tfstate playbook
   import_playbook: tfstate.yml
 

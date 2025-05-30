@@ -13,8 +13,8 @@ services:
       - |
         /bin/container-init.sh ;
         ansible all \
-          --module-name ansible.builtin.setup \
-          -vv
+            --module-name ansible.builtin.setup \
+            -vv
     profiles:
       - setup
 
@@ -118,11 +118,12 @@ services:
       - -c
       - |
         /bin/container-init.sh ;
-        ansible-playbook /etc/ansible/linode.yml \
-          --extra-vars 'cycle_mode={{ cycle_modes.up }}' ;
+        ansible-playbook \
+            /etc/ansible/linode.yml \
+            --extra-vars 'cycle_mode={{ cycle_modes.up }}' ;
         ansible all \
-          --module-name ansible.builtin.ping \
-          -vv
+            --module-name ansible.builtin.ping \
+            -vv
     profiles:
       - ping
 

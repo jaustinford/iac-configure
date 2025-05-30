@@ -6,6 +6,7 @@
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     mode: '0644'
+  when: internet_check.status == 200
 
 - name: GEOIP - discover directory
   ansible.builtin.command: |

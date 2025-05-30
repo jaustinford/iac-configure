@@ -1,14 +1,5 @@
 ---
-- name: MAIN - add apt repository key
-  ansible.builtin.get_url:
-    url: https://download.docker.com/linux/ubuntu/gpg
-    dest: /etc/apt/trusted.gpg.d/docker.asc
-    owner: root
-    group: root
-    mode: '0644'
-  become: true
-
-- name: MAIN - add docker apt repository
+- name: MAIN - add docker apt repository source
   ansible.builtin.copy:
     content: deb [signed-by=/etc/apt/trusted.gpg.d/docker.asc] https://download.docker.com/linux/ubuntu/ {{ ansible_lsb.codename }} stable
     dest: /etc/apt/sources.list.d/docker.list
@@ -17,12 +8,23 @@
     mode: '0644'
   become: true
 
+- name: MAIN - add docker apt repository key
+  ansible.builtin.get_url:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    dest: /etc/apt/trusted.gpg.d/docker.asc
+    owner: root
+    group: root
+    mode: '0644'
+  become: true
+  when: internet_check.status == 200
+
 - name: MAIN - install docker packages
   ansible.builtin.apt:
     name: "{{ item }}"
     state: present
     update_cache: true
   become: true
+  when: internet_check.status == 200
   with_items:
     - "{{ docker.ubuntu_packages }}"
 

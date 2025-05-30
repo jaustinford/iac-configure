@@ -14,6 +14,7 @@
     state: present
     update_cache: true
   become: true
+  when: internet_check.status == 200
 
 - name: MAIN - include ssl_deploy tasks
   ansible.builtin.include_tasks: ssl_deploy.yml
@@ -32,7 +33,7 @@
   ansible.builtin.systemd:
     name: nginx
     state: "{{ nginx.service_state }}"
-    enabled: true
+    enabled: false
   become: true
 
 - name: MAIN - ensure ssh gateway ports

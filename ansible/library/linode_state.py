@@ -108,6 +108,15 @@ def main():
         while api_get_instance_status(arg_token, arg_id) != "offline":
             time.sleep(1)
 
+    elif arg_state == "restarted":
+        execute_return = api_post(
+            arg_token,
+            "instances/" + arg_id + "/reboot"
+        )
+
+        while api_get_instance_status(arg_token, arg_id) != "running":
+            time.sleep(1)
+
     execute_json = json.loads(execute_return)
 
     result = {
