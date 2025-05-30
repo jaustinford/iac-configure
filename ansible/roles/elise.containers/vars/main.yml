@@ -19,7 +19,7 @@ image_tags:
   fourohfour: elise/static-website-fourohfour:main
   fiveohx: elise/static-website-fiveohx:main
   fourohthree: elise/static-website-fourohthree:main
-  barbossa: /elise/barbossa:main
+  barbossa: elise/barbossa:main
   keycloak: keycloak/keycloak:26.0.0-0
   redis: bitnami/redis:7.2.4-debian-11-r19
   oauth: bitnami/oauth2-proxy:7.4.0
