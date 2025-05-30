@@ -1,4 +1,31 @@
 ---
+tags:
+  nexus: sonatype/nexus3:3.68.1
+  pihole: pihole/pihole:2025.04.0
+  plex: plexinc/pms-docker:1.41.7.9799-5bce000f7
+  tautulli: linuxserver/tautulli:amd64-v2.15.2-ls190
+  filebrowser: filebrowser/filebrowser:v2.31.1-amd64
+  elasticsearch: elastic/elasticsearch:8.13.0
+  kibana: elastic/kibana:8.13.0
+  zoneminder: dlandon/zoneminder:latest
+  expressvpn: dperson/openvpn-client:amd64
+  squid: sameersbn/squid:3.5.27-2
+  deluge: linuxserver/deluge:2.1.1
+  gitlab: gitlab/gitlab-ee:17.5.4-ee.0
+  runner: gitlab/gitlab-runner:v17.5.4
+  openvpnas: openvpn/openvpn-as:2.14.0-b90cb316-Ubuntu22
+  docs: elise/docs:main
+  resume: elise/static-website-resume:main
+  fourohfour: elise/static-website-fourohfour:main
+  fiveohx: elise/static-website-fiveohx:main
+  fourohthree: elise/static-website-fourohthree:main
+  barbossa: /elise/barbossa:main
+  keycloak: keycloak/keycloak:26.0.0-0
+  redis: bitnami/redis:7.2.4-debian-11-r19
+  oauth: bitnami/oauth2-proxy:7.4.0
+  nginx: anroe/nginx-geoip2:1.22.1-geoip2-3.4
+  lazarus: elise/lazarus:main
+
 containers_globals:
   restart_policy: unless-stopped
   pull_images:
@@ -22,7 +49,7 @@ containers_globals:
 
 containers:
   - name: nexus
-    image: sonatype/nexus3:3.68.1
+    image: "{{ tags.nexus }}"
     pull: "{{ containers_globals.pull_images.remote }}"
     command:
       - /opt/sonatype/nexus/bin/nexus
@@ -49,7 +76,7 @@ containers:
     wait_port: "{{ external_ports.nexus_docker_proxy }}"
 
   - name: pihole
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/pihole/pihole:2025.04.0"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/{{ tags.pihole }}"
     pull: "{{ containers_globals.pull_images.remote }}"
     command: null
     docker_host: "{{ assignments.pihole.networking.teine.ipv4 }}"
@@ -83,7 +110,7 @@ containers:
     wait_port: "{{ external_ports.pihole_web }}"
 
   - name: plex
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/plexinc/pms-docker:1.41.7.9799-5bce000f7"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/{{ tags.plex }}"
     pull: "{{ containers_globals.pull_images.remote }}"
     command: null
     docker_host: "{{ assignments.plex.networking.teine.ipv4 }}"
@@ -118,7 +145,7 @@ containers:
     wait_port: "{{ external_ports.plex_web }}"
 
   - name: tautulli
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/linuxserver/tautulli:amd64-v2.15.2-ls190"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/{{ tags.tautulli }}"
     pull: "{{ containers_globals.pull_images.remote }}"
     command: null
     docker_host: "{{ assignments.tautulli.networking.teine.ipv4 }}"
@@ -141,7 +168,7 @@ containers:
     wait_port: "{{ external_ports.tautulli_web }}"
 
   - name: filebrowser
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/filebrowser/filebrowser:v2.31.1-amd64"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/{{ tags.filebrowser }}"
     pull: "{{ containers_globals.pull_images.remote }}"
     command: null
     docker_host: "{{ assignments.filebrowser.networking.teine.ipv4 }}"
@@ -167,7 +194,7 @@ containers:
     wait_port: "{{ external_ports.filebrowser_web }}"
 
   - name: elasticsearch
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/elastic/elasticsearch:8.13.0"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/{{ tags.elasticsearch }}"
     pull: "{{ containers_globals.pull_images.remote }}"
     command:
       - eswrapper
@@ -193,7 +220,7 @@ containers:
     wait_port: "{{ external_ports.elasticsearch_db }}"
 
   - name: kibana
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/elastic/kibana:8.13.0"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/{{ tags.kibana }}"
     pull: "{{ containers_globals.pull_images.remote }}"
     command:
       - /usr/local/bin/kibana-docker
@@ -217,7 +244,7 @@ containers:
     wait_port: "{{ external_ports.kibana_web }}"
 
   - name: zoneminder
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/dlandon/zoneminder:latest"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/{{ tags.zoneminder }}"
     pull: "{{ containers_globals.pull_images.remote }}"
     command:
       - /sbin/my_init
@@ -246,7 +273,7 @@ containers:
     wait_port: "{{ external_ports.zoneminder_web }}"
 
   - name: expressvpn
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/dperson/openvpn-client:amd64"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/{{ tags.expressvpn }}"
     pull: "{{ containers_globals.pull_images.remote }}"
     command:
       - -d
@@ -274,7 +301,7 @@ containers:
     wait_port: "0"
 
   - name: squid
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/sameersbn/squid:3.5.27-2"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/{{ tags.squid }}"
     pull: "{{ containers_globals.pull_images.remote }}"
     command: null
     docker_host: "{{ assignments.squid.networking.teine.ipv4 }}"
@@ -296,7 +323,7 @@ containers:
     wait_port: "{{ external_ports.expressvpn_squid }}"
 
   - name: deluge
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/linuxserver/deluge:2.1.1"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/{{ tags.deluge }}"
     pull: "{{ containers_globals.pull_images.remote }}"
     command: null
     docker_host: "{{ assignments.deluge.networking.teine.ipv4 }}"
@@ -324,7 +351,7 @@ containers:
     wait_port: "{{ external_ports.expressvpn_deluge }}"
 
   - name: gitlab
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/gitlab/gitlab-ee:17.5.4-ee.0"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/{{ tags.gitlab }}"
     pull: "{{ containers_globals.pull_images.remote }}"
     command:
       - /assets/wrapper
@@ -352,7 +379,7 @@ containers:
     wait_port: "{{ external_ports.gitlab_web }}"
 
   - name: runner
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/gitlab/gitlab-runner:v17.5.4"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/{{ tags.runner }}"
     pull: "{{ containers_globals.pull_images.remote }}"
     command:
       - run
@@ -380,7 +407,7 @@ containers:
     wait_port: "0"
 
   - name: openvpnas
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/openvpn/openvpn-as:2.14.0-b90cb316-Ubuntu22"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/{{ tags.openvpnas }}"
     pull: "{{ containers_globals.pull_images.remote }}"
     command:
       - /usr/local/openvpn_as/scripts/openvpnas
@@ -407,7 +434,7 @@ containers:
     wait_port: "{{ external_ports.openvpnas_vpn }}"
 
   - name: docs
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/docs:main"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/{{ tags.docs }}"
     pull: "{{ containers_globals.pull_images.local }}"
     command:
       - mkdocs
@@ -431,7 +458,7 @@ containers:
     wait_port: "{{ external_ports.docs_web }}"
 
   - name: resume
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/static-website-resume:main"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/{{ tags.resume }}"
     pull: "{{ containers_globals.pull_images.local }}"
     command:
       - httpd-foreground
@@ -454,7 +481,7 @@ containers:
     wait_port: "{{ external_ports.resume_web }}"
 
   - name: fourohfour
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/static-website-fourohfour:main"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/{{ tags.fourohfour }}"
     pull: "{{ containers_globals.pull_images.local }}"
     command:
       - httpd-foreground
@@ -477,7 +504,7 @@ containers:
     wait_port: "{{ external_ports.fourohfour_web }}"
 
   - name: fiveohx
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/static-website-fiveohx:main"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/{{ tags.fiveohx }}"
     pull: "{{ containers_globals.pull_images.local }}"
     command:
       - httpd-foreground
@@ -500,7 +527,7 @@ containers:
     wait_port: "{{ external_ports.fiveohx_web }}"
 
   - name: fourohthree
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/static-website-fourohthree:main"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/{{ tags.fourohthree }}"
     pull: "{{ containers_globals.pull_images.local }}"
     command:
       - httpd-foreground
@@ -523,7 +550,7 @@ containers:
     wait_port: "{{ external_ports.fourohthree_web }}"
 
   - name: barbossa
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/barbossa:main"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/{{ tags.barbossa }}"
     pull: "{{ containers_globals.pull_images.local }}"
     command:
       - python3
@@ -551,7 +578,7 @@ containers:
     wait_port: "0"
 
   - name: keycloak
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/keycloak/keycloak:26.0.0-0"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/{{ tags.keycloak }}"
     pull: "{{ containers_globals.pull_images.remote }}"
     command:
       - start
@@ -581,7 +608,7 @@ containers:
     wait_port: "{{ external_ports.keycloak_web }}"
 
   - name: redis
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/bitnami/redis:7.2.4-debian-11-r19"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/{{ tags.redis }}"
     pull: "{{ containers_globals.pull_images.remote }}"
     command:
       - /opt/bitnami/scripts/redis/run.sh
@@ -606,7 +633,7 @@ containers:
     wait_port: "{{ external_ports.redis_db }}"
 
   - name: oauth
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/bitnami/oauth2-proxy:7.4.0"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/{{ tags.oauth }}"
     pull: "{{ containers_globals.pull_images.remote }}"
     command:
       - --config=/etc/oauth2-proxy.cfg
@@ -632,7 +659,7 @@ containers:
     wait_port: "0"
 
   - name: nginx
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/anroe/nginx-geoip2:1.22.1-geoip2-3.4"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/{{ tags.nginx }}"
     pull: "{{ containers_globals.pull_images.remote }}"
     command:
       - nginx
@@ -662,7 +689,7 @@ containers:
     wait_port: "443"
 
   - name: lazarus
-    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/elise/lazarus:main"
+    image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}/{{ tags.lazarus }}"
     pull: "{{ containers_globals.pull_images.local }}"
     command:
       - python3
