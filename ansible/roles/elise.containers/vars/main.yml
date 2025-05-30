@@ -104,7 +104,10 @@ containers:
         http://172.16.13.2:{{ external_ports.plex_web }},
         http://{{ assignments.plex.networking.teine.ipv4 }}:{{ external_ports.plex_web }},
         https://plex.home.elysianskies.com
-      ALLOWED_NETWORKS: 172.16.13.0/27,172.16.14.0/29,172.16.17.0/29
+      ALLOWED_NETWORKS: |
+        172.16.13.0/27,
+        172.16.14.0/29,
+        172.16.17.0/29
     ports:
       - "{{ assignments.plex.networking.talamh.ipv4 }}:{{ external_ports.plex_web }}:32400/tcp"
       - "{{ assignments.plex.networking.teine.ipv4 }}:{{ external_ports.plex_web }}:32400/tcp"
