@@ -24,7 +24,8 @@ nas-teine.home.elysianskies.com ansible_host='172.16.17.5'
 [elysianskies_linode]
 EOF
 
-if [ $(curl -s -o /dev/null -w "%{http_code}" https://www.google.com) == "200" ]; then
+if [ $(curl -s -o /dev/null -w "%{http_code}" https://www.google.com) == "200" ] || \
+   [ ${CYCLE_MODE} == "up" ]; then
     echo " "
     echo -e "[ \033[31m*\033[0m ] Adding Portal host to inventory."
     echo " "
