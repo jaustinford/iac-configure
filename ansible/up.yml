@@ -11,6 +11,7 @@
         status_code:
           - -1
           - 200
+          - 429
       register: internet_check
 
 - name: UP - import tfstate playbook

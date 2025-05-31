@@ -6,9 +6,12 @@ chmod 600 /root/ssh.key
 
 cat <<EOF > /etc/ansible_hosts
 [secrets:children]
+elysianskies_onprem
+elysianskies_linode
+
+[elysianskies_onprem:children]
 elysianskies_onprem_docker
 elysianskies_onprem_nas
-elysianskies_linode
 
 [elysianskies_onprem_docker]
 docker01-teine.home.elysianskies.com ansible_host='172.16.17.2'
