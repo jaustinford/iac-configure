@@ -7,9 +7,5 @@
     port: "{{ wol.port }}"
   changed_when: false
 
-- name: "WAKE - waiting on host port {{ wol.wait_port }}"
-  delegate_to: localhost
-  ansible.builtin.wait_for:
-    host: "{{ ansible_host }}"
-    port: "{{ wol.wait_port }}"
-    state: started
+- name: WAKE - waiting on host
+  ansible.builtin.wait_for_connection:
