@@ -1,0 +1,4 @@
+---
+- name: ONPREM - include install tasks
+  ansible.builtin.include_tasks: install.yml
+  when: internet_check.status == 200

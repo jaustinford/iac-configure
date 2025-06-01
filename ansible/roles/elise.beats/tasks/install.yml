@@ -1,0 +1,16 @@
+---
+- name: INSTALL - download beat packages
+  ansible.builtin.uri:
+    url: "{{ beats.download_url }}/{{ item.name }}/{{ item.name }}-{{ beats.version }}-{{ os_distro }}.deb"
+    method: GET
+    dest: "{{ ansible_user_dir }}/{{ item.name }}-{{ beats.version }}-{{ os_distro }}.deb"
+    status_code:
+      - 200
+      - 304
+
+- name: INSTALL - install beat packages
+  ansible.builtin.apt:
+    deb: "{{ ansible_user_dir }}/{{ item.name }}-{{ beats.version }}-{{ os_distro }}.deb"
+    state: "{{ item.package_state }}"
+    update_cache: true
+  become: true

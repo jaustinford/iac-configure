@@ -14,7 +14,6 @@
     state: present
     update_cache: true
   become: true
-  when: internet_check.status == 200
 
 - name: MAIN - include ssl_deploy tasks
   ansible.builtin.include_tasks: ssl_deploy.yml

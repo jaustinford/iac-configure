@@ -1,6 +1,6 @@
 ---
 - name: DOWN - run connectivity task
-  hosts: all
+  hosts: elysianskies_onprem
   tasks:
     - name: SITE - determine internet connectivity
       ansible.builtin.uri:

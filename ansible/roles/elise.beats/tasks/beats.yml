@@ -1,21 +1,11 @@
 ---
-- name: BEATS - download packages
-  ansible.builtin.uri:
-    url: "{{ beats.download_url }}/{{ item.name }}/{{ item.name }}-{{ beats.version }}-{{ os_distro }}.deb"
-    method: GET
-    dest: "{{ ansible_user_dir }}/{{ item.name }}-{{ beats.version }}-{{ os_distro }}.deb"
-    status_code:
-      - 200
-      - 304
-  when: internet_check.status == 200
+- name: BEATS - include onprem tasks
+  ansible.builtin.include_tasks: onprem.yml
+  when: cycle_mode.name == "up" and internet_check is defined
 
-- name: BEATS - install packages
-  ansible.builtin.apt:
-    deb: "{{ ansible_user_dir }}/{{ item.name }}-{{ beats.version }}-{{ os_distro }}.deb"
-    state: "{{ item.package_state }}"
-    update_cache: true
-  become: true
-  when: internet_check.status == 200
+- name: BEATS - include linode tasks
+  ansible.builtin.include_tasks: linode.yml
+  when: cycle_mode.name == "up" and internet_check is undefined
 
 - name: BEATS - copy templates
   ansible.builtin.template:

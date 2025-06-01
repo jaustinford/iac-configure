@@ -5,12 +5,10 @@
     apt_host: "{{ apt_object.mirror_proxy if discovered_nexus.status == 200 else apt_object.mirror_original }}"
   when: ansible_system_vendor != "Linode"
 
-- name: APT - install additional packages
-  ansible.builtin.apt:
-    name: "{{ item.name }}"
-    state: "{{ item.state }}"
-    update_cache: true
-  become: true
-  when: cycle_mode.name == "up" and internet_check.status == 200
-  with_items:
-    - "{{ ubuntu.additional_packages }}"
+- name: APT - include onprem tasks
+  ansible.builtin.include_tasks: onprem.yml
+  when: cycle_mode.name == "up" and internet_check is defined
+
+- name: APT - include linode tasks
+  ansible.builtin.include_tasks: linode.yml
+  when: cycle_mode.name == "up" and internet_check is undefined
