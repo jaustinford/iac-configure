@@ -2,6 +2,12 @@
 - name: UP - import wake playbook
   import_playbook: wake.yml
 
+- name: UP - import tfstate playbook
+  import_playbook: tfstate.yml
+
+- name: UP - import gateway playbook
+  import_playbook: gateway.yml
+
 - name: UP - run connectivity task
   hosts: all
   tasks:
@@ -13,12 +19,6 @@
           - 200
           - 429
       register: internet_check
-
-- name: UP - import tfstate playbook
-  import_playbook: tfstate.yml
-
-- name: UP - import gateway playbook
-  import_playbook: gateway.yml
 
 - name: UP - import linode playbook
   import_playbook: linode.yml
