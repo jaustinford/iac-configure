@@ -11,3 +11,4 @@ wol:
   mac: "04:42:1A:03:A4:BD"
   broadcast: "172.16.17.7"
   port: 9
+  wait_port: 22
