@@ -120,7 +120,7 @@ services:
         /bin/container-init.sh ;
         ansible-playbook \
             /etc/ansible/linode.yml \
-            --extra-vars 'cycle_mode={{ cycle_modes.up }}' ;
+            --extra-vars '{"cycle_mode": "{{ cycle_modes.up }}", "internet_check": {"status": 200}}' ;
         ansible all \
             --module-name ansible.builtin.ping \
             -vv
