@@ -4,20 +4,23 @@ output:
     username: elastic
     password: {{ secrets.elasticsearch.password }}
     pipeline: elysianskies-geoip-pipeline
-    hosts:
 {% if ansible_system_vendor == "Linode" %}
-      - http://localhost:{{ external_ports.elasticsearch_db }}
+    hosts:
+      - https://elasticsearch.{{ assignments.nginx.networking.teine.fqdn }}:443
+
+setup:
+  dashboards:
+    enabled: false
+  kibana:
+    host: https://kibana.{{ assignments.nginx.networking.teine.fqdn }}:443
 {% else %}
+    hosts:
       - http://{{ assignments.elasticsearch.networking.teine.ipv4 }}:{{ external_ports.elasticsearch_db }}
-{% endif %}
 
 setup:
   dashboards:
     enabled: true
   kibana:
-{% if ansible_system_vendor == "Linode" %}
-    host: http://localhost:{{ external_ports.kibana_web }}
-{% else %}
     host: http://{{ assignments.kibana.networking.teine.ipv4 }}:{{ external_ports.kibana_web }}
 {% endif %}
 

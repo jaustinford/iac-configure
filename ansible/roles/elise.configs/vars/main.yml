@@ -30,8 +30,5 @@ nginx:
       - Aurora
       - Broomfield
       - Denver
-      - Greenwood Village
-      - Littleton
-      - Parker
       - Thornton
       - Westminster

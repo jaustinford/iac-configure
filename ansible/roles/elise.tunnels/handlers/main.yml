@@ -12,17 +12,3 @@
     state: restarted
     daemon_reload: true
   become: true
-
-- name: MAIN - systemctl restart tunnel-elasticsearch
-  ansible.builtin.systemd:
-    name: tunnel-elasticsearch
-    state: restarted
-    daemon_reload: true
-  become: true
-
-- name: MAIN - systemctl restart tunnel-kibana
-  ansible.builtin.systemd:
-    name: tunnel-kibana
-    state: restarted
-    daemon_reload: true
-  become: true
