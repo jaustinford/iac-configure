@@ -115,3 +115,7 @@ external_ports:
   redis_db: "32521"
   oauth_web: "32522"
   nginx_web: "32523"
+
+task_globals:
+  discover_uri:
+    status_code: [-1, 200, 502]

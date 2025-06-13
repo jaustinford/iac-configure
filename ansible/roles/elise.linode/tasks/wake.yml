@@ -1,21 +1,6 @@
 ---
-- name: WAKE - determine external nginx connectivity
-  ansible.builtin.uri:
-    url: "https://ping.home.elysianskies.com"
-    status_code:
-      - -1
-      - 200
-      - 502
-  register: external_check
-
-- name: WAKE - determine internal nginx connectivity
-  ansible.builtin.uri:
-    url: "https://ping.docker02-teine.home.elysianskies.com"
-    status_code:
-      - -1
-      - 200
-      - 502
-  register: internal_check
+- name: WAKE - include discover tasks
+  ansible.builtin.include_tasks: discover.yml
 
 - name: WAKE - manage linode
   linode_state:

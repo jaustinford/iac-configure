@@ -9,4 +9,9 @@
     gitlab_credential: "{{ secrets.gitlab.root_username }}:{{ secrets.gitlab.root_password }}"
   when: ansible_architecture == "aarch64" and lazarus_node is defined
   with_items:
-    - infrastructure/iac-configure
+    - project:
+        path: infrastructure/iac-configure
+        branch: main
+      image:
+        name: iac-configure
+        tag: main

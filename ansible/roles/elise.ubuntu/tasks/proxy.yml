@@ -1,11 +1,6 @@
 ---
-- name: PROXY - discover nexus apt repository
-  ansible.builtin.uri:
-    url: "{{ nexus_proxy }}"
-    status_code:
-      - 200
-      - -1
-  register: discovered_nexus
+- name: PROXY - include discover tasks
+  ansible.builtin.include_tasks: discover.yml
 
 - name: PROXY - create nexus auth file
   ansible.builtin.template:
