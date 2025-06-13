@@ -1,0 +1,15 @@
+[Unit]
+Description={{ item.description }}
+After=network.target auditd.service
+
+[Service]
+WorkingDirectory=/root/tunnel-{{ item.name }}
+ExecStart=/root/tunnel-{{ item.name }}/tunnel-{{ item.name }}.sh
+KillMode=control-group
+Type=simple
+StandardOutput=append:/dev/null
+StandardError=append:/dev/null
+
+[Install]
+WantedBy=multi-user.target
+Alias=tunnel-{{ item.name }}.service

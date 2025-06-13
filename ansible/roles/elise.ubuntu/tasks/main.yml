@@ -15,9 +15,8 @@
   when: cycle_mode.name == "up"
 
 - name: MAIN - configure user sudoers
-  ansible.builtin.copy:
-    content: |
-      {{ ansible_user }}    ALL=(ALL) NOPASSWD: ALL
+  ansible.builtin.template:
+    src: sudoers
     dest: "/etc/sudoers.d/{{ ansible_user }}"
     owner: root
     group: root

@@ -1,0 +1,2 @@
+{{ elysianskies_tfstate.msg.outputs.tls_nginx_certificate_certificate_pem.value }}
+{{ elysianskies_tfstate.msg.outputs.tls_nginx_certificate_issuer_pem.value }}

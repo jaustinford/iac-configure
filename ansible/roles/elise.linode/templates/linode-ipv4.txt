@@ -1,0 +1,1 @@
+{{ elysianskies_tfstate.msg.outputs[item.output_elements.ip_address].value[0] }}

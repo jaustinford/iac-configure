@@ -7,21 +7,18 @@
   register: elysianskies_tfstate
 
 - name: SSL_DEPLOY - copy ssl certificate
-  ansible.builtin.copy:
-    content: "{{ item.content }}"
+  ansible.builtin.template:
+    src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     mode: "{{ item.mode }}"
   become: true
   no_log: true
   notify: MAIN - systemctl restart nginx
   with_items:
-    - content: |
-        {{ elysianskies_tfstate.msg.outputs.tls_nginx_certificate_certificate_pem.value }}
-        {{ elysianskies_tfstate.msg.outputs.tls_nginx_certificate_issuer_pem.value }}
+    - src: nginx.crt
       dest: /etc/nginx/nginx.crt
       mode: '0644'
 
-    - content: |
-        {{ elysianskies_tfstate.msg.outputs.tls_nginx_certificate_private_key_pem.value }}
+    - src: nginx.crt.key
       dest: /etc/nginx/nginx.crt.key
       mode: '0600'

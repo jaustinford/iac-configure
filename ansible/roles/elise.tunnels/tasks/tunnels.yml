@@ -10,19 +10,8 @@
   when: item.host == ansible_hostname + "-teine.home.elysianskies.com"
 
 - name: "TUNNELS - create script for tunnel-{{ item.name }}"
-  ansible.builtin.copy:
-    content: |
-      #!/usr/bin/env bash
-
-      autossh -N -T \
-          -o ServerAliveInterval=30 \
-          -o ServerAliveCountMax=960 \
-          -o ExitOnForwardFailure=yes \
-          -o StrictHostKeyChecking=no \
-          -o UserKnownHostsFile=/dev/null \
-          -i /root/ssh.key \
-          -R {{ item.external_port }}:{{ item.ipv4 }}:{{ item.internal_port }} \
-          root@portal.elysianskies.com
+  ansible.builtin.template:
+    src: tunnel.sh
     dest: "/root/tunnel-{{ item.name }}/tunnel-{{ item.name }}.sh"
     owner: root
     group: root
@@ -32,24 +21,9 @@
   when: item.host == ansible_hostname + "-teine.home.elysianskies.com"
 
 - name: "TUNNELS - create systemd unit for tunnel-{{ item.name }}"
-  ansible.builtin.copy:
+  ansible.builtin.template:
+    src: tunnel.service
     dest: /lib/systemd/system/tunnel-{{ item.name }}.service
-    content: |
-      [Unit]
-      Description={{ item.description }}
-      After=network.target auditd.service
-
-      [Service]
-      WorkingDirectory=/root/tunnel-{{ item.name }}
-      ExecStart=/root/tunnel-{{ item.name }}/tunnel-{{ item.name }}.sh
-      KillMode=control-group
-      Type=simple
-      StandardOutput=append:/dev/null
-      StandardError=append:/dev/null
-
-      [Install]
-      WantedBy=multi-user.target
-      Alias=tunnel-{{ item.name }}.service
     owner: root
     group: root
     mode: '0644'
