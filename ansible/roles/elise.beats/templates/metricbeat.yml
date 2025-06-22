@@ -1,8 +1,8 @@
 ---
 output:
   elasticsearch:
-    username: elastic
-    password: {{ secrets.elasticsearch.password }}
+    username: {{ secrets.elastic.james_austin.username }}
+    password: {{ secrets.elastic.james_austin.password }}
     pipeline: elysianskies-geoip-pipeline
 {% if ansible_system_vendor == "Linode" %}
     hosts:
