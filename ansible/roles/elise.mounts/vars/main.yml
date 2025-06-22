@@ -2,7 +2,7 @@
 mounts:
   - fstype: cifs
     src: //172.16.16.4/tvault
-    opts: "username={{ secrets.tvault.cifs.username }},password={{ secrets.tvault.cifs.password }},uid=1000,gid=1000"
+    opts: "username={{ secrets.hosts.nas.user.username }},password={{ secrets.hosts.nas.user.password }},uid=1000,gid=1000"
     path: /mnt/tvault
     state: "{{ cycle_mode.volumes.tvault }}"
 

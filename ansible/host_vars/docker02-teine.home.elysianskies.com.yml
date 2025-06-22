@@ -1,4 +1,8 @@
 ---
+ansible_user: "{{ secrets.hosts.docker02.user.username }}"
+ansible_password: "{{ secrets.hosts.docker02.user.password }}"
+ansible_become_password: "{{ secrets.hosts.docker02.user.password }}"
+
 lan_interface:
   teine: eno1
   talamh: enp1s0f1
