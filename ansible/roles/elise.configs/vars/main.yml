@@ -25,10 +25,8 @@ nginx:
   geoip_whitelists:
     country:
       - United States
-    city:
-      - Arvada
-      - Aurora
-      - Broomfield
-      - Denver
-      - Thornton
-      - Westminster
+    city: [
+      "Broomfield", "Superior", "Louisville", "Lafayette", "Westminster",
+      "Boulder", "Federal Heights", "Northglenn", "Thornton", "Commerce City",
+      "Denver", "Wheat Ridge", "Arvada", "Lakewood"
+    ]
