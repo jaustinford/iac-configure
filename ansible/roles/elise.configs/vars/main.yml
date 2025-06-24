@@ -28,5 +28,5 @@ nginx:
     city: [
       "Broomfield", "Superior", "Louisville", "Lafayette", "Westminster",
       "Boulder", "Federal Heights", "Northglenn", "Thornton", "Commerce City",
-      "Denver", "Wheat Ridge", "Arvada", "Lakewood", "Edgewater"
+      "Denver", "Wheat Ridge", "Arvada", "Lakewood"
     ]

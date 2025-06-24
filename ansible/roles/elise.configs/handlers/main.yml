@@ -1,246 +1,246 @@
 ---
 - name: MAIN - docker restart nexus
   ansible.builtin.command: |
-    /bin/bash -c '
+    /bin/bash -c "
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=nexus)" ]; then
         docker restart nexus
       fi
-    '
+    "
   changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.nexus.networking.teine.fqdn
 
 - name: MAIN - docker restart pihole
   ansible.builtin.command: |
-    /bin/bash -c '
+    /bin/bash -c "
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=pihole)" ]; then
         docker restart pihole
       fi
-    '
+    "
   changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.pihole.networking.teine.fqdn
 
 - name: MAIN - docker restart plex
   ansible.builtin.command: |
-    /bin/bash -c '
+    /bin/bash -c "
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=plex)" ]; then
         docker restart plex
       fi
-    '
+    "
   changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.plex.networking.teine.fqdn
 
 - name: MAIN - docker restart tautulli
   ansible.builtin.command: |
-    /bin/bash -c '
+    /bin/bash -c "
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=tautulli)" ]; then
         docker restart tautulli
       fi
-    '
+    "
   changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.tautulli.networking.teine.fqdn
 
 - name: MAIN - docker restart filebrowser
   ansible.builtin.command: |
-    /bin/bash -c '
+    /bin/bash -c "
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=filebrowser)" ]; then
         docker restart filebrowser
       fi
-    '
+    "
   changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.filebrowser.networking.teine.fqdn
 
 - name: MAIN - docker restart elasticsearch
   ansible.builtin.command: |
-    /bin/bash -c '
+    /bin/bash -c "
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=elasticsearch)" ]; then
         docker restart elasticsearch
       fi
-    '
+    "
   changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.elasticsearch.networking.teine.fqdn
 
 - name: MAIN - docker restart kibana
   ansible.builtin.command: |
-    /bin/bash -c '
+    /bin/bash -c "
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=kibana)" ]; then
         docker restart kibana
       fi
-    '
+    "
   changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.kibana.networking.teine.fqdn
 
 - name: MAIN - docker restart zoneminder
   ansible.builtin.command: |
-    /bin/bash -c '
+    /bin/bash -c "
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=zoneminder)" ]; then
         docker restart zoneminder
       fi
-    '
+    "
   changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.zoneminder.networking.teine.fqdn
 
 - name: MAIN - docker restart expressvpn
   ansible.builtin.command: |
-    /bin/bash -c '
+    /bin/bash -c "
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=expressvpn)" ]; then
         docker restart expressvpn squid deluge
       fi
-    '
+    "
   changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.expressvpn.networking.teine.fqdn
 
 - name: MAIN - docker restart squid
   ansible.builtin.command: |
-    /bin/bash -c '
+    /bin/bash -c "
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=squid)" ]; then
         docker restart squid
       fi
-    '
+    "
   changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.squid.networking.teine.fqdn
 
 - name: MAIN - docker restart deluge
   ansible.builtin.command: |
-    /bin/bash -c '
+    /bin/bash -c "
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=deluge)" ]; then
         docker restart deluge
       fi
-    '
+    "
   changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.deluge.networking.teine.fqdn
 
 - name: MAIN - docker restart gitlab
   ansible.builtin.command: |
-    /bin/bash -c '
+    /bin/bash -c "
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=gitlab)" ]; then
         docker restart gitlab
       fi
-    '
+    "
   changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.gitlab.networking.teine.fqdn
 
 - name: MAIN - docker restart runner
   ansible.builtin.command: |
-    /bin/bash -c '
+    /bin/bash -c "
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=runner)" ]; then
         docker restart runner
       fi
-    '
+    "
   changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.runner.networking.teine.fqdn
 
 - name: MAIN - docker restart openvpnas
   ansible.builtin.command: |
-    /bin/bash -c '
+    /bin/bash -c "
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=openvpnas)" ]; then
-        echo \\'"{{ secrets.hosts[ansible_hostname].user.password }}"\\' | sudo -S systemctl stop tunnel-openvpnas
+        echo '{{ secrets.hosts[ansible_hostname].user.password }}' | sudo -S systemctl stop tunnel-openvpnas
         docker restart openvpnas
-        echo \\'"{{ secrets.hosts[ansible_hostname].user.password }}"\\' | sudo -S systemctl start tunnel-openvpnas
+        echo '{{ secrets.hosts[ansible_hostname].user.password }}' | sudo -S systemctl start tunnel-openvpnas
       fi
-    '
+    "
   changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.openvpnas.networking.teine.fqdn
 
 - name: MAIN - docker restart resume
   ansible.builtin.command: |
-    /bin/bash -c '
+    /bin/bash -c "
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=resume)" ]; then
         docker restart resume
       fi
-    '
+    "
   changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.resume.networking.teine.fqdn
 
 - name: MAIN - docker restart fourohfour
   ansible.builtin.command: |
-    /bin/bash -c '
+    /bin/bash -c "
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=fourohfour)" ]; then
         docker restart fourohfour
       fi
-    '
+    "
   changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.fourohfour.networking.teine.fqdn
 
 - name: MAIN - docker restart fiveohx
   ansible.builtin.command: |
-    /bin/bash -c '
+    /bin/bash -c "
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=fiveohx)" ]; then
         docker restart fiveohx
       fi
-    '
+    "
   changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.fiveohx.networking.teine.fqdn
 
 - name: MAIN - docker restart fourohthree
   ansible.builtin.command: |
-    /bin/bash -c '
+    /bin/bash -c "
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=fourohthree)" ]; then
         docker restart fourohthree
       fi
-    '
+    "
   changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.fourohthree.networking.teine.fqdn
 
 - name: MAIN - docker restart keycloak
   ansible.builtin.command: |
-    /bin/bash -c '
+    /bin/bash -c "
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=keycloak)" ]; then
         docker restart keycloak
       fi
-    '
+    "
   changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.keycloak.networking.teine.fqdn
 
 - name: MAIN - docker restart redis
   ansible.builtin.command: |
-    /bin/bash -c '
+    /bin/bash -c "
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=redis)" ]; then
         docker restart redis
       fi
-    '
+    "
   changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.redis.networking.teine.fqdn
 
 - name: MAIN - docker restart oauth
   ansible.builtin.command: |
-    /bin/bash -c '
+    /bin/bash -c "
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=oauth)" ]; then
         docker restart oauth
       fi
-    '
+    "
   changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.oauth.networking.teine.fqdn
 
 - name: MAIN - docker restart nginx
   ansible.builtin.command: |
-    /bin/bash -c '
+    /bin/bash -c "
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=nginx)" ]; then
-        echo \\'"{{ secrets.hosts[ansible_hostname].user.password }}"\\' | sudo -S systemctl stop tunnel-nginx
+        echo '{{ secrets.hosts[ansible_hostname].user.password }}' | sudo -S systemctl stop tunnel-nginx
         docker restart nginx
-        echo \\'"{{ secrets.hosts[ansible_hostname].user.password }}"\\' | sudo -S systemctl start tunnel-nginx
+        echo '{{ secrets.hosts[ansible_hostname].user.password }}' | sudo -S systemctl start tunnel-nginx
       fi
-    '
+    "
   changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.nginx.networking.teine.fqdn
