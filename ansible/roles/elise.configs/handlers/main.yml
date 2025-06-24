@@ -146,9 +146,9 @@
   ansible.builtin.command: |
     /bin/bash -c '
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=openvpnas)" ]; then
-        echo \'"{{ secrets.hosts[ansible_hostname].user.password }}"\' | sudo -S systemctl stop tunnel-openvpnas
+        echo \\'"{{ secrets.hosts[ansible_hostname].user.password }}"\\' | sudo -S systemctl stop tunnel-openvpnas
         docker restart openvpnas
-        echo \'"{{ secrets.hosts[ansible_hostname].user.password }}"\' | sudo -S systemctl start tunnel-openvpnas
+        echo \\'"{{ secrets.hosts[ansible_hostname].user.password }}"\\' | sudo -S systemctl start tunnel-openvpnas
       fi
     '
   changed_when: false
@@ -236,9 +236,9 @@
   ansible.builtin.command: |
     /bin/bash -c '
       if [ ! -z "$(docker ps --quiet --filter status=running --filter name=nginx)" ]; then
-        echo \'"{{ secrets.hosts[ansible_hostname].user.password }}"\' | sudo -S systemctl stop tunnel-nginx
+        echo \\'"{{ secrets.hosts[ansible_hostname].user.password }}"\\' | sudo -S systemctl stop tunnel-nginx
         docker restart nginx
-        echo \'"{{ secrets.hosts[ansible_hostname].user.password }}"\' | sudo -S systemctl start tunnel-nginx
+        echo \\'"{{ secrets.hosts[ansible_hostname].user.password }}"\\' | sudo -S systemctl start tunnel-nginx
       fi
     '
   changed_when: false
