@@ -151,6 +151,7 @@
         echo '{{ secrets.hosts[ansible_hostname].user.password }}' | sudo -S systemctl start tunnel-openvpnas
       fi
     "
+  no_log: true
   changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.openvpnas.networking.teine.fqdn
@@ -241,6 +242,7 @@
         echo '{{ secrets.hosts[ansible_hostname].user.password }}' | sudo -S systemctl start tunnel-nginx
       fi
     "
+  no_log: true
   changed_when: false
   when:
     - ansible_hostname + "-teine.home.elysianskies.com" == assignments.nginx.networking.teine.fqdn
