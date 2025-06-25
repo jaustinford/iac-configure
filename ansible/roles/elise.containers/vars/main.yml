@@ -369,7 +369,7 @@ containers:
     env:
       TZ: "{{ containers_globals.env.TZ }}"
       GITLAB_OMNIBUS_CONFIG: external_url "http://gitlab.home.elysianskies.com"
-      GITLAB_ROOT_PASSWORD: "{{ secrets.gitlab.root_password }}"
+      GITLAB_ROOT_PASSWORD: "{{ secrets.gitlab.root.password }}"
     ports:
       - "{{ assignments.gitlab.networking.teine.ipv4 }}:{{ external_ports.gitlab_web }}:80/tcp"
     volumes:
