@@ -11,6 +11,7 @@
     chain: POSTROUTING
     out_interface: "{{ gateway.external_interface }}"
     jump: MASQUERADE
+    state: "{{ cycle_mode.gateway_masquerade }}"
   become: true
 
 - name: GATEWAY - accept internal interface on forward chain
@@ -19,6 +20,7 @@
     chain: FORWARD
     in_interface: "{{ gateway.internal_interface }}"
     jump: ACCEPT
+    state: "{{ cycle_mode.gateway_masquerade }}"
   become: true
 
 - name: GATEWAY - accept internal interface and external interface on forward chain
@@ -28,6 +30,7 @@
     in_interface: "{{ gateway.internal_interface }}"
     out_interface: "{{ gateway.external_interface }}"
     jump: ACCEPT
+    state: "{{ cycle_mode.gateway_masquerade }}"
   become: true
 
 - name: GATEWAY - accept internal interface and external interface on return forward chain
@@ -42,4 +45,5 @@
       - RELATED
       - ESTABLISHED
     jump: ACCEPT
+    state: "{{ cycle_mode.gateway_masquerade }}"
   become: true

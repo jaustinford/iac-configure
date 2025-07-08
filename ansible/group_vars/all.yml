@@ -10,6 +10,7 @@ cycle_modes:
         nginx: started
         linode: started
       beats: started
+    gateway_masquerade: present
     pull_local_images: true
     volumes:
       app_data: mounted
@@ -26,6 +27,7 @@ cycle_modes:
         nginx: stopped
         linode: stopped
       beats: stopped
+    gateway_masquerade: absent
     pull_local_images: false
     volumes:
       app_data: unmounted
