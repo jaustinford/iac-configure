@@ -12,3 +12,11 @@
   when: cycle_mode.name == "down"
   with_items:
     - "{{ containers | reverse }}"
+
+- name: MAIN - remove any orphaned lock files
+  ansible.builtin.file:
+    path: "{{ containers_globals.application_directory }}{{ item }}"
+    state: absent
+  when: cycle_mode.name == "down"
+  with_items:
+    - "{{ lock_files }}"

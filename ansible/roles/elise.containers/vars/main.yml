@@ -723,3 +723,6 @@ containers:
       - "{{ hostvars[assignments.lazarus.networking.teine.fqdn].ansible_user_dir }}/iac-configure:/iac-configure:ro"
       - "{{ hostvars[assignments.lazarus.networking.teine.fqdn].ansible_user_dir }}/data:/lazarus/data:rw"
     wait_port: "0"
+
+lock_files:
+  - /gitlab/data/postgresql/.s.PGSQL.5432.lock
