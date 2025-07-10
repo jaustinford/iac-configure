@@ -17,6 +17,7 @@
   ansible.builtin.file:
     path: "{{ containers_globals.application_directory }}{{ item }}"
     state: absent
+  become: true
   when: cycle_mode.name == "down"
   with_items:
     - "{{ lock_files }}"
