@@ -25,6 +25,7 @@ nginx:
   docs:
     restricted_pages:
       - inventory
+      - tvault
       - six-keys
       - barbossa
   geoip_whitelists:
