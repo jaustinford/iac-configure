@@ -15,3 +15,7 @@
       image:
         name: iac-configure
         tag: main
+
+- name: MAIN - include rtc tasks
+  ansible.builtin.include_tasks: rtc.yml
+  when: ansible_architecture == "aarch64"

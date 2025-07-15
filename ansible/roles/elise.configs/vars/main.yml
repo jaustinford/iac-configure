@@ -22,6 +22,11 @@ maxmind:
 
 nginx:
   client_max_body_size: 10G
+  docs:
+    restricted_pages:
+      - inventory
+      - six-keys
+      - barbossa
   geoip_whitelists:
     country:
       - United States
