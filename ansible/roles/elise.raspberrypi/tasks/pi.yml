@@ -21,14 +21,7 @@
   become: true
   with_items:
     - path: /boot/firmware/config.txt
-      line: dtoverlay=disable-wifi
-      regexp: "^"
-      owner: root
-      group: root
-      mode: '0755'
-
-    - path: /boot/firmware/config.txt
-      line: dtoverlay=i2c-rtc,ds3231
+      line: dtoverlay=i2c-rtc,ds3231,disable-wifi
       regexp: "^"
       owner: root
       group: root
