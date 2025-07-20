@@ -1,0 +1,8 @@
+---
+rpi:
+  additional_packages:
+    - name: python3-smbus
+      state: present
+
+    - name: i2c-tools
+      state: present

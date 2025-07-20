@@ -1,4 +1,14 @@
 ---
+- name: PI - install additional packages
+  ansible.builtin.apt:
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+    update_cache: true
+  become: true
+  when: internet_check.status == 200
+  with_items:
+    - "{{ rpi.additional_packages }}"
+
 - name: PI - ensure configurations
   ansible.builtin.lineinfile:
     path: "{{ item.path }}"
@@ -17,9 +27,25 @@
       group: root
       mode: '0755'
 
+    - path: /boot/firmware/config.txt
+      line: dtoverlay=i2c-rtc,ds3231
+      regexp: "^"
+      owner: root
+      group: root
+      mode: '0755'
+
     - path: /etc/cloud/cloud.cfg
       line: "  #- update_etc_hosts"
       regexp: "^  - update_etc_hosts"
       owner: root
       group: root
       mode: '0644'
+
+- name: PI - add hwclock-set
+  ansible.builtin.template:
+    src: hwclock-set
+    dest: /lib/udev/hwclock-set
+    owner: root
+    group: root
+    mode: '0755'
+  become: true
