@@ -27,7 +27,7 @@ nginx:
       - inventory
       - tvault
       - six-keys
-      - barbossa
+      - pimp
   geoip_whitelists:
     country:
       - United States
