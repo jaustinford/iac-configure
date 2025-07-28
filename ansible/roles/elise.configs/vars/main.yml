@@ -26,8 +26,8 @@ nginx:
     restricted_pages:
       - inventory
       - tvault
-      - six-keys
       - pimp
+      - six-keys
   geoip_whitelists:
     country:
       - United States
