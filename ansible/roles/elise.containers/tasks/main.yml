@@ -4,20 +4,11 @@
   no_log: true
   when: cycle_mode.name == "up"
   with_items:
-    - "{{ containers }}"
+    - "{{ lookup('community.general.filetree', 'vars/containers') }}"
 
 - name: MAIN - include container tasks in shutdown mode
   ansible.builtin.include_tasks: container.yml
   no_log: true
   when: cycle_mode.name == "down"
   with_items:
-    - "{{ containers | reverse }}"
-
-- name: MAIN - remove any orphaned lock files
-  ansible.builtin.file:
-    path: "{{ containers_globals.application_directory }}{{ item }}"
-    state: absent
-  become: true
-  when: cycle_mode.name == "down"
-  with_items:
-    - "{{ lock_files }}"
+    - "{{ lookup('community.general.filetree', 'vars/containers') | reverse }}"

@@ -1,0 +1,38 @@
+---
+###########################################################
+# elasticsearch
+###########################################################
+
+###########################################################
+# Distributed, RESTful search and analytics engine built on
+# Apache Lucene. It excels at full-text search, log
+# analytics, security intelligence, business analytics, and
+# operational intelligence.
+###########################################################
+
+container:
+  name: elasticsearch
+  image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/elastic/elasticsearch:8.13.0"
+  pull: "{{ containers_globals.pull_images.remote }}"
+  command:
+    - eswrapper
+  docker_host: "{{ assignments.elasticsearch.networking.teine.ipv4 }}"
+  restart_policy: "{{ containers_globals.restart_policy }}"
+  detach: "{{ containers_globals.detach }}"
+  labels: "{{ containers_globals.labels }}"
+  state: "{{ containers_globals.state }}"
+  shm_size: "{{ containers_globals.shm_size }}"
+  devices: []
+  capabilities: []
+  network_mode: "{{ containers_globals.network_mode }}"
+  dns_servers: "{{ containers_globals.dns_servers }}"
+  dns_search_domains: "{{ containers_globals.dns_search_domains }}"
+  env:
+    TZ: "{{ containers_globals.env.TZ }}"
+    ES_JAVA_OPTS: -Xms4g -Xmx4g
+  ports:
+    - "{{ assignments.elasticsearch.networking.teine.ipv4 }}:{{ external_ports.elasticsearch_db }}:9200/tcp"
+  volumes:
+    - "{{ lab_dirs.configuration_directory }}/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro"
+    - "{{ lab_dirs.application_directory }}/elasticsearch/data:/usr/share/elasticsearch/data:rw"
+  wait_port: "{{ external_ports.elasticsearch_db }}"

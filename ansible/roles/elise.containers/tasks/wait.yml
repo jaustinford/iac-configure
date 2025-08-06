@@ -1,6 +1,6 @@
 ---
-- name: "WAIT - waiting on host port {{ item.wait_port }}"
+- name: "WAIT - waiting on host port {{ container.wait_port }}"
   ansible.builtin.wait_for:
-    host: "{{ item.docker_host }}"
-    port: "{{ item.wait_port }}"
+    host: "{{ container.docker_host }}"
+    port: "{{ container.wait_port }}"
     state: "{{ cycle_mode.state.containers }}"

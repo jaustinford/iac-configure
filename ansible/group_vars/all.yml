@@ -1,4 +1,8 @@
 ---
+lab_dirs:
+  application_directory: /elysianskies/application_data
+  configuration_directory: /elysianskies/configurations
+
 cycle_modes:
   up:
     name: up

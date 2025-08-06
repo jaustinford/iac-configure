@@ -11,7 +11,7 @@
 - name: UP - run connectivity task
   hosts: elysianskies_onprem
   tasks:
-    - name: SITE - determine internet connectivity
+    - name: UP - determine internet connectivity
       ansible.builtin.uri:
         url: "https://www.google.com"
         status_code:

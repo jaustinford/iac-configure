@@ -7,3 +7,15 @@
     - group_vars/all.yml
     - group_vars/secrets.yml
     - group_vars/elysianskies_onprem_docker.yml
+
+- name: CONTAINERS - run orphaned files task
+  hosts: elysianskies_onprem_docker[0]
+  tasks:
+    - name: CONTAINERS - remove any orphaned lock files
+      ansible.builtin.file:
+        path: "{{ lab_dirs.application_directory }}{{ item }}"
+        state: absent
+      become: true
+      when: cycle_mode.name == "down"
+      with_items:
+        - /gitlab/data/postgresql/.s.PGSQL.5432.lock
