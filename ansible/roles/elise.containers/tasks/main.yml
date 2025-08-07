@@ -4,11 +4,11 @@
   no_log: true
   when: cycle_mode.name == "up"
   with_items:
-    - "{{ lookup('ansible.builtin.filetree', 'vars/containers').files | sort }}"
+    - "{{ lookup('community.general.filetree', 'vars/containers') }}"
 
 - name: MAIN - include container tasks in shutdown mode
   ansible.builtin.include_tasks: container.yml
   no_log: true
   when: cycle_mode.name == "down"
   with_items:
-    - "{{ lookup('ansible.builtin.filetree', 'vars/containers').files | sort | reverse }}"
+    - "{{ lookup('community.general.filetree', 'vars/containers') | reverse }}"
