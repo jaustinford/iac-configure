@@ -1,0 +1,19 @@
+---
+- name: ELASTIC - deploy ingest pipelines
+  community.elastic.elastic_pipeline:
+    name: "{{ pipeline.name }}"
+    state: "{{ pipeline.state }}"
+    description: "{{ pipeline.description }}"
+    processors: "{{ pipeline.processors }}"
+    auth_scheme: http
+    auth_method: http_auth
+    login_hosts: ["{{ assignments.elasticsearch.networking.teine.ipv4 }}"]
+    login_port: "{{ external_ports.elasticsearch_db }}"
+    login_user: "{{ secrets.elastic.james_austin.username }}"
+    login_password: "{{ secrets.elastic.james_austin.password }}"
+  vars:
+    ansible_python_interpreter: /usr/local/bin/python3
+  loop_control:
+    loop_var: pipeline
+  with_items:
+    - "{{ elastic.ingest_pipelines }}"

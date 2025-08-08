@@ -13,7 +13,12 @@ RUN \
         ansible==8.7.0 \
         ansible-core==2.15.11 \
         requests \
-        jmespath
+        jmespath \
+        elasticsearch==8.13.2
+
+RUN \
+    ansible-galaxy collection install \
+        community.elastic
 
 WORKDIR /etc/ansible
 

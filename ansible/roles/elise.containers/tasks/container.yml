@@ -30,3 +30,7 @@
 - name: CONTAINER - include wait tasks
   ansible.builtin.include_tasks: wait.yml
   when: container.wait_port != "0"
+
+- name: CONTAINER - include elastic tasks
+  ansible.builtin.include_tasks: elastic.yml
+  when: container.name == "elasticsearch"
