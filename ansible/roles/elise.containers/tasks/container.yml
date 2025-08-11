@@ -33,4 +33,4 @@
 
 - name: CONTAINER - include elastic tasks
   ansible.builtin.include_tasks: elastic.yml
-  when: container.name == "elasticsearch"
+  when: container.name == "elasticsearch" and cycle_mode.name == "up"
