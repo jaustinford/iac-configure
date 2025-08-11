@@ -25,7 +25,6 @@ container:
   shm_size: 4G
   devices:
     - /dev/video0
-    - /dev/video2
   capabilities: []
   network_mode: "{{ containers_globals.network_mode }}"
   dns_servers: "{{ containers_globals.dns_servers }}"
