@@ -15,4 +15,5 @@
   community.docker.docker_image_pull:
     name: "nexus-hosted.{{ assignments.nginx.networking.teine.fqdn }}/elise/{{ item.image.name }}"
     tag: "{{ item.image.tag }}"
+  no_log: true
   when: discovered_nexus.status == 200
