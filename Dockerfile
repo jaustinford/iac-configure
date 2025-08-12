@@ -14,7 +14,8 @@ RUN \
         ansible-core==2.15.11 \
         requests \
         jmespath \
-        elasticsearch==8.13.2
+        elasticsearch==8.13.2 \
+        docker
 
 RUN \
     ansible-galaxy collection install \
