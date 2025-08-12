@@ -12,8 +12,7 @@
   when: discovered_gitlab.status == 200
 
 - name: "GIT - download image - {{ item.image.name }}"
-  community.docker.docker_image:
+  community.docker.docker_image_pull:
     name: "nexus-hosted.{{ assignments.nginx.networking.teine.fqdn }}/elise/{{ item.image.name }}"
     tag: "{{ item.image.tag }}"
-    source: pull
   when: discovered_nexus.status == 200
