@@ -18,6 +18,7 @@ RUN \
 
 RUN \
     ansible-galaxy collection install \
+        community.docker \
         community.elastic
 
 WORKDIR /etc/ansible
