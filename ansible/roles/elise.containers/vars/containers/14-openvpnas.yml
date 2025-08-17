@@ -36,6 +36,7 @@ container:
     TZ: "{{ containers_globals.env.TZ }}"
   ports:
     - "{{ assignments.openvpnas.networking.teine.ipv4 }}:{{ external_ports.openvpnas_web }}:943/tcp"
+    - "{{ assignments.openvpnas.networking.talamh.ipv4 }}:{{ external_ports.openvpnas_vpn }}:1194/tcp"
     - "{{ assignments.openvpnas.networking.teine.ipv4 }}:{{ external_ports.openvpnas_vpn }}:1194/tcp"
   volumes:
     - "{{ lab_dirs.application_directory }}/openvpnas/openvpn:/openvpn:rw"
