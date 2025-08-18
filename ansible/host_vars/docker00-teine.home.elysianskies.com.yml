@@ -1,0 +1,12 @@
+---
+ansible_user: "{{ secrets.hosts.docker00.user.username }}"
+ansible_password: "{{ secrets.hosts.docker00.user.password }}"
+ansible_become_password: "{{ secrets.hosts.docker00.user.password }}"
+
+lan_interface:
+  teine: eth0
+
+poweroff:
+  enabled: false
+
+lazarus_node: true

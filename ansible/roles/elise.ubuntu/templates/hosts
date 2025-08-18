@@ -8,6 +8,8 @@ ff00::0 ip6-mcastprefix
 ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 
+172.16.17.4  docker00-teine.home.elysianskies.com
+
 172.16.16.2  docker01-uisge.home.elysianskies.com
 172.16.17.2  docker01-teine.home.elysianskies.com
 172.16.14.2  docker01-talamh.home.elysianskies.com
@@ -15,5 +17,3 @@ ff02::2 ip6-allrouters
 172.16.16.3  docker02-uisge.home.elysianskies.com
 172.16.17.3  docker02-teine.home.elysianskies.com nexus.docker02-teine.home.elysianskies.com nginx.docker02-teine.home.elysianskies.com gitlab.docker02-teine.home.elysianskies.com nexus-hosted.docker02-teine.home.elysianskies.com nexus-proxy.docker02-teine.home.elysianskies.com
 172.16.14.3  docker02-talamh.home.elysianskies.com
-
-172.16.17.4  docker03-teine.home.elysianskies.com
