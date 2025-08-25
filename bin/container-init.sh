@@ -14,12 +14,12 @@ elysianskies_onprem_docker
 elysianskies_onprem_nas
 
 [elysianskies_onprem_docker]
-docker00-teine.home.elysianskies.com ansible_host='172.16.17.4'
-docker01-teine.home.elysianskies.com ansible_host='172.16.17.2'
-docker02-teine.home.elysianskies.com ansible_host='172.16.17.3'
+docker00-teine.home.elysianskies.com ansible_host='192.168.40.4'
+docker01-teine.home.elysianskies.com ansible_host='192.168.40.1'
+docker02-teine.home.elysianskies.com ansible_host='192.168.40.2'
 
 [elysianskies_onprem_nas]
-nas-teine.home.elysianskies.com ansible_host='172.16.17.5'
+nas-teine.home.elysianskies.com ansible_host='192.168.40.5'
 
 [elysianskies_linode]
 EOF

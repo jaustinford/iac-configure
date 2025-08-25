@@ -14,7 +14,7 @@
 
 container:
   name: plex
-  image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/plexinc/pms-docker:1.41.7.9799-5bce000f7"
+  image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/plexinc/pms-docker:1.42.1.10060-4e8b05daf"
   pull: "{{ containers_globals.pull_images.remote }}"
   command: null
   docker_host: "{{ assignments.plex.networking.teine.ipv4 }}"
@@ -37,8 +37,8 @@ container:
       https://plex.home.elysianskies.com
     ALLOWED_NETWORKS: |
       172.16.13.0/27,
-      172.16.14.0/29,
-      172.16.17.0/29
+      192.168.30.0/29,
+      192.168.40.0/29
   ports:
     - "{{ assignments.plex.networking.talamh.ipv4 }}:{{ external_ports.plex_web }}:32400/tcp"
     - "{{ assignments.plex.networking.teine.ipv4 }}:{{ external_ports.plex_web }}:32400/tcp"

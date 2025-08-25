@@ -11,6 +11,6 @@ poweroff:
 
 wol:
   mac: "10:FF:E0:00:8D:6C"
-  broadcast: "172.16.17.7"
+  broadcast: "192.168.40.7"
   port: 9
   wait_port: 445

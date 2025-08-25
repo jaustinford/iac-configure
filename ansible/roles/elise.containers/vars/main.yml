@@ -11,7 +11,7 @@ containers_globals:
   shm_size: 64M
   network_mode: bridge
   dns_servers:
-    - "172.16.14.4"
+    - "192.168.30.6"
     - "8.8.8.8"
   dns_search_domains:
     - home.elysianskies.com

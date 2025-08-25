@@ -8,12 +8,19 @@ ff00::0 ip6-mcastprefix
 ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 
-172.16.17.4  docker00-teine.home.elysianskies.com
+192.168.10.1  docker01-adhair docker01-adhair.home.elysianskies.com
+192.168.20.1  docker01-uisge  docker01-uisge.home.elysianskies.com
+192.168.30.1  docker01-talamh docker01-talamh.home.elysianskies.com
+192.168.40.1  docker01-teine  docker01-teine.home.elysianskies.com
 
-172.16.16.2  docker01-uisge.home.elysianskies.com
-172.16.17.2  docker01-teine.home.elysianskies.com
-172.16.14.2  docker01-talamh.home.elysianskies.com
+192.168.10.2  docker02-adhair docker02-adhair.home.elysianskies.com
+192.168.20.2  docker02-uisge  docker02-uisge.home.elysianskies.com
+192.168.30.2  docker02-talamh docker02-talamh.home.elysianskies.com
+192.168.40.2  docker02-teine  docker02-teine.home.elysianskies.com nexus.docker02-teine.home.elysianskies.com nginx.docker02-teine.home.elysianskies.com gitlab.docker02-teine.home.elysianskies.com nexus-hosted.docker02-teine.home.elysianskies.com nexus-proxy.docker02-teine.home.elysianskies.com
 
-172.16.16.3  docker02-uisge.home.elysianskies.com
-172.16.17.3  docker02-teine.home.elysianskies.com nexus.docker02-teine.home.elysianskies.com nginx.docker02-teine.home.elysianskies.com gitlab.docker02-teine.home.elysianskies.com nexus-hosted.docker02-teine.home.elysianskies.com nexus-proxy.docker02-teine.home.elysianskies.com
-172.16.14.3  docker02-talamh.home.elysianskies.com
+192.168.30.4  docker00-talamh docker00-talamh.home.elysianskies.com
+192.168.40.4  docker00-teine  docker00-teine.home.elysianskies.com
+
+192.168.20.5  nas-uisge  nas-uisge.home.elysianskies.com
+192.168.30.5  nas-talamh nas-talamh.home.elysianskies.com
+192.168.40.5  nas-teine  nas-teine.home.elysianskies.com

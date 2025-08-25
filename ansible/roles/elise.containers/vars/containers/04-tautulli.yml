@@ -15,7 +15,7 @@
 
 container:
   name: tautulli
-  image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/linuxserver/tautulli:amd64-v2.15.2-ls190"
+  image: "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}/linuxserver/tautulli:amd64-v2.15.3-ls199"
   pull: "{{ containers_globals.pull_images.remote }}"
   command: null
   docker_host: "{{ assignments.tautulli.networking.teine.ipv4 }}"
