@@ -32,7 +32,7 @@ container:
     TZ: "{{ containers_globals.env.TZ }}"
     PLEX_CLAIM: "{{ secrets.plex.plex_claim }}"
     ADVERTISE_IP: |
-      http://172.16.13.2:{{ external_ports.plex_web }},
+      http://192.168.60.6:{{ external_ports.plex_web }},
       http://{{ assignments.plex.networking.teine.ipv4 }}:{{ external_ports.plex_web }},
       https://plex.home.elysianskies.com
     ALLOWED_NETWORKS: |
