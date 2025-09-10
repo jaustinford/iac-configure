@@ -2,12 +2,18 @@
 mounts:
   - fstype: cifs
     src: //192.168.20.5/tvault
-    opts: "username={{ secrets.hosts.nas.user.username }},password={{ secrets.hosts.nas.user.password }},uid=1000,gid=1000"
+    owner: root
+    group: tvault
+    mode: "0770"
+    opts: "username={{ secrets.hosts.nas.user.username }},password={{ secrets.hosts.nas.user.password }},uid=0,gid=1066,dir_mode=0770,file_mode=0660"
     path: /mnt/tvault
     state: "{{ cycle_mode.volumes.tvault }}"
 
   - fstype: ext4
     src: /dev/mapper/ubuntu--vg-dfs_lvm
+    owner: austin
+    group: austin
+    mode: "0755"
     opts: defaults
     path: /mnt/dfs_lvm
     state: "{{ cycle_mode.volumes.dfs_lvm }}"

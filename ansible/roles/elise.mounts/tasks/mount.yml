@@ -1,11 +1,25 @@
 ---
+- name: MOUNT - create tvault user group
+  ansible.builtin.group:
+    name: tvault
+    state: present
+    gid: 1066
+  become: true
+
+- name: MOUNT - add user to tvault group
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"
+    groups: tvault
+    append: true
+  become: true
+
 - name: "MOUNT - ensure mount path {{ item.path }}"
   ansible.builtin.file:
     path: "{{ item.path }}"
     state: directory
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    mode: '0755'
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
   become: true
 
 - name: "MOUNT - mount volume {{ item.path }}"

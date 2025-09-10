@@ -17,6 +17,8 @@ containers_globals:
     - home.elysianskies.com
   env:
     TZ: America/Denver
+    PUID: "1000"
+    PGID: "1066"
 
 elastic:
   ingest_pipelines:

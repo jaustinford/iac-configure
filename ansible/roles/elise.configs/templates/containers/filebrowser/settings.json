@@ -3,6 +3,6 @@
     "address": "",
     "port": 80,
     "log": "stdout",
-    "database": "/database.db",
+    "database": "/database/filebrowser.db",
     "root": "/tvault"
 }

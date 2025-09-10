@@ -29,7 +29,8 @@ container:
   dns_search_domains: []
   env:
     TZ: "{{ containers_globals.env.TZ }}"
-    PUID: "1000"
+    PUID: "{{ containers_globals.env.PUID }}"
+    PGID: "{{ containers_globals.env.PGID }}"
   ports: []
   volumes:
     - /mnt/tvault/deluge:/downloads:rw

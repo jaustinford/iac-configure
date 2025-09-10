@@ -30,6 +30,8 @@ container:
   dns_search_domains: "{{ containers_globals.dns_search_domains }}"
   env:
     TZ: "{{ containers_globals.env.TZ }}"
+    PLEX_UID: "{{ containers_globals.env.PUID }}"
+    PLEX_GID: "{{ containers_globals.env.PGID }}"
     PLEX_CLAIM: "{{ secrets.plex.plex_claim }}"
     ADVERTISE_IP: |
       http://192.168.60.6:{{ external_ports.plex_web }},
