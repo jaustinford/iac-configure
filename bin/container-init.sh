@@ -27,7 +27,7 @@ EOF
 if [ $(curl -s -o /dev/null -w "%{http_code}" https://www.google.com) == "200" ] || \
    [ ${CYCLE_MODE} == "up" ]; then
     echo " "
-    echo -e "[ \033[31m*\033[0m ] Adding Portal host to inventory"
+    echo -e "[ \033[35m*\033[0m ] Adding Portal host to inventory"
     echo " "
 
     cat <<EOF >> /etc/ansible_hosts
@@ -36,7 +36,7 @@ EOF
 
 else
     echo " "
-    echo -e "[ \033[31m*\033[0m ] Ignoring Portal host for inventory"
+    echo -e "[ \033[35m*\033[0m ] Ignoring Portal host for inventory"
     echo " "
 
 fi

@@ -10,11 +10,11 @@ if os.environ.get("COMPOSE_PROFILE"):
     COMPOSE_PROFILE = os.environ.get("COMPOSE_PROFILE")
 
 else:
-    COMPOSE_PROFILE = input("\n \033[31mcompose profile\033[0m : ")
+    COMPOSE_PROFILE = input("\n \033[35mcompose profile\033[0m : ")
 
 if COMPOSE_PROFILE == "site":
     if not os.environ.get("CYCLE_MODE"):
-        CYCLE_MODE = input(" \033[31m     cycle mode\033[0m : ")
+        CYCLE_MODE = input(" \033[35m     cycle mode\033[0m : ")
         os.environ["CYCLE_MODE"] = CYCLE_MODE
 
 print(" ")

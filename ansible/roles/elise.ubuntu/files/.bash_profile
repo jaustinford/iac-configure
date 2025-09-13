@@ -1,6 +1,6 @@
 #!/bin/bash
 
-COLOR_NAME_PRIMARY="lightred"
+COLOR_NAME_PRIMARY="purple"
 COLOR_NAME_SECONDARY="white"
 COLOR_NAME_TERTIARY="lightgrey"
 
@@ -54,6 +54,10 @@ color_concat_time="${COLOR_CODE_ESCAPE}${STYLE_CODE_REGULAR};${color_code_primar
 color_concat_host="${COLOR_CODE_ESCAPE}${STYLE_CODE_BOLD};${color_code_secondary}m"
 color_concat_cwd="${COLOR_CODE_ESCAPE}${STYLE_CODE_REGULAR};${color_code_tertiary}m"
 color_concat_prompt="${COLOR_CODE_ESCAPE}${STYLE_CODE_REGULAR};${color_code_primary}m"
+
+alias ls="ls --color=auto"
+alias grep="grep --color=auto"
+alias egrep="egrep --color=auto"
 
 export TZ="America/Denver"
 
