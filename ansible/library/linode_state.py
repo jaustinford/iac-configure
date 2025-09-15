@@ -55,10 +55,13 @@ def api_get_instance_status(token: str, instance_id: str):
     instance status.
     """
 
-    instance_info = api_get(
-        token,
-        "instances/" + instance_id
-    )
+    instance_info = {"status": ""}
+
+    while not instance_info["status"]:
+        instance_info = api_get(
+            token,
+            "instances/" + instance_id
+        )
 
     return instance_info["status"]
 
