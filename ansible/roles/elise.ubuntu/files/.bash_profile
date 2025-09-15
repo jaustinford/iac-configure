@@ -1,38 +1,35 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+###########################################################
 
 COLOR_NAME_PRIMARY="purple"
 COLOR_NAME_SECONDARY="white"
 COLOR_NAME_TERTIARY="lightgrey"
 
-COLOR_CODE_ESCAPE="\033["
-COLOR_CODE_RESET="${COLOR_CODE_ESCAPE}0m"
-
-STYLE_CODE_REGULAR="0"
-STYLE_CODE_BOLD="1"
-STYLE_CODE_ITALICS="3"
-
-BASH_COLORS=(
-    "90:lightgrey"
-    "91:lightred"
-    "92:lightgreen"
-    "93:lightyellow"
-    "94:lightblue"
-    "95:lightpurple"
-    "96:lightcyan"
-    "30:grey"
-    "31:red"
-    "32:green"
-    "33:yellow"
-    "34:blue"
-    "35:purple"
-    "36:cyan"
-    "0:white"
-)
+###########################################################
 
 resolve_color_code() {
     color_name_query="${1}"
 
-    for bash_color in ${BASH_COLORS[@]}; do
+    bash_colors=(
+        "0:white"
+        "30:grey"
+        "31:red"
+        "32:green"
+        "33:yellow"
+        "34:blue"
+        "35:purple"
+        "36:cyan"
+        "90:lightgrey"
+        "91:lightred"
+        "92:lightgreen"
+        "93:lightyellow"
+        "94:lightblue"
+        "95:lightpurple"
+        "96:lightcyan"
+    )
+
+    for bash_color in ${bash_colors[@]}; do
         bash_color_code="$(echo ${bash_color} | cut -d ':' -f1)"
         bash_color_name="$(echo ${bash_color} | cut -d ':' -f2)"
 
@@ -45,26 +42,35 @@ resolve_color_code() {
     done
 }
 
-color_code_primary=$(resolve_color_code "${COLOR_NAME_PRIMARY}")
-color_code_secondary=$(resolve_color_code "${COLOR_NAME_SECONDARY}")
-color_code_tertiary=$(resolve_color_code "${COLOR_NAME_TERTIARY}")
+export_ps1() {
+    c_primary="${1}"
+    c_secondary="${2}"
+    c_tertiary="${3}"
 
-color_concat_user="${COLOR_CODE_ESCAPE}${STYLE_CODE_ITALICS};${color_code_primary}m"
-color_concat_time="${COLOR_CODE_ESCAPE}${STYLE_CODE_REGULAR};${color_code_primary}m"
-color_concat_host="${COLOR_CODE_ESCAPE}${STYLE_CODE_BOLD};${color_code_secondary}m"
-color_concat_cwd="${COLOR_CODE_ESCAPE}${STYLE_CODE_REGULAR};${color_code_tertiary}m"
-color_concat_prompt="${COLOR_CODE_ESCAPE}${STYLE_CODE_REGULAR};${color_code_primary}m"
+    c_escape="\[\e["
+    c_close="m\]"
+    c_reset="${c_escape}0${c_close}"
+
+    s_regular="0"
+    s_bold="1"
+
+    export PS1="\n \
+[ ${c_escape}${s_bold};${c_primary}${c_close}\u${c_reset} ] \
+${c_escape}${s_bold};${c_secondary}${c_close}\H${c_reset}:\
+${c_escape}${s_regular};${c_tertiary}${c_close}\w${c_reset} \
+[ ${c_escape}${s_regular};${c_primary}${c_close}\d${c_reset} - \
+${c_escape}${s_regular};${c_primary}${c_close}\t${c_reset} ]\n   \
+${c_escape}${s_regular};${c_primary}${c_close}\$${c_reset} "
+}
 
 alias ls="ls --color=auto"
 alias grep="grep --color=auto"
 alias egrep="egrep --color=auto"
+alias _source="source ~/.bash_profile"
 
 export TZ="America/Denver"
 
-export PS1="\n \
-[ ${color_concat_user}\u${COLOR_CODE_RESET} ] \
-${color_concat_host}\H${COLOR_CODE_RESET}:\
-${color_concat_cwd}\w${COLOR_CODE_RESET} \
-[ ${color_concat_time}\d${COLOR_CODE_RESET} - \
-${color_concat_time}\t${COLOR_CODE_RESET} ]\n   \
-${color_concat_prompt}\$${COLOR_CODE_RESET} "
+export_ps1 \
+    $(resolve_color_code "${COLOR_NAME_PRIMARY}") \
+    $(resolve_color_code "${COLOR_NAME_SECONDARY}") \
+    $(resolve_color_code "${COLOR_NAME_TERTIARY}")
