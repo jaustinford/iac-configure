@@ -23,6 +23,7 @@
 - name: UP - gather facts
   hosts: all
   gather_facts: true
+  gather_timeout: 60
 
 - name: UP - import raspberrypi playbook
   import_playbook: raspberrypi.yml

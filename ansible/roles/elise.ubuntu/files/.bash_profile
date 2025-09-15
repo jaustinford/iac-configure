@@ -63,6 +63,7 @@ ${c_escape}${s_regular};${c_primary}${c_close}\t${c_reset} )\n   \
 ${c_escape}${s_regular};${c_primary}${c_close}\$${c_reset} "
 }
 
+alias tree="tree -aC"
 alias ls="ls --color=auto"
 alias grep="grep --color=auto"
 alias egrep="egrep --color=auto"
