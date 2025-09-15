@@ -1,0 +1,6 @@
+---
+- name: MAIN - systemctl restart glusterd
+  ansible.builtin.systemd:
+    name: glusterd
+    state: restarted
+  become: true

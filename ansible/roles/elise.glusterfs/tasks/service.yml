@@ -5,3 +5,19 @@
     state: "{{ glusterfs.service.state }}"
     enabled: true
   become: true
+
+- name: SERVICE - copy daemon files
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+  notify: MAIN - systemctl restart glusterd
+  become: true
+  with_items:
+    - src: glusterd.vol
+      dest: /etc/glusterfs/glusterd.vol
+      owner: root
+      group: root
+      mode: '0644'

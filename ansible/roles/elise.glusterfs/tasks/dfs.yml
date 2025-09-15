@@ -13,4 +13,7 @@
     replicas: "{{ glusterfs.dfs.replicas }}"
     transport: "{{ glusterfs.dfs.transport }}"
     cluster: "{{ glusterfs.peers }}"
+    options:
+      transport.socket.bind-address: "{{ ansible_facts[lan_interface.uisge].ipv4.address }}"
+      auth.allow: "{{ glusterfs.peers | join(',') }}"
   become: true
