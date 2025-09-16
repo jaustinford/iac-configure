@@ -36,6 +36,7 @@ container:
     TZ: "{{ containers_globals.env.TZ }}"
   ports:
     - "{{ assignments.expressvpn.networking.teine.ipv4 }}:{{ external_ports.expressvpn_squid }}:3128/tcp"
+    - "{{ assignments.expressvpn.networking.talamh.ipv4 }}:{{ external_ports.expressvpn_squid }}:3128/tcp"
     - "{{ assignments.expressvpn.networking.teine.ipv4 }}:{{ external_ports.expressvpn_deluge }}:8112/tcp"
   volumes:
     - "{{ lab_dirs.configuration_directory }}/expressvpn/vpn:/vpn:ro"
