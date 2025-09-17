@@ -1,5 +1,6 @@
 ---
 tvault_gid: 32600
+cifs_globals: uid=0,gid={{ tvault_gid }},dir_mode=0770,file_mode=0660
 
 mounts:
 
@@ -13,7 +14,7 @@ mounts:
     group: tvault-users
     mode: "0770"
     src: "//192.168.20.5/{{ secrets.tvault_users.tvault_root_ro.username[:-3] }}"
-    opts: "username={{ secrets.tvault_users.tvault_root_ro.username }},password={{ secrets.tvault_users.tvault_root_ro.password }},uid=0,gid={{ tvault_gid }},dir_mode=0770,file_mode=0660"
+    opts: "username={{ secrets.tvault_users.tvault_root_ro.username }},password={{ secrets.tvault_users.tvault_root_ro.password }},{{ cifs_globals }}"
     path: "/mnt/{{ secrets.tvault_users.tvault_root_ro.username }}"
     state: "{{ cycle_mode.volumes.tvault }}"
 
@@ -23,7 +24,7 @@ mounts:
     group: tvault-users
     mode: "0770"
     src: "//192.168.20.5/{{ secrets.tvault_users.tvault_plex_ro.username[:-3] }}"
-    opts: "username={{ secrets.tvault_users.tvault_plex_ro.username }},password={{ secrets.tvault_users.tvault_plex_ro.password }},uid=0,gid={{ tvault_gid }},dir_mode=0770,file_mode=0660"
+    opts: "username={{ secrets.tvault_users.tvault_plex_ro.username }},password={{ secrets.tvault_users.tvault_plex_ro.password }},{{ cifs_globals }}"
     path: "/mnt/{{ secrets.tvault_users.tvault_plex_ro.username }}"
     state: "{{ cycle_mode.volumes.tvault }}"
 
@@ -33,7 +34,7 @@ mounts:
     group: tvault-users
     mode: "0770"
     src: "//192.168.20.5/{{ secrets.tvault_users.tvault_plex_rw.username[:-3] }}"
-    opts: "username={{ secrets.tvault_users.tvault_plex_rw.username }},password={{ secrets.tvault_users.tvault_plex_rw.password }},uid=0,gid={{ tvault_gid }},dir_mode=0770,file_mode=0660"
+    opts: "username={{ secrets.tvault_users.tvault_plex_rw.username }},password={{ secrets.tvault_users.tvault_plex_rw.password }},{{ cifs_globals }}"
     path: "/mnt/{{ secrets.tvault_users.tvault_plex_rw.username }}"
     state: "{{ cycle_mode.volumes.tvault }}"
 
@@ -43,7 +44,7 @@ mounts:
     group: tvault-users
     mode: "0770"
     src: "//192.168.20.5/{{ secrets.tvault_users.tvault_deluge_rw.username[:-3] }}"
-    opts: "username={{ secrets.tvault_users.tvault_deluge_rw.username }},password={{ secrets.tvault_users.tvault_deluge_rw.password }},uid=0,gid={{ tvault_gid }},dir_mode=0770,file_mode=0660"
+    opts: "username={{ secrets.tvault_users.tvault_deluge_rw.username }},password={{ secrets.tvault_users.tvault_deluge_rw.password }},{{ cifs_globals }}"
     path: "/mnt/{{ secrets.tvault_users.tvault_deluge_rw.username }}"
     state: "{{ cycle_mode.volumes.tvault }}"
 
@@ -53,7 +54,7 @@ mounts:
     group: tvault-users
     mode: "0770"
     src: "//192.168.20.5/{{ secrets.tvault_users.tvault_deluge_rw.username[:-3] }}"
-    opts: "username={{ secrets.tvault_users.tvault_deluge_rw.username }},password={{ secrets.tvault_users.tvault_deluge_rw.password }},uid=0,gid={{ tvault_gid }},dir_mode=0770,file_mode=0660"
+    opts: "username={{ secrets.tvault_users.tvault_deluge_rw.username }},password={{ secrets.tvault_users.tvault_deluge_rw.password }},{{ cifs_globals }}"
     path: "/mnt/{{ secrets.tvault_users.tvault_deluge_rw.username }}"
     state: "{{ cycle_mode.volumes.tvault }}"
 
