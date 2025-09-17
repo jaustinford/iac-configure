@@ -33,7 +33,7 @@ container:
     PGID: "{{ containers_globals.env.PGID }}"
   ports: []
   volumes:
-    - /mnt/tvault/deluge:/downloads:rw
+    - "/mnt/{{ secrets.tvault_users.tvault_deluge_rw.username }}:/downloads:rw"
     - "{{ lab_dirs.configuration_directory }}/deluge/auth:/config/auth:ro"
     - "{{ lab_dirs.configuration_directory }}/deluge/core.conf:/config/core.conf:ro"
     - "{{ lab_dirs.configuration_directory }}/deluge/hostlist.conf:/config/hostlist.conf:ro"

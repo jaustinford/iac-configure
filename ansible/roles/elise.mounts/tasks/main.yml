@@ -2,6 +2,6 @@
 - name: MAIN - include mount tasks
   ansible.builtin.include_tasks: mount.yml
   no_log: true
-  when: lan_interface.uisge is defined
+  when: lan_interface.uisge is defined and item.host == ansible_hostname
   with_items:
     - "{{ mounts }}"

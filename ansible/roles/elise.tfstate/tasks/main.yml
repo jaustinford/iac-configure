@@ -1,7 +1,7 @@
 ---
 - name: MAIN - fetch tfstate file
   ansible.builtin.fetch:
-    src: /mnt/tvault/austin/elysianskies/tfstate/elysianskies.json
+    src: /mnt/tvault/root/elysianskies/tfstate/elysianskies.json
     dest: /tfstate/elysianskies.json
     flat: true
   changed_when: false

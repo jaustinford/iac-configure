@@ -33,6 +33,6 @@ container:
     PLEX_TOKEN: "{{ secrets.plex.token }}"
   ports: []
   volumes:
-    - /mnt/tvault/deluge:/downloads:rw
-    - /mnt/tvault/video/plex_libraries:/plex_libraries:rw
+    - "/mnt/{{ secrets.tvault_users.tvault_deluge_rw.username }}:/downloads:rw"
+    - "/mnt/{{ secrets.tvault_users.tvault_plex_rw.username }}:/plex_libraries:rw"
   wait_port: "0"

@@ -1,15 +1,15 @@
 ---
 - name: MOUNT - create tvault user group
   ansible.builtin.group:
-    name: tvault
+    name: tvault-users
     state: present
-    gid: 1066
+    gid: "{{ tvault_gid }}"
   become: true
 
 - name: MOUNT - add user to tvault group
   ansible.builtin.user:
     name: "{{ ansible_user }}"
-    groups: tvault
+    groups: tvault-users
     append: true
   become: true
 

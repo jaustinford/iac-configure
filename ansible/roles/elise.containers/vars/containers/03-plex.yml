@@ -47,5 +47,5 @@ container:
   volumes:
     - "{{ lab_dirs.application_directory }}/plex/Application Support:/config/Library/Application Support:rw"
     - /tmp/transcode:/transcode:rw
-    - /mnt/tvault/video/plex_libraries:/plex_libraries:ro
+    - "/mnt/{{ secrets.tvault_users.tvault_plex_ro.username }}:/plex_libraries:ro"
   wait_port: "{{ external_ports.plex_web }}"

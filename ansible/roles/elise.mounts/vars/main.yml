@@ -1,15 +1,78 @@
 ---
+tvault_gid: 32600
+
 mounts:
-  - fstype: cifs
-    src: //192.168.20.5/tvault
+
+    ###########################################################+
+    # tvault
+    ###########################################################
+
+  - host: docker02
+    fstype: cifs
     owner: root
-    group: tvault
+    group: tvault-users
     mode: "0770"
-    opts: "username={{ secrets.hosts.nas.user.username }},password={{ secrets.hosts.nas.user.password }},uid=0,gid=1066,dir_mode=0770,file_mode=0660"
-    path: /mnt/tvault
+    src: "//192.168.20.5/{{ secrets.tvault_users.tvault_root_ro.username[:-3] }}"
+    opts: "username={{ secrets.tvault_users.tvault_root_ro.username }},password={{ secrets.tvault_users.tvault_root_ro.password }},uid=0,gid={{ tvault_gid }},dir_mode=0770,file_mode=0660"
+    path: "/mnt/{{ secrets.tvault_users.tvault_root_ro.username }}"
     state: "{{ cycle_mode.volumes.tvault }}"
 
-  - fstype: ext4
+  - host: docker01
+    fstype: cifs
+    owner: root
+    group: tvault-users
+    mode: "0770"
+    src: "//192.168.20.5/{{ secrets.tvault_users.tvault_plex_ro.username[:-3] }}"
+    opts: "username={{ secrets.tvault_users.tvault_plex_ro.username }},password={{ secrets.tvault_users.tvault_plex_ro.password }},uid=0,gid={{ tvault_gid }},dir_mode=0770,file_mode=0660"
+    path: "/mnt/{{ secrets.tvault_users.tvault_plex_ro.username }}"
+    state: "{{ cycle_mode.volumes.tvault }}"
+
+  - host: docker02
+    fstype: cifs
+    owner: root
+    group: tvault-users
+    mode: "0770"
+    src: "//192.168.20.5/{{ secrets.tvault_users.tvault_plex_rw.username[:-3] }}"
+    opts: "username={{ secrets.tvault_users.tvault_plex_rw.username }},password={{ secrets.tvault_users.tvault_plex_rw.password }},uid=0,gid={{ tvault_gid }},dir_mode=0770,file_mode=0660"
+    path: "/mnt/{{ secrets.tvault_users.tvault_plex_rw.username }}"
+    state: "{{ cycle_mode.volumes.tvault }}"
+
+  - host: docker01
+    fstype: cifs
+    owner: root
+    group: tvault-users
+    mode: "0770"
+    src: "//192.168.20.5/{{ secrets.tvault_users.tvault_deluge_rw.username[:-3] }}"
+    opts: "username={{ secrets.tvault_users.tvault_deluge_rw.username }},password={{ secrets.tvault_users.tvault_deluge_rw.password }},uid=0,gid={{ tvault_gid }},dir_mode=0770,file_mode=0660"
+    path: "/mnt/{{ secrets.tvault_users.tvault_deluge_rw.username }}"
+    state: "{{ cycle_mode.volumes.tvault }}"
+
+  - host: docker02
+    fstype: cifs
+    owner: root
+    group: tvault-users
+    mode: "0770"
+    src: "//192.168.20.5/{{ secrets.tvault_users.tvault_deluge_rw.username[:-3] }}"
+    opts: "username={{ secrets.tvault_users.tvault_deluge_rw.username }},password={{ secrets.tvault_users.tvault_deluge_rw.password }},uid=0,gid={{ tvault_gid }},dir_mode=0770,file_mode=0660"
+    path: "/mnt/{{ secrets.tvault_users.tvault_deluge_rw.username }}"
+    state: "{{ cycle_mode.volumes.tvault }}"
+
+    ###########################################################
+    # glusterfs
+    ###########################################################
+
+  - host: docker01
+    fstype: ext4
+    src: /dev/mapper/ubuntu--vg-dfs_lvm
+    owner: austin
+    group: austin
+    mode: "0755"
+    opts: defaults
+    path: /mnt/dfs_lvm
+    state: "{{ cycle_mode.volumes.dfs_lvm }}"
+
+  - host: docker02
+    fstype: ext4
     src: /dev/mapper/ubuntu--vg-dfs_lvm
     owner: austin
     group: austin
