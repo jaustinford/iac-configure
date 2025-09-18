@@ -31,7 +31,7 @@ container:
     TZ: "{{ containers_globals.env.TZ }}"
     WEBPASSWORD: "{{ secrets.pihole.webpassword }}"
     ServerIP: "{{ assignments.pihole.networking.teine.ipv4 }}"
-    ADMIN_EMAIL: j.austin.ford@gmail.com
+    ADMIN_EMAIL: "{{ secrets.admin_email }}"
     TEMPERATUREUNIT: F
     WEBTHEME: default-dark
     PIHOLE_DNS_1: "{{ containers_globals.dns_servers[1] }}"

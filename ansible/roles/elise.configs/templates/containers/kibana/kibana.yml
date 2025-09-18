@@ -4,8 +4,8 @@ server:
   host: 0.0.0.0
 
 elasticsearch:
-  username: {{ secrets.elastic.kibana_system.username }}
-  password: {{ secrets.elastic.kibana_system.password }}
+  username: {{ secrets.elasticsearch.kibana_system.username }}
+  password: {{ secrets.elasticsearch.kibana_system.password }}
   hosts:
     - http://{{ assignments.elasticsearch.networking.teine.ipv4 }}:{{ external_ports.elasticsearch_db }}
 

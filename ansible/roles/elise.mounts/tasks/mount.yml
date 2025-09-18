@@ -6,13 +6,6 @@
     gid: "{{ tvault_gid }}"
   become: true
 
-- name: MOUNT - add user to tvault group
-  ansible.builtin.user:
-    name: "{{ ansible_user }}"
-    groups: tvault-users
-    append: true
-  become: true
-
 - name: "MOUNT - ensure mount path {{ item.path }}"
   ansible.builtin.file:
     path: "{{ item.path }}"

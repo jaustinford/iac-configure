@@ -12,4 +12,4 @@ ssh:
         A8ZWULe7uJj5uR0x2SLNX1H7jnZJwBeasPFSfaGPifkJNkAzuFLKsY9shMSLmLaLfgQ4vZt\
         FyboAVvVZfMw1I5wKGhBCT5PJJ4VwuO1YX8gz7GWwc+FD/omwX6uH3LMMaCb9RKMcETXw1a\
         B1CXEA1t3qSkIQ/G7jSdDKlPZiIvPJOGeFRZTwepvtdoBYL2kmx/UcS3BFZxXkdKN8C+p9/\
-        vg+sX9A+WE1BaBTw== austin@elysianskies.com"
+        vg+sX9A+WE1BaBTw== {{ ansible_user }}@elysianskies.com"

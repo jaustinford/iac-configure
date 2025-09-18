@@ -1,6 +1,6 @@
 ---
 ssmtp:
-  email: j.austin.ford@gmail.com
+  email: "{{ secrets.admin_email }}"
   email_server: smtp.gmail.com:587
 
 deluge:

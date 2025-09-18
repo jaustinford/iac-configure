@@ -1,4 +1,12 @@
 ---
+- name: MAIN - add privileged_user to groups
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"
+    groups:
+      - "{{ ansible_user }}"
+      - sudo
+  become: true
+
 - name: MAIN - include hosts tasks
   ansible.builtin.include_tasks: hosts.yml
   when: ansible_system_vendor != "Linode"

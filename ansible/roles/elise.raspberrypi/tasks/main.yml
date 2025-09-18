@@ -6,7 +6,7 @@
 - name: MAIN - include git tasks
   ansible.builtin.include_tasks: git.yml
   vars:
-    gitlab_credential: "{{ secrets.gitlab.root.username }}:{{ secrets.gitlab.root.password | urlencode }}"
+    gitlab_credential: "{{ secrets.gitlab.user.username }}:{{ secrets.gitlab.user.password | urlencode }}"
   when: ansible_architecture == "aarch64" and lazarus_node is defined
   with_items:
     - project:

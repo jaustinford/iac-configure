@@ -1,7 +1,7 @@
 ---
-ansible_user: "{{ secrets.hosts.nas.root.username }}"
-ansible_password: "{{ secrets.hosts.nas.root.password }}"
-ansible_become_password: "{{ secrets.hosts.nas.root.password }}"
+ansible_user: "{{ secrets.nas.privileged_user.username }}"
+ansible_password: "{{ secrets.nas.privileged_user.password }}"
+ansible_become_password: "{{ secrets.nas.privileged_user.password }}"
 
 lan_interface:
   teine: re0

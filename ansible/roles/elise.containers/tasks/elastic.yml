@@ -9,8 +9,8 @@
     auth_method: http_auth
     login_hosts: ["{{ assignments.elasticsearch.networking.teine.ipv4 }}"]
     login_port: "{{ external_ports.elasticsearch_db }}"
-    login_user: "{{ secrets.elastic.james_austin.username }}"
-    login_password: "{{ secrets.elastic.james_austin.password }}"
+    login_user: "{{ secrets.elasticsearch.user.username }}"
+    login_password: "{{ secrets.elasticsearch.user.password }}"
   vars:
     ansible_python_interpreter: /usr/local/bin/python3
   loop_control:
