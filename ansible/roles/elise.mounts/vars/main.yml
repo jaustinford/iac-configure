@@ -58,6 +58,16 @@ mounts:
     path: "/mnt/{{ secrets.nas.tvault_deluge_rw.username }}"
     state: "{{ cycle_mode.volumes.tvault }}"
 
+  - host: docker02
+    fstype: cifs
+    owner: "{{ secrets.docker02.superuser.username }}"
+    group: tvault-users
+    mode: "0770"
+    src: "//192.168.20.5/{{ secrets.nas.tvault_tf_rw.username[:-3] }}"
+    opts: "username={{ secrets.nas.tvault_tf_rw.username }},password={{ secrets.nas.tvault_tf_rw.password }},{{ cifs_globals }}"
+    path: "/mnt/{{ secrets.nas.tvault_tf_rw.username }}"
+    state: "{{ cycle_mode.volumes.tvault }}"
+
     ###########################################################
     # glusterfs
     ###########################################################

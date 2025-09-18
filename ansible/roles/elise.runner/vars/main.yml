@@ -9,5 +9,5 @@ runner:
   docker_volumes:
     - /var/run/docker.sock:/var/run/docker.sock:rw
     - "{{ ansible_user_dir }}/.docker:/root/.docker:rw"
-    - /mnt/tvault/elysianskies/tfstate:/tfstate:rw
-    - /mnt/tvault/video/plex_libraries:/plex_libraries:rw
+    - /mnt/tvault-tf-rw:/tfstate:rw
+    - /mnt/tvault-plex-rw:/plex_libraries:rw
