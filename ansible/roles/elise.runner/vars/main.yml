@@ -8,6 +8,6 @@ runner:
   docker_privileged: "true"
   docker_volumes:
     - /var/run/docker.sock:/var/run/docker.sock:rw
-    - "{{ ansible_user_dir }}/.docker:/root/.docker:rw"
+    - /root/.docker:/root/.docker:rw"
     - /mnt/tvault-tf-rw:/tfstate:rw
     - /mnt/tvault-plex-rw:/plex_libraries:rw
