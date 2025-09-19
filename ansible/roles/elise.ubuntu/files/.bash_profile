@@ -2,9 +2,17 @@
 
 ###########################################################
 
-COLOR_NAME_PRIMARY="purple"
-COLOR_NAME_SECONDARY="white"
-COLOR_NAME_TERTIARY="lightgrey"
+if [ "${USERNAME}" != "merlin" ]; then
+    COLOR_NAME_PRIMARY="red"
+    COLOR_NAME_SECONDARY="white"
+    COLOR_NAME_TERTIARY="lightgrey"
+
+else
+    COLOR_NAME_PRIMARY="purple"
+    COLOR_NAME_SECONDARY="white"
+    COLOR_NAME_TERTIARY="lightgrey"
+
+fi
 
 ###########################################################
 
