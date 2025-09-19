@@ -16,4 +16,5 @@
     name: "nexus-hosted.{{ assignments.nginx.networking.teine.fqdn }}/elise/{{ item.image.name }}"
     tag: "{{ item.image.tag }}"
   no_log: true
+  become: true
   when: discovered_nexus.status == 200
