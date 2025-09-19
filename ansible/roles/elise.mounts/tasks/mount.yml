@@ -1,7 +1,7 @@
 ---
 - name: MOUNT - create tvault user group
   ansible.builtin.group:
-    name: tvault-users
+    name: roundtable
     state: present
     gid: "{{ tvault_gid }}"
   become: true
