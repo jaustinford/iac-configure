@@ -1,0 +1,38 @@
+---
+- name: SAMBA - create xcalibr user group
+  ansible.builtin.group:
+    name: "{{ xcalibr.group_name }}"
+    gid: "{{ xcalibr.group_id }}"
+    state: present
+  become: true
+
+- name: "SAMBA - ensure mount path {{ item.path }}"
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: directory
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+  become: true
+
+- name: "SAMBA - create credentials file {{ item.path }}"
+  ansible.builtin.copy:
+    content: |
+      username={{ item.username }}
+      password={{ item.password }}
+    dest: "/root/.{{ item.username }}.smbcredentials"
+    owner: root
+    group: root
+    mode: '0600'
+  become: true
+  no_log: true
+
+- name: "SAMBA - mount volume {{ item.path }}"
+  ansible.posix.mount:
+    fstype: "{{ item.fstype }}"
+    src: "{{ item.src }}"
+    opts: "credentials=/root/.{{ item.username }}.smbcredentials,{{ item.globals }}"
+    path: "{{ item.path }}"
+    state: "{{ item.state }}"
+  become: true
+  no_log: true

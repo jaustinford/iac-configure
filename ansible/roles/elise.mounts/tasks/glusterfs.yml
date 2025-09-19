@@ -1,12 +1,5 @@
 ---
-- name: MOUNT - create xcalibr user group
-  ansible.builtin.group:
-    name: "{{ xcalibr.group_name }}"
-    state: present
-    gid: "{{ xcalibr.group_id }}"
-  become: true
-
-- name: "MOUNT - ensure mount path {{ item.path }}"
+- name: "GLUSTERFS - ensure mount path {{ item.path }}"
   ansible.builtin.file:
     path: "{{ item.path }}"
     state: directory
@@ -15,11 +8,11 @@
     mode: "{{ item.mode }}"
   become: true
 
-- name: "MOUNT - mount volume {{ item.path }}"
+- name: "GLUSTERFS - mount volume {{ item.path }}"
   ansible.posix.mount:
     fstype: "{{ item.fstype }}"
     src: "{{ item.src }}"
-    opts: "{{ item.opts }}"
+    opts: defaults
     path: "{{ item.path }}"
     state: "{{ item.state }}"
   become: true

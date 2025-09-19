@@ -36,14 +36,6 @@
     group: "{{ ansible_user }}"
     mode: '0755'
 
-- name: MAIN - manage local docker configuration
-  ansible.builtin.template:
-    src: config.json
-    dest: "{{ ansible_user_dir }}/.docker/config.json"
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    mode: '0600'
-
 - name: MAIN - manage docker configuration
   ansible.builtin.template:
     src: "{{ item.src }}"

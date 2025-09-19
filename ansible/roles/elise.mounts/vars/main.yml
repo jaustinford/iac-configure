@@ -6,91 +6,94 @@ xcalibr:
 cifs_globals: uid=0,gid={{ xcalibr.group_name }},dir_mode=0770,file_mode=0660
 
 mounts:
+  samba:
+    - host: docker02
+      fstype: cifs
+      owner: "{{ secrets.docker02.superuser.username }}"
+      group: "{{ xcalibr.group_name }}"
+      mode: "0770"
+      src: //192.168.20.5/xcalibr-root
+      username: "{{ secrets.nas.xcalibr_root_ro.username }}"
+      password: "{{ secrets.nas.xcalibr_root_ro.password }}"
+      globals: "{{ cifs_globals }}"
+      path: /mnt/xcalibr-root
+      state: "{{ cycle_mode.volumes.xcalibr }}"
 
-    ###########################################################
-    # xcalibr
-    ###########################################################
+    - host: docker01
+      fstype: cifs
+      owner: "{{ secrets.docker01.superuser.username }}"
+      group: "{{ xcalibr.group_name }}"
+      mode: "0770"
+      src: //192.168.20.5/xcalibr-plex_libraries
+      username: "{{ secrets.nas.xcalibr_plex_libraries_ro.username }}"
+      password: "{{ secrets.nas.xcalibr_plex_libraries_ro.password }}"
+      globals: "{{ cifs_globals }}"
+      path: /mnt/xcalibr-plex_libraries
+      state: "{{ cycle_mode.volumes.xcalibr }}"
 
-  - host: docker02
-    fstype: cifs
-    owner: "{{ secrets.docker02.superuser.username }}"
-    group: "{{ xcalibr.group_name }}"
-    mode: "0770"
-    src: //192.168.20.5/xcalibr-root
-    opts: "username={{ secrets.nas.xcalibr_root_ro.username }},password={{ secrets.nas.xcalibr_root_ro.password }},{{ cifs_globals }}"
-    path: /mnt/xcalibr-root
-    state: "{{ cycle_mode.volumes.xcalibr }}"
+    - host: docker02
+      fstype: cifs
+      owner: "{{ secrets.docker02.superuser.username }}"
+      group: "{{ xcalibr.group_name }}"
+      mode: "0770"
+      src: //192.168.20.5/xcalibr-plex_libraries
+      username: "{{ secrets.nas.xcalibr_plex_libraries_rw.username }}"
+      password: "{{ secrets.nas.xcalibr_plex_libraries_rw.password }}"
+      globals: "{{ cifs_globals }}"
+      path: /mnt/xcalibr-plex_libraries
+      state: "{{ cycle_mode.volumes.xcalibr }}"
 
-  - host: docker01
-    fstype: cifs
-    owner: "{{ secrets.docker01.superuser.username }}"
-    group: "{{ xcalibr.group_name }}"
-    mode: "0770"
-    src: //192.168.20.5/xcalibr-plex_libraries
-    opts: "username={{ secrets.nas.xcalibr_plex_ro.username }},password={{ secrets.nas.xcalibr_plex_ro.password }},{{ cifs_globals }}"
-    path: /mnt/xcalibr-plex_libraries
-    state: "{{ cycle_mode.volumes.xcalibr }}"
+    - host: docker01
+      fstype: cifs
+      owner: "{{ secrets.docker01.superuser.username }}"
+      group: "{{ xcalibr.group_name }}"
+      mode: "0770"
+      src: //192.168.20.5/xcalibr-deluge
+      username: "{{ secrets.nas.xcalibr_deluge_rw.username }}"
+      password: "{{ secrets.nas.xcalibr_deluge_rw.password }}"
+      globals: "{{ cifs_globals }}"
+      path: /mnt/xcalibr-deluge
+      state: "{{ cycle_mode.volumes.xcalibr }}"
 
-  - host: docker02
-    fstype: cifs
-    owner: "{{ secrets.docker02.superuser.username }}"
-    group: "{{ xcalibr.group_name }}"
-    mode: "0770"
-    src: //192.168.20.5/xcalibr-plex_libraries
-    opts: "username={{ secrets.nas.xcalibr_plex_rw.username }},password={{ secrets.nas.xcalibr_plex_rw.password }},{{ cifs_globals }}"
-    path: /mnt/xcalibr-plex_libraries
-    state: "{{ cycle_mode.volumes.xcalibr }}"
+    - host: docker02
+      fstype: cifs
+      owner: "{{ secrets.docker02.superuser.username }}"
+      group: "{{ xcalibr.group_name }}"
+      mode: "0770"
+      src: //192.168.20.5/xcalibr-deluge
+      username: "{{ secrets.nas.xcalibr_deluge_rw.username }}"
+      password: "{{ secrets.nas.xcalibr_deluge_rw.password }}"
+      globals: "{{ cifs_globals }}"
+      path: /mnt/xcalibr-deluge
+      state: "{{ cycle_mode.volumes.xcalibr }}"
 
-  - host: docker01
-    fstype: cifs
-    owner: "{{ secrets.docker01.superuser.username }}"
-    group: "{{ xcalibr.group_name }}"
-    mode: "0770"
-    src: //192.168.20.5/xcalibr-deluge
-    opts: "username={{ secrets.nas.xcalibr_deluge_rw.username }},password={{ secrets.nas.xcalibr_deluge_rw.password }},{{ cifs_globals }}"
-    path: /mnt/xcalibr-deluge
-    state: "{{ cycle_mode.volumes.xcalibr }}"
+    - host: docker02
+      fstype: cifs
+      owner: "{{ secrets.docker02.superuser.username }}"
+      group: "{{ xcalibr.group_name }}"
+      mode: "0770"
+      src: //192.168.20.5/xcalibr-tfstate
+      username: "{{ secrets.nas.xcalibr_tfstate_rw.username }}"
+      password: "{{ secrets.nas.xcalibr_tfstate_rw.password }}"
+      globals: "{{ cifs_globals }}"
+      path: /mnt/xcalibr-tfstate
+      state: "{{ cycle_mode.volumes.xcalibr }}"
 
-  - host: docker02
-    fstype: cifs
-    owner: "{{ secrets.docker02.superuser.username }}"
-    group: "{{ xcalibr.group_name }}"
-    mode: "0770"
-    src: //192.168.20.5/xcalibr-deluge
-    opts: "username={{ secrets.nas.xcalibr_deluge_rw.username }},password={{ secrets.nas.xcalibr_deluge_rw.password }},{{ cifs_globals }}"
-    path: /mnt/xcalibr-deluge
-    state: "{{ cycle_mode.volumes.xcalibr }}"
+  glusterfs:
+    - host: docker01
+      fstype: ext4
+      src: /dev/mapper/ubuntu--vg-dfs_lvm
+      owner: "{{ secrets.docker01.superuser.username }}"
+      group: "{{ secrets.docker01.superuser.username }}"
+      mode: "0755"
+      path: /mnt/dfs_lvm
+      state: "{{ cycle_mode.volumes.dfs_lvm }}"
 
-  - host: docker02
-    fstype: cifs
-    owner: "{{ secrets.docker02.superuser.username }}"
-    group: "{{ xcalibr.group_name }}"
-    mode: "0770"
-    src: //192.168.20.5/xcalibr-tfstate
-    opts: "username={{ secrets.nas.xcalibr_tf_rw.username }},password={{ secrets.nas.xcalibr_tf_rw.password }},{{ cifs_globals }}"
-    path: /mnt/xcalibr-tfstate
-    state: "{{ cycle_mode.volumes.xcalibr }}"
-
-    ###########################################################
-    # glusterfs
-    ###########################################################
-
-  - host: docker01
-    fstype: ext4
-    src: /dev/mapper/ubuntu--vg-dfs_lvm
-    owner: "{{ secrets.docker01.superuser.username }}"
-    group: "{{ secrets.docker01.superuser.username }}"
-    mode: "0755"
-    opts: defaults
-    path: /mnt/dfs_lvm
-    state: "{{ cycle_mode.volumes.dfs_lvm }}"
-
-  - host: docker02
-    fstype: ext4
-    src: /dev/mapper/ubuntu--vg-dfs_lvm
-    owner: "{{ secrets.docker02.superuser.username }}"
-    group: "{{ secrets.docker02.superuser.username }}"
-    mode: "0755"
-    opts: defaults
-    path: /mnt/dfs_lvm
-    state: "{{ cycle_mode.volumes.dfs_lvm }}"
+    - host: docker02
+      fstype: ext4
+      src: /dev/mapper/ubuntu--vg-dfs_lvm
+      owner: "{{ secrets.docker02.superuser.username }}"
+      group: "{{ secrets.docker02.superuser.username }}"
+      mode: "0755"
+      path: /mnt/dfs_lvm
+      state: "{{ cycle_mode.volumes.dfs_lvm }}"

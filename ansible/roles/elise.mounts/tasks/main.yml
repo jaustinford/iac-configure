@@ -1,7 +1,14 @@
 ---
-- name: MAIN - include mount tasks
-  ansible.builtin.include_tasks: mount.yml
+- name: MAIN - include samba tasks
+  ansible.builtin.include_tasks: samba.yml
   no_log: true
   when: lan_interface.uisge is defined and item.host == ansible_hostname
   with_items:
-    - "{{ mounts }}"
+    - "{{ mounts.samba }}"
+
+- name: MAIN - include glusterfs tasks
+  ansible.builtin.include_tasks: glusterfs.yml
+  no_log: true
+  when: lan_interface.uisge is defined and item.host == ansible_hostname
+  with_items:
+    - "{{ mounts.glusterfs }}"
