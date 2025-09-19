@@ -25,7 +25,7 @@ nginx:
   docs:
     restricted_pages:
       - inventory
-      - tvault
+      - xcalibr
       - pimp
       - six-keys
   geoip_whitelists:

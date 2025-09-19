@@ -19,7 +19,7 @@ cycle_modes:
     volumes:
       app_data: mounted
       dfs_lvm: mounted
-      tvault: mounted
+      xcalibr: mounted
 
   down:
     name: down
@@ -36,7 +36,7 @@ cycle_modes:
     volumes:
       app_data: unmounted
       dfs_lvm: unmounted
-      tvault: unmounted
+      xcalibr: unmounted
 
 docker_hosts:
   host_1:

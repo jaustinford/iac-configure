@@ -1,9 +1,9 @@
 ---
-- name: MOUNT - create tvault user group
+- name: MOUNT - create xcalibr user group
   ansible.builtin.group:
-    name: roundtable
+    name: "{{ xcalibr.group_name }}"
     state: present
-    gid: "{{ tvault_gid }}"
+    gid: "{{ xcalibr.group_id }}"
   become: true
 
 - name: "MOUNT - ensure mount path {{ item.path }}"

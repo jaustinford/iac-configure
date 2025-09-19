@@ -36,5 +36,5 @@ container:
     - "{{ lab_dirs.application_directory }}/runner/config:/etc/gitlab-runner:rw"
     - "{{ lab_dirs.application_directory }}/runner/cache:/cache:rw"
     - /var/run/docker.sock:/var/run/docker.sock:rw
-    - "{{ hostvars[assignments.runner.networking.teine.fqdn].ansible_user_dir }}/.docker:/root/.docker:rw"
+    - /root/.docker:/root/.docker:rw
   wait_port: "0"

@@ -1,6 +1,9 @@
 ---
-xcalibr_gid: 32600
-cifs_globals: uid=0,gid={{ xcalibr_gid }},dir_mode=0770,file_mode=0660
+xcalibr:
+  group_name: roundtable
+  group_id: 32600
+
+cifs_globals: uid=0,gid={{ xcalibr.group_name }},dir_mode=0770,file_mode=0660
 
 mounts:
 
@@ -11,61 +14,61 @@ mounts:
   - host: docker02
     fstype: cifs
     owner: "{{ secrets.docker02.superuser.username }}"
-    group: rountable
+    group: "{{ xcalibr.group_name }}"
     mode: "0770"
-    src: "//192.168.20.5/{{ secrets.nas.xcalibr_root_ro.username[:-3] }}"
+    src: //192.168.20.5/xcalibr-root
     opts: "username={{ secrets.nas.xcalibr_root_ro.username }},password={{ secrets.nas.xcalibr_root_ro.password }},{{ cifs_globals }}"
-    path: "/mnt/{{ secrets.nas.xcalibr_root_ro.username }}"
+    path: /mnt/xcalibr-root
     state: "{{ cycle_mode.volumes.xcalibr }}"
 
   - host: docker01
     fstype: cifs
     owner: "{{ secrets.docker01.superuser.username }}"
-    group: rountable
+    group: "{{ xcalibr.group_name }}"
     mode: "0770"
-    src: "//192.168.20.5/{{ secrets.nas.xcalibr_plex_ro.username[:-3] }}"
+    src: //192.168.20.5/xcalibr-plex_libraries
     opts: "username={{ secrets.nas.xcalibr_plex_ro.username }},password={{ secrets.nas.xcalibr_plex_ro.password }},{{ cifs_globals }}"
-    path: "/mnt/{{ secrets.nas.xcalibr_plex_ro.username }}"
+    path: /mnt/xcalibr-plex_libraries
     state: "{{ cycle_mode.volumes.xcalibr }}"
 
   - host: docker02
     fstype: cifs
     owner: "{{ secrets.docker02.superuser.username }}"
-    group: rountable
+    group: "{{ xcalibr.group_name }}"
     mode: "0770"
-    src: "//192.168.20.5/{{ secrets.nas.xcalibr_plex_rw.username[:-3] }}"
+    src: //192.168.20.5/xcalibr-plex_libraries
     opts: "username={{ secrets.nas.xcalibr_plex_rw.username }},password={{ secrets.nas.xcalibr_plex_rw.password }},{{ cifs_globals }}"
-    path: "/mnt/{{ secrets.nas.xcalibr_plex_rw.username }}"
+    path: /mnt/xcalibr-plex_libraries
     state: "{{ cycle_mode.volumes.xcalibr }}"
 
   - host: docker01
     fstype: cifs
     owner: "{{ secrets.docker01.superuser.username }}"
-    group: rountable
+    group: "{{ xcalibr.group_name }}"
     mode: "0770"
-    src: "//192.168.20.5/{{ secrets.nas.xcalibr_deluge_rw.username[:-3] }}"
+    src: //192.168.20.5/xcalibr-deluge
     opts: "username={{ secrets.nas.xcalibr_deluge_rw.username }},password={{ secrets.nas.xcalibr_deluge_rw.password }},{{ cifs_globals }}"
-    path: "/mnt/{{ secrets.nas.xcalibr_deluge_rw.username }}"
+    path: /mnt/xcalibr-deluge
     state: "{{ cycle_mode.volumes.xcalibr }}"
 
   - host: docker02
     fstype: cifs
     owner: "{{ secrets.docker02.superuser.username }}"
-    group: rountable
+    group: "{{ xcalibr.group_name }}"
     mode: "0770"
-    src: "//192.168.20.5/{{ secrets.nas.xcalibr_deluge_rw.username[:-3] }}"
+    src: //192.168.20.5/xcalibr-deluge
     opts: "username={{ secrets.nas.xcalibr_deluge_rw.username }},password={{ secrets.nas.xcalibr_deluge_rw.password }},{{ cifs_globals }}"
-    path: "/mnt/{{ secrets.nas.xcalibr_deluge_rw.username }}"
+    path: /mnt/xcalibr-deluge
     state: "{{ cycle_mode.volumes.xcalibr }}"
 
   - host: docker02
     fstype: cifs
     owner: "{{ secrets.docker02.superuser.username }}"
-    group: rountable
+    group: "{{ xcalibr.group_name }}"
     mode: "0770"
-    src: "//192.168.20.5/{{ secrets.nas.xcalibr_tf_rw.username[:-3] }}"
+    src: //192.168.20.5/xcalibr-tfstate
     opts: "username={{ secrets.nas.xcalibr_tf_rw.username }},password={{ secrets.nas.xcalibr_tf_rw.password }},{{ cifs_globals }}"
-    path: "/mnt/{{ secrets.nas.xcalibr_tf_rw.username }}"
+    path: /mnt/xcalibr-tfstate
     state: "{{ cycle_mode.volumes.xcalibr }}"
 
     ###########################################################
