@@ -36,5 +36,5 @@ container:
   volumes:
     - "{{ lab_dirs.configuration_directory }}/filebrowser/settings.json:/config/settings.json:ro"
     - "{{ lab_dirs.application_directory }}/filebrowser/filebrowser.db:/database/filebrowser.db:rw"
-    - "/mnt/{{ secrets.nas.tvault_root_ro.username }}:/tvault:ro"
+    - "/mnt/{{ secrets.nas.xcalibr_root_ro.username }}:/tvault:ro"
   wait_port: "{{ external_ports.filebrowser_web }}"
