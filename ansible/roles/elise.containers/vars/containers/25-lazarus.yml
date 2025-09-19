@@ -30,7 +30,7 @@ container:
   dns_search_domains: "{{ containers_globals.dns_search_domains }}"
   env:
     TZ: "{{ containers_globals.env.TZ }}"
-    USER_HOME: "{{ lab_dirs.application_directory }}/lazarus"
+    USER_HOME: /root
     IAC_CONFIGURE_PROJECT_DIR: "{{ lab_dirs.application_directory }}/lazarus/iac-configure"
     SKIP_PAUSE: 'yes'
     COMPOSE_PROFILE: site
