@@ -30,11 +30,12 @@
 
 - name: MAIN - create local .docker directory
   ansible.builtin.file:
-    path: "{{ ansible_user_dir }}/.docker"
+    path: /root/.docker
     state: directory
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    mode: '0755'
+    owner: root
+    group: root
+    mode: '0750'
+  become: true
 
 - name: MAIN - manage docker configuration
   ansible.builtin.template:
