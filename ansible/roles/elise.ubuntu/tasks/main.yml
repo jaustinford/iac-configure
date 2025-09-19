@@ -6,7 +6,6 @@
       - "{{ ansible_user }}"
       - sudo
   become: true
-  changed_when: false
 
 - name: MAIN - include hosts tasks
   ansible.builtin.include_tasks: hosts.yml

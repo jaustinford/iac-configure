@@ -75,8 +75,8 @@ mounts:
   - host: docker01
     fstype: ext4
     src: /dev/mapper/ubuntu--vg-dfs_lvm
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
+    owner: "{{ secrets.docker01.superuser.username }}"
+    group: "{{ secrets.docker01.superuser.username }}"
     mode: "0755"
     opts: defaults
     path: /mnt/dfs_lvm
@@ -85,8 +85,8 @@ mounts:
   - host: docker02
     fstype: ext4
     src: /dev/mapper/ubuntu--vg-dfs_lvm
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
+    owner: "{{ secrets.docker02.superuser.username }}"
+    group: "{{ secrets.docker02.superuser.username }}"
     mode: "0755"
     opts: defaults
     path: /mnt/dfs_lvm

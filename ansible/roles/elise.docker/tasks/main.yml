@@ -75,10 +75,3 @@
     state: started
     enabled: true
   become: true
-
-- name: MAIN - add user to docker group
-  ansible.builtin.user:
-    name: "{{ ansible_user }}"
-    groups: docker
-    append: true
-  become: true
