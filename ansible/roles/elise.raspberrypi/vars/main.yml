@@ -1,5 +1,7 @@
 ---
 rpi:
+  app_data_path: /elysianskies/application_data
+
   additional_packages:
     - name: python3-smbus
       state: present

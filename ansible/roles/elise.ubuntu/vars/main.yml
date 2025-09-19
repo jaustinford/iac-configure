@@ -35,6 +35,9 @@ ubuntu:
     - name: python3-pip
       state: present
 
+    - name: tree
+      state: present
+
   python_packages:
     - name: requests
       state: present
