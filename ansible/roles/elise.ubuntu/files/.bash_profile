@@ -2,13 +2,23 @@
 
 ###########################################################
 
-if [ "${USERNAME}" != "merlin" ]; then
+if [ "$(whoami)" == "root" ]; then
     COLOR_NAME_PRIMARY="red"
     COLOR_NAME_SECONDARY="white"
     COLOR_NAME_TERTIARY="lightgrey"
 
-else
+elif [ "$(whoami)" == "merlin" ]; then
     COLOR_NAME_PRIMARY="purple"
+    COLOR_NAME_SECONDARY="white"
+    COLOR_NAME_TERTIARY="lightgrey"
+
+elif [ "$(whoami)" == "squire" ]; then
+    COLOR_NAME_PRIMARY="white"
+    COLOR_NAME_SECONDARY="white"
+    COLOR_NAME_TERTIARY="lightgrey"
+
+else
+    COLOR_NAME_PRIMARY="green"
     COLOR_NAME_SECONDARY="white"
     COLOR_NAME_TERTIARY="lightgrey"
 
