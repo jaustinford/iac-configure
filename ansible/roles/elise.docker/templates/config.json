@@ -1,0 +1,34 @@
+{
+  "auths": {
+    "{{ docker01_vlan_40_address }}:{{ ports.nexus_docker_hosted }}": {
+      "auth": "{{ ( secrets.containers.nexus.username + ':' + secrets.containers.nexus.password ) | b64encode }}"
+    },
+    "{{ docker01_vlan_40_address }}:{{ ports.nexus_docker_proxy }}": {
+      "auth": "{{ ( secrets.containers.nexus.username + ':' + secrets.containers.nexus.password ) | b64encode }}"
+    },
+    "{{ docker02_vlan_40_address }}:{{ ports.nexus_docker_hosted }}": {
+      "auth": "{{ ( secrets.containers.nexus.username + ':' + secrets.containers.nexus.password ) | b64encode }}"
+    },
+    "{{ docker02_vlan_40_address }}:{{ ports.nexus_docker_proxy }}": {
+      "auth": "{{ ( secrets.containers.nexus.username + ':' + secrets.containers.nexus.password ) | b64encode }}"
+    },
+    "{{ docker01_vlan_40_fqdn }}:{{ ports.nexus_docker_hosted }}": {
+      "auth": "{{ ( secrets.containers.nexus.username + ':' + secrets.containers.nexus.password ) | b64encode }}"
+    },
+    "{{ docker01_vlan_40_fqdn }}:{{ ports.nexus_docker_proxy }}": {
+      "auth": "{{ ( secrets.containers.nexus.username + ':' + secrets.containers.nexus.password ) | b64encode }}"
+    },
+    "{{ docker02_vlan_40_fqdn }}:{{ ports.nexus_docker_hosted }}": {
+      "auth": "{{ ( secrets.containers.nexus.username + ':' + secrets.containers.nexus.password ) | b64encode }}"
+    },
+    "{{ docker02_vlan_40_fqdn }}:{{ ports.nexus_docker_proxy }}": {
+      "auth": "{{ ( secrets.containers.nexus.username + ':' + secrets.containers.nexus.password ) | b64encode }}"
+    },
+    "docker-hosted.{{ nginx_vlan_40_fqdn }}": {
+      "auth": "{{ ( secrets.containers.nexus.username + ':' + secrets.containers.nexus.password ) | b64encode }}"
+    },
+    "docker-proxy.{{ nginx_vlan_40_fqdn }}": {
+      "auth": "{{ ( secrets.containers.nexus.username + ':' + secrets.containers.nexus.password ) | b64encode }}"
+    }
+  }
+}

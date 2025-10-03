@@ -27,7 +27,7 @@
     privileged: false
   vars:
     ansible_python_interpreter: /usr/local/bin/python3
-  # no_log: true
+  no_log: true
 
 - name: CONTAINER - include wait tasks
   ansible.builtin.include_tasks: wait.yml
