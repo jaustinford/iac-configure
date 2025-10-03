@@ -16,7 +16,7 @@
         | grep '{{ item }}' \
         | sort \
         | tail -1 \
-        | cut -d '/' -f5 \
+        | cut -d '/' -f4 \
         | cut -d '.' -f1
     '
   register: db_directory
