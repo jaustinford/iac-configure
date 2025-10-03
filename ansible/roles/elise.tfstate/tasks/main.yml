@@ -1,8 +1,8 @@
 ---
 - name: MAIN - fetch tfstate file
   ansible.builtin.fetch:
-    src: /mnt/xcalibr/root/elysianskies/tfstate/elysianskies.json
-    dest: /tfstate/elysianskies.json
+    src: /mnt/{{ names.raid_vol.name }}/root/lab/tfstate/lab.json
+    dest: /tfstate/lab.json
     flat: true
   changed_when: false
   become: true

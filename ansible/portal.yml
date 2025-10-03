@@ -1,5 +1,5 @@
 ---
 - name: PORTAL - apply elise.portal role
-  hosts: portal.elysianskies.com
+  hosts: lab_linode
   roles:
     - elise.portal

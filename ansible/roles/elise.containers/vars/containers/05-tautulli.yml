@@ -1,0 +1,38 @@
+---
+###########################################################
+# tautulli
+###########################################################
+
+###########################################################
+# Free, open-source web application that acts as a
+# monitoring and analytics tool for Plex Media Server. It
+# provides detailed statistics and insights into your Plex
+# usage, allowing you to track who is watching what, when,
+# and how. Tautulli also offers customizable notifications
+# and can generate reports, making it a valuable tool for
+# Plex administrators.
+###########################################################
+
+container:
+  name: tautulli
+  image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/linuxserver/tautulli:amd64-v2.15.3-ls199"
+  pull: "{{ containers_globals.pull_images.remote }}"
+  user: "0:0"
+  command: null
+  docker_host: "{{ tautulli_vlan_40_address }}"
+  state: "{{ containers_globals.state }}"
+  shm_size: "{{ containers_globals.shm_size }}"
+  devices: []
+  capabilities: []
+  network_mode: "{{ containers_globals.network_mode }}"
+  dns_servers: "{{ containers_globals.dns_servers }}"
+  dns_search_domains: "{{ containers_globals.dns_search_domains }}"
+  env:
+    TZ: "{{ names.local_timezone }}"
+    PUID: "{{ assignments.tautulli.uid }}"
+    PGID: "{{ assignments.tautulli.uid }}"
+  ports:
+    - "{{ tautulli_vlan_40_address }}:{{ ports.tautulli_web }}:8181/tcp"
+  volumes:
+    - "{{ lab.dirs.app_data }}/tautulli/config:/config:rw"
+  wait_port: "{{ ports.tautulli_web }}"

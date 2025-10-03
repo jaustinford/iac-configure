@@ -7,7 +7,7 @@
     group: root
     mode: '0775'
   become: true
-  when: item.host == ansible_hostname + "-teine.home.elysianskies.com"
+  when: item.host == inventory_hostname
 
 - name: "TUNNELS - create script for tunnel-{{ item.name }}"
   ansible.builtin.template:
@@ -18,7 +18,7 @@
     mode: '0750'
   become: true
   notify: "MAIN - systemctl restart tunnel-{{ item.name }}"
-  when: item.host == ansible_hostname + "-teine.home.elysianskies.com"
+  when: item.host == inventory_hostname
 
 - name: "TUNNELS - create systemd unit for tunnel-{{ item.name }}"
   ansible.builtin.template:
@@ -29,7 +29,7 @@
     mode: '0644'
   become: true
   notify: "MAIN - systemctl restart tunnel-{{ item.name }}"
-  when: item.host == ansible_hostname + "-teine.home.elysianskies.com"
+  when: item.host == inventory_hostname
 
 - name: MAIN - flush handlers
   ansible.builtin.meta: flush_handlers
@@ -41,4 +41,4 @@
     daemon_reload: true
     state: "{{ item.state }}"
   become: true
-  when: item.host == ansible_hostname + "-teine.home.elysianskies.com"
+  when: item.host == inventory_hostname

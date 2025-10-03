@@ -1,43 +1,32 @@
 ---
-- name: MAIN - add privileged_user to groups
-  ansible.builtin.user:
-    name: "{{ ansible_user }}"
-    groups:
-      - "{{ ansible_user }}"
-      - sudo
-  become: true
-
-- name: MAIN - include hosts tasks
-  ansible.builtin.include_tasks: hosts.yml
-  when: ansible_system_vendor != "Linode"
-
-- name: MAIN - include proxy tasks
-  ansible.builtin.include_tasks: proxy.yml
-  when: ansible_system_vendor != "Linode"
-
-- name: MAIN - include arch tasks
-  ansible.builtin.include_tasks: arch.yml
-
-- name: MAIN - include pip tasks
-  ansible.builtin.include_tasks: pip.yml
-  when: cycle_mode.name == "up"
-
 - name: MAIN - configure user sudoers
   ansible.builtin.template:
     src: sudoers
-    dest: "/etc/sudoers.d/{{ ansible_user }}"
+    dest: /etc/sudoers.d/lab_sudoers
     owner: root
     group: root
-    mode: '0750'
+    mode: '0600'
   become: true
 
-- name: MAIN - copy bash files
-  ansible.builtin.copy:
-    src: "{{ item }}"
-    dest: "{{ ansible_user_dir }}/{{ item }}"
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    mode: '755'
+- name: MAIN - include lab tasks
+  ansible.builtin.include_tasks: lab.yml
+  when: ansible_system_vendor != "Linode"
+
+- name: MAIN - install general packages
+  ansible.builtin.apt:
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+    update_cache: true
+  when: internet_found == "yes"
+  become: true
   with_items:
-    - .bash_profile
-    - .vimrc
+    - "{{ ubuntu.general_packages }}"
+
+- name: MAIN - install python packages
+  ansible.builtin.pip:
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+  when: internet_found == "yes"
+  become: true
+  with_items:
+    - "{{ ubuntu.python_packages }}"

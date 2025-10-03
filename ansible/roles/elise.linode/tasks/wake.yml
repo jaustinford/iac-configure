@@ -4,14 +4,14 @@
 
 - name: WAKE - manage linode
   linode_state:
-    token: "{{ secrets.linode.token }}"
-    id: "{{ elysianskies_tfstate.msg.outputs[item.output_elements.instance_id].value[0] }}"
+    token: "{{ secrets.external.linode.token }}"
+    id: "{{ lab_tfstate.msg.outputs[item.output_elements.instance_id].value[0] }}"
     state: "{{ 'restarted' if external_check.status == 200 and internal_check.status != 200 and cycle_mode.name == 'up' else item.state }}"
-  when: internet_check.status == 200
+  when: internet_found == "yes"
 
 - name: "WAKE - waiting on host port {{ item.wait_port }}"
   ansible.builtin.wait_for:
-    host: "{{ elysianskies_tfstate.msg.outputs[item.output_elements.ip_address].value[0] }}"
+    host: "{{ lab_tfstate.msg.outputs[item.output_elements.ip_address].value[0] }}"
     port: "{{ item.wait_port }}"
     state: "{{ item.state }}"
-  when: internet_check.status == 200
+  when: internet_found == "yes"

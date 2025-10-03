@@ -1,6 +1,0 @@
----
-- name: DISCOVER - find nexus apt repository
-  ansible.builtin.uri:
-    url: "https://nexus.{{ assignments.nginx.networking.teine.fqdn }}"
-    status_code: "{{ task_globals.discover_uri.status_code }}"
-  register: discovered_nexus

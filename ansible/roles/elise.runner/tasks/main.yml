@@ -13,10 +13,11 @@
           "
       fi
     '
+  become: true
   register: is_registered
   changed_when: false
   when:
-    - ansible_hostname + "-teine.home.elysianskies.com" == assignments.runner.networking.teine.fqdn
+    - assignments.runner.host == inventory_hostname
 
 - name: MAIN - register gitlab runner
   ansible.builtin.command: |
@@ -26,14 +27,15 @@
         --url {{ runner.url }} \
         --clone-url {{ runner.clone_url }} \
         --executor {{ runner.executor }} \
-        --token {{ secrets.gitlab.runner_authentication_token }} \
+        --token {{ secrets.containers.gitlab.runner_authentication_token }} \
         --docker-image {{ runner.docker_image }} \
         --description {{ runner.description }} \
         --docker-privileged={{ runner.docker_privileged }} \
     {% for docker_volume in runner.docker_volumes %}
         --docker-volumes {{ docker_volume }} \
     {% endfor %}
+  become: true
   changed_when: false
   when:
-    - ansible_hostname + "-teine.home.elysianskies.com" == assignments.runner.networking.teine.fqdn
+    - assignments.runner.host == inventory_hostname
     - is_registered.stdout == "unregistered"

@@ -1,0 +1,38 @@
+---
+###########################################################
+# oauth
+###########################################################
+
+###########################################################
+# Reverse proxy that provides authentication for
+# applications using OAuth2 or OpenID Connect (OIDC)
+# providers like Google, GitHub, and others. It acts as a
+# middleman, intercepting requests to your application and
+# redirecting users to their chosen provider for
+# authentication.
+###########################################################
+
+container:
+  name: oauth
+  image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/bitnamilegacy/oauth2-proxy:7.4.0"
+  pull: "{{ containers_globals.pull_images.remote }}"
+  user: "{{ assignments.oauth.uid }}:{{ assignments.oauth.uid }}"
+  command:
+    - --config=/etc/oauth2-proxy.cfg
+    - --upstream=http://0.0.0.0:8080/
+    - --http-address=0.0.0.0:4180
+  docker_host: "{{ oauth_vlan_40_address }}"
+  state: "{{ containers_globals.state }}"
+  shm_size: "{{ containers_globals.shm_size }}"
+  devices: []
+  capabilities: []
+  network_mode: "{{ containers_globals.network_mode }}"
+  dns_servers: "{{ containers_globals.dns_servers }}"
+  dns_search_domains: "{{ containers_globals.dns_search_domains }}"
+  env:
+    TZ: "{{ names.local_timezone }}"
+  ports:
+    - "{{ oauth_vlan_40_address }}:{{ ports.oauth_web }}:4180/tcp"
+  volumes:
+    - "{{ lab.dirs.config }}/oauth/oauth2-proxy.cfg:/etc/oauth2-proxy.cfg:ro"
+  wait_port: "0"

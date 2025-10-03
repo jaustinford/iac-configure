@@ -6,7 +6,7 @@ containers_globals:
     remote: false
   detach: true
   labels:
-    elysianskies_container: "true"
+    lab_container: "true"
   state: "{{ cycle_mode.state.containers }}"
   shm_size: 64M
   network_mode: bridge
@@ -14,15 +14,11 @@ containers_globals:
     - "192.168.30.6"
     - "8.8.8.8"
   dns_search_domains:
-    - home.elysianskies.com
-  env:
-    TZ: America/Denver
-    PUID: "1000"
-    PGID: "32600"
+    - "{{ lab.domain }}"
 
 elastic:
   ingest_pipelines:
-    - name: elysianskies-geoip-pipeline
+    - name: lab-geoip-pipeline
       state: present
       description: GeoIP Ingest Pipeline for Portal remote hosts
       processors:

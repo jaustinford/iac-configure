@@ -1,10 +1,10 @@
 ---
-- name: WAKE - apply elise.power role for elysianskies_onprem_nas
-  hosts: elysianskies_onprem_nas
+- name: WAKE - apply elise.power role for lab_onprem_nas
+  hosts: lab_onprem_nas
   roles:
     - elise.power
 
-- name: WAKE - apply elise.power role for elysianskies_onprem_docker
-  hosts: elysianskies_onprem_docker
+- name: WAKE - apply elise.power role for lab_onprem_docker
+  hosts: lab_onprem_docker
   roles:
     - elise.power

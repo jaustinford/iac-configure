@@ -1,16 +1,15 @@
 ---
 glusterfs:
   peers:
-    - "{{ docker_hosts.host_1.networking.uisge.ipv4 }}"
-    - "{{ docker_hosts.host_2.networking.uisge.ipv4 }}"
+    - "{{ docker01_vlan_20_address }}"
+    - "{{ docker02_vlan_20_address }}"
 
   dfs:
-    name: elysianskies_dfs
+    name: lab_dfs
     state: started
-    bricks: /mnt/dfs_lvm/elysianskies_dfs
+    bricks: /mnt/dfs_lvm/lab_dfs
     replicas: 2
     transport: tcp
-    path: /elysianskies/application_data
 
   service:
     state: "{{ cycle_mode.state.glusterfs }}"

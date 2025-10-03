@@ -1,5 +1,5 @@
 ---
 - name: MOUNTS - apply elise.mounts role
-  hosts: elysianskies_onprem_docker
+  hosts: lab_onprem_docker
   roles:
     - elise.mounts

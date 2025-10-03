@@ -5,7 +5,7 @@ volume management
     option transport.socket.keepalive-time 10
     option transport.socket.keepalive-interval 2
     option transport.socket.read-fail-log off
-    option transport.socket.bind-address {{ ansible_facts[lan_interface.uisge].ipv4.address }}
+    option transport.socket.bind-address {{ ansible_facts[lan_ints.vlan_20].ipv4.address }}
     option transport.socket.listen-port 24007
     option ping-timeout 0
     option event-threads 1

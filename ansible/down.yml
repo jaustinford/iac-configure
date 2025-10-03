@@ -36,9 +36,6 @@
 - name: DOWN - import mounts playbook
   import_playbook: mounts.yml
 
-- name: DOWN - import ubuntu playbook
-  import_playbook: ubuntu.yml
-
 - name: UP - import linode playbook
   import_playbook: linode.yml
 

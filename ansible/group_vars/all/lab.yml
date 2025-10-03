@@ -1,0 +1,14 @@
+---
+lab:
+  domain: pendragonlab.com
+
+  dirs:
+    app_data: /lab/app_data
+    config: /lab/config
+    owner: root
+    group: root
+    mode: '0770'
+
+  task_globals:
+    discover_uri:
+      status_code: [-1, 200, 502]

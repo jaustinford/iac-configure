@@ -1,8 +1,8 @@
 ---
 - name: MAIN - include up tasks
   ansible.builtin.include_tasks: up.yml
-  when: lan_interface.uisge is defined and cycle_mode.name == "up"
+  when: lan_ints.vlan_20 is defined and cycle_mode.name == "up"
 
 - name: MAIN - include down tasks
   ansible.builtin.include_tasks: down.yml
-  when: lan_interface.uisge is defined and cycle_mode.name == "down"
+  when: lan_ints.vlan_20 is defined and cycle_mode.name == "down"

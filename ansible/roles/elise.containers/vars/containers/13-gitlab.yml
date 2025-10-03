@@ -1,0 +1,41 @@
+---
+###########################################################
+# gitlab
+###########################################################
+
+###########################################################
+# Web-based DevSecOps platform that provides a
+# comprehensive set of tools for the entire software
+# development lifecycle. It's built around Git, a
+# distributed version control system, and offers features
+# for source code management, continuous
+# integration/continuous deployment (CI/CD), issue
+# tracking, and more.
+###########################################################
+
+container:
+  name: gitlab
+  image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/gitlab/gitlab-ee:17.5.4-ee.0"
+  pull: "{{ containers_globals.pull_images.remote }}"
+  user: "0:0"
+  command:
+    - /assets/wrapper
+  docker_host: "{{ gitlab_vlan_40_address }}"
+  state: "{{ containers_globals.state }}"
+  shm_size: 4G
+  devices: []
+  capabilities: []
+  network_mode: "{{ containers_globals.network_mode }}"
+  dns_servers: "{{ containers_globals.dns_servers }}"
+  dns_search_domains: "{{ containers_globals.dns_search_domains }}"
+  env:
+    TZ: "{{ names.local_timezone }}"
+    GITLAB_OMNIBUS_CONFIG: external_url "http://cicd.{{ lab.domain }}"
+    GITLAB_ROOT_PASSWORD: "{{ secrets.containers.gitlab.user.password }}"
+  ports:
+    - "{{ gitlab_vlan_40_address }}:{{ ports.gitlab_web }}:80/tcp"
+  volumes:
+    - "{{ lab.dirs.app_data }}/gitlab/config:/etc/gitlab:rw"
+    - "{{ lab.dirs.app_data }}/gitlab/logs:/var/log/gitlab:rw"
+    - "{{ lab.dirs.app_data }}/gitlab/data:/var/opt/gitlab:rw"
+  wait_port: "{{ ports.gitlab_web }}"

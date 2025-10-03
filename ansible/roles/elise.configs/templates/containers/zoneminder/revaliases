@@ -1,1 +1,1 @@
-root:{{ ssmtp.email }}:{{ ssmtp.email_server }}
+root:{{ names.admin_email }}:{{ ssmtp.email_server }}

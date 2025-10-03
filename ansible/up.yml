@@ -1,21 +1,17 @@
 ---
+
+  ############################################################
+  # boot
+  ############################################################
+
 - name: UP - import wake playbook
   import_playbook: wake.yml
 
+- name: UP - import hosts playbook
+  import_playbook: hosts.yml
+
 - name: UP - import tfstate playbook
   import_playbook: tfstate.yml
-
-- name: UP - run connectivity task
-  hosts: elysianskies_onprem
-  tasks:
-    - name: UP - determine internet connectivity
-      ansible.builtin.uri:
-        url: "https://www.google.com"
-        status_code:
-          - -1
-          - 200
-          - 429
-      register: internet_check
 
 - name: UP - import linode playbook
   import_playbook: linode.yml
@@ -25,14 +21,18 @@
   gather_facts: true
   gather_timeout: 60
 
-- name: UP - import raspberrypi playbook
-  import_playbook: raspberrypi.yml
+  ############################################################
+  # hosts
+  ############################################################
 
-- name: UP - import ssh playbook
-  import_playbook: ssh.yml
+- name: UP - import users playbook
+  import_playbook: users.yml
 
 - name: UP - import ubuntu playbook
   import_playbook: ubuntu.yml
+
+- name: UP - import raspberrypi playbook
+  import_playbook: raspberrypi.yml
 
 - name: UP - import mounts playbook
   import_playbook: mounts.yml
@@ -42,6 +42,10 @@
 
 - name: UP - import docker playbook
   import_playbook: docker.yml
+
+  ############################################################
+  # lab
+  ############################################################
 
 - name: UP - import configs playbook
   import_playbook: configs.yml
@@ -58,5 +62,5 @@
 - name: UP - import tunnels playbook
   import_playbook: tunnels.yml
 
-- name: UP - import beats playbook
-  import_playbook: beats.yml
+# - name: UP - import beats playbook
+#   import_playbook: beats.yml

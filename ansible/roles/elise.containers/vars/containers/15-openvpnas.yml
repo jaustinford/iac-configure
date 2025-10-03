@@ -1,0 +1,41 @@
+---
+###########################################################
+# openvpnas
+###########################################################
+
+###########################################################
+# Commercial, self-hosted VPN solution designed for secure
+# remote access to private networks, offering features like
+# secure tunnels, multi-factor authentication, and flexible
+# deployment options. It provides a secure way for
+# businesses to connect employees to their internal
+# resources from anywhere, ensuring data privacy and
+# network security.
+###########################################################
+
+container:
+  name: openvpnas
+  image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/openvpn/openvpn-as:2.14.0-b90cb316-Ubuntu22"
+  pull: "{{ containers_globals.pull_images.remote }}"
+  user: "0:0"
+  command:
+    - /usr/local/openvpn_as/scripts/openvpnas
+    - --nodaemon
+  docker_host: "{{ openvpnas_vlan_40_address }}"
+  state: "{{ containers_globals.state }}"
+  shm_size: "{{ containers_globals.shm_size }}"
+  devices: []
+  capabilities:
+    - net_admin
+  network_mode: "{{ containers_globals.network_mode }}"
+  dns_servers: "{{ containers_globals.dns_servers }}"
+  dns_search_domains: "{{ containers_globals.dns_search_domains }}"
+  env:
+    TZ: "{{ names.local_timezone }}"
+  ports:
+    - "{{ openvpnas_vlan_40_address }}:{{ ports.openvpnas_web }}:943/tcp"
+    - "{{ openvpnas_vlan_30_address }}:{{ ports.openvpnas_vpn }}:1194/tcp"
+    - "{{ openvpnas_vlan_40_address }}:{{ ports.openvpnas_vpn }}:1194/tcp"
+  volumes:
+    - "{{ lab.dirs.app_data }}/openvpnas/openvpn:/openvpn:rw"
+  wait_port: "{{ ports.openvpnas_vpn }}"

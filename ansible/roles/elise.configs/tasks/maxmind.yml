@@ -1,16 +1,16 @@
 ---
 - name: MAXMIND - ensure geoip download directory
   ansible.builtin.file:
-    path: "{{ ansible_user_dir }}/geoip"
+    path: /root/geoip
     state: directory
-    mode: '0755'
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
+    mode: '0750'
+    owner: root
+    group: root
   become: true
 
 - name: MAXMIND - find old geoip databases
   ansible.builtin.find:
-    paths: "{{ ansible_user_dir }}/geoip"
+    paths: /root/geoip
     recurse: true
     file_type: any
     age: "{{ maxmind.rotate_after_days }}d"

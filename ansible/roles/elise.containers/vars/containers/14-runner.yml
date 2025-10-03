@@ -1,0 +1,38 @@
+---
+###########################################################
+# runner
+###########################################################
+
+###########################################################
+# Open-source application that executes jobs defined in
+# GitLab CI/CD pipelines. It acts as an agent that picks up
+# CI/CD jobs from a GitLab instance and runs them on a
+# designated environment.
+###########################################################
+
+container:
+  name: runner
+  image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/gitlab/gitlab-runner:v17.5.4"
+  pull: "{{ containers_globals.pull_images.remote }}"
+  user: "0:0"
+  command:
+    - run
+    - --user=gitlab-runner
+    - --working-directory=/home/gitlab-runner
+  docker_host: "{{ runner_vlan_40_address }}"
+  state: "{{ containers_globals.state }}"
+  shm_size: "{{ containers_globals.shm_size }}"
+  devices: []
+  capabilities: []
+  network_mode: "{{ containers_globals.network_mode }}"
+  dns_servers: "{{ containers_globals.dns_servers }}"
+  dns_search_domains: "{{ containers_globals.dns_search_domains }}"
+  env:
+    TZ: "{{ names.local_timezone }}"
+  ports: []
+  volumes:
+    - "{{ lab.dirs.app_data }}/runner/config:/etc/gitlab-runner:rw"
+    - "{{ lab.dirs.app_data }}/runner/cache:/cache:rw"
+    - /var/run/docker.sock:/var/run/docker.sock:rw
+    - /root/.docker:/root/.docker:rw
+  wait_port: "0"

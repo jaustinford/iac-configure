@@ -1,0 +1,40 @@
+---
+###########################################################
+# filebrowser
+###########################################################
+
+###########################################################
+# Self-hosted, open-source web application for managing
+# files and folders. It allows users to perform basic file
+# operations like creating, deleting, renaming, uploading,
+# downloading, and zipping files and folders, either
+# locally or connected to other storage services.
+###########################################################
+
+container:
+  name: filebrowser
+  image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/filebrowser/filebrowser:v2.42.5-amd64-s6"
+  pull: "{{ containers_globals.pull_images.remote }}"
+  user: "0:0"
+  command: null
+  docker_host: "{{ filebrowser_vlan_40_address }}"
+  state: "{{ containers_globals.state }}"
+  shm_size: "{{ containers_globals.shm_size }}"
+  devices: []
+  capabilities: []
+  network_mode: "{{ containers_globals.network_mode }}"
+  dns_servers: "{{ containers_globals.dns_servers }}"
+  dns_search_domains: "{{ containers_globals.dns_search_domains }}"
+  env:
+    TZ: "{{ names.local_timezone }}"
+    PUID: "{{ assignments.filebrowser.uid }}"
+    PGID: "{{ names.raid_vol.group.gid }}"
+  ports:
+    - "{{ filebrowser_vlan_40_address }}:{{ ports.filebrowser_web }}:80/tcp"
+  volumes:
+    - "{{ lab.dirs.config }}/filebrowser/settings.json:/config/settings.json:ro"
+    - "{{ lab.dirs.app_data }}/filebrowser/filebrowser.db:/database/filebrowser.db:rw"
+    - "/mnt/{{ names.raid_vol.name }}-documents:/{{ names.raid_vol.name }}/documents:ro"
+    - "/mnt/{{ names.raid_vol.name }}-music:/{{ names.raid_vol.name }}/music:ro"
+    - "/mnt/{{ names.raid_vol.name }}-pictures:/{{ names.raid_vol.name }}/pictures:ro"
+  wait_port: "{{ ports.filebrowser_web }}"

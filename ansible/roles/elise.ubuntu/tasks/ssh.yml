@@ -1,0 +1,25 @@
+---
+- name: SSH - upload templates
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+  become: true
+  notify: MAIN - systemctl restart ssh
+  with_items:
+    - src: sshd_config
+      dest: /etc/ssh/sshd_config
+      owner: root
+      group: root
+      mode: '0644'
+
+- name: SSH - remove conflicting configs
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  become: true
+  when: ansible_architecture == "aarch64"
+  with_items:
+    - /etc/ssh/sshd_config.d/60-cloudimg-settings.conf

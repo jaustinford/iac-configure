@@ -1,0 +1,101 @@
+---
+assignments:
+  nexus:
+    host: docker01
+    uid: 32620
+
+  pihole:
+    host: docker02
+    uid: 32621
+
+  nginx:
+    host: docker02
+    uid: 32622
+
+  plex:
+    host: docker01
+    uid: 32623
+
+  tautulli:
+    host: docker02
+    uid: 32624
+
+  filebrowser:
+    host: docker02
+    uid: 32625
+
+  elasticsearch:
+    host: docker01
+    uid: 32626
+
+  kibana:
+    host: docker01
+    uid: 32627
+
+  zoneminder:
+    host: docker02
+    uid: 32628
+
+  expressvpn:
+    host: docker01
+    uid: 32629
+
+  squid:
+    host: docker01
+    uid: 32630
+
+  deluge:
+    host: docker01
+    uid: 32631
+
+  gitlab:
+    host: docker02
+    uid: 32632
+
+  runner:
+    host: docker02
+    uid: 32633
+
+  openvpnas:
+    host: docker02
+    uid: 32634
+
+  docs:
+    host: docker01
+    uid: 32635
+
+  resume:
+    host: docker01
+    uid: 32636
+
+  fourohfour:
+    host: docker02
+    uid: 32637
+
+  fiveohx:
+    host: docker01
+    uid: 32638
+
+  fourohthree:
+    host: docker02
+    uid: 32639
+
+  barbossa:
+    host: docker02
+    uid: 32640
+
+  keycloak:
+    host: docker01
+    uid: 32641
+
+  redis:
+    host: docker02
+    uid: 32642
+
+  oauth:
+    host: docker01
+    uid: 32643
+
+  lazarus:
+    host: docker00
+    uid: 32644

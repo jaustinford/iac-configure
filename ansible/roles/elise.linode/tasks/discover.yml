@@ -1,12 +1,12 @@
 ---
 - name: DISCOVER - find external nginx
   ansible.builtin.uri:
-    url: "https://ping.home.elysianskies.com"
-    status_code: "{{ task_globals.discover_uri.status_code }}"
+    url: "https://ping.{{ lab.domain }}"
+    status_code: "{{ lab.task_globals.discover_uri.status_code }}"
   register: external_check
 
 - name: DISCOVER - find internal nginx
   ansible.builtin.uri:
-    url: "https://ping.{{ assignments.nginx.networking.teine.fqdn }}"
-    status_code: "{{ task_globals.discover_uri.status_code }}"
+    url: "https://ping.{{ nginx_vlan_40_fqdn }}"
+    status_code: "{{ lab.task_globals.discover_uri.status_code }}"
   register: internal_check

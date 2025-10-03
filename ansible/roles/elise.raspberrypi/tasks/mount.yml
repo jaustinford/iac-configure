@@ -1,9 +1,0 @@
----
-- name: MOUNT - ensure glusterfs mount path
-  ansible.builtin.file:
-    path: "{{ rpi.app_data_path }}"
-    state: directory
-    owner: root
-    group: root
-    mode: '0755'
-  become: true

@@ -1,0 +1,4 @@
+---
+- name: MAIN - reboot
+  ansible.builtin.reboot:
+  become: true

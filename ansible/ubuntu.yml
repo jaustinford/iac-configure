@@ -1,5 +1,5 @@
 ---
 - name: UBUNTU - apply elise.ubuntu role
-  hosts: elysianskies_onprem_docker:elysianskies_linode
+  hosts: lab_onprem_docker:lab_linode
   roles:
     - elise.ubuntu

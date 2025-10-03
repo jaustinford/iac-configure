@@ -1,18 +1,18 @@
 ---
 server:
-  publicBaseUrl: https://kibana.home.elysianskies.com
+  publicBaseUrl: https://data.{{ lab.domain }}
   host: 0.0.0.0
 
 elasticsearch:
-  username: {{ secrets.elasticsearch.kibana_system.username }}
-  password: {{ secrets.elasticsearch.kibana_system.password }}
+  username: {{ secrets.containers.elasticsearch.kibana_system.username }}
+  password: {{ secrets.containers.elasticsearch.kibana_system.password }}
   hosts:
-    - http://{{ assignments.elasticsearch.networking.teine.ipv4 }}:{{ external_ports.elasticsearch_db }}
+    - http://{{ elasticsearch_vlan_40_address }}:{{ ports.elasticsearch_db }}
 
 xpack:
   encryptedSavedObjects:
-    encryptionKey: {{ secrets.kibana.encryption_keys.encrypted_saved_objects }}
+    encryptionKey: {{ secrets.containers.kibana.encryption_keys.encrypted_saved_objects }}
   reporting:
-    encryptionKey: {{ secrets.kibana.encryption_keys.reporting }}
+    encryptionKey: {{ secrets.containers.kibana.encryption_keys.reporting }}
   security:
-    encryptionKey: {{ secrets.kibana.encryption_keys.security }}
+    encryptionKey: {{ secrets.containers.kibana.encryption_keys.security }}

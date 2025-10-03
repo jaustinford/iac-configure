@@ -5,7 +5,7 @@
     state: "{{ item.state }}"
     update_cache: true
   become: true
-  when: internet_check.status == 200
+  when: internet_found == "yes"
   with_items:
     - "{{ rpi.additional_packages }}"
 

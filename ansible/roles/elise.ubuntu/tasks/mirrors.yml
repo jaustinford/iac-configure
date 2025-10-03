@@ -1,9 +1,0 @@
----
-- name: MIRRORS - override /etc/apt/sources.list
-  ansible.builtin.template:
-    src: sources.list
-    dest: /etc/apt/sources.list
-    owner: root
-    group: root
-    mode: '0644'
-  become: true

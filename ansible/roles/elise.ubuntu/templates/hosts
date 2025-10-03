@@ -1,5 +1,5 @@
 127.0.0.1 localhost
-127.0.1.1 {{ ansible_hostname }}
+127.0.1.1 {{ names.hosts[inventory_hostname] }}.{{ lab.domain }}
 
 # The following lines are desirable for IPv6 capable hosts
 ::1     ip6-localhost ip6-loopback
@@ -8,19 +8,19 @@ ff00::0 ip6-mcastprefix
 ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 
-192.168.10.1  docker01-adhair docker01-adhair.home.elysianskies.com
-192.168.20.1  docker01-uisge  docker01-uisge.home.elysianskies.com
-192.168.30.1  docker01-talamh docker01-talamh.home.elysianskies.com
-192.168.40.1  docker01-teine  docker01-teine.home.elysianskies.com
+{{ docker01_vlan_20_address }}    {{ docker01_vlan_20_fqdn | replace('.' + lab.domain, '') }} {{ docker01_vlan_20_fqdn }}
+{{ docker01_vlan_30_address }}    {{ docker01_vlan_30_fqdn | replace('.' + lab.domain, '') }} {{ docker01_vlan_30_fqdn }}
+{{ docker01_vlan_40_address }}    {{ docker01_vlan_40_fqdn | replace('.' + lab.domain, '') }} {{ docker01_vlan_40_fqdn }}
+{{ docker01_vlan_50_address }}    {{ docker01_vlan_50_fqdn | replace('.' + lab.domain, '') }} {{ docker01_vlan_50_fqdn }}
 
-192.168.10.2  docker02-adhair docker02-adhair.home.elysianskies.com
-192.168.20.2  docker02-uisge  docker02-uisge.home.elysianskies.com
-192.168.30.2  docker02-talamh docker02-talamh.home.elysianskies.com
-192.168.40.2  docker02-teine  docker02-teine.home.elysianskies.com nexus.docker02-teine.home.elysianskies.com nginx.docker02-teine.home.elysianskies.com gitlab.docker02-teine.home.elysianskies.com nexus-hosted.docker02-teine.home.elysianskies.com nexus-proxy.docker02-teine.home.elysianskies.com
+{{ docker02_vlan_20_address }}    {{ docker02_vlan_20_fqdn | replace('.' + lab.domain, '') }} {{ docker02_vlan_20_fqdn }}
+{{ docker02_vlan_30_address }}    {{ docker02_vlan_30_fqdn | replace('.' + lab.domain, '') }} {{ docker02_vlan_30_fqdn }}
+{{ docker02_vlan_40_address }}    {{ docker02_vlan_40_fqdn | replace('.' + lab.domain, '') }} {{ docker02_vlan_40_fqdn }} artifact.{{ nginx_vlan_40_fqdn }} nginx.{{ nginx_vlan_40_fqdn }} cicd.{{ nginx_vlan_40_fqdn }} docker-hosted.{{ nginx_vlan_40_fqdn }} docker-proxy.{{ nginx_vlan_40_fqdn }}
+{{ docker02_vlan_50_address }}    {{ docker02_vlan_50_fqdn | replace('.' + lab.domain, '') }} {{ docker02_vlan_50_fqdn }}
 
-192.168.30.4  docker00-talamh docker00-talamh.home.elysianskies.com
-192.168.40.4  docker00-teine  docker00-teine.home.elysianskies.com
+{{ docker00_vlan_30_address }}    {{ docker00_vlan_30_fqdn | replace('.' + lab.domain, '') }} {{ docker00_vlan_30_fqdn }}
+{{ docker00_vlan_40_address }}    {{ docker00_vlan_40_fqdn | replace('.' + lab.domain, '') }} {{ docker00_vlan_40_fqdn }}
 
-192.168.20.5  nas-uisge  nas-uisge.home.elysianskies.com
-192.168.30.5  nas-talamh nas-talamh.home.elysianskies.com
-192.168.40.5  nas-teine  nas-teine.home.elysianskies.com
+{{ nas_vlan_20_address }}    {{ nas_vlan_20_fqdn | replace('.' + lab.domain, '') }} {{ nas_vlan_20_fqdn }}
+{{ nas_vlan_30_address }}    {{ nas_vlan_30_fqdn | replace('.' + lab.domain, '') }} {{ nas_vlan_30_fqdn }}
+{{ nas_vlan_40_address }}    {{ nas_vlan_40_fqdn | replace('.' + lab.domain, '') }} {{ nas_vlan_40_fqdn }}

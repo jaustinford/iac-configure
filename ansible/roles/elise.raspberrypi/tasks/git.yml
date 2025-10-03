@@ -2,20 +2,20 @@
 - name: GIT - include discover tasks
   ansible.builtin.include_tasks: discover.yml
 
-- name: "GIT - download git project - elise/{{ item.project.path }}"
-  ansible.builtin.git:
-    repo: "https://{{ gitlab_credential }}@gitlab.{{ assignments.nginx.networking.teine.fqdn }}/elise/{{ item.project.path }}.git"
-    dest: "{{ lab_dirs.application_directory }}/lazarus/{{ item.project.path.split('/')[-1] }}"
-    update: true
-    version: "{{ item.project.branch }}"
-    force: true
-  become: true
-  when: discovered_gitlab.status == 200
+# - name: "GIT - download git project - elise/{{ item.project.path }}"
+#   ansible.builtin.git:
+#     repo: "https://{{ gitlab_credential }}@cicd.{{ nginx_vlan_40_fqdn }}/elise/{{ item.project.path }}.git"
+#     dest: "{{ lab.dirs.app_data }}/lazarus/{{ item.project.path.split('/')[-1] }}"
+#     update: true
+#     version: "{{ item.project.branch }}"
+#     force: true
+#   become: true
+#   when: discovered_gitlab.status == 200
 
-- name: "GIT - download image - {{ item.image.name }}"
-  community.docker.docker_image_pull:
-    name: "nexus-hosted.{{ assignments.nginx.networking.teine.fqdn }}/elise/{{ item.image.name }}"
-    tag: "{{ item.image.tag }}"
-  become: true
-  no_log: true
-  when: discovered_nexus.status == 200
+# - name: "GIT - download image - {{ item.image.name }}"
+#   community.docker.docker_image_pull:
+#     name: "docker-hosted.{{ nginx_vlan_40_fqdn }}/elise/{{ item.image.name }}"
+#     tag: "{{ item.image.tag }}"
+#   become: true
+#   no_log: true
+#   when: discovered_nexus.status == 200

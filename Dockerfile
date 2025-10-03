@@ -3,8 +3,8 @@
 FROM python:3.9.19-bookworm
 
 RUN \
-    apt-get -y update && \
-    apt-get -y install \
+    apt -y update && \
+    apt -y install \
         sshpass
 
 RUN \
@@ -15,7 +15,8 @@ RUN \
         requests \
         jmespath \
         elasticsearch==8.13.2 \
-        docker
+        docker \
+        passlib
 
 RUN \
     ansible-galaxy collection install \

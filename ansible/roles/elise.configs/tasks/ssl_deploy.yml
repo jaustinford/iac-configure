@@ -1,10 +1,10 @@
 ---
-- name: SSL_DEPLOY - fetch elysianskies tfstate
+- name: SSL_DEPLOY - fetch lab tfstate
   delegate_to: localhost
   ansible.builtin.debug:
-    msg: "{{ lookup('ansible.builtin.file', '/tfstate/elysianskies.json') }}"
+    msg: "{{ lookup('ansible.builtin.file', '/tfstate/lab.json') }}"
   no_log: true
-  register: elysianskies_tfstate
+  register: lab_tfstate
 
 - name: SSL_DEPLOY - copy ssl certificate
   ansible.builtin.template:
@@ -16,9 +16,9 @@
   notify: MAIN - docker restart nginx
   with_items:
     - src: nginx.crt
-      dest: /elysianskies/configurations/nginx/nginx.crt
+      dest: "{{ lab.dirs.config }}/nginx/nginx.crt"
       mode: '0644'
 
     - src: nginx.crt.key
-      dest: /elysianskies/configurations/nginx/nginx.crt.key
+      dest: "{{ lab.dirs.config }}/nginx/nginx.crt.key"
       mode: '0600'

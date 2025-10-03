@@ -1,0 +1,44 @@
+---
+- name: NONPRIVILEGED_USER - manage nonprivileged user
+  ansible.builtin.user:
+    name: "{{ names.lab_users.nonprivileged }}"
+    shell: /bin/bash
+    uid: "{{ host_users.nonprivileged.uid }}"
+    state: "{{ lab_users.nonprivileged.state }}"
+    groups: ''
+    force: true
+    remove: true
+  become: true
+  when: inventory_hostname != "nas"
+
+- name: NONPRIVILEGED_USER - manage nonprivileged user password
+  ansible.builtin.user:
+    name: "{{ names.lab_users.nonprivileged }}"
+    password: "{{ secrets.lab_users[inventory_hostname].nonprivileged | password_hash('sha512') }}"
+  become: true
+  changed_when: false
+  when: lab_users.nonprivileged.state == "present" and inventory_hostname != "nas"
+
+- name: NONPRIVILEGED_USER - copy nonprivileged user ssh key
+  ansible.posix.authorized_key:
+    user: "{{ names.lab_users.nonprivileged }}"
+    key: "{{ lab_users.nonprivileged.public_key }}"
+    state: present
+  when: lab_users.nonprivileged.state == "present" and inventory_hostname != "nas"
+  become: true
+
+- name: NONPRIVILEGED_USER - copy nonprivileged user bash files
+  ansible.builtin.template:
+    src: "{{ item }}"
+    dest: "{{ host_users.nonprivileged.home_dir }}/{{ item }}"
+    owner: "{{ names.lab_users.nonprivileged }}"
+    group: "{{ host_users.nonprivileged.group }}"
+    mode: '0750'
+  vars:
+    colorscheme: "{{ lab_users.nonprivileged.colors.vim }}"
+  when: lab_users.nonprivileged.state == "present"
+  become: true
+  with_items:
+    - .bash_profile
+    - .vimrc
+    - .hushlogin

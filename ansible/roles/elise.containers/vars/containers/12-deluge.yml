@@ -1,0 +1,40 @@
+---
+###########################################################
+# deluge
+###########################################################
+
+###########################################################
+# Free and open-source, cross-platform BitTorrent client
+# that utilizes the client-server model. It features a
+# daemon process that handles all BitTorrent activity in
+# the background, while users can interact with it through
+# various interfaces like GTK+, web, or console.
+###########################################################
+
+container:
+  name: deluge
+  image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/linuxserver/deluge:2.1.1"
+  pull: "{{ containers_globals.pull_images.remote }}"
+  user: "0:0"
+  command: null
+  docker_host: "{{ deluge_vlan_40_address }}"
+  state: "{{ containers_globals.state }}"
+  shm_size: "{{ containers_globals.shm_size }}"
+  devices: []
+  capabilities: []
+  network_mode: container:expressvpn
+  dns_servers: []
+  dns_search_domains: []
+  env:
+    TZ: "{{ names.local_timezone }}"
+    PUID: "{{ assignments.deluge.uid }}"
+    PGID: "{{ names.raid_vol.group.gid }}"
+  ports: []
+  volumes:
+    - "/mnt/{{ names.raid_vol.name }}-deluge:/downloads:rw"
+    - "{{ lab.dirs.config }}/deluge/auth:/config/auth:ro"
+    - "{{ lab.dirs.config }}/deluge/core.conf:/config/core.conf:ro"
+    - "{{ lab.dirs.config }}/deluge/hostlist.conf:/config/hostlist.conf:ro"
+    - "{{ lab.dirs.config }}/deluge/web.conf:/config/web.conf:ro"
+    - "{{ lab.dirs.app_data }}/deluge/plugins:/config/plugins:rw"
+  wait_port: "{{ ports.expressvpn_deluge }}"

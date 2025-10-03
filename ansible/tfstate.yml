@@ -1,5 +1,5 @@
 ---
 - name: TFSTATE - apply tfstate tasks
-  hosts: nas-teine.home.elysianskies.com
+  hosts: lab_onprem_nas
   roles:
     - elise.tfstate

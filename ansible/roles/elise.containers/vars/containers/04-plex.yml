@@ -1,0 +1,49 @@
+---
+###########################################################
+# plex
+###########################################################
+
+###########################################################
+# Media server software and a free streaming service that
+# allows users to organize, stream, and share their
+# personal media collections across various devices. It
+# also offers a free, ad-supported streaming service with
+# live TV and on-demand content from partners like
+# Lionsgate and MGM.
+###########################################################
+
+container:
+  name: plex
+  image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/plexinc/pms-docker:1.42.1.10060-4e8b05daf"
+  pull: "{{ containers_globals.pull_images.remote }}"
+  user: "0:0"
+  command: null
+  docker_host: "{{ plex_vlan_40_address }}"
+  state: "{{ containers_globals.state }}"
+  shm_size: "{{ containers_globals.shm_size }}"
+  devices: []
+  capabilities: []
+  network_mode: "{{ containers_globals.network_mode }}"
+  dns_servers: "{{ containers_globals.dns_servers }}"
+  dns_search_domains: "{{ containers_globals.dns_search_domains }}"
+  env:
+    TZ: "{{ names.local_timezone }}"
+    PLEX_UID: "{{ assignments.plex.uid }}"
+    PLEX_GID: "{{ names.raid_vol.group.gid }}"
+    PLEX_CLAIM: "{{ secrets.containers.plex.plex_claim }}"
+    ADVERTISE_IP: |
+      http://192.168.60.6:{{ ports.plex_web }},
+      http://{{ plex_vlan_40_address }}:{{ ports.plex_web }},
+      https://media.{{ lab.domain }}
+    ALLOWED_NETWORKS: |
+      192.168.30.0/29,
+      192.168.40.0/29,
+      192.168.60.0/27
+  ports:
+    - "{{ plex_vlan_30_address }}:{{ ports.plex_web }}:32400/tcp"
+    - "{{ plex_vlan_40_address }}:{{ ports.plex_web }}:32400/tcp"
+  volumes:
+    - "{{ lab.dirs.app_data }}/plex/Application Support:/config/Library/Application Support:rw"
+    - "/mnt/{{ names.raid_vol.name }}-plex_libraries:/plex_libraries:ro"
+    - /tmp/transcode:/transcode:rw
+  wait_port: "{{ ports.plex_web }}"

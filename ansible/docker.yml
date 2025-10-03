@@ -1,5 +1,5 @@
 ---
 - name: DOCKER - apply elise.docker role
-  hosts: elysianskies_onprem_docker
+  hosts: lab_onprem_docker
   roles:
     - elise.docker

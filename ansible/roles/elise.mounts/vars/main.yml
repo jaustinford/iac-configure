@@ -1,99 +1,71 @@
 ---
-xcalibr:
-  group_name: roundtable
-  group_id: 32600
-
-cifs_globals: uid=0,gid={{ xcalibr.group_name }},dir_mode=0770,file_mode=0660
+cifs_globals: "uid=0,gid={{ names.raid_vol.group.gid }},dir_mode=0770,file_mode=0660"
 
 mounts:
   samba:
-    - host: docker02
-      fstype: cifs
-      owner: "{{ secrets.docker02.superuser.username }}"
-      group: "{{ xcalibr.group_name }}"
-      mode: "0770"
-      src: //192.168.20.5/xcalibr-root
-      username: "{{ secrets.nas.xcalibr_root_ro.username }}"
-      password: "{{ secrets.nas.xcalibr_root_ro.password }}"
-      globals: "{{ cifs_globals }}"
-      path: /mnt/xcalibr-root
-      state: "{{ cycle_mode.volumes.xcalibr }}"
+    - host: "{{ names.hosts.docker02 }}.{{ lab.domain }}"
+      state: "{{ cycle_mode.volumes.raid_vol }}"
+      src: "//{{ nas_vlan_20_address }}/{{ names.raid_vol.name }}-documents"
+      path: "/mnt/{{ names.raid_vol.name }}-documents"
+      username: "{{ names.lab_users.raid_vol.documents_ro }}"
+      password: "{{ secrets.lab_users.nas.raid_vol.documents_ro }}"
 
-    - host: docker01
-      fstype: cifs
-      owner: "{{ secrets.docker01.superuser.username }}"
-      group: "{{ xcalibr.group_name }}"
-      mode: "0770"
-      src: //192.168.20.5/xcalibr-plex_libraries
-      username: "{{ secrets.nas.xcalibr_plex_libraries_ro.username }}"
-      password: "{{ secrets.nas.xcalibr_plex_libraries_ro.password }}"
-      globals: "{{ cifs_globals }}"
-      path: /mnt/xcalibr-plex_libraries
-      state: "{{ cycle_mode.volumes.xcalibr }}"
+    - host: "{{ names.hosts.docker02 }}.{{ lab.domain }}"
+      state: "{{ cycle_mode.volumes.raid_vol }}"
+      src: "//{{ nas_vlan_20_address }}/{{ names.raid_vol.name }}-music"
+      path: "/mnt/{{ names.raid_vol.name }}-music"
+      username: "{{ names.lab_users.raid_vol.music_ro }}"
+      password: "{{ secrets.lab_users.nas.raid_vol.music_ro }}"
 
-    - host: docker02
-      fstype: cifs
-      owner: "{{ secrets.docker02.superuser.username }}"
-      group: "{{ xcalibr.group_name }}"
-      mode: "0770"
-      src: //192.168.20.5/xcalibr-plex_libraries
-      username: "{{ secrets.nas.xcalibr_plex_libraries_rw.username }}"
-      password: "{{ secrets.nas.xcalibr_plex_libraries_rw.password }}"
-      globals: "{{ cifs_globals }}"
-      path: /mnt/xcalibr-plex_libraries
-      state: "{{ cycle_mode.volumes.xcalibr }}"
+    - host: "{{ names.hosts.docker02 }}.{{ lab.domain }}"
+      state: "{{ cycle_mode.volumes.raid_vol }}"
+      src: "//{{ nas_vlan_20_address }}/{{ names.raid_vol.name }}-pictures"
+      path: "/mnt/{{ names.raid_vol.name }}-pictures"
+      username: "{{ names.lab_users.raid_vol.pictures_ro }}"
+      password: "{{ secrets.lab_users.nas.raid_vol.pictures_ro }}"
 
-    - host: docker01
-      fstype: cifs
-      owner: "{{ secrets.docker01.superuser.username }}"
-      group: "{{ xcalibr.group_name }}"
-      mode: "0770"
-      src: //192.168.20.5/xcalibr-deluge
-      username: "{{ secrets.nas.xcalibr_deluge_rw.username }}"
-      password: "{{ secrets.nas.xcalibr_deluge_rw.password }}"
-      globals: "{{ cifs_globals }}"
-      path: /mnt/xcalibr-deluge
-      state: "{{ cycle_mode.volumes.xcalibr }}"
+    - host: "{{ names.hosts.docker02 }}.{{ lab.domain }}"
+      state: "{{ cycle_mode.volumes.raid_vol }}"
+      src: "//{{ nas_vlan_20_address }}/{{ names.raid_vol.name }}-plex_libraries"
+      path: "/mnt/{{ names.raid_vol.name }}-plex_libraries"
+      username: "{{ names.lab_users.raid_vol.plex_libraries_rw }}"
+      password: "{{ secrets.lab_users.nas.raid_vol.plex_libraries_rw }}"
 
-    - host: docker02
-      fstype: cifs
-      owner: "{{ secrets.docker02.superuser.username }}"
-      group: "{{ xcalibr.group_name }}"
-      mode: "0770"
-      src: //192.168.20.5/xcalibr-deluge
-      username: "{{ secrets.nas.xcalibr_deluge_rw.username }}"
-      password: "{{ secrets.nas.xcalibr_deluge_rw.password }}"
-      globals: "{{ cifs_globals }}"
-      path: /mnt/xcalibr-deluge
-      state: "{{ cycle_mode.volumes.xcalibr }}"
+    - host: "{{ names.hosts.docker01 }}.{{ lab.domain }}"
+      state: "{{ cycle_mode.volumes.raid_vol }}"
+      src: "//{{ nas_vlan_20_address }}/{{ names.raid_vol.name }}-plex_libraries"
+      path: "/mnt/{{ names.raid_vol.name }}-plex_libraries"
+      username: "{{ names.lab_users.raid_vol.plex_libraries_ro }}"
+      password: "{{ secrets.lab_users.nas.raid_vol.plex_libraries_ro }}"
 
-    - host: docker02
-      fstype: cifs
-      owner: "{{ secrets.docker02.superuser.username }}"
-      group: "{{ xcalibr.group_name }}"
-      mode: "0770"
-      src: //192.168.20.5/xcalibr-tfstate
-      username: "{{ secrets.nas.xcalibr_tfstate_rw.username }}"
-      password: "{{ secrets.nas.xcalibr_tfstate_rw.password }}"
-      globals: "{{ cifs_globals }}"
-      path: /mnt/xcalibr-tfstate
-      state: "{{ cycle_mode.volumes.xcalibr }}"
+    - host: "{{ names.hosts.docker01 }}.{{ lab.domain }}"
+      state: "{{ cycle_mode.volumes.raid_vol }}"
+      src: "//{{ nas_vlan_20_address }}/{{ names.raid_vol.name }}-deluge"
+      path: "/mnt/{{ names.raid_vol.name }}-deluge"
+      username: "{{ names.lab_users.raid_vol.deluge_rw }}"
+      password: "{{ secrets.lab_users.nas.raid_vol.deluge_rw }}"
+
+    - host: "{{ names.hosts.docker02 }}.{{ lab.domain }}"
+      state: "{{ cycle_mode.volumes.raid_vol }}"
+      src: "//{{ nas_vlan_20_address }}/{{ names.raid_vol.name }}-deluge"
+      path: "/mnt/{{ names.raid_vol.name }}-deluge"
+      username: "{{ names.lab_users.raid_vol.deluge_rw }}"
+      password: "{{ secrets.lab_users.nas.raid_vol.deluge_rw }}"
+
+    - host: "{{ names.hosts.docker02 }}.{{ lab.domain }}"
+      state: "{{ cycle_mode.volumes.raid_vol }}"
+      src: "//{{ nas_vlan_20_address }}/{{ names.raid_vol.name }}-tfstate"
+      path: "/mnt/{{ names.raid_vol.name }}-tfstate"
+      username: "{{ names.lab_users.raid_vol.tfstate_rw }}"
+      password: "{{ secrets.lab_users.nas.raid_vol.tfstate_rw }}"
 
   glusterfs:
-    - host: docker01
-      fstype: ext4
-      src: /dev/mapper/ubuntu--vg-dfs_lvm
-      owner: "{{ secrets.docker01.superuser.username }}"
-      group: "{{ secrets.docker01.superuser.username }}"
-      mode: "0755"
-      path: /mnt/dfs_lvm
+    - host: "{{ names.hosts.docker01 }}.{{ lab.domain }}"
       state: "{{ cycle_mode.volumes.dfs_lvm }}"
+      src: /dev/mapper/ubuntu--vg-dfs_lvm
+      path: /mnt/dfs_lvm
 
-    - host: docker02
-      fstype: ext4
-      src: /dev/mapper/ubuntu--vg-dfs_lvm
-      owner: "{{ secrets.docker02.superuser.username }}"
-      group: "{{ secrets.docker02.superuser.username }}"
-      mode: "0755"
-      path: /mnt/dfs_lvm
+    - host: "{{ names.hosts.docker02 }}.{{ lab.domain }}"
       state: "{{ cycle_mode.volumes.dfs_lvm }}"
+      src: /dev/mapper/ubuntu--vg-dfs_lvm
+      path: /mnt/dfs_lvm

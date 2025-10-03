@@ -1,0 +1,39 @@
+---
+###########################################################
+# zoneminder
+###########################################################
+
+###########################################################
+# Free, open-source, full-featured video surveillance and
+# security software application designed to run on
+# Linux-based systems. It allows users to monitor, record,
+# and manage video from various camera sources, including
+# IP cameras, webcams, and analog cameras.
+###########################################################
+
+container:
+  name: zoneminder
+  image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/dlandon/zoneminder:latest"
+  pull: "{{ containers_globals.pull_images.remote }}"
+  user: "0:0"
+  command:
+    - /sbin/my_init
+  docker_host: "{{ zoneminder_vlan_40_address }}"
+  state: "{{ containers_globals.state }}"
+  shm_size: 4G
+  devices:
+    - /dev/video0
+  capabilities: []
+  network_mode: "{{ containers_globals.network_mode }}"
+  dns_servers: "{{ containers_globals.dns_servers }}"
+  dns_search_domains: "{{ containers_globals.dns_search_domains }}"
+  env:
+    TZ: "{{ names.local_timezone }}"
+  ports:
+    - "{{ zoneminder_vlan_40_address }}:{{ ports.zoneminder_web }}:80/tcp"
+  volumes:
+    - "{{ lab.dirs.app_data }}/zoneminder/config:/config:rw"
+    - "{{ lab.dirs.app_data }}/zoneminder/recordings:/zm_recordings:rw"
+    - "{{ lab.dirs.config }}/zoneminder/ssmtp.conf:/etc/ssmtp/ssmtp.conf:ro"
+    - "{{ lab.dirs.config }}/zoneminder/revaliases:/etc/ssmtp/revaliases:ro"
+  wait_port: "{{ ports.zoneminder_web }}"

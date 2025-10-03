@@ -1,14 +1,14 @@
 ---
 - name: MAIN - include container tasks in deploy mode
   ansible.builtin.include_tasks: container.yml
-  no_log: true
   when: cycle_mode.name == "up"
+  no_log: true
   with_items:
     - "{{ lookup('community.general.filetree', 'vars/containers') | sort(attribute='src') }}"
 
 - name: MAIN - include container tasks in shutdown mode
   ansible.builtin.include_tasks: container.yml
-  no_log: true
   when: cycle_mode.name == "down"
+  no_log: true
   with_items:
     - "{{ lookup('community.general.filetree', 'vars/containers') | sort(attribute='src', reverse=True) }}"

@@ -1,0 +1,45 @@
+---
+############################################################
+
+ansible_python_interpreter: /usr/bin/python3
+
+# ansible_user: root
+# ansible_password: "{{ secrets.lab_users.docker02.superuser }}"
+# ansible_become_password: "{{ secrets.lab_users.docker02.superuser }}"
+
+ansible_user: "{{ names.lab_users.privileged }}"
+ansible_password: "{{ secrets.lab_users.docker02.privileged }}"
+ansible_become_password: "{{ secrets.lab_users.docker02.privileged }}"
+
+ansible_ssh_private_key_file: /root/ssh.key
+
+############################################################
+
+host_users:
+  superuser:
+    group: root
+
+  privileged:
+    uid: "32612"
+    home_dir: "/home/{{ names.lab_users.privileged }}"
+    group: "{{ names.lab_users.privileged }}"
+
+  nonprivileged:
+    uid: "32613"
+    home_dir: "/home/{{ names.lab_users.nonprivileged }}"
+    group: "{{ names.lab_users.nonprivileged }}"
+
+poweroff:
+  enabled: true
+
+lan_ints:
+  vlan_20: bond0
+  vlan_30: enp1s0f1
+  vlan_40: eno1
+  vlan_50: enp2s0f1
+
+wol:
+  mac: "04:42:1A:06:BB:AF"
+  broadcast: "192.168.40.7"
+  port: 9
+  wait_port: 22

@@ -1,28 +1,26 @@
 ---
-###########################################################
+############################################################
 # nexus
-###########################################################
+############################################################
 
-###########################################################
+############################################################
 # Software repository manager, primarily used for storing
 # and managing software artifacts like JAR files, Docker
 # images, NPM packages, and other build outputs. It acts as
 # a central location for developers to access, distribute,
 # and collaborate on software components, offering features
 # like access control, versioning, and build integration.
-###########################################################
+############################################################
 
 container:
   name: nexus
   image: sonatype/nexus3:3.68.1
   pull: "{{ containers_globals.pull_images.remote }}"
+  user: "{{ assignments.nexus.uid }}:{{ assignments.nexus.uid }}"
   command:
     - /opt/sonatype/nexus/bin/nexus
     - run
-  docker_host: "{{ assignments.nexus.networking.teine.ipv4 }}"
-  restart_policy: "{{ containers_globals.restart_policy }}"
-  detach: "{{ containers_globals.detach }}"
-  labels: "{{ containers_globals.labels }}"
+  docker_host: "{{ nexus_vlan_40_address }}"
   state: "{{ containers_globals.state }}"
   shm_size: "{{ containers_globals.shm_size }}"
   devices: []
@@ -31,11 +29,11 @@ container:
   dns_servers: "{{ containers_globals.dns_servers }}"
   dns_search_domains: "{{ containers_globals.dns_search_domains }}"
   env:
-    TZ: "{{ containers_globals.env.TZ }}"
+    TZ: "{{ names.local_timezone }}"
   ports:
-    - "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_web }}:8081/tcp"
-    - "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}:{{ external_ports.nexus_docker_hosted }}/tcp"
-    - "{{ assignments.nexus.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}:{{ external_ports.nexus_docker_proxy }}/tcp"
+    - "{{ nexus_vlan_40_address }}:{{ ports.nexus_web }}:8081/tcp"
+    - "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_hosted }}:{{ ports.nexus_docker_hosted }}/tcp"
+    - "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}:{{ ports.nexus_docker_proxy }}/tcp"
   volumes:
-    - "{{ lab_dirs.application_directory }}/nexus/data:/nexus-data:rw"
-  wait_port: "{{ external_ports.nexus_docker_proxy }}"
+    - "{{ lab.dirs.app_data }}/nexus/data:/nexus-data:rw"
+  wait_port: "{{ ports.nexus_docker_proxy }}"

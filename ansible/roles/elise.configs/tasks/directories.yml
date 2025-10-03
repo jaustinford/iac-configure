@@ -1,9 +1,9 @@
 ---
 - name: "DIRECTORIES - copy container directory {{ item.path }}"
   ansible.builtin.file:
-    path: "/elysianskies/configurations/{{ item.path }}"
+    path: "{{ lab.dirs.config }}/{{ item.path }}"
     state: "{{ item.state }}"
-    mode: '0755'
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
+    owner: "{{ lab.dirs.owner }}"
+    group: "{{ lab.dirs.group }}"
+    mode: "{{ lab.dirs.mode }}"
   become: true

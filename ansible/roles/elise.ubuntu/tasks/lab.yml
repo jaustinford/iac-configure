@@ -1,0 +1,30 @@
+---
+- name: LAB - configure local resolutions
+  ansible.builtin.template:
+    src: hosts
+    dest: /etc/hosts
+    owner: root
+    group: root
+    mode: '0644'
+  become: true
+
+- name: LAB - include ssh tasks
+  ansible.builtin.include_tasks: ssh.yml
+
+- name: LAB - find nexus apt repository
+  ansible.builtin.uri:
+    url: "https://nexus.{{ nginx_vlan_40_fqdn }}"
+    status_code: "{{ lab.task_globals.discover_uri.status_code }}"
+  register: discovered_nexus
+
+- name: LAB - create nexus auth file
+  ansible.builtin.template:
+    src: lab_nexus.conf
+    dest: /etc/apt/auth.conf.d/lab_nexus.conf
+    owner: root
+    group: root
+    mode: '0600'
+  become: true
+
+- name: LAB - include arch tasks
+  ansible.builtin.include_tasks: arch.yml

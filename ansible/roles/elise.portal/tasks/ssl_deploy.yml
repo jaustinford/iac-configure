@@ -1,10 +1,10 @@
 ---
-- name: SSL_DEPLOY - fetch elysianskies tfstate
+- name: SSL_DEPLOY - fetch lab tfstate
   delegate_to: localhost
   ansible.builtin.debug:
-    msg: "{{ lookup('ansible.builtin.file', '/tfstate/elysianskies.json') }}"
+    msg: "{{ lookup('ansible.builtin.file', '/tfstate/lab.json') }}"
   no_log: true
-  register: elysianskies_tfstate
+  register: lab_tfstate
 
 - name: SSL_DEPLOY - copy ssl certificate
   ansible.builtin.template:

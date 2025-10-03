@@ -2,9 +2,9 @@
 - name: "TEMPLATES - copy container template {{ item.path }}"
   ansible.builtin.template:
     src: "{{ item.src }}"
-    dest: "/elysianskies/configurations/{{ item.path }}"
-    mode: '0755'
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
+    dest: "{{ lab.dirs.config }}/{{ item.path }}"
+    owner: "{{ assignments[item.path.split('/')[0]].uid }}"
+    group: "{{ assignments[item.path.split('/')[0]].uid }}"
+    mode: "{{ lab.dirs.mode }}"
   become: true
   notify: "MAIN - docker restart {{ item.path.split('/')[0] }}"

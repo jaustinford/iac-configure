@@ -1,0 +1,41 @@
+---
+###########################################################
+# keycloak
+###########################################################
+
+###########################################################
+# Open-source Identity and Access Management (IAM) solution
+# designed to help manage user authentication and
+# authorization for applications and services. It acts as a
+# central hub for handling user logins, allowing for Single
+# Sign-On (SSO) across multiple applications.
+###########################################################
+
+container:
+  name: keycloak
+  image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/keycloak/keycloak:26.4.0-0"
+  pull: "{{ containers_globals.pull_images.remote }}"
+  user: "0:0"
+  command:
+    - start
+  docker_host: "{{ keycloak_vlan_40_address }}"
+  state: "{{ containers_globals.state }}"
+  shm_size: "{{ containers_globals.shm_size }}"
+  devices: []
+  capabilities: []
+  network_mode: "{{ containers_globals.network_mode }}"
+  dns_servers: "{{ containers_globals.dns_servers }}"
+  dns_search_domains: "{{ containers_globals.dns_search_domains }}"
+  env:
+    TZ: "{{ names.local_timezone }}"
+    KC_HOSTNAME: "auth.{{ lab.domain }}"
+    KC_PROXY: edge
+    KC_HTTP_ENABLED: "true"
+    KC_PROXY_HEADERS: xforwarded
+    KC_BOOTSTRAP_ADMIN_USERNAME: temp_admin
+    KC_BOOTSTRAP_ADMIN_PASSWORD: temp_admin
+  ports:
+    - "{{ keycloak_vlan_40_address }}:{{ ports.keycloak_web }}:8080/tcp"
+  volumes:
+    - "{{ lab.dirs.app_data }}/keycloak/data:/opt/keycloak/data:rw"
+  wait_port: "{{ ports.keycloak_web }}"

@@ -1,0 +1,35 @@
+---
+###########################################################
+# elasticsearch
+###########################################################
+
+###########################################################
+# Distributed, RESTful search and analytics engine built on
+# Apache Lucene. It excels at full-text search, log
+# analytics, security intelligence, business analytics, and
+# operational intelligence.
+###########################################################
+
+container:
+  name: elasticsearch
+  image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/elastic/elasticsearch:8.13.0"
+  pull: "{{ containers_globals.pull_images.remote }}"
+  user: "1000:0"
+  # user: "{{ assignments.elasticsearch.uid }}:{{ assignments.elasticsearch.uid }}"
+  command:
+    - eswrapper
+  docker_host: "{{ elasticsearch_vlan_40_address }}"
+  state: "{{ containers_globals.state }}"
+  shm_size: "{{ containers_globals.shm_size }}"
+  devices: []
+  capabilities: []
+  network_mode: "{{ containers_globals.network_mode }}"
+  env:
+    TZ: "{{ names.local_timezone }}"
+    ES_JAVA_OPTS: -Xms4g -Xmx4g
+  ports:
+    - "{{ elasticsearch_vlan_40_address }}:{{ ports.elasticsearch_db }}:9200/tcp"
+  volumes: []
+    # - "{{ lab.dirs.app_data }}/elasticsearch/config:/usr/share/elasticsearch/config:rw"
+    # - "{{ lab.dirs.app_data }}/elasticsearch/data:/usr/share/elasticsearch/data:rw"
+  wait_port: "{{ ports.elasticsearch_db }}"

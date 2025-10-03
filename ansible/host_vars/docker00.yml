@@ -1,0 +1,39 @@
+---
+############################################################
+
+ansible_python_interpreter: /usr/bin/python3
+
+# ansible_user: root
+# ansible_password: "{{ secrets.lab_users.docker00.superuser }}"
+# ansible_become_password: "{{ secrets.lab_users.docker00.superuser }}"
+
+ansible_user: "{{ names.lab_users.privileged }}"
+ansible_password: "{{ secrets.lab_users.docker00.privileged }}"
+ansible_become_password: "{{ secrets.lab_users.docker00.privileged }}"
+
+ansible_ssh_private_key_file: /root/ssh.key
+
+############################################################
+
+host_users:
+  superuser:
+    group: root
+
+  privileged:
+    uid: "32614"
+    home_dir: "/home/{{ names.lab_users.privileged }}"
+    group: "{{ names.lab_users.privileged }}"
+
+  nonprivileged:
+    uid: "32615"
+    home_dir: "/home/{{ names.lab_users.nonprivileged }}"
+    group: "{{ names.lab_users.nonprivileged }}"
+
+poweroff:
+  enabled: false
+
+lan_ints:
+  vlan_30: enx9c69d3004ff3
+  vlan_40: eth0
+
+lazarus_node: true

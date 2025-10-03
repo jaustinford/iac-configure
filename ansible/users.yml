@@ -1,0 +1,5 @@
+---
+- name: USERS - apply elise.users role
+  hosts: all
+  roles:
+    - elise.users

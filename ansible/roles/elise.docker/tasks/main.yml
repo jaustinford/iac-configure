@@ -16,7 +16,7 @@
     group: root
     mode: '0644'
   become: true
-  when: internet_check.status == 200
+  when: internet_found == 'yes'
 
 - name: MAIN - install docker packages
   ansible.builtin.apt:
@@ -24,7 +24,7 @@
     state: present
     update_cache: true
   become: true
-  when: internet_check.status == 200
+  when: internet_found == 'yes'
   with_items:
     - "{{ docker.ubuntu_packages }}"
 

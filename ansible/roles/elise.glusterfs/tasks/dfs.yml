@@ -14,6 +14,6 @@
     transport: "{{ glusterfs.dfs.transport }}"
     cluster: "{{ glusterfs.peers }}"
     options:
-      transport.socket.bind-address: "{{ ansible_facts[lan_interface.uisge].ipv4.address }}"
+      transport.socket.bind-address: "{{ ansible_facts[lan_ints.vlan_20].ipv4.address }}"
       auth.allow: "{{ glusterfs.peers | join(',') }}"
   become: true

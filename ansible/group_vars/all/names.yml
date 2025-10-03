@@ -1,0 +1,64 @@
+---
+names:
+
+  admin_email: j.austin.ford@gmail.com
+  local_timezone: America/Denver
+
+  ############################################################
+  #     Theme : Ancient England and Arthurian Legend         #
+  ############################################################
+
+  #        ⠀⠀⠀⠀⠀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+  #        ⠀⠀⠀⠀⠀⠙⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+  #        ⠀⠀⠀⠀⠀⠀⠹⣧⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+  #        ⠀⠀⠀⠀⠀⢀⣴⣿⣿⡿⠿⠛⠓⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+  #        ⠀⠀⠀⠀⣤⡾⠟⠋⣁⣤⣤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+  #        ⠀⠀⠀⠀⠀⠀⠀⠘⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+  #        ⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+  #        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⣿⣷⡀⠀⠀⣀⣀⣠⣤⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀
+  #        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣿⣿⡇⢀⣴⣿⣿⣿⣿⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀
+  #        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⠋⣠⣾⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀
+  #        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣴⣾⣿⣿⣿⣿⠟⠻⢿⣿⣿⡀⠀⠀⠀⠀⠀⠀⠀
+  #        ⠀⠀⠀⠀⠀⠀⠀⠀⢀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣤⣄⣉⠁⠀⠀⠀⠀⠀⠀⠀
+  #        ⠀⠀⠀⠀⠀⠀⠀⠀⣸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣤⡄⠀⠀⠀
+  #        ⠀⠀⠀⠀⠀⠀⠀⢀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀
+  #        ⠀⠀⠀⠀⠀⠀⠀⠘⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠃⠀⠀
+
+  ############################################################
+  #                                                          #
+  #   Whoso pulleth out this sword of this stone and anvil,  #
+  #       is rightwise king born of all England.             #
+  #                                                          #
+  ############################################################
+
+  raid_vol:
+    name: xcalibr # The Sword in the Stone, 24TB RAIDZ1 volume.
+    group:
+      name: roundtable # Access only for the 'roundtable' knights.
+      gid: 32600
+
+  hosts:
+    docker01: mercia      # Kingdom of the Midlands.
+    docker02: northumbria # Kingdom of the North.
+    docker00: eastanglia  # Kingdom of the Angles.
+    nas: wessex           # Father Kingdom to England.
+    portal: portal        # Gateway to the World Wide Web.
+
+  networks:
+    vlan_20: rth # Earth, SMB and DFS Storage.
+    vlan_30: wtr # Water, Gateway routing.
+    vlan_40: fre # Fire, Container and Host Services.
+    vlan_50: air # Air, Managed Switch Configuration.
+
+  lab_users:
+    privileged: merlin    # Powerful wizard, privileged above all.
+    nonprivileged: squire # Meager candidate, no privileges.
+
+    raid_vol:
+      plex_libraries_rw: galahad # Purest of knights, son of Lancelot.
+      plex_libraries_ro: gawain  # Loyal knight, good friend of Arthur.
+      documents_ro: bors         # Faithful and pious knight.
+      music_ro: tristan          # Skilled knight, warrior musician.
+      pictures_ro: bedivere      # The knight who returned the Sword.
+      tfstate_rw: percival       # Pious knight, hunter of the Grail.
+      deluge_rw: lancelot        # Most famous knight, betrayer of Arthur.

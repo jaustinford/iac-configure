@@ -1,0 +1,30 @@
+---
+###########################################################
+# resume
+###########################################################
+
+###########################################################
+# Admin resume splash page.
+###########################################################
+
+container:
+  name: resume
+  image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_hosted }}/elise/static-website-resume:main"
+  pull: "{{ containers_globals.pull_images.local }}"
+  user: "{{ assignments.resume.uid }}:{{ assignments.resume.uid }}"
+  command:
+    - httpd-foreground
+  docker_host: "{{ resume_vlan_40_address }}"
+  state: "{{ containers_globals.state }}"
+  shm_size: "{{ containers_globals.shm_size }}"
+  devices: []
+  capabilities: []
+  network_mode: "{{ containers_globals.network_mode }}"
+  dns_servers: "{{ containers_globals.dns_servers }}"
+  dns_search_domains: "{{ containers_globals.dns_search_domains }}"
+  env:
+    TZ: "{{ names.local_timezone }}"
+  ports:
+    - "{{ resume_vlan_40_address }}:{{ ports.resume_web }}:80/tcp"
+  volumes: []
+  wait_port: "{{ ports.resume_web }}"

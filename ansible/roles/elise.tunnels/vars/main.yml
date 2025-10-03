@@ -3,15 +3,15 @@ tunnels:
   - name: nginx
     description: web ingress tunnel
     state: "{{ cycle_mode.state.tunnels }}"
-    host: "{{ assignments.nginx.networking.teine.fqdn }}"
-    ipv4: "{{ assignments.nginx.networking.teine.ipv4 }}"
-    external_port: "{{ external_ports.nginx_web }}"
+    host: "{{ assignments.nginx.host }}"
+    ipv4: "{{ nginx_vlan_40_address }}"
+    external_port: "{{ ports.nginx_web }}"
     internal_port: "443"
 
   - name: openvpnas
     description: openvpnas tunnel
     state: "{{ cycle_mode.state.tunnels }}"
-    host: "{{ assignments.openvpnas.networking.teine.fqdn }}"
-    ipv4: "{{ assignments.openvpnas.networking.teine.ipv4 }}"
+    host: "{{ assignments.openvpnas.host }}"
+    ipv4: "{{ openvpnas_vlan_40_address }}"
     external_port: "1194"
-    internal_port: "{{ external_ports.openvpnas_vpn }}"
+    internal_port: "{{ ports.openvpnas_vpn }}"

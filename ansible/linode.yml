@@ -1,5 +1,5 @@
 ---
 - name: LINODE - apply elise.linode role
-  hosts: elysianskies_onprem_docker[0]
+  hosts: lab_onprem_docker[0]
   roles:
     - elise.linode

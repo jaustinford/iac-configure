@@ -1,17 +1,17 @@
 {
-    "insecure-registries": [
-        "{{ docker_hosts.host_1.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}",
-        "{{ docker_hosts.host_1.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}",
-        "{{ docker_hosts.host_2.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_hosted }}",
-        "{{ docker_hosts.host_2.networking.teine.ipv4 }}:{{ external_ports.nexus_docker_proxy }}",
-        "{{ docker_hosts.host_1.networking.teine.fqdn }}:{{ external_ports.nexus_docker_hosted }}",
-        "{{ docker_hosts.host_1.networking.teine.fqdn }}:{{ external_ports.nexus_docker_proxy }}",
-        "{{ docker_hosts.host_2.networking.teine.fqdn }}:{{ external_ports.nexus_docker_hosted }}",
-        "{{ docker_hosts.host_2.networking.teine.fqdn }}:{{ external_ports.nexus_docker_proxy }}"
-    ],
-    "log-driver": "json-file",
-    "log-opts": {
-        "max-size": "10m",
-        "max-file": "5"
-    }
+  "insecure-registries": [
+    "{{ docker01_vlan_40_address }}:{{ ports.nexus_docker_hosted }}",
+    "{{ docker01_vlan_40_address }}:{{ ports.nexus_docker_proxy }}",
+    "{{ docker02_vlan_40_address }}:{{ ports.nexus_docker_hosted }}",
+    "{{ docker02_vlan_40_address }}:{{ ports.nexus_docker_proxy }}",
+    "{{ docker01_vlan_40_fqdn }}:{{ ports.nexus_docker_hosted }}",
+    "{{ docker01_vlan_40_fqdn }}:{{ ports.nexus_docker_proxy }}",
+    "{{ docker02_vlan_40_fqdn }}:{{ ports.nexus_docker_hosted }}",
+    "{{ docker02_vlan_40_fqdn }}:{{ ports.nexus_docker_proxy }}"
+  ],
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "10m",
+    "max-file": "5"
+  }
 }

@@ -1,0 +1,6 @@
+---
+- name: MAIN - set hostnames
+  ansible.builtin.hostname:
+    name: "{{ names.hosts[inventory_hostname] }}.{{ lab.domain }}"
+  become: true
+  notify: MAIN - reboot

@@ -1,11 +1,11 @@
 ---
 - name: LAB - ensure config directory
   ansible.builtin.file:
-    path: /elysianskies/configurations
+    path: "{{ lab.dirs.config }}"
     state: directory
-    mode: '0755'
-    owner: root
-    group: root
+    owner: "{{ lab.dirs.owner }}"
+    group: "{{ lab.dirs.group }}"
+    mode: "{{ lab.dirs.mode }}"
   become: true
 
 - name: "LAB - resolve expressvpn server"
@@ -36,5 +36,5 @@
 - name: LAB - include maxmind tasks
   ansible.builtin.include_tasks: maxmind.yml
   when:
-    - ansible_hostname + "-teine.home.elysianskies.com" == assignments.nginx.networking.teine.fqdn
+    - inventory_hostname == assignments.nginx.host
     - maxmind.download == "true"

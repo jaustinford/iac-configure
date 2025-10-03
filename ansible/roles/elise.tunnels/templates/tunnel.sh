@@ -8,4 +8,4 @@ autossh -N -T \
     -o UserKnownHostsFile=/dev/null \
     -i /root/ssh.key \
     -R {{ item.external_port }}:{{ item.ipv4 }}:{{ item.internal_port }} \
-    root@portal.elysianskies.com
+    root@portal.{{ lab.domain }}

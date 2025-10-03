@@ -1,37 +1,54 @@
 #!/usr/bin/env bash
 
+find_internet() {
+    result=$(
+        curl \
+            --silent \
+            --output /dev/null \
+            --write-out "%{http_code}" \
+            https://www.google.com
+    )
+
+    if [ "${result}" == "200" ]; then
+        INTERNET_FOUND='yes'
+
+    else
+        INTERNET_FOUND='no'
+
+    fi
+}
+
 echo "${VAULT_PASSWORD}" > /root/.vault.password
-echo "${B64_SSH_KEY}" | base64 -d > /root/ssh.key
+echo "${PRIVILEGED_USER_SSH_KEY_B64}" | base64 -d > /root/ssh.key
 chmod 600 /root/ssh.key
+find_internet
 
 cat <<EOF > /etc/ansible_hosts
-[secrets:children]
-elysianskies_onprem
-elysianskies_linode
+[all:vars]
+internet_found='${INTERNET_FOUND}'
 
-[elysianskies_onprem:children]
-elysianskies_onprem_docker
-elysianskies_onprem_nas
+[lab_onprem:children]
+lab_onprem_docker
+lab_onprem_nas
 
-[elysianskies_onprem_docker]
-docker00-teine.home.elysianskies.com ansible_host='192.168.40.4'
-docker01-teine.home.elysianskies.com ansible_host='192.168.40.1'
-docker02-teine.home.elysianskies.com ansible_host='192.168.40.2'
+[lab_onprem_docker]
+docker01 ansible_host='192.168.40.1'
+docker02 ansible_host='192.168.40.2'
+docker00 ansible_host='192.168.40.4'
 
-[elysianskies_onprem_nas]
-nas-teine.home.elysianskies.com ansible_host='192.168.40.5'
+[lab_onprem_nas]
+nas ansible_host='192.168.40.5'
 
-[elysianskies_linode]
+[lab_linode]
 EOF
 
-if [ $(curl -s -o /dev/null -w "%{http_code}" https://www.google.com) == "200" ] || \
-   [ ${CYCLE_MODE} == "up" ]; then
+if [ "${INTERNET_FOUND}" == 'yes' ] || [ "${CYCLE_MODE}" == 'up' ]; then
     echo " "
     echo -e "[ \033[31m*\033[0m ] Adding Portal host to inventory"
     echo " "
 
     cat <<EOF >> /etc/ansible_hosts
-portal.elysianskies.com ansible_host="{{ lookup('ansible.builtin.file', '/tfstate/instance_portal_ip_address.txt') }}"
+portal ansible_host="{{ lookup('ansible.builtin.file', '/tfstate/instance_portal_ip_address.txt') }}"
 EOF
 
 else

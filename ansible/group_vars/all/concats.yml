@@ -1,0 +1,72 @@
+---
+
+############################################################
+# hosts
+############################################################
+
+docker01_vlan_20_address: "{{ hostvars.docker01['ansible_' + hostvars.docker01.lan_ints.vlan_20].ipv4.address }}"
+docker01_vlan_30_address: "{{ hostvars.docker01['ansible_' + hostvars.docker01.lan_ints.vlan_30].ipv4.address }}"
+docker01_vlan_40_address: "{{ hostvars.docker01['ansible_' + hostvars.docker01.lan_ints.vlan_40].ipv4.address }}"
+docker01_vlan_50_address: "{{ hostvars.docker01['ansible_' + hostvars.docker01.lan_ints.vlan_50].ipv4.address }}"
+docker01_vlan_20_fqdn: "{{ names.hosts.docker01 }}-{{ names.networks.vlan_20 }}.{{ lab.domain }}"
+docker01_vlan_30_fqdn: "{{ names.hosts.docker01 }}-{{ names.networks.vlan_30 }}.{{ lab.domain }}"
+docker01_vlan_40_fqdn: "{{ names.hosts.docker01 }}-{{ names.networks.vlan_40 }}.{{ lab.domain }}"
+docker01_vlan_50_fqdn: "{{ names.hosts.docker01 }}-{{ names.networks.vlan_50 }}.{{ lab.domain }}"
+
+docker02_vlan_20_address: "{{ hostvars.docker02['ansible_' + hostvars.docker02.lan_ints.vlan_20].ipv4.address }}"
+docker02_vlan_30_address: "{{ hostvars.docker02['ansible_' + hostvars.docker02.lan_ints.vlan_30].ipv4.address }}"
+docker02_vlan_40_address: "{{ hostvars.docker02['ansible_' + hostvars.docker02.lan_ints.vlan_40].ipv4.address }}"
+docker02_vlan_50_address: "{{ hostvars.docker02['ansible_' + hostvars.docker02.lan_ints.vlan_50].ipv4.address }}"
+docker02_vlan_20_fqdn: "{{ names.hosts.docker02 }}-{{ names.networks.vlan_20 }}.{{ lab.domain }}"
+docker02_vlan_30_fqdn: "{{ names.hosts.docker02 }}-{{ names.networks.vlan_30 }}.{{ lab.domain }}"
+docker02_vlan_40_fqdn: "{{ names.hosts.docker02 }}-{{ names.networks.vlan_40 }}.{{ lab.domain }}"
+docker02_vlan_50_fqdn: "{{ names.hosts.docker02 }}-{{ names.networks.vlan_50 }}.{{ lab.domain }}"
+
+docker00_vlan_30_address: "{{ hostvars.docker00['ansible_' + hostvars.docker00.lan_ints.vlan_30].ipv4.address }}"
+docker00_vlan_40_address: "{{ hostvars.docker00['ansible_' + hostvars.docker00.lan_ints.vlan_40].ipv4.address }}"
+docker00_vlan_30_fqdn: "{{ names.hosts.docker00 }}-{{ names.networks.vlan_30 }}.{{ lab.domain }}"
+docker00_vlan_40_fqdn: "{{ names.hosts.docker00 }}-{{ names.networks.vlan_40 }}.{{ lab.domain }}"
+
+nas_vlan_20_address: "{{ hostvars.nas['ansible_' + hostvars.nas.lan_ints.vlan_20].ipv4[0].address }}"
+nas_vlan_30_address: "{{ hostvars.nas['ansible_' + hostvars.nas.lan_ints.vlan_30].ipv4[0].address }}"
+nas_vlan_40_address: "{{ hostvars.nas['ansible_' + hostvars.nas.lan_ints.vlan_40].ipv4[0].address }}"
+nas_vlan_20_fqdn: "{{ names.hosts.nas }}-{{ names.networks.vlan_20 }}.{{ lab.domain }}"
+nas_vlan_30_fqdn: "{{ names.hosts.nas }}-{{ names.networks.vlan_30 }}.{{ lab.domain }}"
+nas_vlan_40_fqdn: "{{ names.hosts.nas }}-{{ names.networks.vlan_40 }}.{{ lab.domain }}"
+
+############################################################
+# containers
+############################################################
+
+pihole_vlan_20_address: "{{ hostvars[assignments.pihole.host]['ansible_' + hostvars[assignments.pihole.host].lan_ints.vlan_20].ipv4.address }}"
+
+pihole_vlan_30_address: "{{ hostvars[assignments.pihole.host]['ansible_' + hostvars[assignments.pihole.host].lan_ints.vlan_30].ipv4.address }}"
+plex_vlan_30_address: "{{ hostvars[assignments.plex.host]['ansible_' + hostvars[assignments.plex.host].lan_ints.vlan_30].ipv4.address }}"
+expressvpn_vlan_30_address: "{{ hostvars[assignments.expressvpn.host]['ansible_' + hostvars[assignments.expressvpn.host].lan_ints.vlan_30].ipv4.address }}"
+openvpnas_vlan_30_address: "{{ hostvars[assignments.openvpnas.host]['ansible_' + hostvars[assignments.openvpnas.host].lan_ints.vlan_30].ipv4.address }}"
+
+nginx_vlan_40_fqdn: "{{ names.hosts[assignments.nginx.host] }}-{{ names.networks.vlan_40 }}.{{ lab.domain }}"
+
+nexus_vlan_40_address: "{{ hostvars[assignments.nexus.host]['ansible_' + hostvars[assignments.nexus.host].lan_ints.vlan_40].ipv4.address }}"
+pihole_vlan_40_address: "{{ hostvars[assignments.pihole.host]['ansible_' + hostvars[assignments.pihole.host].lan_ints.vlan_40].ipv4.address }}"
+nginx_vlan_40_address: "{{ hostvars[assignments.nginx.host]['ansible_' + hostvars[assignments.nginx.host].lan_ints.vlan_40].ipv4.address }}"
+plex_vlan_40_address: "{{ hostvars[assignments.plex.host]['ansible_' + hostvars[assignments.plex.host].lan_ints.vlan_40].ipv4.address }}"
+tautulli_vlan_40_address: "{{ hostvars[assignments.tautulli.host]['ansible_' + hostvars[assignments.tautulli.host].lan_ints.vlan_40].ipv4.address }}"
+filebrowser_vlan_40_address: "{{ hostvars[assignments.filebrowser.host]['ansible_' + hostvars[assignments.filebrowser.host].lan_ints.vlan_40].ipv4.address }}"
+elasticsearch_vlan_40_address: "{{ hostvars[assignments.elasticsearch.host]['ansible_' + hostvars[assignments.elasticsearch.host].lan_ints.vlan_40].ipv4.address }}"
+kibana_vlan_40_address: "{{ hostvars[assignments.kibana.host]['ansible_' + hostvars[assignments.kibana.host].lan_ints.vlan_40].ipv4.address }}"
+zoneminder_vlan_40_address: "{{ hostvars[assignments.zoneminder.host]['ansible_' + hostvars[assignments.zoneminder.host].lan_ints.vlan_40].ipv4.address }}"
+expressvpn_vlan_40_address: "{{ hostvars[assignments.expressvpn.host]['ansible_' + hostvars[assignments.expressvpn.host].lan_ints.vlan_40].ipv4.address }}"
+squid_vlan_40_address: "{{ hostvars[assignments.squid.host]['ansible_' + hostvars[assignments.squid.host].lan_ints.vlan_40].ipv4.address }}"
+deluge_vlan_40_address: "{{ hostvars[assignments.deluge.host]['ansible_' + hostvars[assignments.deluge.host].lan_ints.vlan_40].ipv4.address }}"
+gitlab_vlan_40_address: "{{ hostvars[assignments.gitlab.host]['ansible_' + hostvars[assignments.gitlab.host].lan_ints.vlan_40].ipv4.address }}"
+runner_vlan_40_address: "{{ hostvars[assignments.runner.host]['ansible_' + hostvars[assignments.runner.host].lan_ints.vlan_40].ipv4.address }}"
+openvpnas_vlan_40_address: "{{ hostvars[assignments.openvpnas.host]['ansible_' + hostvars[assignments.openvpnas.host].lan_ints.vlan_40].ipv4.address }}"
+docs_vlan_40_address: "{{ hostvars[assignments.docs.host]['ansible_' + hostvars[assignments.docs.host].lan_ints.vlan_40].ipv4.address }}"
+resume_vlan_40_address: "{{ hostvars[assignments.resume.host]['ansible_' + hostvars[assignments.resume.host].lan_ints.vlan_40].ipv4.address }}"
+fourohfour_vlan_40_address: "{{ hostvars[assignments.fourohfour.host]['ansible_' + hostvars[assignments.fourohfour.host].lan_ints.vlan_40].ipv4.address }}"
+fiveohx_vlan_40_address: "{{ hostvars[assignments.fiveohx.host]['ansible_' + hostvars[assignments.fiveohx.host].lan_ints.vlan_40].ipv4.address }}"
+fourohthree_vlan_40_address: "{{ hostvars[assignments.fourohthree.host]['ansible_' + hostvars[assignments.fourohthree.host].lan_ints.vlan_40].ipv4.address }}"
+keycloak_vlan_40_address: "{{ hostvars[assignments.keycloak.host]['ansible_' + hostvars[assignments.keycloak.host].lan_ints.vlan_40].ipv4.address }}"
+redis_vlan_40_address: "{{ hostvars[assignments.redis.host]['ansible_' + hostvars[assignments.redis.host].lan_ints.vlan_40].ipv4.address }}"
+oauth_vlan_40_address: "{{ hostvars[assignments.oauth.host]['ansible_' + hostvars[assignments.oauth.host].lan_ints.vlan_40].ipv4.address }}"

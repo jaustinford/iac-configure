@@ -1,0 +1,1 @@
+# The existence of this file mutes the Ubuntu login banner for {{ ansible_fqdn }}.
