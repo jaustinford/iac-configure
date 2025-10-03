@@ -27,8 +27,8 @@
   ansible.builtin.unarchive:
     src: "/root/geoip/{{ db_directory.stdout }}.tar.gz"
     dest: /root/geoip
-    owner: root
-    group: root
+    owner: "{{ assignments.nginx.uid }}"
+    group: "{{ assignments.nginx.uid }}"
     mode: '0640'
     remote_src: true
   become: true
@@ -37,8 +37,8 @@
   ansible.builtin.copy:
     src: "/root/geoip/{{ db_directory.stdout }}/{{ item }}.mmdb"
     dest: "{{ lab.dirs.app_data }}/nginx/geoip/{{ item }}.mmdb"
-    owner: root
-    group: root
+    owner: "{{ assignments.nginx.uid }}"
+    group: "{{ assignments.nginx.uid }}"
     mode: '0640'
     remote_src: true
   become: true
