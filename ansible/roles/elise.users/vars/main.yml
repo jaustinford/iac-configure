@@ -14,8 +14,15 @@ lab_users:
       tertiary: lightgrey
       vim: elflord
     state: present
-    public_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCw5PQecme+/WsJYSh0bjEiawrsnIwvxZe7QWuCMdDUJgYNwz0yR3IdVlPBd1gf+PCD3qz9SkwTpGsoyYHptjjUw/TYRvEEQaC2x5OwZIuprcTFYztGvDDmEX5giZdNy6Aq9uGrtnzQZRd2T8JSLi/5jLJ7HWz/b1IO2puj4g/E++njPeP4Hh0FI5SPgUzdLP0GHPCAXvZXz3O9QS9kbZ28ICZ4OVjTy2WBaHsfz5XLZ4mdjZIJKp1j2zyPe3WGUhYKOpoA1clk6T7ZPGZDwRUAZDHB4A8HZHepmAwVsHATad/Jq4PfBHzsB4DhNrp7vez5C/51WI+jJJBvkQqALxgti6D12770WCHKfxD5kFR4xzSZoXEt6RZ2oz+7wb+F5HXGGDsufP7rCDsAHU3ciu8riV5J8dRY/PwQEUO5YMwxQAEIStrThDJxh3TIU2dou9u3yKdsWA8ZWULe7uJj5uR0x2SLNX1H7jnZJwBeasPFSfaGPifkJNkAzuFLKsY9shMSLmLaLfgQ4vZtFyboAVvVZfMw1I5wKGhBCT5PJJ4VwuO1YX8gz7GWwc+FD/omwX6uH3LMMaCb9RKMcETXw1aB1CXEA1t3qSkIQ/G7jSdDKlPZiIvPJOGeFRZTwepvtdoBYL2kmx/UcS3BFZxXkdKN8C+p9/vg+sX9A+WE1BaBTw== {{ names.lab_users.privileged }}@{{ lab.domain }}"
-
+    public_key:
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCw5PQecme+/WsJYSh0bjEiawrsnIwvxZe7QWuCMdDUJgYNwz0yR3IdVlPBd1g\
+      f+PCD3qz9SkwTpGsoyYHptjjUw/TYRvEEQaC2x5OwZIuprcTFYztGvDDmEX5giZdNy6Aq9uGrtnzQZRd2T8JSLi/5jLJ7HWz/b1I\
+      O2puj4g/E++njPeP4Hh0FI5SPgUzdLP0GHPCAXvZXz3O9QS9kbZ28ICZ4OVjTy2WBaHsfz5XLZ4mdjZIJKp1j2zyPe3WGUhYKOpo\
+      A1clk6T7ZPGZDwRUAZDHB4A8HZHepmAwVsHATad/Jq4PfBHzsB4DhNrp7vez5C/51WI+jJJBvkQqALxgti6D12770WCHKfxD5kFR\
+      4xzSZoXEt6RZ2oz+7wb+F5HXGGDsufP7rCDsAHU3ciu8riV5J8dRY/PwQEUO5YMwxQAEIStrThDJxh3TIU2dou9u3yKdsWA8ZWUL\
+      e7uJj5uR0x2SLNX1H7jnZJwBeasPFSfaGPifkJNkAzuFLKsY9shMSLmLaLfgQ4vZtFyboAVvVZfMw1I5wKGhBCT5PJJ4VwuO1YX8\
+      gz7GWwc+FD/omwX6uH3LMMaCb9RKMcETXw1aB1CXEA1t3qSkIQ/G7jSdDKlPZiIvPJOGeFRZTwepvtdoBYL2kmx/UcS3BFZxXkdK\
+      N8C+p9/vg+sX9A+WE1BaBTw== {{ names.lab_users.privileged }}@{{ lab.domain }}"
   nonprivileged:
     colors:
       primary: blue
@@ -23,4 +30,12 @@ lab_users:
       tertiary: lightgrey
       vim: elflord
     state: present
-    public_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCpErad40aqy0xiICQK7lzBTOUE0jwH1zFAvOItWPmp+aIkOpyET+fEjCJk89lf5+kyXzV1N7bdy+2whHL/haKvVMrEX6mm6MSL1HKJ4sqXisTSVi9ccoWZB6uAzK180B69lgBOXKFscnZ0cihwbZ/mNU4An6HzpAPLAJ1UJQs6Qxnc3OteKIhNCi43WV71CNseDAAcnlx2jGI/gl78JHdIL2WzBZgIrMUKiPKuY1Hy+tP17cad2T8wnqRK/iyH4ZMLWUXLhKl0/dcu4v3Pd9gO7U5wPC5HqjCUgg2gnU1vNBRNC/yy9u4TAFb0KY2IobpXa6b2D6bI0SqkSVdTZR+nIzLzME9HxG6i2a0L1y7BTei4225xBEwDQ/YY6gtpNPGYSdCIgJVlSAESIdpSioD5FPEyChmoQgmUKkkswrKDBkn0Ilkx7hH4YiED4FjK0+D/vavCzV9ppL73SgAPnZvYhD9bppJOVxqQc7D5G2mkEVuYGbwQf2IsyRIrukp9ro8WwREphc8DZzjbreaIHpWWtNZKK7iYptW4LCnSyyUaZv5XtXUCcgTIm5u+HW6xxeBgJLGu2xEwx1hYG/Gbr5eSkQsaL987TZwL61UInDVTTHJ9SOStqe1m8tv84KP0BNrnGJgtVXxJ0okNnoKmLPKYkgWlPSNN3SRef6Dp3kF7+Q== {{ names.lab_users.nonprivileged }}@{{ lab.domain }}"
+    public_key:
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCpErad40aqy0xiICQK7lzBTOUE0jwH1zFAvOItWPmp+aIkOpyET+fEjCJk89l\
+      f5+kyXzV1N7bdy+2whHL/haKvVMrEX6mm6MSL1HKJ4sqXisTSVi9ccoWZB6uAzK180B69lgBOXKFscnZ0cihwbZ/mNU4An6HzpAP\
+      LAJ1UJQs6Qxnc3OteKIhNCi43WV71CNseDAAcnlx2jGI/gl78JHdIL2WzBZgIrMUKiPKuY1Hy+tP17cad2T8wnqRK/iyH4ZMLWUX\
+      LhKl0/dcu4v3Pd9gO7U5wPC5HqjCUgg2gnU1vNBRNC/yy9u4TAFb0KY2IobpXa6b2D6bI0SqkSVdTZR+nIzLzME9HxG6i2a0L1y7\
+      BTei4225xBEwDQ/YY6gtpNPGYSdCIgJVlSAESIdpSioD5FPEyChmoQgmUKkkswrKDBkn0Ilkx7hH4YiED4FjK0+D/vavCzV9ppL7\
+      3SgAPnZvYhD9bppJOVxqQc7D5G2mkEVuYGbwQf2IsyRIrukp9ro8WwREphc8DZzjbreaIHpWWtNZKK7iYptW4LCnSyyUaZv5XtXU\
+      CcgTIm5u+HW6xxeBgJLGu2xEwx1hYG/Gbr5eSkQsaL987TZwL61UInDVTTHJ9SOStqe1m8tv84KP0BNrnGJgtVXxJ0okNnoKmLPK\
+      YkgWlPSNN3SRef6Dp3kF7+Q== {{ names.lab_users.nonprivileged }}@{{ lab.domain }}"
