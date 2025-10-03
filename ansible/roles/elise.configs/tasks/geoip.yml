@@ -1,7 +1,7 @@
 ---
 - name: GEOIP - download database
   ansible.builtin.get_url:
-    url: "https://download.maxmind.com/app/geoip_download?edition_id={{ item }}&license_key={{ secrets.maxmind.license_key }}&suffix=tar.gz"
+    url: "https://download.maxmind.com/app/geoip_download?edition_id={{ item }}&license_key={{ secrets.external.maxmind.license_key }}&suffix=tar.gz"
     dest: /root/geoip
     owner: root
     group: root
