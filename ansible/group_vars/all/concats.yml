@@ -67,6 +67,7 @@ resume_vlan_40_address: "{{ hostvars[assignments.resume.host]['ansible_' + hostv
 fourohfour_vlan_40_address: "{{ hostvars[assignments.fourohfour.host]['ansible_' + hostvars[assignments.fourohfour.host].lan_ints.vlan_40].ipv4.address }}"
 fiveohx_vlan_40_address: "{{ hostvars[assignments.fiveohx.host]['ansible_' + hostvars[assignments.fiveohx.host].lan_ints.vlan_40].ipv4.address }}"
 fourohthree_vlan_40_address: "{{ hostvars[assignments.fourohthree.host]['ansible_' + hostvars[assignments.fourohthree.host].lan_ints.vlan_40].ipv4.address }}"
+barbossa_vlan_40_address: "{{ hostvars[assignments.barbossa.host]['ansible_' + hostvars[assignments.barbossa.host].lan_ints.vlan_40].ipv4.address }}"
 keycloak_vlan_40_address: "{{ hostvars[assignments.keycloak.host]['ansible_' + hostvars[assignments.keycloak.host].lan_ints.vlan_40].ipv4.address }}"
 redis_vlan_40_address: "{{ hostvars[assignments.redis.host]['ansible_' + hostvars[assignments.redis.host].lan_ints.vlan_40].ipv4.address }}"
 oauth_vlan_40_address: "{{ hostvars[assignments.oauth.host]['ansible_' + hostvars[assignments.oauth.host].lan_ints.vlan_40].ipv4.address }}"
