@@ -1,12 +1,12 @@
 ---
 - name: DISCOVER - find gitlab web service
   ansible.builtin.uri:
-    url: "https://cicd.{{ nginx_vlan_40_fqdn }}"
+    url: "https://cicd.proxy-int.{{ lab.domain }}"
     status_code: "{{ lab.task_globals.discover_uri.status_code }}"
   register: discovered_gitlab
 
 - name: DISCOVER - find nexus apt repository
   ansible.builtin.uri:
-    url: "https://artifact.{{ nginx_vlan_40_fqdn }}"
+    url: "https://artifact.proxy-int.{{ lab.domain }}"
     status_code: "{{ lab.task_globals.discover_uri.status_code }}"
   register: discovered_nexus

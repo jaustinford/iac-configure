@@ -15,7 +15,7 @@ ff02::2 ip6-allrouters
 
 {{ docker02_vlan_20_address }}    {{ docker02_vlan_20_fqdn | replace('.' + lab.domain, '') }} {{ docker02_vlan_20_fqdn }}
 {{ docker02_vlan_30_address }}    {{ docker02_vlan_30_fqdn | replace('.' + lab.domain, '') }} {{ docker02_vlan_30_fqdn }}
-{{ docker02_vlan_40_address }}    {{ docker02_vlan_40_fqdn | replace('.' + lab.domain, '') }} {{ docker02_vlan_40_fqdn }} artifact.{{ nginx_vlan_40_fqdn }} nginx.{{ nginx_vlan_40_fqdn }} cicd.{{ nginx_vlan_40_fqdn }} docker-hosted.{{ nginx_vlan_40_fqdn }} docker-proxy.{{ nginx_vlan_40_fqdn }}
+{{ docker02_vlan_40_address }}    {{ docker02_vlan_40_fqdn | replace('.' + lab.domain, '') }} {{ docker02_vlan_40_fqdn }} artifact.proxy-int.{{ lab.domain }} nginx.proxy-int.{{ lab.domain }} cicd.proxy-int.{{ lab.domain }} docker-hosted.proxy-int.{{ lab.domain }} docker-proxy.proxy-int.{{ lab.domain }}
 {{ docker02_vlan_50_address }}    {{ docker02_vlan_50_fqdn | replace('.' + lab.domain, '') }} {{ docker02_vlan_50_fqdn }}
 
 {{ docker00_vlan_30_address }}    {{ docker00_vlan_30_fqdn | replace('.' + lab.domain, '') }} {{ docker00_vlan_30_fqdn }}

@@ -13,7 +13,7 @@
 
 - name: LAB - find nexus apt repository
   ansible.builtin.uri:
-    url: "https://nexus.{{ nginx_vlan_40_fqdn }}"
+    url: "https://artifact.proxy-int.{{ lab.domain }}"
     status_code: "{{ lab.task_globals.discover_uri.status_code }}"
   register: discovered_nexus
 

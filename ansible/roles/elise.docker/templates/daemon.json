@@ -7,7 +7,9 @@
     "{{ docker01_vlan_40_fqdn }}:{{ ports.nexus_docker_hosted }}",
     "{{ docker01_vlan_40_fqdn }}:{{ ports.nexus_docker_proxy }}",
     "{{ docker02_vlan_40_fqdn }}:{{ ports.nexus_docker_hosted }}",
-    "{{ docker02_vlan_40_fqdn }}:{{ ports.nexus_docker_proxy }}"
+    "{{ docker02_vlan_40_fqdn }}:{{ ports.nexus_docker_proxy }}",
+    "docker-hosted.proxy-int.{{ lab.domain }}",
+    "docker-proxy.proxy-int.{{ lab.domain }}"
   ],
   "log-driver": "json-file",
   "log-opts": {

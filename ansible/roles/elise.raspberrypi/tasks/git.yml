@@ -4,7 +4,7 @@
 
 - name: "GIT - download git project - elise/{{ item.project.path }}"
   ansible.builtin.git:
-    repo: "https://{{ gitlab_credential }}@cicd.{{ nginx_vlan_40_fqdn }}/elise/{{ item.project.path }}.git"
+    repo: "https://{{ gitlab_credential }}@cicd.proxy-int.{{ lab.domain }}/elise/{{ item.project.path }}.git"
     dest: "{{ lab.dirs.app_data }}/lazarus/{{ item.project.path.split('/')[-1] }}"
     update: true
     version: "{{ item.project.branch }}"
@@ -14,7 +14,7 @@
 
 - name: "GIT - download image - {{ item.image.name }}"
   community.docker.docker_image_pull:
-    name: "docker-hosted.{{ nginx_vlan_40_fqdn }}/elise/{{ item.image.name }}"
+    name: "docker-hosted.proxy-int.{{ lab.domain }}/elise/{{ item.image.name }}"
     tag: "{{ item.image.tag }}"
   become: true
   no_log: true

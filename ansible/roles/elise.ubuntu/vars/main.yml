@@ -3,11 +3,11 @@ ubuntu:
   apt:
     jammy:
       amd64:
-        mirror_proxy: "https://artifact.{{ nginx_vlan_40_fqdn }}/repository/lab_apt_jammy_amd64_proxy/"
+        mirror_proxy: "https://artifact.proxy-int.{{ lab.domain }}/repository/lab_apt_jammy_amd64_proxy/"
         mirror_original: http://us.archive.ubuntu.com/ubuntu/
 
       arm64:
-        mirror_proxy: "https://artifact.{{ nginx_vlan_40_fqdn }}/repository/lab_apt_jammy_arm64_proxy/"
+        mirror_proxy: "https://artifact.proxy-int.{{ lab.domain }}/repository/lab_apt_jammy_arm64_proxy/"
         mirror_original: http://ports.ubuntu.com/
 
   general_packages:

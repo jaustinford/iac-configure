@@ -24,10 +24,10 @@
     "{{ docker02_vlan_40_fqdn }}:{{ ports.nexus_docker_proxy }}": {
       "auth": "{{ ( secrets.containers.nexus.username + ':' + secrets.containers.nexus.password ) | b64encode }}"
     },
-    "docker-hosted.{{ nginx_vlan_40_fqdn }}": {
+    "docker-hosted.proxy-int.{{ lab.domain }}": {
       "auth": "{{ ( secrets.containers.nexus.username + ':' + secrets.containers.nexus.password ) | b64encode }}"
     },
-    "docker-proxy.{{ nginx_vlan_40_fqdn }}": {
+    "docker-proxy.proxy-int.{{ lab.domain }}": {
       "auth": "{{ ( secrets.containers.nexus.username + ':' + secrets.containers.nexus.password ) | b64encode }}"
     }
   }
