@@ -1,5 +1,4 @@
 ---
-
 ############################################################
 # hosts
 ############################################################
@@ -41,6 +40,7 @@ nas_vlan_40_fqdn: "{{ names.hosts.nas }}-{{ names.networks.vlan_40 }}.{{ lab.dom
 pihole_vlan_20_address: "{{ hostvars[assignments.pihole.host]['ansible_' + hostvars[assignments.pihole.host].lan_ints.vlan_20].ipv4.address }}"
 
 pihole_vlan_30_address: "{{ hostvars[assignments.pihole.host]['ansible_' + hostvars[assignments.pihole.host].lan_ints.vlan_30].ipv4.address }}"
+nginx_vlan_30_address: "{{ hostvars[assignments.nginx.host]['ansible_' + hostvars[assignments.nginx.host].lan_ints.vlan_30].ipv4.address }}"
 plex_vlan_30_address: "{{ hostvars[assignments.plex.host]['ansible_' + hostvars[assignments.plex.host].lan_ints.vlan_30].ipv4.address }}"
 expressvpn_vlan_30_address: "{{ hostvars[assignments.expressvpn.host]['ansible_' + hostvars[assignments.expressvpn.host].lan_ints.vlan_30].ipv4.address }}"
 openvpnas_vlan_30_address: "{{ hostvars[assignments.openvpnas.host]['ansible_' + hostvars[assignments.openvpnas.host].lan_ints.vlan_30].ipv4.address }}"

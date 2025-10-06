@@ -32,6 +32,7 @@ container:
   env:
     TZ: "{{ names.local_timezone }}"
   ports:
+    - "{{ nginx_vlan_30_address }}:443:443/tcp"
     - "{{ nginx_vlan_40_address }}:443:443/tcp"
   volumes:
     - "{{ lab.dirs.app_data }}/nginx/geoip:/etc/nginx/geoip:rw"
