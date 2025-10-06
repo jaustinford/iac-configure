@@ -15,11 +15,11 @@
 
 container:
   name: gitlab
-  image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/gitlab/gitlab-ee:17.5.4-ee.0"
+  image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/gitlab/gitlab-ee:18.4.0-ee.0"
   pull: "{{ containers_globals.pull_images.remote }}"
   user: "0:0"
   command:
-    - /assets/wrapper
+    - /assets/init-container
   docker_host: "{{ gitlab_vlan_40_address }}"
   state: "{{ containers_globals.state }}"
   shm_size: 4G
@@ -31,7 +31,7 @@ container:
   env:
     TZ: "{{ names.local_timezone }}"
     GITLAB_OMNIBUS_CONFIG: external_url "http://cicd.{{ lab.domain }}"
-    GITLAB_ROOT_PASSWORD: "{{ secrets.containers.gitlab.user.password }}"
+    GITLAB_ROOT_PASSWORD: "{{ secrets.containers.gitlab.superuser }}"
   ports:
     - "{{ gitlab_vlan_40_address }}:{{ ports.gitlab_web }}:80/tcp"
   volumes:

@@ -6,13 +6,13 @@ services:
   ############################################################
 
   setup:
-    image: docker-hosted.pendragonlab.com/elise/iac-configure:main
+    image: docker-hosted.proxy-int.pendragonlab.com/elise/iac-configure:main
     entrypoint:
       - /bin/bash
       - -c
       - |
         /bin/container-init.sh ;
-        ansible docker00 \
+        ansible ${SETUP_TARGET} \
             --module-name ansible.builtin.setup \
             -vv
     profiles:
@@ -36,7 +36,7 @@ services:
   ############################################################
 
   site:
-    image: docker-hosted.pendragonlab.com/elise/iac-configure:main
+    image: docker-hosted.proxy-int.pendragonlab.com/elise/iac-configure:main
     entrypoint:
       - /bin/bash
       - -c
@@ -82,7 +82,7 @@ services:
   ############################################################
 
   vault_secrets:
-    image: docker-hosted.pendragonlab.com/elise/iac-configure:main
+    image: docker-hosted.proxy-int.pendragonlab.com/elise/iac-configure:main
     entrypoint:
       - /bin/bash
       - -c
@@ -112,7 +112,7 @@ services:
   ############################################################
 
   ping:
-    image: docker-hosted.pendragonlab.com/elise/iac-configure:main
+    image: docker-hosted.proxy-int.pendragonlab.com/elise/iac-configure:main
     entrypoint:
       - /bin/bash
       - -c
