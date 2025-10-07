@@ -24,8 +24,8 @@ nginx:
   docs:
     restricted_pages:
       - inventory
-      - xcalibr
       - pimp
+      - raidvol
       - six-keys
   geoip_whitelists:
     country:
