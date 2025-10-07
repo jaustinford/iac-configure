@@ -1,6 +1,6 @@
 ---
 cluster:
-  name: esones
+  name: lab_elastic
 
 network:
   host: 0.0.0.0

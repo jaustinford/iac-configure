@@ -1,6 +1,5 @@
 ---
 beats:
-  version: 8.13.3
   refresh_interval: 30s
   download_url: https://artifacts.elastic.co/downloads/beats
   packages:

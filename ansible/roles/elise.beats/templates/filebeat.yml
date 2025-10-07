@@ -1,27 +1,27 @@
 ---
 output:
   elasticsearch:
-    username: {{ secrets.elasticsearch.user.username }}
-    password: {{ secrets.elasticsearch.user.password }}
-    pipeline: elysianskies-geoip-pipeline
+    username: elastic
+    password: {{ secrets.containers.elasticsearch.elastic }}
+    pipeline: lab-geoip-pipeline
 {% if ansible_system_vendor == "Linode" %}
     hosts:
-      - https://elasticsearch.{{ assignments.nginx.networking.teine.fqdn }}:443
+      - https://db.proxy-int.{{ lab.domain }}:443
 
 setup:
   dashboards:
     enabled: false
   kibana:
-    host: https://kibana.{{ assignments.nginx.networking.teine.fqdn }}:443
+    host: https://data.proxy-int.{{ lab.domain }}:443
 {% else %}
     hosts:
-      - http://{{ assignments.elasticsearch.networking.teine.ipv4 }}:{{ external_ports.elasticsearch_db }}
+      - http://{{ elasticsearch_vlan_40_address }}:{{ ports.elasticsearch_db }}
 
 setup:
   dashboards:
     enabled: true
   kibana:
-    host: http://{{ assignments.kibana.networking.teine.ipv4 }}:{{ external_ports.kibana_web }}
+    host: http://{{ kibana_vlan_40_address }}:{{ ports.kibana_web }}
 {% endif %}
 
 logging:
@@ -52,7 +52,8 @@ filebeat:
           paths:
             - /var/log/auth.log*
   inputs:
-    - type: container
+    - type: filestream
+      id: container-fs
       paths:
         - /var/lib/docker/containers/*/*.log
       processors:

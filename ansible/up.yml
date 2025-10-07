@@ -62,5 +62,5 @@
 - name: UP - import tunnels playbook
   import_playbook: tunnels.yml
 
-# - name: UP - import beats playbook
-#   import_playbook: beats.yml
+- name: UP - import beats playbook
+  import_playbook: beats.yml

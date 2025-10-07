@@ -9,8 +9,8 @@
     auth_method: http_auth
     login_hosts: ["{{ elasticsearch_vlan_40_address }}"]
     login_port: "{{ ports.elasticsearch_db }}"
-    login_user: "{{ secrets.containers.elasticsearch.user.username }}"
-    login_password: "{{ secrets.containers.elasticsearch.user.password }}"
+    login_user: elastic
+    login_password: "{{ secrets.containers.elasticsearch.elastic }}"
   vars:
     ansible_python_interpreter: /usr/local/bin/python3
   loop_control:

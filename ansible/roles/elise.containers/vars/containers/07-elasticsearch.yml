@@ -12,24 +12,24 @@
 
 container:
   name: elasticsearch
-  image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/elastic/elasticsearch:8.13.0"
+  image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/elastic/elasticsearch:{{ lab.elastic_version }}"
   pull: "{{ containers_globals.pull_images.remote }}"
-  user: "1000:0"
-  # user: "{{ assignments.elasticsearch.uid }}:{{ assignments.elasticsearch.uid }}"
-  command:
-    - eswrapper
+  user: "1000:{{ assignments.elasticsearch.uid }}"
+  command: []
   docker_host: "{{ elasticsearch_vlan_40_address }}"
   state: "{{ containers_globals.state }}"
   shm_size: "{{ containers_globals.shm_size }}"
   devices: []
   capabilities: []
   network_mode: "{{ containers_globals.network_mode }}"
+  dns_servers: "{{ containers_globals.dns_servers }}"
+  dns_search_domains: "{{ containers_globals.dns_search_domains }}"
   env:
     TZ: "{{ names.local_timezone }}"
     ES_JAVA_OPTS: -Xms4g -Xmx4g
   ports:
     - "{{ elasticsearch_vlan_40_address }}:{{ ports.elasticsearch_db }}:9200/tcp"
-  volumes: []
-    # - "{{ lab.dirs.app_data }}/elasticsearch/config:/usr/share/elasticsearch/config:rw"
-    # - "{{ lab.dirs.app_data }}/elasticsearch/data:/usr/share/elasticsearch/data:rw"
+  volumes:
+    - "{{ lab.dirs.app_data }}/elasticsearch/data:/usr/share/elasticsearch/data:rw"
+    - "{{ lab.dirs.config }}/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro"
   wait_port: "{{ ports.elasticsearch_db }}"

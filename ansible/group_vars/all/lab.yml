@@ -9,6 +9,8 @@ lab:
     group: root
     mode: '0770'
 
+  elastic_version: 9.1.5
+
   task_globals:
     discover_uri:
       status_code: [-1, 200, 502]
