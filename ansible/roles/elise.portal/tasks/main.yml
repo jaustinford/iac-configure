@@ -1,4 +1,10 @@
 ---
+- name: MAIN - set hostname
+  ansible.builtin.hostname:
+    name: "{{ names.hosts[inventory_hostname] }}.{{ lab.domain }}"
+  become: true
+  notify: MAIN - reboot
+
 - name: MAIN - install nginx
   ansible.builtin.apt:
     name: nginx
