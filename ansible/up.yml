@@ -1,9 +1,4 @@
 ---
-
-  ############################################################
-  # boot
-  ############################################################
-
 - name: UP - import wake playbook
   import_playbook: wake.yml
 
@@ -20,10 +15,6 @@
   hosts: all
   gather_facts: true
   gather_timeout: 60
-
-  ############################################################
-  # hosts
-  ############################################################
 
 - name: UP - import users playbook
   import_playbook: users.yml
@@ -42,10 +33,6 @@
 
 - name: UP - import docker playbook
   import_playbook: docker.yml
-
-  ############################################################
-  # lab
-  ############################################################
 
 - name: UP - import configs playbook
   import_playbook: configs.yml
