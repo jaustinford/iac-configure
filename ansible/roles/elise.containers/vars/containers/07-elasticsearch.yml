@@ -15,7 +15,8 @@ container:
   image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/elastic/elasticsearch:{{ lab.elastic_version }}"
   pull: "{{ containers_globals.pull_images.remote }}"
   user: "1000:{{ assignments.elasticsearch.uid }}"
-  command: []
+  command:
+    - eswrapper
   docker_host: "{{ elasticsearch_vlan_40_address }}"
   state: "{{ containers_globals.state }}"
   shm_size: "{{ containers_globals.shm_size }}"
