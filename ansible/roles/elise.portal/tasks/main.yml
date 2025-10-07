@@ -5,6 +5,9 @@
   become: true
   notify: MAIN - reboot
 
+- name: MAIN - flush handlers
+  ansible.builtin.meta: flush_handlers
+
 - name: MAIN - install nginx
   ansible.builtin.apt:
     name: nginx
