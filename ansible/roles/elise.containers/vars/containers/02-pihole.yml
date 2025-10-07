@@ -17,7 +17,6 @@ container:
   user: "0:0"
   command: null
   docker_host: "{{ pihole_vlan_40_address }}"
-  state: "{{ containers_globals.state }}"
   shm_size: "{{ containers_globals.shm_size }}"
   devices: []
   capabilities:

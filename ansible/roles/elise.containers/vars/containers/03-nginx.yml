@@ -22,7 +22,6 @@ container:
     - -g
     - daemon off;
   docker_host: "{{ nginx_vlan_40_address }}"
-  state: "{{ containers_globals.state }}"
   shm_size: "{{ containers_globals.shm_size }}"
   devices: []
   capabilities: []

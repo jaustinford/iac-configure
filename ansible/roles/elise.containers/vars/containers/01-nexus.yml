@@ -21,7 +21,6 @@ container:
     - /opt/sonatype/nexus/bin/nexus
     - run
   docker_host: "{{ nexus_vlan_40_address }}"
-  state: "{{ containers_globals.state }}"
   shm_size: "{{ containers_globals.shm_size }}"
   devices: []
   capabilities: []

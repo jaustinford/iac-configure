@@ -1,0 +1,43 @@
+---
+###########################################################
+# lazarus
+###########################################################
+
+###########################################################
+# Power event management system which executes
+# elise/infrastructure/iac-configure in cycle modes.
+###########################################################
+
+container:
+  name: lazarus
+  image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_hosted }}/elise/lazarus:main"
+  pull: "{{ containers_globals.pull_images.local }}"
+  user: "{{ assignments.lazarus.uid }}:{{ assignments.lazarus.uid }}"
+  command:
+    - python3
+    - src
+  docker_host: "{{ lazarus_vlan_40_address }}"
+  shm_size: "{{ containers_globals.shm_size }}"
+  devices:
+    - /dev/usb/hiddev0
+    - /dev/usb/hiddev1
+  capabilities: []
+  network_mode: "{{ containers_globals.network_mode }}"
+  dns_servers: "{{ containers_globals.dns_servers }}"
+  dns_search_domains: "{{ containers_globals.dns_search_domains }}"
+  env:
+    TZ: "{{ names.local_timezone }}"
+    USER_HOME: /root
+    IAC_CONFIGURE_PROJECT_DIR: "{{ lab.dirs.app_data }}/lazarus/iac-configure"
+    SKIP_PAUSE: 'yes'
+    COMPOSE_PROFILE: site
+    ELASTICSEARCH_ENDPOINT: "{{ elasticsearch_vlan_40_address }}:{{ ports.elasticsearch_db }}"
+    ELASTICSEARCH_USERNAME: elastic
+    ELASTICSEARCH_PASSWORD: "{{ secrets.containers.elasticsearch.elastic }}"
+  ports: []
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock:rw
+    - /root/.docker:/root/.docker:rw
+    - "{{ lab.dirs.app_data }}/lazarus/iac-configure:/iac-configure:ro"
+    - "{{ lab.dirs.app_data }}/lazarus/data:/lazarus/data:rw"
+  wait_port: "0"

@@ -21,7 +21,6 @@ container:
     - -d
     - -f ""
   docker_host: "{{ expressvpn_vlan_40_address }}"
-  state: "{{ containers_globals.state }}"
   shm_size: "{{ containers_globals.shm_size }}"
   devices:
     - /dev/net/tun

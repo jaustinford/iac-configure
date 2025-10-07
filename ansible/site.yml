@@ -5,8 +5,8 @@
     cycle_mode: "{{ cycles.up }}"
   when: lookup('env', 'CYCLE_MODE') == "up"
 
-# - name: SITE - import down playbook
-#   import_playbook: down.yml
-#   vars:
-#     cycle_mode: "{{ cycles.down }}"
-#   when: lookup('env', 'CYCLE_MODE') == "down"
+- name: SITE - import down playbook
+  import_playbook: down.yml
+  vars:
+    cycle_mode: "{{ cycles.down }}"
+  when: lookup('env', 'CYCLE_MODE') == "down"
