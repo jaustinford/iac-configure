@@ -109,7 +109,7 @@ metricbeat:
       core:
         metrics:
           - percentages
-{% if inventory_hostname == assignments.nginx %}
+{% if inventory_hostname == assignments.nginx.host %}
 
     - module: nginx
       metricsets:
