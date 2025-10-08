@@ -12,7 +12,7 @@ container:
   name: lazarus
   image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_hosted }}/elise/lazarus:main"
   pull: "{{ containers_globals.pull_images.local }}"
-  user: "{{ assignments.lazarus.uid }}:{{ assignments.lazarus.uid }}"
+  user: "0:{{ assignments.lazarus.uid }}"
   command:
     - python3
     - src
