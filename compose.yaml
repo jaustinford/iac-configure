@@ -44,7 +44,7 @@ services:
         /bin/container-init.sh ;
         ansible-playbook \
             /etc/ansible/site.yml \
-            -vvv
+            -vv
     profiles:
       - site
 
