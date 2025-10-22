@@ -1,3 +1,6 @@
+Cmnd_Alias RESTRICT_ESCALATE = /usr/bin/su, \
+                               /usr/bin/passwd
+
 Cmnd_Alias RESTRICT_DOCKER = /usr/bin/docker exec *, /usr/bin/docker * exec *, \
                              /usr/bin/docker run *, /usr/bin/docker * run *
 
@@ -19,9 +22,8 @@ Cmnd_Alias RESTRICT_DIRS = /usr/bin/ls /mnt/{{ names.raid_vol.name }}*, /usr/bin
                            /usr/bin/ls /mnt/dfs_lvm*, /usr/bin/ls * /mnt/dfs_lvm*, \
                            /usr/bin/ls /lab*, /usr/bin/ls * /lab*
 
-{{ names.lab_users.privileged }}    ALL=(ALL) ALL, \
-                                              !/usr/bin/su, \
-                                              !RESTRICT_DOCKER, \
-                                              !RESTRICT_SUDOERS, \
-                                              !RESTRICT_SMB, \
-                                              !RESTRICT_DIRS
+{{ names.lab_users.privileged }}    ALL=(ALL) ALL, !RESTRICT_ESCALATE, \
+                                                   !RESTRICT_DOCKER, \
+                                                   !RESTRICT_SUDOERS, \
+                                                   !RESTRICT_SMB, \
+                                                   !RESTRICT_DIRS
