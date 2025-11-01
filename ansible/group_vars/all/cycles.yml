@@ -5,7 +5,9 @@ cycles:
     state:
       glusterfs: started
       containers: started
-      tunnels: started
+      tunnels:
+        nginx: started
+        openvpnas: started
       portal:
         nginx: started
         linode: started
@@ -21,7 +23,9 @@ cycles:
     state:
       glusterfs: stopped
       containers: stopped
-      tunnels: stopped
+      tunnels:
+        nginx: stopped
+        openvpnas: stopped
       portal:
         nginx: stopped
         linode: stopped

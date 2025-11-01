@@ -2,7 +2,7 @@
 tunnels:
   - name: nginx
     description: web ingress tunnel
-    state: "{{ cycle_mode.state.tunnels }}"
+    state: "{{ cycle_mode.state.tunnels.nginx }}"
     host: "{{ assignments.nginx.host }}"
     ipv4: "{{ nginx_vlan_40_address }}"
     external_port: "{{ ports.nginx_web }}"
@@ -10,7 +10,7 @@ tunnels:
 
   - name: openvpnas
     description: openvpnas tunnel
-    state: "{{ cycle_mode.state.tunnels }}"
+    state: "{{ cycle_mode.state.tunnels.openvpnas }}"
     host: "{{ assignments.openvpnas.host }}"
     ipv4: "{{ openvpnas_vlan_40_address }}"
     external_port: "1194"
