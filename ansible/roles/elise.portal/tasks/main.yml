@@ -8,6 +8,30 @@
 - name: MAIN - flush handlers
   ansible.builtin.meta: flush_handlers
 
+- name: MAIN - prevent syn flood attacks
+  ansible.posix.sysctl:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+    state: present
+    sysctl_set: true
+    reload: true
+  become: true
+  with_items:
+    - name: net.ipv4.tcp_syncookies
+      value: '1'
+
+    - name: net.ipv4.tcp_max_syn_backlog
+      value: '4096'
+
+    - name: net.ipv4.tcp_synack_retries
+      value: '3'
+
+    - name: net.ipv4.conf.all.rp_filter
+      value: '1'
+
+    - name: net.ipv4.conf.default.rp_filter
+      value: '1'
+
 - name: MAIN - install nginx
   ansible.builtin.apt:
     name: nginx
