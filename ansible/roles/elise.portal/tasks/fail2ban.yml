@@ -1,0 +1,31 @@
+---
+- name: FAIL2BAN - install fail2ban package
+  ansible.builtin.apt:
+    name: fail2ban
+    state: present
+    update_cache: true
+  when: internet_found == "yes"
+  become: true
+
+- name: FAIL2BAN - manage fail2ban configuration
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+  become: true
+  notify: MAIN - systemctl restart fail2ban
+  with_items:
+    - src: jail.local
+      dest: /etc/fail2ban/jail.local
+      owner: root
+      group: root
+      mode: '0644'
+
+- name: FAIL2BAN - ensure fail2ban daemon
+  ansible.builtin.systemd:
+    name: fail2ban
+    state: started
+    enabled: true
+  become: true

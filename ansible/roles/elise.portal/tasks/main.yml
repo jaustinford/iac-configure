@@ -42,3 +42,6 @@
     line: GatewayPorts yes
   become: true
   notify: MAIN - systemctl restart ssh
+
+- name: MAIN - include fail2ban tasks
+  ansible.builtin.include_tasks: fail2ban.yml
