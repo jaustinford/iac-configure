@@ -55,10 +55,8 @@ names:
     nonprivileged: squire # Meager candidate, no privileges.
 
     raid_vol:
-      plex_libraries_rw: galahad # Purest of knights, son of Lancelot.
-      plex_libraries_ro: gawain  # Loyal knight, good friend of Arthur.
-      documents_ro: bors         # Faithful and pious knight.
-      music_ro: tristan          # Skilled knight, warrior musician.
-      pictures_ro: bedivere      # The knight who returned the Sword.
-      tfstate_rw: percival       # Pious knight, hunter of the Grail.
-      deluge_rw: lancelot        # Most famous knight, betrayer of Arthur.
+      black_rw: lancelot # Most famous knight, betrayer of Arthur.
+      blue_ro: tristan   # Skilled knight, warrior musician.
+      green_rw: bedivere # The knight who returned the Sword.
+      red_ro: gawain     # Loyal knight, good friend of Arthur.
+      red_rw: galahad    # Purest of knights, son of Lancelot.

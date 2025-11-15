@@ -34,7 +34,5 @@ container:
     - "{{ lab.dirs.config }}/filebrowser/settings.json:/config/settings.json:ro"
     - "{{ lab.dirs.app_data }}/filebrowser/filebrowser.db:/database/filebrowser.db:rw"
     - "{{ lab.dirs.app_data }}/filebrowser/branding:/branding:rw"
-    - "/mnt/{{ names.raid_vol.name }}-documents:/{{ names.raid_vol.name }}/documents:ro"
-    - "/mnt/{{ names.raid_vol.name }}-music:/{{ names.raid_vol.name }}/music:ro"
-    - "/mnt/{{ names.raid_vol.name }}-pictures:/{{ names.raid_vol.name }}/pictures:ro"
+    - "/mnt/{{ names.raid_vol.name }}-blue:/{{ names.raid_vol.name }}:ro"
   wait_port: "{{ ports.filebrowser_web }}"

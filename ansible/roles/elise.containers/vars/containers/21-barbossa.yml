@@ -30,6 +30,6 @@ container:
     PLEX_TOKEN: "{{ secrets.containers.plex.token }}"
   ports: []
   volumes:
-    - "/mnt/{{ names.raid_vol.name }}-deluge:/downloads:rw"
-    - "/mnt/{{ names.raid_vol.name }}-plex_libraries:/plex_libraries:rw"
+    - "/mnt/{{ names.raid_vol.name }}-black:/downloads:rw"
+    - "/mnt/{{ names.raid_vol.name }}-red:/plex_libraries:rw"
   wait_port: "0"

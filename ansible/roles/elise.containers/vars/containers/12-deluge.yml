@@ -30,7 +30,7 @@ container:
     PGID: "{{ names.raid_vol.group.gid }}"
   ports: []
   volumes:
-    - "/mnt/{{ names.raid_vol.name }}-deluge:/downloads:rw"
+    - "/mnt/{{ names.raid_vol.name }}-black:/downloads:rw"
     - "{{ lab.dirs.config }}/deluge/auth:/config/auth:ro"
     - "{{ lab.dirs.config }}/deluge/core.conf:/config/core.conf:ro"
     - "{{ lab.dirs.config }}/deluge/hostlist.conf:/config/hostlist.conf:ro"

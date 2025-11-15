@@ -1,7 +1,7 @@
 ---
 - name: MAIN - fetch tfstate file
   ansible.builtin.fetch:
-    src: /mnt/{{ names.raid_vol.name }}/root/lab/tfstate/lab.json
+    src: /mnt/{{ names.raid_vol.name }}/root/green/lab.json
     dest: /tfstate/lab.json
     flat: true
   changed_when: false
