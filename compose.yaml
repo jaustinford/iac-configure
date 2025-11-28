@@ -15,6 +15,7 @@ services:
         ansible ${SETUP_TARGET} \
             --module-name ansible.builtin.setup \
             -vv
+    
     profiles:
       - setup
 
@@ -31,6 +32,11 @@ services:
 
     network_mode: host
 
+    logging:
+      options:
+        max-size: 10m
+        max-file: '10'
+
   ############################################################
   # site
   ############################################################
@@ -45,6 +51,7 @@ services:
         ansible-playbook \
             /etc/ansible/site.yml \
             -vv
+    
     profiles:
       - site
 
@@ -77,6 +84,11 @@ services:
 
     network_mode: host
 
+    logging:
+      options:
+        max-size: 10m
+        max-file: '10'
+
   ############################################################
   # vault_secrets
   ############################################################
@@ -91,6 +103,7 @@ services:
         ansible-vault ${VAULT_SECRETS_MODE} \
             /etc/ansible/group_vars/all/secrets.yml \
             -vv
+    
     profiles:
       - vault-secrets
 
@@ -106,6 +119,11 @@ services:
         read_only: false
 
     network_mode: host
+
+    logging:
+      options:
+        max-size: 10m
+        max-file: '10'
 
   ############################################################
   # ping
@@ -124,6 +142,7 @@ services:
         ansible all \
             --module-name ansible.builtin.ping \
             -vv
+    
     profiles:
       - ping
 
@@ -144,3 +163,8 @@ services:
         read_only: false
 
     network_mode: host
+
+    logging:
+      options:
+        max-size: 10m
+        max-file: '10'
