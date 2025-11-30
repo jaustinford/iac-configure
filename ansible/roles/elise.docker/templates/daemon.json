@@ -1,4 +1,10 @@
 {
+  "builder": {
+    "gc": {
+      "defaultKeepStorage": "{{ docker.defaultkeepstorage }}",
+      "enabled": true
+    }
+  },
   "insecure-registries": [
     "{{ docker01_vlan_40_address }}:{{ ports.nexus_docker_hosted }}",
     "{{ docker01_vlan_40_address }}:{{ ports.nexus_docker_proxy }}",
@@ -14,6 +20,6 @@
   "log-driver": "json-file",
   "log-opts": {
     "max-size": "10m",
-    "max-file": "5"
+    "max-file": "10"
   }
 }

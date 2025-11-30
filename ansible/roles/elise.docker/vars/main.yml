@@ -1,5 +1,7 @@
 ---
 docker:
+  defaultkeepstorage: 10GB
+
   ubuntu_packages:
     - docker-ce
     - docker-ce-cli
