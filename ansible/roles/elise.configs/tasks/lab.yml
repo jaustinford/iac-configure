@@ -37,4 +37,4 @@
   ansible.builtin.include_tasks: maxmind.yml
   when:
     - inventory_hostname == assignments.nginx.host
-    - maxmind.download == "true"
+    - lookup('env', 'ELISE_PROJECT_CRON_TRIGGER') == "true"

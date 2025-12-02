@@ -16,20 +16,22 @@ oauth:
   client_id: oauth2-proxy
 
 maxmind:
-  download: "{{ lookup('env', 'ELISE_PROJECT_MAXMIND_DOWNLOAD') }}"
   rotate_after_days: 15
 
 nginx:
   client_max_body_size: 10G
+
   docs:
     restricted_pages:
       - inventory
       - pimp
       - raidvol
       - six-keys
+
   geoip_whitelists:
     country:
       - United States
+
     city: [
       "Broomfield", "Superior", "Louisville", "Lafayette", "Westminster",
       "Boulder", "Federal Heights", "Northglenn", "Thornton", "Commerce City",

@@ -8,3 +8,18 @@
     - group_vars/lab.yml
     - group_vars/ports.yml
     - group_vars/secrets.yml
+
+- name: CONTAINERS - apply docker prune
+  hosts: lab_onprem_docker
+  tasks:
+    - name: CONTAINERS - prune unused docker resources
+      community.docker.docker_prune:
+        containers: true
+        images: true
+        images_filters:
+          dangling: false
+        networks: true
+        volumes: true
+        builder_cache: true
+      when: lookup('env', 'ELISE_PROJECT_CRON_TRIGGER') == "true"
+      become: true

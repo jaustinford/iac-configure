@@ -1,10 +1,4 @@
 {
-  "builder": {
-    "gc": {
-      "defaultKeepStorage": "{{ docker.defaultkeepstorage }}",
-      "enabled": true
-    }
-  },
   "insecure-registries": [
     "{{ docker01_vlan_40_address }}:{{ ports.nexus_docker_hosted }}",
     "{{ docker01_vlan_40_address }}:{{ ports.nexus_docker_proxy }}",
