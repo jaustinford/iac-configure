@@ -1,4 +1,30 @@
 ---
+- name: MAIN - set hostnames for raspberry pi
+  ansible.builtin.lineinfile:
+    path: "{{ item.path }}"
+    line: "{{ item.line }}"
+    regexp: "{{ item.regexp }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+  when: ansible_architecture == "aarch64"
+  become: true
+  notify: MAIN - reboot
+  with_items:
+    - path: /boot/firmware/user-data
+      line: "hostname: {{ names.hosts[inventory_hostname] }}.{{ lab.domain }}"
+      regexp: "^hostname: "
+      owner: root
+      group: root
+      mode: '0755'
+
+    - path: /boot/firmware/user-data
+      line: "manage_etc_hosts: false"
+      regexp: "^manage_etc_hosts: "
+      owner: root
+      group: root
+      mode: '0755'
+
 - name: MAIN - set hostnames
   ansible.builtin.hostname:
     name: "{{ names.hosts[inventory_hostname] }}.{{ lab.domain }}"

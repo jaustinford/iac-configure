@@ -2,9 +2,6 @@
 - name: UP - import wake playbook
   import_playbook: wake.yml
 
-- name: UP - import hosts playbook
-  import_playbook: hosts.yml
-
 - name: UP - import tfstate playbook
   import_playbook: tfstate.yml
 
@@ -15,6 +12,9 @@
   hosts: all
   gather_facts: true
   gather_timeout: 60
+
+- name: UP - import hosts playbook
+  import_playbook: hosts.yml
 
 - name: UP - import users playbook
   import_playbook: users.yml
