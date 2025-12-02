@@ -7,10 +7,10 @@
 {% endfor %}
 {% set filesystem_restrictions = [] %}
 {% for cmd_path in sudoers.restrict_groups.cmd_paths %}
+{% for discover_cmd in sudoers.restrict_groups.discover_cmds %}
 {% for discover_dir in sudoers.restrict_groups.discover_dirs %}
-{% for target_dir in sudoers.restrict_groups.target_dirs %}
-{{- filesystem_restrictions.append(cmd_path + "/" + discover_dir + " " + target_dir + "*") -}}
-{{- filesystem_restrictions.append(cmd_path + "/" + discover_dir + " * " + target_dir + "*") -}}
+{{- filesystem_restrictions.append(cmd_path + "/" + discover_cmd + " " + discover_dir + "*") -}}
+{{- filesystem_restrictions.append(cmd_path + "/" + discover_cmd + " * " + discover_dir + "*") -}}
 {% endfor %}
 {% endfor %}
 {% endfor %}
