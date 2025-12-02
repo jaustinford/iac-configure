@@ -1,21 +1,19 @@
 {% set docker_restrictions = [] %}
-{% for cmd_dir in sudoers.restrict_groups.cmd_dirs %}
-{% for docker_arg in sudoers.restrict_groups.docker_args %}
-{{- docker_restrictions.append(cmd_dir + "/docker " + docker_arg + " *") -}}
-{{- docker_restrictions.append(cmd_dir + "/docker * " + docker_arg + " *") -}}
+{% for cmd_path in sudoers.restrict_groups.cmd_paths %}
+{% for docker_option in sudoers.restrict_groups.docker_options %}
+{{- docker_restrictions.append(cmd_path + "/docker " + docker_option + " *") -}}
+{{- docker_restrictions.append(cmd_path + "/docker * " + docker_option + " *") -}}
 {% endfor %}
 {% endfor %}
-
 {% set filesystem_restrictions = [] %}
-{% for cmd_dir in sudoers.restrict_groups.cmd_dirs %}
-{% for discover_cmd in sudoers.restrict_groups.discover_cmds %}
+{% for cmd_path in sudoers.restrict_groups.cmd_paths %}
+{% for discover_dir in sudoers.restrict_groups.discover_dirs %}
 {% for target_dir in sudoers.restrict_groups.target_dirs %}
-{{- filesystem_restrictions.append(cmd_dir + "/" + discover_cmd + " " + target_dir + "*") -}}
-{{- filesystem_restrictions.append(cmd_dir + "/" + discover_cmd + " * " + target_dir + "*") -}}
+{{- filesystem_restrictions.append(cmd_path + "/" + discover_dir + " " + target_dir + "*") -}}
+{{- filesystem_restrictions.append(cmd_path + "/" + discover_dir + " * " + target_dir + "*") -}}
 {% endfor %}
 {% endfor %}
 {% endfor %}
-
 Cmnd_Alias RESTRICT_ESCALATE = \ 
 /usr/bin/su, \ 
 /usr/bin/passwd

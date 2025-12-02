@@ -1,7 +1,11 @@
 ---
 sudoers:
   restrict_groups:
-    docker_args:
+    cmd_paths:
+      - /bin
+      - /usr/bin
+
+    docker_options:
       - exec
       - run
 
@@ -14,11 +18,7 @@ sudoers:
       - less
       - more
 
-    cmd_dirs:
-      - /bin
-      - /usr/bin
-
-    target_dirs:
+    discover_dirs:
       - /etc/sudoers
       - /usr/local/etc/sudoers
       - /root/.smb/.
