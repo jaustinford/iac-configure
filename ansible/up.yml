@@ -19,6 +19,9 @@
 - name: UP - import users playbook
   import_playbook: users.yml
 
+- name: UP - import sudoers playbook
+  import_playbook: sudoers.yml
+
 - name: UP - import ubuntu playbook
   import_playbook: ubuntu.yml
 

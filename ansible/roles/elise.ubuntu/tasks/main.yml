@@ -1,13 +1,4 @@
 ---
-- name: MAIN - configure user sudoers
-  ansible.builtin.template:
-    src: sudoers
-    dest: /etc/sudoers.d/lab_sudoers
-    owner: root
-    group: root
-    mode: '0600'
-  become: true
-
 - name: MAIN - include lab tasks
   ansible.builtin.include_tasks: lab.yml
   when: ansible_system_vendor != "Linode"

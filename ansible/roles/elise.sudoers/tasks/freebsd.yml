@@ -1,0 +1,29 @@
+---
+- name: FREEBSD - configure user sudoers
+  ansible.builtin.template:
+    src: lab_sudoers
+    dest: /usr/local/etc/sudoers.d/lab_sudoers
+    owner: root
+    group: wheel
+    mode: '0644'
+  become: true
+
+- name: FREEBSD - ensure sudoers.d
+  ansible.builtin.lineinfile:
+    path: /usr/local/etc/sudoers
+    line: "@includedir /usr/local/etc/sudoers.d"
+    state: present
+    owner: root
+    group: wheel
+    mode: '0644'
+  become: true
+
+- name: FREEBSD - remove conflicting statements
+  ansible.builtin.lineinfile:
+    path: /usr/local/etc/sudoers
+    regexp: "^{{ names.lab_users.privileged }}"
+    state: absent
+    owner: root
+    group: wheel
+    mode: '0644'
+  become: true

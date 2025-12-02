@@ -1,0 +1,8 @@
+---
+- name: MAIN - include freebsd tasks
+  ansible.builtin.include_tasks: freebsd.yml
+  when: ansible_distribution == "FreeBSD"
+
+- name: MAIN - include ubuntu tasks
+  ansible.builtin.include_tasks: ubuntu.yml
+  when: ansible_distribution == "Ubuntu"

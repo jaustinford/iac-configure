@@ -1,0 +1,9 @@
+---
+- name: UBUNTU - configure user sudoers
+  ansible.builtin.template:
+    src: lab_sudoers
+    dest: /etc/sudoers.d/lab_sudoers
+    owner: root
+    group: root
+    mode: '0644'
+  become: true

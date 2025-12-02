@@ -1,0 +1,27 @@
+---
+sudoers:
+  restrict_groups:
+    docker_args:
+      - exec
+      - run
+
+    discover_cmds:
+      - ls
+      - vi
+      - vim
+      - cat
+      - nano
+      - less
+      - more
+
+    cmd_dirs:
+      - /bin
+      - /usr/bin
+
+    target_dirs:
+      - /etc/sudoers
+      - /usr/local/etc/sudoers
+      - /root/.smb/.
+      - "/mnt/{{ names.raid_vol.name }}"
+      - /mnt/dfs_lvm
+      - /lab

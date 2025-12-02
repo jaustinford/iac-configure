@@ -1,0 +1,45 @@
+{% set docker_restrictions = [] %}
+{% for cmd_dir in sudoers.restrict_groups.cmd_dirs %}
+{% for docker_arg in sudoers.restrict_groups.docker_args %}
+{{- docker_restrictions.append(cmd_dir + "/docker " + docker_arg + " *") -}}
+{{- docker_restrictions.append(cmd_dir + "/docker * " + docker_arg + " *") -}}
+{% endfor %}
+{% endfor %}
+
+{% set filesystem_restrictions = [] %}
+{% for cmd_dir in sudoers.restrict_groups.cmd_dirs %}
+{% for discover_cmd in sudoers.restrict_groups.discover_cmds %}
+{% for target_dir in sudoers.restrict_groups.target_dirs %}
+{{- filesystem_restrictions.append(cmd_dir + "/" + discover_cmd + " " + target_dir + "*") -}}
+{{- filesystem_restrictions.append(cmd_dir + "/" + discover_cmd + " * " + target_dir + "*") -}}
+{% endfor %}
+{% endfor %}
+{% endfor %}
+
+Cmnd_Alias RESTRICT_ESCALATE = \ 
+/usr/bin/su, \ 
+/usr/bin/passwd
+
+Cmnd_Alias RESTRICT_DOCKER = \
+{% for docker_restriction in docker_restrictions %}
+{{ docker_restriction }}{% if not loop.last %}, \
+{% else %}
+
+{% endif %}
+{% endfor %}
+
+Cmnd_Alias RESTRICT_FILESYSTEM = \
+{% for filesystem_restriction in filesystem_restrictions %}
+{{ filesystem_restriction }}{% if not loop.last %}, \
+{% else %}
+
+{% endif %}
+{% endfor %}
+
+User_Alias LAB_SUDOERS = \
+{{ names.lab_users.privileged }}
+
+LAB_SUDOERS ALL=(ALL) ALL, \
+    !RESTRICT_ESCALATE, \
+    !RESTRICT_DOCKER, \
+    !RESTRICT_FILESYSTEM
