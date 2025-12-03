@@ -34,9 +34,9 @@ container:
   dns_search_domains: "{{ containers_globals.dns_search_domains }}"
   env:
     TZ: "{{ names.local_timezone }}"
-    CYCLE_MODE: up
     VAULT_PASSWORD: "{{ lookup('env', 'VAULT_PASSWORD') }}"
     PRIVILEGED_USER_SSH_KEY_B64: "{{ lookup('env', 'PRIVILEGED_USER_SSH_KEY_B64') }}"
+    CYCLE_MODE: up
     ELISE_PROJECT_CRON_TRIGGER: "false"
     ELISE_PROJECT_EXPRESSVPN_CONTINENT: "{{ lookup('env', 'ELISE_PROJECT_EXPRESSVPN_CONTINENT') }}"
     ELISE_PROJECT_EXPRESSVPN_REGION: "{{ lookup('env', 'ELISE_PROJECT_EXPRESSVPN_REGION') }}"
