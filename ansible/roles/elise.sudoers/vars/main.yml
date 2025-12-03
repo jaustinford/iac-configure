@@ -18,12 +18,32 @@ sudoers:
         - su
         - passwd
 
+      docker_nopasswd:
+        - image ls
+        - network ls
+        - volume ls
+        - events
+        - ps
+        - logs
+        - pull
+        - stats
+        - top
+        - system df
+
       docker_restricted:
+        - inspect
+        - image inspect
+        - network inspect
+        - volume inspect
+        - export
         - exec
         - run
-        - volume
-        - network
-        - inspect
+        - push
+        - rename
+        - kill
+        - rm
+        - rmi
+        - system prune
 
       fs_restricted:
         - ls
@@ -36,9 +56,9 @@ sudoers:
 
     dirs:
       fs_restricted:
-        - /etc/sudoers
         - /lab
         - /mnt/dfs_lvm
         - "/mnt/{{ names.raid_vol.name }}"
         - /root
+        - /etc/sudoers
         - /usr/local/etc/sudoers
