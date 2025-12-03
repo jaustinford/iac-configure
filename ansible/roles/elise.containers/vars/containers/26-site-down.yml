@@ -1,0 +1,46 @@
+---
+###########################################################
+# site-down
+###########################################################
+
+###########################################################
+# Standby container for Lazarus triggers of the
+# elise/infrastructure/iac-configure project in down cycle
+# mode.
+###########################################################
+
+container:
+  name: site-down
+  image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_hosted }}/elise/iac-configure:main"
+  pull: "{{ containers_globals.pull_images.local }}"
+  user: "0:{{ assignments.site_down.uid }}"
+  command:
+    - /bin/bash
+    - -c
+    - |
+      /bin/container-init.sh ;
+      ansible-playbook \
+          /etc/ansible/site.yml \
+          -vv
+  docker_host: "{{ site_down_vlan_40_address }}"
+  state: present
+  detach: false
+  interactive: true
+  shm_size: "{{ containers_globals.shm_size }}"
+  devices: []
+  capabilities: []
+  network_mode: "{{ containers_globals.network_mode }}"
+  dns_servers: "{{ containers_globals.dns_servers }}"
+  dns_search_domains: "{{ containers_globals.dns_search_domains }}"
+  env:
+    TZ: "{{ names.local_timezone }}"
+    COMPOSE_PROFILE: site
+    CYCLE_MODE: down
+    SKIP_PAUSE: 'yes'
+    VAULT_PASSWORD: "{{ lookup('ansible.builtin.file', '/root/.vault.password') }}"
+  ports: []
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock:rw
+    - /root/.docker:/root/.docker:rw
+    - /mnt/xcalibr-green:/tfstate:rw
+  wait_port: "0"

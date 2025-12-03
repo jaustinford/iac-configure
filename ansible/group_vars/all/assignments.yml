@@ -96,6 +96,14 @@ assignments:
     host: docker01
     uid: 32643
 
-  lazarus:
+  site_up:
     host: docker00
     uid: 32644
+
+  site_down:
+    host: docker00
+    uid: 32645
+
+  lazarus:
+    host: docker00
+    uid: 32646

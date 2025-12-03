@@ -4,7 +4,6 @@ containers_globals:
   pull_images:
     local: "{{ cycle_mode.pull_local_images }}"
     remote: false
-  detach: true
   labels:
     lab_container: "true"
   shm_size: 64M

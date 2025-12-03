@@ -21,6 +21,9 @@ container:
     - -d
     - -f ""
   docker_host: "{{ expressvpn_vlan_40_address }}"
+  state: "{{ cycle_mode.state.containers }}"
+  detach: true
+  interactive: false
   shm_size: "{{ containers_globals.shm_size }}"
   devices:
     - /dev/net/tun

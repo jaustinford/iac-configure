@@ -71,4 +71,6 @@ barbossa_vlan_40_address: "{{ hostvars[assignments.barbossa.host]['ansible_' + h
 keycloak_vlan_40_address: "{{ hostvars[assignments.keycloak.host]['ansible_' + hostvars[assignments.keycloak.host].lan_ints.vlan_40].ipv4.address }}"
 redis_vlan_40_address: "{{ hostvars[assignments.redis.host]['ansible_' + hostvars[assignments.redis.host].lan_ints.vlan_40].ipv4.address }}"
 oauth_vlan_40_address: "{{ hostvars[assignments.oauth.host]['ansible_' + hostvars[assignments.oauth.host].lan_ints.vlan_40].ipv4.address }}"
+site_up_vlan_40_address: "{{ hostvars[assignments.site_up.host]['ansible_' + hostvars[assignments.site_up.host].lan_ints.vlan_40].ipv4.address }}"
+site_down_vlan_40_address: "{{ hostvars[assignments.site_down.host]['ansible_' + hostvars[assignments.site_down.host].lan_ints.vlan_40].ipv4.address }}"
 lazarus_vlan_40_address: "{{ hostvars[assignments.lazarus.host]['ansible_' + hostvars[assignments.lazarus.host].lan_ints.vlan_40].ipv4.address }}"
