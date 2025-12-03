@@ -34,9 +34,7 @@ container:
   dns_search_domains: "{{ containers_globals.dns_search_domains }}"
   env:
     TZ: "{{ names.local_timezone }}"
-    COMPOSE_PROFILE: site
     CYCLE_MODE: up
-    SKIP_PAUSE: 'yes'
     VAULT_PASSWORD: "{{ lookup('env', 'VAULT_PASSWORD') }}"
     PRIVILEGED_USER_SSH_KEY_B64: "{{ lookup('env', 'PRIVILEGED_USER_SSH_KEY_B64') }}"
     ELISE_PROJECT_CRON_TRIGGER: "false"
