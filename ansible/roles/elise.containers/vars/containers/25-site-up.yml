@@ -37,9 +37,9 @@ container:
     COMPOSE_PROFILE: site
     CYCLE_MODE: up
     SKIP_PAUSE: 'yes'
-    VAULT_PASSWORD: "{{ lookup('ansible.builtin.file', '/root/.vault.password') }}"
+    VAULT_PASSWORD: "{{ lookup('env', 'VAULT_PASSWORD') }}"
     PRIVILEGED_USER_SSH_KEY_B64: "{{ lookup('env', 'PRIVILEGED_USER_SSH_KEY_B64') }}"
-    ELISE_PROJECT_CRON_TRIGGER: "{{ lookup('env', 'ELISE_PROJECT_CRON_TRIGGER') }}"
+    ELISE_PROJECT_CRON_TRIGGER: "false"
     ELISE_PROJECT_EXPRESSVPN_CONTINENT: "{{ lookup('env', 'ELISE_PROJECT_EXPRESSVPN_CONTINENT') }}"
     ELISE_PROJECT_EXPRESSVPN_REGION: "{{ lookup('env', 'ELISE_PROJECT_EXPRESSVPN_REGION') }}"
     ELISE_PROJECT_EXPRESSVPN_COUNTRY: "{{ lookup('env', 'ELISE_PROJECT_EXPRESSVPN_COUNTRY') }}"
