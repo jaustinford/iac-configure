@@ -1,27 +1,44 @@
 ---
 sudoers:
-  restrict_groups:
-    cmd_paths:
-      - /bin
-      - /usr/bin
+  cmd_paths:
+    - /bin
+    - /usr/bin
 
-    docker_options:
-      - exec
-      - run
+  aliases:
+    users:
+      lab_sudoers:
+        - "{{ names.lab_users.privileged }}"
 
-    discover_cmds:
-      - ls
-      - vi
-      - vim
-      - cat
-      - nano
-      - less
-      - more
+    cmds:
+      general_nopasswd:
+        - systemctl
+        - netstat
 
-    discover_dirs:
-      - /etc/sudoers
-      - /usr/local/etc/sudoers
-      - /root/.smb/.
-      - "/mnt/{{ names.raid_vol.name }}"
-      - /mnt/dfs_lvm
-      - /lab
+      general_restricted:
+        - su
+        - passwd
+
+      docker_restricted:
+        - exec
+        - run
+        - volume
+        - network
+        - inspect
+
+      fs_restricted:
+        - ls
+        - vi
+        - vim
+        - cat
+        - nano
+        - less
+        - more
+
+    dirs:
+      fs_restricted:
+        - /etc/sudoers
+        - /lab
+        - /mnt/dfs_lvm
+        - "/mnt/{{ names.raid_vol.name }}"
+        - /root
+        - /usr/local/etc/sudoers

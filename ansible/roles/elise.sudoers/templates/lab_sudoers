@@ -1,43 +1,102 @@
-{% set docker_restrictions = [] %}
-{% for cmd_path in sudoers.restrict_groups.cmd_paths %}
-{% for docker_option in sudoers.restrict_groups.docker_options %}
-{{- docker_restrictions.append(cmd_path + "/docker " + docker_option + " *") -}}
-{{- docker_restrictions.append(cmd_path + "/docker * " + docker_option + " *") -}}
-{% endfor %}
-{% endfor %}
-{% set filesystem_restrictions = [] %}
-{% for cmd_path in sudoers.restrict_groups.cmd_paths %}
-{% for discover_cmd in sudoers.restrict_groups.discover_cmds %}
-{% for discover_dir in sudoers.restrict_groups.discover_dirs %}
-{{- filesystem_restrictions.append(cmd_path + "/" + discover_cmd + " " + discover_dir + "*") -}}
-{{- filesystem_restrictions.append(cmd_path + "/" + discover_cmd + " * " + discover_dir + "*") -}}
-{% endfor %}
-{% endfor %}
-{% endfor %}
-Cmnd_Alias RESTRICT_ESCALATE = \ 
-/usr/bin/su, \ 
-/usr/bin/passwd
 
-Cmnd_Alias RESTRICT_DOCKER = \
-{% for docker_restriction in docker_restrictions %}
-{{ docker_restriction }}{% if not loop.last %}, \
-{% else %}
-
-{% endif %}
-{% endfor %}
-
-Cmnd_Alias RESTRICT_FILESYSTEM = \
-{% for filesystem_restriction in filesystem_restrictions %}
-{{ filesystem_restriction }}{% if not loop.last %}, \
-{% else %}
-
-{% endif %}
-{% endfor %}
+############################################################
+# LAB_SUDOERS
+############################################################
 
 User_Alias LAB_SUDOERS = \
-{{ names.lab_users.privileged }}
+{% for lab_sudoer in sudoers.aliases.users.lab_sudoers -%}
+{{- lab_sudoer -}}{% if not loop.last %}, \
+{% else %}
+
+{% endif %}
+{%- endfor %}
+
+############################################################
+# CMDS_GENERAL_NOPASSWD
+############################################################
+
+{% set cmds_general_nopasswds = [] %}
+{%- for cmd_path in sudoers.cmd_paths -%}
+{%- for general_nopasswd in sudoers.aliases.cmds.general_nopasswd -%}
+{{- cmds_general_nopasswds.append(cmd_path + "/" + general_nopasswd) -}}
+{%- endfor -%}
+{%- endfor -%}
+
+Cmnd_Alias CMDS_GENERAL_NOPASSWD = \
+{% for cmds_general_nopasswd in cmds_general_nopasswds -%}
+{{- cmds_general_nopasswd -}}{% if not loop.last %}, \
+{% else %}
+
+{% endif %}
+{%- endfor %}
+
+############################################################
+# CMDS_GENERAL_RESTRICTED
+############################################################
+
+{% set cmds_general_restricteds = [] %}
+{%- for cmd_path in sudoers.cmd_paths -%}
+{%- for general_restricted in sudoers.aliases.cmds.general_restricted -%}
+{{- cmds_general_restricteds.append(cmd_path + "/" + general_restricted) -}}
+{%- endfor -%}
+{%- endfor -%}
+
+Cmnd_Alias CMDS_GENERAL_RESTRICTED = \
+{% for cmds_general_restricted in cmds_general_restricteds -%}
+{{- cmds_general_restricted -}}{% if not loop.last %}, \
+{% else %}
+
+{% endif %}
+{%- endfor %}
+
+############################################################
+# CMDS_DOCKER_RESTRICTED
+############################################################
+
+{% set cmds_docker_restricteds = [] %}
+{%- for cmd_path in sudoers.cmd_paths -%}
+{%- for docker_restricted in sudoers.aliases.cmds.docker_restricted -%}
+{{- cmds_docker_restricteds.append(cmd_path + "/docker " + docker_restricted + " *") -}}
+{{- cmds_docker_restricteds.append(cmd_path + "/docker * " + docker_restricted + " *") -}}
+{%- endfor -%}
+{%- endfor -%}
+
+Cmnd_Alias CMDS_DOCKER_RESTRICTED = \
+{% for cmds_docker_restricted in cmds_docker_restricteds -%}
+{{- cmds_docker_restricted -}}{% if not loop.last %}, \
+{% else %}
+
+{% endif %}
+{%- endfor %}
+
+############################################################
+# CMDS_FS_RESTRICTED
+############################################################
+
+{% set cmds_fs_restricteds = [] %}
+{%- for cmd_path in sudoers.cmd_paths -%}
+{%- for cmds_fs_restricted in sudoers.aliases.cmds.fs_restricted -%}
+{%- for dirs_fs_restricted in sudoers.aliases.dirs.fs_restricted -%}
+{{- cmds_fs_restricteds.append(cmd_path + "/" + cmds_fs_restricted + " " + dirs_fs_restricted + "*") -}}
+{{- cmds_fs_restricteds.append(cmd_path + "/" + cmds_fs_restricted + " * " + dirs_fs_restricted + "*") -}}
+{%- endfor -%}
+{%- endfor -%}
+{%- endfor -%}
+
+Cmnd_Alias CMDS_FS_RESTRICTED = \
+{% for cmds_fs_restricted in cmds_fs_restricteds -%}
+{{- cmds_fs_restricted -}}{% if not loop.last %}, \
+{% else %}
+
+{% endif %}
+{%- endfor %}
+
+############################################################
+# CONCAT
+############################################################
 
 LAB_SUDOERS ALL=(ALL) ALL, \
-    !RESTRICT_ESCALATE, \
-    !RESTRICT_DOCKER, \
-    !RESTRICT_FILESYSTEM
+    NOPASSWD: CMDS_GENERAL_NOPASSWD, \
+    !CMDS_GENERAL_RESTRICTED, \
+    !CMDS_DOCKER_RESTRICTED, \
+    !CMDS_FS_RESTRICTED
