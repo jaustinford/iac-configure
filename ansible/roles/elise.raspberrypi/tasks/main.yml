@@ -12,16 +12,3 @@
     mode: "{{ lab.dirs.mode }}"
   become: true
   when: ansible_architecture == "aarch64"
-
-- name: MAIN - include git tasks
-  ansible.builtin.include_tasks: git.yml
-  vars:
-    gitlab_credential: "{{ secrets.containers.gitlab.user.username }}:{{ secrets.containers.gitlab.user.password | urlencode }}"
-  when: ansible_architecture == "aarch64" and lazarus_node is defined
-  with_items:
-    - project:
-        path: infrastructure/iac-configure
-        branch: main
-      image:
-        name: iac-configure
-        tag: main
