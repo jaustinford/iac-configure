@@ -1,6 +1,5 @@
 ---
 containers_globals:
-  restart_policy: unless-stopped
   pull_images:
     local: "{{ cycle_mode.pull_local_images }}"
     remote: false

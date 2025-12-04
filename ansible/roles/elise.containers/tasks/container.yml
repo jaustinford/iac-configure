@@ -12,7 +12,7 @@
     command: "{{ container.command }}"
     docker_host: "tcp://{{ container.docker_host }}:2375"
     state: "{{ container.state }}"
-    restart_policy: "{{ containers_globals.restart_policy }}"
+    restart_policy: "{{ container.restart_policy }}"
     detach: "{{ container.detach }}"
     interactive: "{{ container.interactive }}"
     labels: "{{ containers_globals.labels }}"

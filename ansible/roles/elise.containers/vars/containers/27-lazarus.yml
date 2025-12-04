@@ -18,6 +18,7 @@ container:
     - src
   docker_host: "{{ lazarus_vlan_40_address }}"
   state: started
+  restart_policy: unless-stopped
   detach: true
   interactive: false
   shm_size: "{{ containers_globals.shm_size }}"

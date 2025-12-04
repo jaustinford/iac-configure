@@ -20,6 +20,7 @@ container:
     - /sbin/my_init
   docker_host: "{{ zoneminder_vlan_40_address }}"
   state: "{{ cycle_mode.state.containers }}"
+  restart_policy: unless-stopped
   detach: true
   interactive: false
   shm_size: 4G
