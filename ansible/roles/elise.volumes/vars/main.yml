@@ -1,0 +1,44 @@
+---
+volumes:
+  cifs_mounts:
+    - name: "{{ names.raid_vol.name }}-root"
+      host: "{{ nas_vlan_20_address }}"
+      docker_host: "{{ docker02_vlan_40_address }}"
+      username: "{{ names.lab_users.raid_vol.root_rw }}"
+      password: "{{ secrets.lab_users.nas.raid_vol.root_rw }}"
+
+    - name: "{{ names.raid_vol.name }}-black"
+      host: "{{ nas_vlan_20_address }}"
+      docker_host: "{{ docker01_vlan_40_address }}"
+      username: "{{ names.lab_users.raid_vol.black_rw }}"
+      password: "{{ secrets.lab_users.nas.raid_vol.black_rw }}"
+
+    - name: "{{ names.raid_vol.name }}-black"
+      host: "{{ nas_vlan_20_address }}"
+      docker_host: "{{ docker02_vlan_40_address }}"
+      username: "{{ names.lab_users.raid_vol.black_rw }}"
+      password: "{{ secrets.lab_users.nas.raid_vol.black_rw }}"
+
+    - name: "{{ names.raid_vol.name }}-blue"
+      host: "{{ nas_vlan_20_address }}"
+      docker_host: "{{ docker02_vlan_40_address }}"
+      username: "{{ names.lab_users.raid_vol.blue_ro }}"
+      password: "{{ secrets.lab_users.nas.raid_vol.blue_ro }}"
+
+    - name: "{{ names.raid_vol.name }}-green"
+      host: "{{ nas_vlan_20_address }}"
+      docker_host: "{{ docker02_vlan_40_address }}"
+      username: "{{ names.lab_users.raid_vol.green_rw }}"
+      password: "{{ secrets.lab_users.nas.raid_vol.green_rw }}"
+
+    - name: "{{ names.raid_vol.name }}-red"
+      host: "{{ nas_vlan_20_address }}"
+      docker_host: "{{ docker01_vlan_40_address }}"
+      username: "{{ names.lab_users.raid_vol.red_ro }}"
+      password: "{{ secrets.lab_users.nas.raid_vol.red_ro }}"
+
+    - name: "{{ names.raid_vol.name }}-red"
+      host: "{{ nas_vlan_20_address }}"
+      docker_host: "{{ docker02_vlan_40_address }}"
+      username: "{{ names.lab_users.raid_vol.red_rw }}"
+      password: "{{ secrets.lab_users.nas.raid_vol.red_rw }}"

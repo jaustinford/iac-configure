@@ -20,6 +20,7 @@ container:
   docker_host: "{{ filebrowser_vlan_40_address }}"
   state: "{{ cycle_mode.state.containers }}"
   restart_policy: unless-stopped
+  privileged: false
   detach: true
   interactive: false
   shm_size: "{{ containers_globals.shm_size }}"
@@ -38,5 +39,5 @@ container:
     - "{{ lab.dirs.config }}/filebrowser/settings.json:/config/settings.json:ro"
     - "{{ lab.dirs.app_data }}/filebrowser/filebrowser.db:/database/filebrowser.db:rw"
     - "{{ lab.dirs.app_data }}/filebrowser/branding:/branding:rw"
-    - "/mnt/{{ names.raid_vol.name }}-blue:/{{ names.raid_vol.name }}:ro"
+    - "{{ names.raid_vol.name }}-blue:/{{ names.raid_vol.name }}:ro"
   wait_port: "{{ ports.filebrowser_web }}"

@@ -20,6 +20,7 @@ container:
   docker_host: "{{ deluge_vlan_40_address }}"
   state: "{{ cycle_mode.state.containers }}"
   restart_policy: unless-stopped
+  privileged: false
   detach: true
   interactive: false
   shm_size: "{{ containers_globals.shm_size }}"
@@ -34,7 +35,7 @@ container:
     PGID: "{{ names.raid_vol.group.gid }}"
   ports: []
   volumes:
-    - "/mnt/{{ names.raid_vol.name }}-black:/downloads:rw"
+    - "{{ names.raid_vol.name }}-black:/downloads:rw"
     - "{{ lab.dirs.config }}/deluge/auth:/config/auth:ro"
     - "{{ lab.dirs.config }}/deluge/core.conf:/config/core.conf:ro"
     - "{{ lab.dirs.config }}/deluge/hostlist.conf:/config/hostlist.conf:ro"

@@ -20,6 +20,7 @@ container:
   docker_host: "{{ barbossa_vlan_40_address }}"
   state: "{{ cycle_mode.state.containers }}"
   restart_policy: unless-stopped
+  privileged: false
   detach: true
   interactive: false
   shm_size: "{{ containers_globals.shm_size }}"
@@ -34,6 +35,6 @@ container:
     PLEX_TOKEN: "{{ secrets.containers.plex.token }}"
   ports: []
   volumes:
-    - "/mnt/{{ names.raid_vol.name }}-black:/downloads:rw"
-    - "/mnt/{{ names.raid_vol.name }}-red:/plex_libraries:rw"
+    - "{{ names.raid_vol.name }}-black:/downloads:rw"
+    - "{{ names.raid_vol.name }}-red:/plex_libraries:rw"
   wait_port: "0"

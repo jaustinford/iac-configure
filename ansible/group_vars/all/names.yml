@@ -55,8 +55,9 @@ names:
     nonprivileged: squire # Meager candidate, no privileges.
 
     raid_vol:
-      black_rw: lancelot # Most famous knight, betrayer of Arthur.
-      blue_ro: tristan   # Skilled knight, warrior musician.
-      green_rw: bedivere # The knight who returned the Sword.
-      red_ro: gawain     # Loyal knight, good friend of Arthur.
+      root_rw: arthur    # King born of all England.
       red_rw: galahad    # Purest of knights, son of Lancelot.
+      red_ro: gawain     # Loyal knight, good friend of Arthur.
+      green_rw: bedivere # The knight who returned the Sword.
+      blue_ro: tristan   # Skilled knight, warrior musician.
+      black_rw: lancelot # Most famous knight, betrayer of Arthur.

@@ -40,6 +40,9 @@
 - name: UP - import configs playbook
   import_playbook: configs.yml
 
+- name: UP - import volumes playbook
+  import_playbook: volumes.yml
+
 - name: UP - import containers playbook
   import_playbook: containers.yml
 

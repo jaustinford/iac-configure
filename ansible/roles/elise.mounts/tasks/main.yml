@@ -1,20 +1,4 @@
 ---
-- name: MAIN - ensure .smb directory
-  ansible.builtin.file:
-    path: /root/.smb
-    state: directory
-    owner: root
-    group: root
-    mode: '0700'
-  become: true
-
-- name: MAIN - include samba tasks
-  ansible.builtin.include_tasks: samba.yml
-  no_log: true
-  when: lan_ints.vlan_20 is defined and item.host == ansible_fqdn
-  with_items:
-    - "{{ mounts.samba }}"
-
 - name: MAIN - include glusterfs tasks
   ansible.builtin.include_tasks: glusterfs.yml
   no_log: true

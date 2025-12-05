@@ -24,6 +24,7 @@ container:
   docker_host: "{{ openvpnas_vlan_40_address }}"
   state: "{{ cycle_mode.state.containers }}"
   restart_policy: unless-stopped
+  privileged: false
   detach: true
   interactive: false
   shm_size: "{{ containers_globals.shm_size }}"

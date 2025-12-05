@@ -107,3 +107,35 @@ assignments:
   lazarus:
     host: docker00
     uid: 32646
+
+  grail_backup_raidvol_1:
+    host: docker02
+    uid: 32647
+
+  grail_backup_raidvol_2:
+    host: docker02
+    uid: 32648
+
+  grail_backup_raidvol_3:
+    host: docker02
+    uid: 32649
+
+  grail_backup_appvol:
+    host: docker02
+    uid: 32650
+
+  grail_restore_raidvol_1:
+    host: docker02
+    uid: 32651
+
+  grail_restore_raidvol_2:
+    host: docker02
+    uid: 32652
+
+  grail_restore_raidvol_3:
+    host: docker02
+    uid: 32653
+
+  grail_restore_appvol:
+    host: docker02
+    uid: 32654
