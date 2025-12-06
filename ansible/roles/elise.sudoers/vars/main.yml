@@ -28,6 +28,8 @@ sudoers:
         - logs
         - pull
         - stats
+        - start
+        - restart
         - top
         - system df
 
