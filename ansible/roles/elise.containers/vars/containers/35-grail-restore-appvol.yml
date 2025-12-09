@@ -37,5 +37,5 @@ container:
     DISK_MOUNTPOINT: /grail-src
   ports: []
   volumes:
-    - "{{ names.raid_vol.name }}-root:/grail-dst:rw"
+    - /mnt/dfs_lvm/lab_dfs:/grail-dst:rw
   wait_port: "0"
