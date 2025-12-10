@@ -12,7 +12,9 @@
         gid={{ names.raid_vol.group.gid }},\
         dir_mode=0770,\
         file_mode=0770,\
-        iocharset=utf8"
+        iocharset=utf8,\
+        soft,\
+        timeout=10"
       device: "//{{ item.host }}/{{ item.name }}"
   no_log: true
   with_items:
