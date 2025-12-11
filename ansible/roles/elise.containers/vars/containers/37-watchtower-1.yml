@@ -1,0 +1,38 @@
+---
+###########################################################
+# watchtower-1
+###########################################################
+
+###########################################################
+# Monitors a host's Docker containers for updated image
+# builds on the backend Registry and then redeploys any
+# updated containers.
+###########################################################
+
+container:
+  name: watchtower-1
+  image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/containrrr/watchtower:1.7.1"
+  pull: "{{ containers_globals.pull_images.remote }}"
+  user: "0:{{ assignments.watchtower_1.uid }}"
+  command: null
+  docker_host: "{{ watchtower_1_vlan_40_address }}"
+  state: started
+  restart_policy: unless-stopped
+  privileged: false
+  detach: true
+  interactive: false
+  shm_size: "{{ containers_globals.shm_size }}"
+  devices: []
+  capabilities: []
+  network_mode: "{{ containers_globals.network_mode }}"
+  dns_servers: "{{ containers_globals.dns_servers }}"
+  dns_search_domains: "{{ containers_globals.dns_search_domains }}"
+  env:
+    TZ: "{{ names.local_timezone }}"
+    WATCHTOWER_POLL_INTERVAL: "10"
+    WATCHTOWER_LABEL_ENABLE: "true"
+  ports: []
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock:rw
+    - /root/.docker/config.json:/config.json:rw
+  wait_port: "0"

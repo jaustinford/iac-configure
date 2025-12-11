@@ -139,3 +139,15 @@ assignments:
   grail_restore_appvol:
     host: docker02
     uid: 32654
+
+  watchtower_0:
+    host: docker00
+    uid: 32655
+
+  watchtower_1:
+    host: docker01
+    uid: 32656
+
+  watchtower_2:
+    host: docker02
+    uid: 32657

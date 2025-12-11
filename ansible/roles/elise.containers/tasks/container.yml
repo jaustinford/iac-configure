@@ -16,7 +16,10 @@
     privileged: "{{ container.privileged }}"
     detach: "{{ container.detach }}"
     interactive: "{{ container.interactive }}"
-    labels: "{{ containers_globals.labels }}"
+    labels:
+      lab_container: "true"
+      com.centurylinklabs.watchtower.enable:
+        "{{ 'true' if ':' + ports.nexus_docker_hosted in container.image else 'false' }}"
     shm_size: "{{ container.shm_size }}"
     devices: "{{ container.devices }}"
     capabilities: "{{ container.capabilities }}"
@@ -28,7 +31,7 @@
     volumes: "{{ container.volumes }}"
   vars:
     ansible_python_interpreter: /usr/local/bin/python3
-  no_log: true
+  # no_log: true
 
 - name: CONTAINER - include wait tasks
   ansible.builtin.include_tasks: wait.yml
