@@ -29,7 +29,7 @@ container:
   dns_search_domains: "{{ containers_globals.dns_search_domains }}"
   env:
     TZ: "{{ names.local_timezone }}"
-    WATCHTOWER_POLL_INTERVAL: "10"
+    WATCHTOWER_POLL_INTERVAL: "{{ containers_globals.watchtower_poll }}"
     WATCHTOWER_LABEL_ENABLE: "true"
     WATCHTOWER_INCLUDE_STOPPED: "true"
   ports: []
