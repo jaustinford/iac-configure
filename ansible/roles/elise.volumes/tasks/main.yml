@@ -3,7 +3,6 @@
   community.docker.docker_volume:
     name: "{{ item.name }}"
     docker_host: "tcp://{{ item.docker_host }}:2375"
-    timeout: 60
     driver_options:
       type: cifs
       o:
