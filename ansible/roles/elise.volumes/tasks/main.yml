@@ -3,6 +3,7 @@
   community.docker.docker_volume:
     name: "{{ item.name }}"
     docker_host: "tcp://{{ item.docker_host }}:2375"
+    timeout: 60
     driver_options:
       type: cifs
       o:
@@ -12,9 +13,7 @@
         gid={{ names.raid_vol.group.gid }},\
         dir_mode=0770,\
         file_mode=0770,\
-        iocharset=utf8,\
-        soft,\
-        timeout=10"
+        iocharset=utf8"
       device: "//{{ item.host }}/{{ item.name }}"
   no_log: true
   with_items:
