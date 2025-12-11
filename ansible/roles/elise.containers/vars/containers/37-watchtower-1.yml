@@ -16,7 +16,7 @@ container:
   user: "0:{{ assignments.watchtower_1.uid }}"
   command: null
   docker_host: "{{ watchtower_1_vlan_40_address }}"
-  state: started
+  state: "{{ cycle_mode.state.containers }}"
   restart_policy: unless-stopped
   privileged: false
   detach: true
