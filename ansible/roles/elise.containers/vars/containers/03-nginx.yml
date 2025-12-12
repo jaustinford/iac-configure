@@ -15,7 +15,6 @@
 container:
   name: nginx
   image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/anroe/nginx-geoip2:1.22.1-geoip2-3.4"
-  pull: "{{ containers_globals.pull_images.remote }}"
   user: "0:0"
   command:
     - nginx

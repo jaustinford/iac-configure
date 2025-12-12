@@ -14,7 +14,6 @@
 container:
   name: zoneminder
   image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/dlandon/zoneminder:latest"
-  pull: "{{ containers_globals.pull_images.remote }}"
   user: "0:0"
   command:
     - /sbin/my_init

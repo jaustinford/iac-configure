@@ -15,7 +15,6 @@
 container:
   name: kibana
   image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/elastic/kibana:{{ lab.elastic_version }}"
-  pull: "{{ containers_globals.pull_images.remote }}"
   user: "1000:{{ assignments.kibana.uid }}"
   command:
     - /usr/local/bin/kibana-docker

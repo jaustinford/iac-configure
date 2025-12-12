@@ -15,7 +15,6 @@
 container:
   name: squid
   image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/sameersbn/squid:3.5.27-2"
-  pull: "{{ containers_globals.pull_images.remote }}"
   user: "0:0"
   command: null
   docker_host: "{{ squid_vlan_40_address }}"

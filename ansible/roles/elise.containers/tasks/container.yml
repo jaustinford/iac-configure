@@ -7,7 +7,6 @@
   community.docker.docker_container:
     name: "{{ container.name }}"
     image: "{{ container.image }}"
-    pull: "{{ container.pull }}"
     user: "{{ container.user }}"
     command: "{{ container.command }}"
     docker_host: "tcp://{{ container.docker_host }}:2375"

@@ -11,7 +11,6 @@
 container:
   name: grail-backup-raidvol-3
   image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_hosted }}/elise/grail:main"
-  pull: "{{ containers_globals.pull_images.local }}"
   user: "0:{{ assignments.grail_backup_raidvol_3.uid }}"
   command:
     - python3

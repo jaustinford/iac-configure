@@ -14,7 +14,6 @@
 container:
   name: deluge
   image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/linuxserver/deluge:2.1.1"
-  pull: "{{ containers_globals.pull_images.remote }}"
   user: "0:0"
   command: null
   docker_host: "{{ deluge_vlan_40_address }}"

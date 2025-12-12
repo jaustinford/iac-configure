@@ -13,7 +13,6 @@
 container:
   name: pihole
   image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/pihole/pihole:2025.08.0"
-  pull: "{{ containers_globals.pull_images.remote }}"
   user: "0:0"
   command: null
   docker_host: "{{ pihole_vlan_40_address }}"

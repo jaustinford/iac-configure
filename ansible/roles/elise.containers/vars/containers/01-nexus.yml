@@ -15,7 +15,6 @@
 container:
   name: nexus
   image: sonatype/nexus3:3.68.1
-  pull: "{{ containers_globals.pull_images.remote }}"
   user: "{{ assignments.nexus.uid }}:{{ assignments.nexus.uid }}"
   command:
     - /opt/sonatype/nexus/bin/nexus

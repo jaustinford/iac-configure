@@ -15,7 +15,6 @@
 container:
   name: oauth
   image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/bitnamilegacy/oauth2-proxy:7.4.0"
-  pull: "{{ containers_globals.pull_images.remote }}"
   user: "{{ assignments.oauth.uid }}:{{ assignments.oauth.uid }}"
   command:
     - --config=/etc/oauth2-proxy.cfg

@@ -10,7 +10,6 @@
 container:
   name: resume
   image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_hosted }}/elise/static-website-resume:main"
-  pull: "{{ containers_globals.pull_images.local }}"
   user: "{{ assignments.resume.uid }}:{{ assignments.resume.uid }}"
   command:
     - httpd-foreground

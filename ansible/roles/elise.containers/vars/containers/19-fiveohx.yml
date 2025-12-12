@@ -10,7 +10,6 @@
 container:
   name: fiveohx
   image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_hosted }}/elise/static-website-fiveohx:main"
-  pull: "{{ containers_globals.pull_images.local }}"
   user: "{{ assignments.fiveohx.uid }}:{{ assignments.fiveohx.uid }}"
   command:
     - httpd-foreground

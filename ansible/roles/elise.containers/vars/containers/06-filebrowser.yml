@@ -14,7 +14,6 @@
 container:
   name: filebrowser
   image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/filebrowser/filebrowser:v2.42.5-amd64-s6"
-  pull: "{{ containers_globals.pull_images.remote }}"
   user: "0:0"
   command: null
   docker_host: "{{ filebrowser_vlan_40_address }}"

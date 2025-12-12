@@ -12,7 +12,6 @@
 container:
   name: watchtower-0
   image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/containrrr/watchtower:1.7.1"
-  pull: "{{ containers_globals.pull_images.remote }}"
   user: "0:{{ assignments.watchtower_0.uid }}"
   command: null
   docker_host: "{{ watchtower_0_vlan_40_address }}"

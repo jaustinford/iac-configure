@@ -15,7 +15,6 @@
 container:
   name: expressvpn
   image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/dperson/openvpn-client:amd64"
-  pull: "{{ containers_globals.pull_images.remote }}"
   user: "0:0"
   command:
     - -d

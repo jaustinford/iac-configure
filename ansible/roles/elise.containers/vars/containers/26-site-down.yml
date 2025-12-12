@@ -12,7 +12,6 @@
 container:
   name: site-down
   image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_hosted }}/elise/iac-configure:main"
-  pull: "{{ containers_globals.pull_images.local }}"
   user: "0:{{ assignments.site_down.uid }}"
   command:
     - /bin/bash

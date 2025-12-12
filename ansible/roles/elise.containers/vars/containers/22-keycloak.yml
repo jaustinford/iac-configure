@@ -14,7 +14,6 @@
 container:
   name: keycloak
   image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/keycloak/keycloak:26.4.0-0"
-  pull: "{{ containers_globals.pull_images.remote }}"
   user: "0:0"
   command:
     - start

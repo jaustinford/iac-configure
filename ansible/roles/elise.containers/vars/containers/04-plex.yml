@@ -15,7 +15,6 @@
 container:
   name: plex
   image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/plexinc/pms-docker:1.42.1.10060-4e8b05daf"
-  pull: "{{ containers_globals.pull_images.remote }}"
   user: "0:0"
   command: null
   docker_host: "{{ plex_vlan_40_address }}"

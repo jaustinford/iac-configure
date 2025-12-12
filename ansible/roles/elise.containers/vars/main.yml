@@ -1,8 +1,5 @@
 ---
 containers_globals:
-  pull_images:
-    local: "{{ cycle_mode.pull_local_images }}"
-    remote: false
   shm_size: 64M
   network_mode: bridge
   dns_servers:
