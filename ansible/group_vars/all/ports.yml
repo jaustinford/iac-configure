@@ -24,3 +24,4 @@ ports:
   keycloak_web: "32521"
   redis_db: "32522"
   oauth_web: "32523"
+  vault_web: "32524"

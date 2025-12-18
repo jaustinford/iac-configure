@@ -151,3 +151,7 @@ assignments:
   watchtower_2:
     host: docker02
     uid: 32657
+
+  vault:
+    host: docker01
+    uid: 32658
