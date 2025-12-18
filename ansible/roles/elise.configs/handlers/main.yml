@@ -111,3 +111,14 @@
   become: true
   when: inventory_hostname == assignments.oauth.host
   changed_when: false
+
+- name: MAIN - docker restart vault
+  ansible.builtin.command: |
+    /bin/bash -c "
+      if [ ! -z \"$(docker ps --quiet --filter status=running --filter name=vault)\" ]; then
+        docker restart vault
+      fi
+    "
+  become: true
+  when: inventory_hostname == assignments.vault.host
+  changed_when: false
