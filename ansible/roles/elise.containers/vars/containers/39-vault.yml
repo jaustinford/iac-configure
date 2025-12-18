@@ -34,6 +34,6 @@ container:
   ports:
     - "{{ vault_vlan_40_address }}:{{ ports.vault_web }}:8200/tcp"
   volumes:
-    - "{{ lab.dirs.config }}/vault/config.json:/vault/config.json:rw"
+    - "{{ lab.dirs.config }}/vault/config.json:/vault/config.json:ro"
     - "{{ lab.dirs.app_data }}/vault/file:/vault/file:rw"
   wait_port: "0"
