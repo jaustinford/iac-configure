@@ -3,7 +3,6 @@
   ansible.builtin.template:
     src: "{{ item.src }}"
     dest: "{{ lab.dirs.config }}/{{ item.path }}"
-    group: "{{ assignments[item.path.split('/')[0]].uid }}"
     mode: "{{ lab.dirs.mode }}"
   become: true
   notify: "MAIN - docker restart {{ item.path.split('/')[0] }}"
