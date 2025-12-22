@@ -1,0 +1,17 @@
+---
+- name: VAULT - unseal vault
+  ansible.builtin.uri:
+    method: PUT
+    url: http://{{ vault_vlan_40_address }}:{{ ports.vault_web }}/v1/sys/unseal
+    body_format: json
+    body: |
+      {
+        "key": "{{ seal_key }}"
+      }
+  loop_control:
+    loop_var: seal_key
+  no_log: true
+  with_items:
+    - "{{ secrets.containers.vault.unseal_keys[0] }}"
+    - "{{ secrets.containers.vault.unseal_keys[1] }}"
+    - "{{ secrets.containers.vault.unseal_keys[2] }}"

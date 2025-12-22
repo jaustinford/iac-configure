@@ -4,6 +4,10 @@ assignments:
     host: docker01
     uid: 32620
 
+  vault:
+    host: docker01
+    uid: 32658
+
   pihole:
     host: docker02
     uid: 32621
@@ -151,7 +155,3 @@ assignments:
   watchtower_2:
     host: docker02
     uid: 32657
-
-  vault:
-    host: docker01
-    uid: 32658
