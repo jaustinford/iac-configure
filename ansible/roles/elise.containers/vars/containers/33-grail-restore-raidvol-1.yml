@@ -31,10 +31,11 @@ container:
   env:
     TZ: "{{ names.local_timezone }}"
     BACKUP_OBJECT: raidvol-1
-    BACKUP_DISK: /dev/sdb1
-    DISK_PASSWORD: "{{ secrets.containers.grail.backup_1 }}"
-    DISK_MOUNTPOINT: /grail-src
+    BACKUP_DISK_NAME: BACKUP_1
+    BACKUP_DISK_DEVICE: /dev/sdb1
+    BACKUP_DISK_MOUNTPOINT: /grail-src
   ports: []
   volumes:
+    - /root/approle/grail.json:/approle/grail.json:ro
     - "/root/smb/mounts/{{ names.raid_vol.name }}-root:/grail-dst:rw"
   wait_port: "0"
