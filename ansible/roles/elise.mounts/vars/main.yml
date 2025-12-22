@@ -1,5 +1,55 @@
 ---
 mounts:
+  samba:
+    - host: "{{ names.hosts.docker02 }}.{{ lab.domain }}"
+      state: "{{ cycle_mode.volumes.raid_vol }}"
+      src: "//{{ nas_vlan_20_address }}/{{ names.raid_vol.name }}-root"
+      path: "/root/smb/mounts/{{ names.raid_vol.name }}-root"
+      username: "{{ names.lab_users.raid_vol.root_rw }}"
+      password: "{{ secrets.lab_users.nas.raid_vol.root_rw }}"
+
+    - host: "{{ names.hosts.docker01 }}.{{ lab.domain }}"
+      state: "{{ cycle_mode.volumes.raid_vol }}"
+      src: "//{{ nas_vlan_20_address }}/{{ names.raid_vol.name }}-black"
+      path: "/root/smb/mounts/{{ names.raid_vol.name }}-black"
+      username: "{{ names.lab_users.raid_vol.black_rw }}"
+      password: "{{ secrets.lab_users.nas.raid_vol.black_rw }}"
+
+    - host: "{{ names.hosts.docker02 }}.{{ lab.domain }}"
+      state: "{{ cycle_mode.volumes.raid_vol }}"
+      src: "//{{ nas_vlan_20_address }}/{{ names.raid_vol.name }}-black"
+      path: "/root/smb/mounts/{{ names.raid_vol.name }}-black"
+      username: "{{ names.lab_users.raid_vol.black_rw }}"
+      password: "{{ secrets.lab_users.nas.raid_vol.black_rw }}"
+
+    - host: "{{ names.hosts.docker02 }}.{{ lab.domain }}"
+      state: "{{ cycle_mode.volumes.raid_vol }}"
+      src: "//{{ nas_vlan_20_address }}/{{ names.raid_vol.name }}-blue"
+      path: "/root/smb/mounts/{{ names.raid_vol.name }}-blue"
+      username: "{{ names.lab_users.raid_vol.blue_ro }}"
+      password: "{{ secrets.lab_users.nas.raid_vol.blue_ro }}"
+
+    - host: "{{ names.hosts.docker02 }}.{{ lab.domain }}"
+      state: "{{ cycle_mode.volumes.raid_vol }}"
+      src: "//{{ nas_vlan_20_address }}/{{ names.raid_vol.name }}-green"
+      path: "/root/smb/mounts/{{ names.raid_vol.name }}-green"
+      username: "{{ names.lab_users.raid_vol.green_rw }}"
+      password: "{{ secrets.lab_users.nas.raid_vol.green_rw }}"
+
+    - host: "{{ names.hosts.docker01 }}.{{ lab.domain }}"
+      state: "{{ cycle_mode.volumes.raid_vol }}"
+      src: "//{{ nas_vlan_20_address }}/{{ names.raid_vol.name }}-red"
+      path: "/root/smb/mounts/{{ names.raid_vol.name }}-red"
+      username: "{{ names.lab_users.raid_vol.red_ro }}"
+      password: "{{ secrets.lab_users.nas.raid_vol.red_ro }}"
+
+    - host: "{{ names.hosts.docker02 }}.{{ lab.domain }}"
+      state: "{{ cycle_mode.volumes.raid_vol }}"
+      src: "//{{ nas_vlan_20_address }}/{{ names.raid_vol.name }}-red"
+      path: "/root/smb/mounts/{{ names.raid_vol.name }}-red"
+      username: "{{ names.lab_users.raid_vol.red_rw }}"
+      password: "{{ secrets.lab_users.nas.raid_vol.red_rw }}"
+
   glusterfs:
     - host: "{{ names.hosts.docker01 }}.{{ lab.domain }}"
       state: "{{ cycle_mode.volumes.dfs_lvm }}"
