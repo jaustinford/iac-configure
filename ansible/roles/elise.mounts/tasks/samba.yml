@@ -24,7 +24,7 @@
   ansible.posix.mount:
     fstype: cifs
     src: "{{ item.src }}"
-    opts: 
+    opts:
       "credentials=/root/smb/credentials/{{ item.username }}.txt,\
       uid=0,\
       gid={{ names.raid_vol.group.gid }},\
