@@ -37,5 +37,4 @@ container:
   ports: []
   volumes:
     - /root/approle/grail.json:/approle/grail.json:ro
-    - "/root/smb/mounts/{{ names.raid_vol.name }}-root:/grail-dst:rw"
   wait_port: "0"
