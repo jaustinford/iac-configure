@@ -55,7 +55,6 @@ names:
     nonprivileged: squire # Meager candidate, no privileges.
 
     raid_vol:
-      root_rw: arthur    # King born of all England.
       red_rw: galahad    # Purest of knights, son of Lancelot.
       red_ro: gawain     # Loyal knight, good friend of Arthur.
       green_rw: bedivere # The knight who returned the Sword.

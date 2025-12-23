@@ -1,13 +1,6 @@
 ---
 mounts:
   samba:
-    - host: "{{ names.hosts.docker02 }}.{{ lab.domain }}"
-      state: "{{ cycle_mode.volumes.raid_vol }}"
-      src: "//{{ nas_vlan_20_address }}/{{ names.raid_vol.name }}-root"
-      path: "/root/smb/mounts/{{ names.raid_vol.name }}-root"
-      username: "{{ names.lab_users.raid_vol.root_rw }}"
-      password: "{{ secrets.lab_users.nas.raid_vol.root_rw }}"
-
     - host: "{{ names.hosts.docker01 }}.{{ lab.domain }}"
       state: "{{ cycle_mode.volumes.raid_vol }}"
       src: "//{{ nas_vlan_20_address }}/{{ names.raid_vol.name }}-black"
