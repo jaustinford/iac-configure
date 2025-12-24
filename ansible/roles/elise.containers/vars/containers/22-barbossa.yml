@@ -11,7 +11,7 @@
 container:
   name: barbossa
   image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_hosted }}/elise/barbossa:main"
-  user: "{{ assignments.barbossa.uid }}:{{ names.raid_vol.group.gid }}"
+  user: "0:{{ names.raid_vol.group.gid }}"
   command:
     - python3
     - src
