@@ -23,6 +23,7 @@ lab_users:
       e7uJj5uR0x2SLNX1H7jnZJwBeasPFSfaGPifkJNkAzuFLKsY9shMSLmLaLfgQ4vZtFyboAVvVZfMw1I5wKGhBCT5PJJ4VwuO1YX8\
       gz7GWwc+FD/omwX6uH3LMMaCb9RKMcETXw1aB1CXEA1t3qSkIQ/G7jSdDKlPZiIvPJOGeFRZTwepvtdoBYL2kmx/UcS3BFZxXkdK\
       N8C+p9/vg+sX9A+WE1BaBTw== {{ names.lab_users.privileged }}@{{ lab.domain }}"
+
   nonprivileged:
     colors:
       primary: blue

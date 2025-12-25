@@ -7,23 +7,11 @@
   become: true
   when: inventory_hostname != "nas"
 
-- name: MAIN - include privileged_user tasks
-  ansible.builtin.include_tasks: privileged_user.yml
+- name: MAIN - include superuser tasks
+  ansible.builtin.include_tasks: superuser.yml
 
 - name: MAIN - include nonprivileged_user tasks
   ansible.builtin.include_tasks: nonprivileged_user.yml
 
-- name: MAIN - copy superuser bash files
-  ansible.builtin.template:
-    src: "{{ item }}"
-    dest: "/root/{{ item }}"
-    owner: root
-    group: "{{ host_users.superuser.group }}"
-    mode: '0750'
-  vars:
-    colorscheme: "{{ lab_users.superuser.colors.vim }}"
-  become: true
-  with_items:
-    - .bash_profile
-    - .vimrc
-    - .hushlogin
+- name: MAIN - include nonprivileged_user tasks
+  ansible.builtin.include_tasks: nonprivileged_user.yml
