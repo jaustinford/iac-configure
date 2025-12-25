@@ -32,10 +32,9 @@ container:
   env:
     TZ: "{{ names.local_timezone }}"
     ELASTICSEARCH_ENDPOINT: "{{ elasticsearch_vlan_40_address }}:{{ ports.elasticsearch_db }}"
-    ELASTICSEARCH_USERNAME: elastic
-    ELASTICSEARCH_PASSWORD: "{{ secrets.containers.elasticsearch.elastic }}"
   ports: []
   volumes:
+    - /root/approle/lazarus.json:/approle/lazarus.json:ro
     - /var/run/docker.sock:/var/run/docker.sock:rw
     - /tmp:/tmp:rw
     - "{{ lab.dirs.app_data }}/lazarus/data:/lazarus/data:rw"
