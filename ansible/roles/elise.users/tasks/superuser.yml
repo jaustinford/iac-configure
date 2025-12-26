@@ -1,15 +1,7 @@
 ---
-- name: SUPERUSER - copy superuser bash files
-  ansible.builtin.template:
-    src: "{{ item }}"
-    dest: "/root/{{ item }}"
-    owner: root
-    group: "{{ host_users.superuser.group }}"
-    mode: '0750'
-  vars:
-    colorscheme: "{{ lab_users.superuser.colors.vim }}"
+- name: SUPERUSER - manage superuser password
+  ansible.builtin.user:
+    name: "{{ names.users.superuser }}"
+    password: "{{ secrets.users[inventory_hostname].superuser | password_hash('sha512') }}"
   become: true
-  with_items:
-    - .bash_profile
-    - .vimrc
-    - .hushlogin
+  changed_when: false

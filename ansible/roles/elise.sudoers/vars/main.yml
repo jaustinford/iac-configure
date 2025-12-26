@@ -7,7 +7,7 @@ sudoers:
   aliases:
     users:
       lab_sudoers:
-        - "{{ names.lab_users.privileged }}"
+        - "{{ names.users.privileged }}"
 
     cmds:
       general_nopasswd:

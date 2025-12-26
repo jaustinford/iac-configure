@@ -20,12 +20,13 @@
 # external/linode
 # external/maxmind
 
-# users/non_privileged/onprem_docker
-# users/non_privileged/onprem_nas
-# users/non_privileged/linode
+# users/superuser/onprem_docker
+# users/superuser/linode
 # users/privileged/onprem_docker
 # users/privileged/onprem_nas
 # users/privileged/linode
+# users/non_privileged/onprem_docker
+# users/non_privileged/linode
 # users/raid_vol/black_rw
 # users/raid_vol/blue_ro
 # users/raid_vol/green_rw

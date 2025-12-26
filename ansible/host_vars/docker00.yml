@@ -3,13 +3,9 @@
 
 ansible_python_interpreter: /usr/bin/python3
 
-# ansible_user: root
-# ansible_password: "{{ secrets.lab_users.docker00.superuser }}"
-# ansible_become_password: "{{ secrets.lab_users.docker00.superuser }}"
-
-ansible_user: "{{ names.lab_users.privileged }}"
-ansible_password: "{{ secrets.lab_users.docker00.privileged }}"
-ansible_become_password: "{{ secrets.lab_users.docker00.privileged }}"
+ansible_user: "{{ names.users.privileged }}"
+ansible_password: "{{ secrets.users.docker00.privileged }}"
+ansible_become_password: "{{ secrets.users.docker00.privileged }}"
 
 ansible_ssh_private_key_file: /root/ssh.key
 
@@ -17,17 +13,19 @@ ansible_ssh_private_key_file: /root/ssh.key
 
 host_users:
   superuser:
+    uid: "0"
+    home_dir: /root
     group: root
 
   privileged:
     uid: "32614"
-    home_dir: "/home/{{ names.lab_users.privileged }}"
-    group: "{{ names.lab_users.privileged }}"
+    home_dir: "/home/{{ names.users.privileged }}"
+    group: "{{ names.users.privileged }}"
 
-  nonprivileged:
+  non_privileged:
     uid: "32615"
-    home_dir: "/home/{{ names.lab_users.nonprivileged }}"
-    group: "{{ names.lab_users.nonprivileged }}"
+    home_dir: "/home/{{ names.users.non_privileged }}"
+    group: "{{ names.users.non_privileged }}"
 
 poweroff:
   enabled: false

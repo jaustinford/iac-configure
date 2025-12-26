@@ -50,9 +50,10 @@ names:
     vlan_40: fre # Fire, Container and Host Services.
     vlan_50: air # Air, Managed Switch Configuration.
 
-  lab_users:
-    privileged: merlin    # Powerful wizard, privileged above all.
-    nonprivileged: squire # Meager candidate, no privileges.
+  users:
+    superuser: root        # Our Lord, God Allmighty.
+    privileged: merlin     # Powerful wizard, privileged above all.
+    non_privileged: squire # Meager candidate, no privileges.
 
     raid_vol:
       red_ro: gawain     # Loyal knight, good friend of Arthur.

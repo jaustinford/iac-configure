@@ -1,17 +1,11 @@
 ---
-- name: MAIN - create raid_vol group
-  ansible.builtin.group:
-    name: "{{ names.raid_vol.group.name }}"
-    gid: "{{ names.raid_vol.group.gid }}"
-    state: present
-  become: true
+- name: MAIN - include docker tasks
+  ansible.builtin.include_tasks: docker.yml
   when: inventory_hostname != "nas"
 
-- name: MAIN - include superuser tasks
-  ansible.builtin.include_tasks: superuser.yml
-
-- name: MAIN - include nonprivileged_user tasks
-  ansible.builtin.include_tasks: nonprivileged_user.yml
-
-- name: MAIN - include nonprivileged_user tasks
-  ansible.builtin.include_tasks: nonprivileged_user.yml
+- name: MAIN - include files tasks
+  ansible.builtin.include_tasks: files.yml
+  with_items:
+    - .bash_profile
+    - .vimrc
+    - .hushlogin

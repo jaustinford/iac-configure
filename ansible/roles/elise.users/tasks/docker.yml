@@ -1,0 +1,16 @@
+---
+- name: DOCKER - create raid_vol group
+  ansible.builtin.group:
+    name: "{{ names.raid_vol.group.name }}"
+    gid: "{{ names.raid_vol.group.gid }}"
+    state: present
+  become: true
+
+- name: DOCKER - include superuser tasks
+  ansible.builtin.include_tasks: superuser.yml
+
+- name: DOCKER - include privileged tasks
+  ansible.builtin.include_tasks: privileged.yml
+
+- name: DOCKER - include non_privileged tasks
+  ansible.builtin.include_tasks: non_privileged.yml

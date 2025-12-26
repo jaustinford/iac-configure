@@ -2,20 +2,20 @@
 
 ###########################################################
 
-if [ "$(whoami)" == "root" ]; then
-    COLOR_NAME_PRIMARY="{{ lab_users.superuser.colors.primary }}"
-    COLOR_NAME_SECONDARY="{{ lab_users.superuser.colors.secondary }}"
-    COLOR_NAME_TERTIARY="{{ lab_users.superuser.colors.tertiary }}"
+if [ "$(whoami)" == "{{ names.users.superuser }}" ]; then
+    COLOR_NAME_PRIMARY="{{ role_users.superuser.colors.primary }}"
+    COLOR_NAME_SECONDARY="{{ role_users.superuser.colors.secondary }}"
+    COLOR_NAME_TERTIARY="{{ role_users.superuser.colors.tertiary }}"
 
-elif [ "$(whoami)" == "{{ names.lab_users.privileged }}" ]; then
-    COLOR_NAME_PRIMARY="{{ lab_users.privileged.colors.primary }}"
-    COLOR_NAME_SECONDARY="{{ lab_users.privileged.colors.secondary }}"
-    COLOR_NAME_TERTIARY="{{ lab_users.privileged.colors.tertiary }}"
+elif [ "$(whoami)" == "{{ names.users.privileged }}" ]; then
+    COLOR_NAME_PRIMARY="{{ role_users.privileged.colors.primary }}"
+    COLOR_NAME_SECONDARY="{{ role_users.privileged.colors.secondary }}"
+    COLOR_NAME_TERTIARY="{{ role_users.privileged.colors.tertiary }}"
 
-elif [ "$(whoami)" == "{{ names.lab_users.nonprivileged }}" ]; then
-    COLOR_NAME_PRIMARY="{{ lab_users.nonprivileged.colors.primary }}"
-    COLOR_NAME_SECONDARY="{{ lab_users.nonprivileged.colors.secondary }}"
-    COLOR_NAME_TERTIARY="{{ lab_users.nonprivileged.colors.tertiary }}"
+elif [ "$(whoami)" == "{{ names.users.non_privileged }}" ]; then
+    COLOR_NAME_PRIMARY="{{ role_users.non_privileged.colors.primary }}"
+    COLOR_NAME_SECONDARY="{{ role_users.non_privileged.colors.secondary }}"
+    COLOR_NAME_TERTIARY="{{ role_users.non_privileged.colors.tertiary }}"
 
 else
     COLOR_NAME_PRIMARY="green"

@@ -3,28 +3,26 @@
 
 ansible_python_interpreter: /usr/local/bin/python3
 
-# ansible_user: root
-# ansible_password: "{{ secrets.lab_users.nas.superuser }}"
-# ansible_become_password: "{{ secrets.lab_users.nas.superuser }}"
-
-ansible_user: "{{ names.lab_users.privileged }}"
-ansible_password: "{{ secrets.lab_users.nas.privileged }}"
-ansible_become_password: "{{ secrets.lab_users.nas.privileged }}"
+ansible_user: "{{ names.users.privileged }}"
+ansible_password: "{{ secrets.users.nas.privileged }}"
+ansible_become_password: "{{ secrets.users.nas.privileged }}"
 
 ############################################################
 
 host_users:
   superuser:
+    uid: "0"
+    home_dir: /root
     group: wheel
 
   privileged:
     uid: "32616"
-    home_dir: "/mnt/{{ names.raid_vol.name }}/{{ names.lab_users.privileged }}"
+    home_dir: "/mnt/{{ names.raid_vol.name }}/{{ names.users.privileged }}"
     group: wheel
 
-  nonprivileged:
+  non_privileged:
     uid: "32617"
-    home_dir: "/mnt/{{ names.raid_vol.name }}/{{ names.lab_users.nonprivileged }}"
+    home_dir: "/mnt/{{ names.raid_vol.name }}/{{ names.users.non_privileged }}"
     group: builtin_guests
 
 poweroff:

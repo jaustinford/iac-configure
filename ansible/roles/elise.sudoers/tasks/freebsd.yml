@@ -21,7 +21,7 @@
 - name: FREEBSD - remove conflicting statements
   ansible.builtin.lineinfile:
     path: /usr/local/etc/sudoers
-    regexp: "^{{ names.lab_users.privileged }}"
+    regexp: "^{{ names.users.privileged }}"
     state: absent
     owner: root
     group: wheel
