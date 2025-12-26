@@ -101,10 +101,8 @@ Cmnd_Alias CMDS_DOCKER_RESTRICTED = \
 {%- for cmd_path in sudoers.cmd_paths -%}
 {%- for cmds_fs_restricted in sudoers.aliases.cmds.fs_restricted -%}
 {%- for dirs_fs_restricted in sudoers.aliases.dirs.fs_restricted -%}
-{{- cmds_fs_restricteds.append(cmd_path + "/" + cmds_fs_restricted + " " + dirs_fs_restricted) -}}
-{{- cmds_fs_restricteds.append(cmd_path + "/" + cmds_fs_restricted + " " + dirs_fs_restricted + "*") -}}
-{{- cmds_fs_restricteds.append(cmd_path + "/" + cmds_fs_restricted + " * " + dirs_fs_restricted) -}}
-{{- cmds_fs_restricteds.append(cmd_path + "/" + cmds_fs_restricted + " * " + dirs_fs_restricted + "*") -}}
+{{- cmds_fs_restricteds.append(cmd_path + "/" + cmds_fs_restricted + " *" + dirs_fs_restricted + "*") -}}
+{{- cmds_fs_restricteds.append(cmd_path + "/" + cmds_fs_restricted + "* *" + dirs_fs_restricted + "*") -}}
 {%- endfor -%}
 {%- endfor -%}
 {%- endfor -%}

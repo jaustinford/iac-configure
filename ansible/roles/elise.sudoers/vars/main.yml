@@ -56,12 +56,11 @@ sudoers:
 
     dirs:
       fs_restricted:
-        - /lab
-        - /mnt/dfs_lvm
-        - "/mnt/{{ names.raid_vol.name }}/root"
-        - /root
-        - /etc/sudoers
-        - /usr/local/etc/sudoers
-        - /etc/filebeat
-        - /etc/metricbeat
-        - /var/lib/docker
+        - lab
+        - dfs_lvm
+        - "{{ names.raid_vol.name }}"
+        - root
+        - sudoers
+        - filebeat
+        - metricbeat
+        - docker
