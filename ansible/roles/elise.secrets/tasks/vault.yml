@@ -12,7 +12,7 @@
   ansible.builtin.include_tasks: kv.yml
   with_items: "{{ vault.secret_paths }}"
 
-- name: VAULT - create local secrets.yml
+- name: VAULT - create local secrets
   ansible.builtin.template:
     src: secrets.yml
     dest: "{{ playbook_dir }}/group_vars/all/secrets.yml"
@@ -20,6 +20,7 @@
     group: root
     mode: "0600"
   no_log: true
+  changed_when: false
 
 - name: VAULT - set secrets vault_password
   ansible.builtin.set_fact:
@@ -36,3 +37,4 @@
     mode: "0600"
     decrypt: false
   no_log: true
+  changed_when: false
