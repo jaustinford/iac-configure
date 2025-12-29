@@ -1,5 +1,5 @@
 approle/
 env/.env-secrets
-triggers/__pycache__
+ansible/group_vars/all/secrets.yml
 ansible/library/__pycache__
 tfstate

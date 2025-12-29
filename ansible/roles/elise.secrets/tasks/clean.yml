@@ -16,4 +16,3 @@
     state: absent
   with_items:
     - "{{ playbook_dir }}/group_vars/all/secrets.yml"
-    - /root/ansible-vault-password.txt
