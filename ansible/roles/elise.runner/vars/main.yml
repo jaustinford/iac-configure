@@ -7,11 +7,9 @@ runner:
   description: lab_runner
   docker_privileged: "true"
   docker_volumes:
-    - /var/run/docker.sock:/var/run/docker.sock:rw
-    - /root/.docker:/root/.docker:rw
     - /root/approle:/approle:ro
     - /root/ansible-vault-mount.txt:/root/ansible-vault-mount.txt:ro
     - /root/ansible-vault-mount.txt:/root/ansible-vault-password.txt:ro
     - /root/ansible-ssh.key:/root/ansible-ssh.key:ro
-    - "/root/smb/mounts/{{ names.raid_vol.name }}-green:/tfstate:rw"
-    - "/root/smb/mounts/{{ names.raid_vol.name }}-red:/plex_libraries:rw"
+    - /var/run/docker.sock:/var/run/docker.sock:rw
+    - /root/.docker:/root/.docker:rw

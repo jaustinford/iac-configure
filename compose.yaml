@@ -78,10 +78,10 @@ services:
         target: /root/ansible-vault-mount.txt
         read_only: true
 
-      - type: bind
-        source: ${IAC_CONFIGURE_PROJECT_DIR}/tfstate
-        target: /tfstate
-        read_only: false
+      # - type: bind
+      #   source: ${IAC_CONFIGURE_PROJECT_DIR}/tfstate
+      #   target: /tfstate
+      #   read_only: false
 
       - type: bind
         source: ${USER_HOME}/.docker
