@@ -1,11 +1,21 @@
 ---
+- name: TUNNELS - copy ssh key
+  ansible.builtin.copy:
+    src: /root/ansible-ssh.key
+    dest: /root/tunnel-ssh.key
+    owner: root
+    group: root
+    mode: '0600'
+  become: true
+  when: item.host == inventory_hostname
+
 - name: "TUNNELS - create directory for tunnel-{{ item.name }}"
   ansible.builtin.file:
     state: directory
     path: "/root/tunnel-{{ item.name }}"
     owner: root
     group: root
-    mode: '0775'
+    mode: '0770'
   become: true
   when: item.host == inventory_hostname
 

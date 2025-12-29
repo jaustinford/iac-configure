@@ -5,7 +5,8 @@ FROM python:3.9.19-bookworm
 RUN \
     apt -y update && \
     apt -y install \
-        sshpass
+        sshpass \
+        jq
 
 RUN \
     pip3 install --upgrade pip && \
@@ -16,6 +17,7 @@ RUN \
         jmespath \
         elasticsearch==8.13.2 \
         docker \
+        hvac \
         passlib
 
 RUN \

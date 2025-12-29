@@ -3,3 +3,5 @@
   hosts: lab_onprem_docker:lab_linode
   roles:
     - elise.beats
+  vars_files:
+    - group_vars/all/secrets.yml

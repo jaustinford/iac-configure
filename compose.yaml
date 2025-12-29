@@ -21,8 +21,6 @@ services:
 
     environment:
       - TZ=America/Denver
-      - VAULT_PASSWORD=${VAULT_PASSWORD}
-      - PRIVILEGED_USER_SSH_KEY_B64=${PRIVILEGED_USER_SSH_KEY_B64}
 
     volumes:
       - type: bind
@@ -57,8 +55,6 @@ services:
 
     environment:
       - TZ=America/Denver
-      - VAULT_PASSWORD=${VAULT_PASSWORD}
-      - PRIVILEGED_USER_SSH_KEY_B64=${PRIVILEGED_USER_SSH_KEY_B64}
       - CYCLE_MODE=${CYCLE_MODE}
       - ELISE_PROJECT_CRON_TRIGGER=${ELISE_PROJECT_CRON_TRIGGER}
       - ELISE_PROJECT_EXPRESSVPN_CONTINENT=${ELISE_PROJECT_EXPRESSVPN_CONTINENT}
@@ -68,13 +64,18 @@ services:
 
     volumes:
       - type: bind
-        source: ${USER_HOME}/.docker
-        target: /root/.docker
+        source: ${IAC_CONFIGURE_PROJECT_DIR}/approle
+        target: /approle
         read_only: true
 
       - type: bind
-        source: ${IAC_CONFIGURE_PROJECT_DIR}/ansible
-        target: /etc/ansible
+        source: ${USER_KEYFILE}
+        target: /root/ansible-ssh.key
+        read_only: true
+
+      - type: bind
+        source: ${USER_MOUNTFILE}
+        target: /root/ansible-vault-mount.txt
         read_only: true
 
       - type: bind
@@ -82,40 +83,14 @@ services:
         target: /tfstate
         read_only: false
 
-    network_mode: host
-
-    logging:
-      options:
-        max-size: 10m
-        max-file: '10'
-
-  ############################################################
-  # vault_secrets
-  ############################################################
-
-  vault_secrets:
-    image: docker-hosted.proxy-int.pendragonlab.com/elise/iac-configure:main
-    entrypoint:
-      - /bin/bash
-      - -c
-      - |
-        /bin/container-init.sh ;
-        ansible-vault ${VAULT_SECRETS_MODE} \
-            /etc/ansible/group_vars/all/secrets.yml \
-            -vv
-
-    profiles:
-      - vault-secrets
-
-    environment:
-      - TZ=America/Denver
-      - VAULT_PASSWORD=${VAULT_PASSWORD}
-      - PRIVILEGED_USER_SSH_KEY_B64=${PRIVILEGED_USER_SSH_KEY_B64}
-
-    volumes:
       - type: bind
-        source: ${IAC_CONFIGURE_PROJECT_DIR}/ansible/group_vars
-        target: /etc/ansible/group_vars
+        source: ${USER_HOME}/.docker
+        target: /root/.docker
+        read_only: true
+
+      - type: bind
+        source: ${IAC_CONFIGURE_PROJECT_DIR}/ansible
+        target: /etc/ansible
         read_only: false
 
     network_mode: host
@@ -148,14 +123,17 @@ services:
 
     environment:
       - TZ=America/Denver
-      - VAULT_PASSWORD=${VAULT_PASSWORD}
-      - PRIVILEGED_USER_SSH_KEY_B64=${PRIVILEGED_USER_SSH_KEY_B64}
 
     volumes:
       - type: bind
         source: ${IAC_CONFIGURE_PROJECT_DIR}/ansible
         target: /etc/ansible
-        read_only: true
+        read_only: false
+
+      - type: bind
+        source: ${USER_KEYFILE}
+        target: /root/ssh.key
+        read_only: false
 
       - type: bind
         source: ${IAC_CONFIGURE_PROJECT_DIR}/tfstate

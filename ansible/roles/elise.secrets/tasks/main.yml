@@ -1,33 +1,26 @@
 ---
+- name: MAIN - find vault
+  ansible.builtin.uri:
+    url: "http://{{ vault.ipv4 }}:{{ ports.vault_web }}"
+    status_code: "{{ lab.task_globals.discover_uri.status_code }}"
+  register: vault_check
 
-# certificates/nginx
-# certificates/expressvpn
+- name: MAIN - include persist tasks
+  ansible.builtin.include_tasks: persist.yml
+  when: vault_check.status != 200 and cycle_mode.name == "up" and secrets_mode == "start"
 
-# containers/deluge
-# containers/elasticsearch/users/elastic
-# containers/elasticsearch/users/kibana_system
-# containers/expressvpn/users/admin
-# containers/gitlab/users/admin
-# containers/gitlab/runner
-# containers/kibana/encryption_keys
-# containers/nexus/users/admin
-# containers/oauth
-# containers/plex
-# containers/redis
-# containers/vault
-# containers/zoneminder/smtp
+- name: MAIN - include clean tasks
+  ansible.builtin.include_tasks: clean.yml
+  when: vault_check.status == 200 and cycle_mode.name == "up" and secrets_mode == "stop"
 
-# external/linode
-# external/maxmind
+- name: MAIN - include vault tasks
+  ansible.builtin.include_tasks: vault.yml
+  when: vault_check.status == 200 and cycle_mode.name == "up" and secrets_mode == "start"
 
-# users/superuser/onprem_docker
-# users/superuser/linode
-# users/privileged/onprem_docker
-# users/privileged/onprem_nas
-# users/privileged/linode
-# users/non_privileged/onprem_docker
-# users/non_privileged/linode
-# users/raid_vol/black_rw
-# users/raid_vol/blue_ro
-# users/raid_vol/green_rw
-# users/raid_vol/red_ro
+- name: MAIN - include vault tasks
+  ansible.builtin.include_tasks: vault.yml
+  when: vault_check.status == 200 and cycle_mode.name == "down" and secrets_mode == "start"
+
+- name: MAIN - include backup tasks
+  ansible.builtin.include_tasks: backup.yml
+  when: vault_check.status != 200 and cycle_mode.name == "down" and secrets_mode == "stop"

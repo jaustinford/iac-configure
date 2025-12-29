@@ -35,8 +35,6 @@ container:
   dns_search_domains: "{{ containers_globals.dns_search_domains }}"
   env:
     TZ: "{{ names.local_timezone }}"
-    VAULT_PASSWORD: "{{ lookup('env', 'VAULT_PASSWORD') }}"
-    PRIVILEGED_USER_SSH_KEY_B64: "{{ lookup('env', 'PRIVILEGED_USER_SSH_KEY_B64') }}"
     CYCLE_MODE: down
     ELISE_PROJECT_CRON_TRIGGER: "false"
     ELISE_PROJECT_EXPRESSVPN_CONTINENT: "{{ lookup('env', 'ELISE_PROJECT_EXPRESSVPN_CONTINENT') }}"
@@ -45,6 +43,9 @@ container:
     ELISE_PROJECT_EXPRESSVPN_SERVER: "{{ lookup('env', 'ELISE_PROJECT_EXPRESSVPN_SERVER') }}"
   ports: []
   volumes:
+    - /root/approle/iac-configure.json:/approle/iac-configure.json:ro
+    - /root/ansible-vault-mount.txt:/root/ansible-vault-mount.txt:ro
+    - /root/ansible-ssh.key:/root/ansible-ssh.key:ro
     - /var/run/docker.sock:/var/run/docker.sock:rw
     - /root/.docker:/root/.docker:rw
     - /mnt/xcalibr-green:/tfstate:rw

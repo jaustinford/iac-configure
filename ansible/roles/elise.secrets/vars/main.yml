@@ -1,0 +1,40 @@
+---
+vault:
+  mount_point: lab/kv
+  ipv4: "192.168.40.1"
+
+  persisted_host:
+    name: docker00
+    path: secrets.yml
+
+  secret_paths:
+    - certificates/nginx
+    - certificates/expressvpn
+    - external/linode
+    - external/maxmind
+    - containers/deluge
+    - containers/elasticsearch/users/elastic
+    - containers/elasticsearch/users/kibana_system
+    - containers/expressvpn/users/admin
+    - containers/gitlab/users/admin
+    - containers/gitlab/runner
+    - containers/kibana/encryption_keys
+    - containers/nexus/users/admin
+    - containers/oauth
+    - containers/plex
+    - containers/redis
+    - containers/vault
+    - containers/zoneminder/smtp
+    - containers/iac_configure/ssh_key
+    - users/superuser/onprem_docker
+    - users/superuser/linode
+    - users/privileged/onprem_docker
+    - users/privileged/onprem_nas
+    - users/privileged/linode
+    - users/non_privileged/onprem_docker
+    - users/non_privileged/linode
+    - users/raid_vol/black_rw
+    - users/raid_vol/blue_ro
+    - users/raid_vol/green_rw
+    - users/raid_vol/red_ro
+ 

@@ -18,10 +18,10 @@ find_internet() {
     fi
 }
 
-echo "${VAULT_PASSWORD}" > /root/.vault.password
-echo "${PRIVILEGED_USER_SSH_KEY_B64}" | base64 -d > /root/ssh.key
-chmod 600 /root/ssh.key
 find_internet
+
+cat /root/ansible-vault-mount.txt > /root/ansible-vault-password.txt
+chmod 600 /root/ansible-vault-password.txt
 
 cat <<EOF > /etc/ansible_hosts
 [all:vars]

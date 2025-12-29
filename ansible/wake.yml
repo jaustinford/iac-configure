@@ -3,8 +3,12 @@
   hosts: lab_onprem_nas
   roles:
     - elise.power
+  vars_files:
+    - group_vars/all/secrets.yml
 
 - name: WAKE - apply elise.power role for lab_onprem_docker
   hosts: lab_onprem_docker
   roles:
     - elise.power
+  vars_files:
+    - group_vars/all/secrets.yml

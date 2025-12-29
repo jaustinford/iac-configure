@@ -3,3 +3,5 @@
   hosts: lab_linode
   roles:
     - elise.portal
+  vars_files:
+    - group_vars/all/secrets.yml

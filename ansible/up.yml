@@ -1,4 +1,9 @@
 ---
+- name: UP - import secrets playbook
+  import_playbook: secrets.yml
+  vars:
+    secrets_mode: start
+
 - name: UP - import wake playbook
   import_playbook: wake.yml
 
@@ -12,6 +17,8 @@
   hosts: all
   gather_facts: true
   gather_timeout: 60
+  vars_files:
+    - group_vars/all/secrets.yml
 
 - name: UP - import hosts playbook
   import_playbook: hosts.yml
@@ -54,3 +61,8 @@
 
 - name: UP - import beats playbook
   import_playbook: beats.yml
+
+- name: UP - import secrets playbook
+  import_playbook: secrets.yml
+  vars:
+    secrets_mode: stop

@@ -3,3 +3,5 @@
   hosts: lab_onprem_docker
   roles:
     - elise.mounts
+  vars_files:
+    - group_vars/all/secrets.yml

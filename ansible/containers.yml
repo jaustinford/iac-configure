@@ -4,10 +4,7 @@
   roles:
     - elise.containers
   vars_files:
-    - group_vars/concats.yml
-    - group_vars/lab.yml
-    - group_vars/ports.yml
-    - group_vars/secrets.yml
+    - group_vars/all/secrets.yml
 
 - name: CONTAINERS - apply docker prune
   hosts: lab_onprem_docker

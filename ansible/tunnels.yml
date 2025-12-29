@@ -3,3 +3,5 @@
   hosts: lab_onprem_docker
   roles:
     - elise.tunnels
+  vars_files:
+    - group_vars/all/secrets.yml

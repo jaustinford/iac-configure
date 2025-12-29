@@ -1,0 +1,23 @@
+---
+- name: BACKUP - copy secrets to persisted host
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/group_vars/all/secrets.yml"
+    dest: "{{ vault.persisted_host.path }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0600"
+    decrypt: false
+  vars:
+    secrets:
+      users:
+        docker00:
+          privileged: ""
+  delegate_to: "{{ vault.persisted_host.name }}"
+
+- name: BACKUP - remove local secrets
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ playbook_dir }}/group_vars/all/secrets.yml"
+    - /root/ansible-vault-password.txt

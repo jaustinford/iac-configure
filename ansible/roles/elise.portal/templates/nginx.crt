@@ -1,2 +1,2 @@
-{{ lab_tfstate.msg.outputs.tls_nginx_certificate_certificate_pem.value }}
-{{ lab_tfstate.msg.outputs.tls_nginx_certificate_issuer_pem.value }}
+{{ secrets.containers.nginx.tls.cert | b64decode }}
+{{ secrets.containers.nginx.tls.ca | b64decode }}

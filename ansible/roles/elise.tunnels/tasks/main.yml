@@ -1,13 +1,4 @@
 ---
-- name: MAIN - copy ssh key
-  ansible.builtin.template:
-    src: /root/ssh.key
-    dest: /root/ssh.key
-    owner: root
-    group: root
-    mode: '0600'
-  become: true
-
 - name: MAIN - include tunnels tasks
   ansible.builtin.include_tasks: tunnels.yml
   with_items:

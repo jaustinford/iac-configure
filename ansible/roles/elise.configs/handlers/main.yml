@@ -14,9 +14,9 @@
   ansible.builtin.command: |
     /bin/bash -c "
       if [ ! -z \"$(docker ps --quiet --filter status=running --filter name=nginx)\" ]; then
-        echo '{{ secrets.lab_users[inventory_hostname].privileged }}' | sudo -S systemctl stop tunnel-nginx
+        echo '{{ secrets.users[inventory_hostname].privileged }}' | sudo -S systemctl stop tunnel-nginx
         docker restart nginx
-        echo '{{ secrets.lab_users[inventory_hostname].privileged }}' | sudo -S systemctl start tunnel-nginx
+        echo '{{ secrets.users[inventory_hostname].privileged }}' | sudo -S systemctl start tunnel-nginx
       fi
     "
   no_log: true

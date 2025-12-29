@@ -3,3 +3,5 @@
   hosts: all
   roles:
     - elise.users
+  vars_files:
+    - group_vars/all/secrets.yml

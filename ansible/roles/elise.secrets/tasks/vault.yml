@@ -1,0 +1,38 @@
+---
+- name: VAULT - reset secrets_data
+  ansible.builtin.set_fact:
+    secrets_data: []
+
+- name: VAULT - get local approle credentials
+  ansible.builtin.set_fact:
+    approle_object: "{{ lookup('file', '/approle/iac-configure.json') }}"
+  no_log: true
+
+- name: VAULT - include kv tasks
+  ansible.builtin.include_tasks: kv.yml
+  with_items: "{{ vault.secret_paths }}"
+
+- name: VAULT - create local secrets.yml
+  ansible.builtin.template:
+    src: secrets.yml
+    dest: "{{ playbook_dir }}/group_vars/all/secrets.yml"
+    owner: root
+    group: root
+    mode: "0600"
+  no_log: true
+
+- name: VAULT - set secrets vault_password
+  ansible.builtin.set_fact:
+    vault_password: "{{ lookup('file', '/root/ansible-vault-password.txt') }}"
+  no_log: true
+
+- name: VAULT - encrypt local secrets
+  ansible.builtin.copy:
+    content: "{{ lookup('file', playbook_dir + '/group_vars/all/secrets.yml')
+      | ansible.builtin.vault(vault_password) }}"
+    dest: "{{ playbook_dir }}/group_vars/all/secrets.yml"
+    owner: root
+    group: root
+    mode: "0600"
+    decrypt: false
+  no_log: true

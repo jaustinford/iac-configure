@@ -1,0 +1,24 @@
+---
+- name: "KV - get secret - {{ item }}"
+  community.hashi_vault.vault_kv2_get:
+    url: "http://{{ vault.ipv4 }}:{{ ports.vault_web }}"
+    auth_method: approle
+    role_id: "{{ approle_object.role_id }}"
+    secret_id: "{{ approle_object.secret_id }}"
+    engine_mount_point: "{{ vault.mount_point }}"
+    path: "{{ item }}"
+  no_log: true
+  register: kv_secret
+
+- name: "KV - create secrets_object - {{ item }}"
+  ansible.builtin.set_fact:
+    secrets_object: {
+      "path": "{{ item }}",
+      "data": "{{ kv_secret.data.data }}"
+    }
+  no_log: true
+
+- name: "KV - append to secrets_data - {{ item }}"
+  ansible.builtin.set_fact:
+    secrets_data: "{{ secrets_data + [secrets_object] }}"
+  no_log: true

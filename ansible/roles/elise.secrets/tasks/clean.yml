@@ -1,0 +1,19 @@
+---
+- name: CLEAN - remove secrets from persisted host
+  ansible.builtin.file:
+    path: "{{ vault.persisted_host.path }}"
+    state: absent
+  vars:
+    secrets:
+      users:
+        docker00:
+          privileged: ""
+  delegate_to: "{{ vault.persisted_host.name }}"
+
+- name: CLEAN - remove local secrets
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ playbook_dir }}/group_vars/all/secrets.yml"
+    - /root/ansible-vault-password.txt
