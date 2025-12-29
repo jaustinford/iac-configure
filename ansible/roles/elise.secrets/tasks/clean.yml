@@ -14,5 +14,6 @@
   ansible.builtin.file:
     path: "{{ item }}"
     state: absent
+  changed_when: false
   with_items:
     - "{{ playbook_dir }}/group_vars/all/secrets.yml"
