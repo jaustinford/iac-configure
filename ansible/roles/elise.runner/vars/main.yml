@@ -13,3 +13,4 @@ runner:
     - /root/ansible-ssh.key:/root/ansible-ssh.key:ro
     - /var/run/docker.sock:/var/run/docker.sock:rw
     - /root/.docker:/root/.docker:rw
+    - "/root/smb/mounts/{{ names.raid_vol.name }}-green:/tfstate:rw"
