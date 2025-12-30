@@ -14,10 +14,3 @@
 
 - name: DOCKER_HOSTS - include non_privileged tasks
   ansible.builtin.include_tasks: non_privileged.yml
-
-- name: DOCKER_HOSTS - include files_escalated tasks
-  ansible.builtin.include_tasks: files_escalated.yml
-  with_items:
-    - superuser
-    - privileged
-    - non_privileged

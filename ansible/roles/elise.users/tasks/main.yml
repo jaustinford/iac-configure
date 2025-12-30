@@ -3,8 +3,9 @@
   ansible.builtin.include_tasks: docker_hosts.yml
   when: inventory_hostname != "nas"
 
-- name: MAIN - include files_normal tasks
-  ansible.builtin.include_tasks: files_normal.yml
-  when: inventory_hostname == "nas"
+- name: MAIN - include files tasks
+  ansible.builtin.include_tasks: files.yml
   with_items:
+    - superuser
+    - privileged
     - non_privileged

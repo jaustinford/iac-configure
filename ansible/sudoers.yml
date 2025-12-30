@@ -1,6 +1,6 @@
 ---
 - name: SUDOERS - apply elise.sudoers role
-  hosts: lab_onprem_docker:lab_linode
+  hosts: all
   roles:
     - elise.sudoers
   vars_files:
