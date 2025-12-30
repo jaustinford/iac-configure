@@ -47,10 +47,13 @@ sudoers:
 
       fs_restricted:
         - ls
+        - find
+        - grep
+        - egrep
         - vi
         - vim
-        - cat
         - nano
+        - cat
         - less
         - more
 
