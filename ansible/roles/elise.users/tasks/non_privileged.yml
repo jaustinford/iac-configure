@@ -17,11 +17,3 @@
   become: true
   changed_when: false
   when: role_users.non_privileged.state == "present"
-
-- name: NON_PRIVILEGED - copy non_privileged user ssh key
-  ansible.posix.authorized_key:
-    user: "{{ names.users.non_privileged }}"
-    key: "{{ role_users.non_privileged.public_key }}"
-    state: present
-  when: role_users.non_privileged.state == "present"
-  become: true

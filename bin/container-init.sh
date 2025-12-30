@@ -48,7 +48,7 @@ if [ "${INTERNET_FOUND}" == 'yes' ] || [ "${CYCLE_MODE}" == 'up' ]; then
     echo " "
 
     cat <<EOF >> /etc/ansible_hosts
-portal ansible_host="{{ lookup('ansible.builtin.file', '/tfstate/instance_portal_ip_address.txt') }}"
+portal ansible_host="{{ ( lookup('ansible.builtin.file', '/tmp/portal.json') | from_json )['ip_address'] }}"
 EOF
 
 else

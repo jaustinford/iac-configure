@@ -1,7 +1,0 @@
----
-linodes:
-  - output_elements:
-      instance_id: instance_portal_instance_id
-      ip_address: instance_portal_ip_address
-    state: "{{ cycle_mode.state.portal.linode }}"
-    wait_port: 22

@@ -1,11 +1,10 @@
 ---
-- name: MAIN - include docker tasks
-  ansible.builtin.include_tasks: docker.yml
+- name: MAIN - include docker_hosts tasks
+  ansible.builtin.include_tasks: docker_hosts.yml
   when: inventory_hostname != "nas"
 
-- name: MAIN - include files tasks
-  ansible.builtin.include_tasks: files.yml
+- name: MAIN - include files_normal tasks
+  ansible.builtin.include_tasks: files_normal.yml
+  when: inventory_hostname == "nas"
   with_items:
-    - .bash_profile
-    - .vimrc
-    - .hushlogin
+    - non_privileged

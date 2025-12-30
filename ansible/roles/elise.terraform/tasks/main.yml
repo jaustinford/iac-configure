@@ -1,0 +1,13 @@
+---
+- name: MAIN - find instance metadata files
+  ansible.builtin.find:
+    paths: "/home/{{ names.users.privileged }}"
+    patterns: "{{ lab.domain | replace('.com', '') }}-*.json"
+  register: instance_metadata
+
+- name: MAIN - create local instance metadata file
+  ansible.builtin.fetch:
+    src: "{{ instance_metadata.files[0].path }}"
+    dest: /tmp/portal.json
+    flat: true
+  changed_when: false

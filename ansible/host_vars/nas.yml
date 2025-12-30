@@ -3,25 +3,22 @@
 
 ansible_python_interpreter: /usr/local/bin/python3
 
-ansible_user: "{{ names.users.privileged }}"
-ansible_password: "{{ secrets.users.nas.privileged }}"
-ansible_become_password: "{{ secrets.users.nas.privileged }}"
+ansible_user: "{{ names.users.non_privileged }}"
+
+ansible_ssh_private_key_file: /root/ansible-ssh.key
 
 ############################################################
 
 host_users:
   superuser:
-    uid: "0"
     home_dir: /root
     group: wheel
 
   privileged:
-    uid: "32616"
     home_dir: "/mnt/{{ names.raid_vol.name }}/{{ names.users.privileged }}"
     group: wheel
 
   non_privileged:
-    uid: "32617"
     home_dir: "/mnt/{{ names.raid_vol.name }}/{{ names.users.non_privileged }}"
     group: builtin_guests
 

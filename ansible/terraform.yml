@@ -1,0 +1,7 @@
+---
+- name: TERRAFORM - apply terraform tasks
+  hosts: docker00
+  roles:
+    - elise.terraform
+  vars_files:
+    - group_vars/all/secrets.yml

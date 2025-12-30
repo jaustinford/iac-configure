@@ -26,10 +26,10 @@ vault:
     - containers/vault
     - containers/zoneminder/smtp
     - containers/iac_configure/ssh_key
+    - ssh/ansible
     - users/superuser/onprem_docker
     - users/superuser/linode
     - users/privileged/onprem_docker
-    - users/privileged/onprem_nas
     - users/privileged/linode
     - users/non_privileged/onprem_docker
     - users/non_privileged/linode

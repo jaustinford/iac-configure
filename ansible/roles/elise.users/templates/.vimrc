@@ -1,3 +1,3 @@
 set nu
 set wrap
-colorscheme {{ role_users[file_user].colors.vim }}
+colorscheme {{ role_users[item].colors.vim }}
