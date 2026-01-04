@@ -1,0 +1,41 @@
+---
+profiles:
+  super:
+    state: present
+    colors:
+      primary: lightyellow
+      secondary: white
+      tertiary: lightgrey
+      vim: elflord
+
+  admin:
+    state: present
+    colors:
+      primary: red
+      secondary: white
+      tertiary: lightgrey
+      vim: elflord
+
+  iac:
+    state: present
+    colors:
+      primary: purple
+      secondary: white
+      tertiary: lightgrey
+      vim: elflord
+
+  engineer:
+    state: present
+    colors:
+      primary: lightblue
+      secondary: white
+      tertiary: lightgrey
+      vim: elflord
+
+  associate:
+    state: present
+    colors:
+      primary: green
+      secondary: white
+      tertiary: lightgrey
+      vim: elflord

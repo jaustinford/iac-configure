@@ -1,8 +1,8 @@
 ---
 - name: TUNNELS - copy ssh key
   ansible.builtin.copy:
-    src: /root/ansible-ssh.key
-    dest: /root/tunnel-ssh.key
+    src: /root/iac-configure.key
+    dest: /root/ssh-tunnel.key
     owner: root
     group: root
     mode: '0600'

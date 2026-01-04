@@ -1,157 +1,40 @@
 ---
-assignments:
-  nexus:
-    host: docker01
-    uid: 32620
-
-  vault:
-    host: docker01
-    uid: 32658
-
-  pihole:
-    host: docker02
-    uid: 32621
-
-  nginx:
-    host: docker02
-    uid: 32622
-
-  plex:
-    host: docker01
-    uid: 32623
-
-  tautulli:
-    host: docker02
-    uid: 32624
-
-  filebrowser:
-    host: docker02
-    uid: 32625
-
-  elasticsearch:
-    host: docker01
-    uid: 32626
-
-  kibana:
-    host: docker01
-    uid: 32627
-
-  zoneminder:
-    host: docker02
-    uid: 32628
-
-  expressvpn:
-    host: docker01
-    uid: 32629
-
-  squid:
-    host: docker01
-    uid: 32630
-
-  deluge:
-    host: docker01
-    uid: 32631
-
-  gitlab:
-    host: docker02
-    uid: 32632
-
-  runner:
-    host: docker02
-    uid: 32633
-
-  openvpnas:
-    host: docker02
-    uid: 32634
-
-  docs:
-    host: docker01
-    uid: 32635
-
-  resume:
-    host: docker01
-    uid: 32636
-
-  fourohfour:
-    host: docker02
-    uid: 32637
-
-  fiveohx:
-    host: docker01
-    uid: 32638
-
-  fourohthree:
-    host: docker02
-    uid: 32639
-
-  barbossa:
-    host: docker02
-    uid: 32640
-
-  keycloak:
-    host: docker01
-    uid: 32641
-
-  redis:
-    host: docker02
-    uid: 32642
-
-  oauth:
-    host: docker01
-    uid: 32643
-
-  site_up:
-    host: docker00
-    uid: 32644
-
-  site_down:
-    host: docker00
-    uid: 32645
-
-  lazarus:
-    host: docker00
-    uid: 32646
-
-  grail_backup_raidvol_1:
-    host: docker02
-    uid: 32647
-
-  grail_backup_raidvol_2:
-    host: docker02
-    uid: 32648
-
-  grail_backup_raidvol_3:
-    host: docker02
-    uid: 32649
-
-  grail_backup_appvol:
-    host: docker02
-    uid: 32650
-
-  grail_restore_raidvol_1:
-    host: docker02
-    uid: 32651
-
-  grail_restore_raidvol_2:
-    host: docker02
-    uid: 32652
-
-  grail_restore_raidvol_3:
-    host: docker02
-    uid: 32653
-
-  grail_restore_appvol:
-    host: docker02
-    uid: 32654
-
-  watchtower_0:
-    host: docker00
-    uid: 32655
-
-  watchtower_1:
-    host: docker01
-    uid: 32656
-
-  watchtower_2:
-    host: docker02
-    uid: 32657
+  nexus: {host: docker01, uid: 32650 }
+  vault: {host: docker01, uid: 32651 }
+  pihole: {host: docker02, uid: 32652 }
+  nginx: {host: docker02, uid: 32653 }
+  plex: {host: docker01, uid: 32654 }
+  tautulli: {host: docker02, uid: 32655 }
+  filebrowser: {host: docker02, uid: 32656 }
+  elasticsearch: {host: docker01, uid: 32657 }
+  kibana: {host: docker01, uid: 32658 }
+  zoneminder: {host: docker02, uid: 32659 }
+  expressvpn: {host: docker01, uid: 32660 }
+  squid: {host: docker01, uid: 32661 }
+  deluge: {host: docker01, uid: 32662 }
+  gitlab: {host: docker02, uid: 32663 }
+  runner: {host: docker02, uid: 32664 }
+  openvpnas: {host: docker02, uid: 32665 }
+  docs: {host: docker01, uid: 32666 }
+  resume: {host: docker01, uid: 32667 }
+  fourohfour: {host: docker02, uid: 32668 }
+  fiveohx: {host: docker01, uid: 32669 }
+  fourohthree: {host: docker02, uid: 32670 }
+  barbossa: {host: docker02, uid: 32671 }
+  keycloak: {host: docker01, uid: 32672 }
+  redis: {host: docker02, uid: 32673 }
+  oauth: {host: docker01, uid: 32674 }
+  site_up: {host: docker00, uid: 32675 }
+  site_down: {host: docker00, uid: 32676 }
+  lazarus: {host: docker00, uid: 32677 }
+  grail_backup_raidvol_1: {host: docker02, uid: 32678 }
+  grail_backup_raidvol_2: {host: docker02, uid: 32679 }
+  grail_backup_raidvol_3: {host: docker02, uid: 32680 }
+  grail_backup_appvol: {host: docker02, uid: 32681 }
+  grail_restore_raidvol_1: {host: docker02, uid: 32682 }
+  grail_restore_raidvol_2: {host: docker02, uid: 32683 }
+  grail_restore_raidvol_3: {host: docker02, uid: 32684 }
+  grail_restore_appvol: {host: docker02, uid: 32685 }
+  watchtower_0: {host: docker00, uid: 32686 }
+  watchtower_1: {host: docker01, uid: 32687 }
+  watchtower_2: {host: docker02, uid: 32688 }

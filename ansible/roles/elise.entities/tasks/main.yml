@@ -1,0 +1,12 @@
+---
+- name: MAIN - include groups tasks
+  ansible.builtin.include_tasks: groups.yml
+  when: item.host == inventory_hostname
+  with_items:
+    - "{{ entities.groups }}"
+
+- name: MAIN - include users tasks
+  ansible.builtin.include_tasks: users.yml
+  when: item.host == inventory_hostname
+  with_items:
+    - "{{ entities.users }}"

@@ -25,14 +25,28 @@ vault:
     - containers/redis
     - containers/vault
     - containers/zoneminder/smtp
-    - users/superuser/onprem_docker
-    - users/superuser/linode
-    - users/privileged/onprem_docker
-    - users/privileged/onprem_nas
-    - users/privileged/linode
-    - users/non_privileged/onprem_docker
-    - users/non_privileged/linode
-    - users/raid_vol/black_rw
-    - users/raid_vol/blue_ro
-    - users/raid_vol/green_rw
-    - users/raid_vol/red_ro
+    - users/host/super/docker/00
+    - users/host/super/docker/01
+    - users/host/super/docker/02
+    - users/host/super/portal
+    - users/host/admin/docker/00
+    - users/host/admin/docker/01
+    - users/host/admin/docker/02
+    - users/host/admin/portal
+    - users/host/iac/docker/00
+    - users/host/iac/docker/01
+    - users/host/iac/docker/02
+    - users/host/iac/nas
+    - users/host/iac/portal
+    - users/host/engineer/docker/00
+    - users/host/engineer/docker/01
+    - users/host/engineer/docker/02
+    - users/host/engineer/portal
+    - users/host/associate/docker/00
+    - users/host/associate/docker/01
+    - users/host/associate/docker/02
+    - users/host/associate/portal
+    - users/raid/red_ro
+    - users/raid/green_rw
+    - users/raid/blue_ro
+    - users/raid/black_rw

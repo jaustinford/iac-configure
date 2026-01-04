@@ -1,28 +1,15 @@
 ---
-############################################################
-
 ansible_python_interpreter: /usr/local/bin/python3
 
-ansible_user: "{{ names.users.privileged }}"
-ansible_password: "{{ secrets.users.nas.privileged }}"
-ansible_become_password: "{{ secrets.users.nas.privileged }}"
+# ansible_user: "{{ names.users.host.super }}"
+# ansible_password: "{{ secrets.users.host.iac.super }}"
+# ansible_become_password: "{{ secrets.users.host.iac.super }}"
 
-ansible_ssh_private_key_file: /root/ansible-ssh.key
+ansible_user: "{{ names.users.host.iac }}"
+ansible_password: "{{ secrets.users.host.iac.nas }}"
+ansible_become_password: "{{ secrets.users.host.iac.nas }}"
 
-############################################################
-
-host_users:
-  superuser:
-    home_dir: /root
-    group: wheel
-
-  privileged:
-    home_dir: "/mnt/{{ names.raid_vol.name }}/{{ names.users.privileged }}"
-    group: wheel
-
-  non_privileged:
-    home_dir: "/mnt/{{ names.raid_vol.name }}/{{ names.users.non_privileged }}"
-    group: builtin_guests
+ansible_ssh_private_key_file: /root/iac-configure.key
 
 poweroff:
   enabled: true

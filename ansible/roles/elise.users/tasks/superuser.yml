@@ -1,7 +1,0 @@
----
-- name: SUPERUSER - manage superuser password
-  ansible.builtin.user:
-    name: "{{ names.users.superuser }}"
-    password: "{{ secrets.users[inventory_hostname].superuser | password_hash('sha512') }}"
-  become: true
-  changed_when: false

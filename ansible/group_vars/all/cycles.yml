@@ -15,7 +15,7 @@ cycles:
     volumes:
       app_data: mounted
       dfs_lvm: mounted
-      raid_vol: mounted
+      raid: mounted
 
   down:
     name: down
@@ -32,4 +32,4 @@ cycles:
     volumes:
       app_data: unmounted
       dfs_lvm: unmounted
-      raid_vol: unmounted
+      raid: unmounted

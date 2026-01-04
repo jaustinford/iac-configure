@@ -1,0 +1,52 @@
+---
+sshkeys:
+
+  ############################################################
+  # human
+  ############################################################
+
+  founder: 
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCwG4LrW8hjKCfd2ir0FHSQOjlkkuFtmVlvCbLFATTG6mpuxv6GS9u/Rdp\
+    URtLsJoh18uYriMGFuNzOFgM/Znz2kjx+AgrWdcgdUgClGKdD9GNX6S0r3NXk1bItVMbdseBh46wX42Vn5q+3Wh8rOEU6i7g\
+    tRG2X6Of0hYc2X/Yu0JFbAOJVNfiUKOMp7i2wAmigm5jdxfytJg1t5xNg+0GlySWziNEfQFtNRTEGkhN/TjIF+BiaWDRhTOL\
+    io8pUPKHppb9u3C304rSUJUPyoEjIzsXZxj2I6eq3ZPPAnMyDn/H4HnTSJPbamzab59jJ5MwDKA/oIEFuaCkwjTDx6wefHYN\
+    aE0k05F4FNIHWksLDnAAIi1p3LyfYDLKYc2Ctd9YZw6YxmiNelMIA+Hc0JkpLy/6QY6+SrOizTKoNZv5FTDQ7A7sNW/mywgs\
+    miuMDyLXSMw0w3QUGf0dfap3f/OYlEDF3vGE8CbCDsWO/vAtzfSGPIkQjWge3tFx/kjcj+M4b50i+blnfZItl8ZhUabW/iSL\
+    gAcxC7svVlMXn+vYozXTwJUI/Yn3Xlxua9Q5n2oeEGtL5RJVa5egdWbQsau/vKfLVwKDSLbxrYhfNukWbToFCAuAu6ns6oQO\
+    9V6bunzE/u/JsrZN7DwxY0viwxj8+kmvyeR/J2Mguy8kngcc29Q== founder@{{ lab.domain }}"
+
+  citizens: []
+
+  ############################################################
+  # machine
+  ############################################################
+
+  iac_configure:
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC3zWmwZOiPNh4Z6esor3FpuIYxD1gNkD4BCT37wkl7mxHmjvsDxaItF8e\
+    0VDe98rGemmQumDPmZNR4yzD3wf92p4pf/keXFhrc5rAboe0Dw8gjZSr9BXiDp9A9JJR+Z0JUcRWR7gk5Y7gzZOMfxIjYE8k\
+    v9W8iKnidInVo51uaVj6gK2qisqxWERqkhH9Tu1fJgSeo30Soqb8cNSdXqeiirn4D83QPu+P6xkSUZ//VXLThSwEBVsJCtG4\
+    cjMjBWEf5qtiCjgz9X+IDbqV7Bn0NEHN3HQsPHNNIXlZ3wtJJNSUJq1OpsujqXKk/tQGV09Q4H9Ixr4bZjiD1zZk82yGWahL\
+    T5S8Yq0/mgVz3tgP4W68A3EEujp+mkDFadUtiYVb15t24AWm4ZKvaO8fA7KkWHYbiULIMPeoLdd7oO0yhcF3oiKyBx+3xnHg\
+    jkxpcqUjUFvF/pbM5WwA788GdaD7Md9+4vEfmpAo0Ivrs2q9A4BusX8eSH6L+IG7z5Hp7+spB42tlk1tQJMTjBy0i5ISFdH/\
+    AYf6xVEUuWlot28W6koSJ1qlYJfmIeAw5a8YrFWtSU8j+VS7bM4Gu8E5M8uRePU/c/G+qLcK96L8nCBHJ2edBzLBWw6KvjzZ\
+    RoaZRqvZjrH3vyUvY9yYqtOhib+6qeNykDquIloLyepIvuxMURw== iac-configure@{{ lab.domain }}"
+
+  iac_deploy:
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC4xPsCyXVq9KkChUyl810VdYj7kguu0XWrdaI04kMN8Vvk5S2Z89jEmi7\
+    rTiu5ngNYLHG2xPipPgDbpi/h//L82tcTHSPY+Z6epOgVpF172rPoyecU+vz5CeDq2MwIpsDgV8HfDMxnWsa2gzQ/1kizES+\
+    OxrLkO/iir6E5Vwus3IU0xmS4QkpT3zq+Q/tUhX4Maf4UetXPw2yR+jGWjouYGkr+ArIo6y06ZHRCAfyMCgIcOQr5DDgUCU9\
+    uDvSRDCepHFs3/B++jrNxVQ4Y6Fx+ObyRpv5T6RsZMhSQveWXyUzd9r5FAvi+vw87uOvLFC9y4hNKkIvdWkphvRdDGpurgzF\
+    xRV+Icb4grGvQpyfR/TwUg96pxRrLHOQPhR5KBrVNObNTD+RIYTqvAjrIUdQ11jEOmdzZQuNVfhJFeLWN6E5DmaXC42rsLpE\
+    MfYtAIQDfk2Tcokb5dpJmaaU+oi6OmaVojtiCFsg2Zml+Y9bI1him3dSHuY1vhQ1qQUIxwNjNgc1BjevY24TURvnxq+tERx2\
+    Fd5+iJn+eZAv8ejgjrZxiLQJ3UFotWyLBA1sqc/QqWH+bRzKGnPh7FaT4rQUgvtwMIA1LopW/XfeMqXmbCuVBrBBSdc8vmGQ\
+    +UvuIUHDrEqLauddIjdby6aHANLi8Z24j5M+QbcJINOEC+lY1rQ== iac-deploy@{{ lab.domain }}"
+
+  ssh_tunnel:
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC4NBmrrOLfEek4uPoW2blVyKIW39eJwtzjAjatEqYHO0NEsFL48kLkM8h\
+    WLAhVx73bPFwOHyTfrj4MPGPXMgUd+eiHWe7XbYne1bdEevtrMN4dO71CI3VXJbehrHWqj5DwrkYkXYUJx/WBdqBpK3s/wA0\
+    dtK4xMthtDdV9s+6KFel7FNml/pW8WZdWV8qnieM3tDdUafPfQvMRMIsciRw18WcNGgj65P3xaiCmWz67m0dHKnG9Y7P1bs0\
+    voR0xHmdcBo/oncpEHl8hPCEDlwBo6xkLNm2XAj2jLDU630Z8S/Hoa8JcFUVtNck3ynaG1SXMfFL1SLDf5Y6ig+O6Dg4VWuq\
+    HtB6JRpm3l0Rov/CkJ/9dEItlJyI8SLOpi55kmjh+ImoMatdXPifjLoCr63v8qleqQ9yHpzk3o15NRx18vsK2q/tvEHkblml\
+    CYw+HWXHzxFNQdAs2QLnorUrwHKSeKgNQFjVXGDgN8vKP+IQhGnOZsJmm/IZHeJkhz5B0cggNACZKJNF123btOnle/9sennC\
+    joK/9hIa0ljH0U3aabA6pA16LxwHiaA2gDiGczjY0x/F4W1nqSCXskOLAalsCcunHHV7HybdKYQhKE+Bj4ekaSuPHzqLP0ru\
+    Wf4vXt1I8UIhy1BgGFaYMfcxgZPa95m73lP4ionYbP0o571vuxw== ssh-tunnel@{{ lab.domain }}"

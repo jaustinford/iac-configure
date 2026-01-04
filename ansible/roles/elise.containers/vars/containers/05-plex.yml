@@ -32,7 +32,7 @@ container:
   env:
     TZ: "{{ names.local_timezone }}"
     PLEX_UID: "{{ assignments.plex.uid }}"
-    PLEX_GID: "{{ names.raid_vol.group.gid }}"
+    PLEX_GID: "{{ names.groups.raid.id }}"
     PLEX_CLAIM: "{{ secrets.containers.plex.plex_claim }}"
     ADVERTISE_IP: |
       http://192.168.60.6:{{ ports.plex_web }},
@@ -47,6 +47,6 @@ container:
     - "{{ plex_vlan_40_address }}:{{ ports.plex_web }}:32400/tcp"
   volumes:
     - "{{ lab.dirs.app_data }}/plex/Application Support:/config/Library/Application Support:rw"
-    - "/root/smb/mounts/{{ names.raid_vol.name }}-red:/plex_libraries:ro"
+    - "/root/smb/mounts/{{ names.raid }}-red:/plex_libraries:ro"
     - /tmp/transcode:/transcode:rw
   wait_port: "{{ ports.plex_web }}"

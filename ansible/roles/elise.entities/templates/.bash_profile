@@ -1,30 +1,16 @@
 #!/usr/bin/env bash
 
-###########################################################
-
-if [ "$(whoami)" == "{{ names.users.superuser }}" ]; then
-    COLOR_NAME_PRIMARY="{{ role_users.superuser.colors.primary }}"
-    COLOR_NAME_SECONDARY="{{ role_users.superuser.colors.secondary }}"
-    COLOR_NAME_TERTIARY="{{ role_users.superuser.colors.tertiary }}"
-
-elif [ "$(whoami)" == "{{ names.users.privileged }}" ]; then
-    COLOR_NAME_PRIMARY="{{ role_users.privileged.colors.primary }}"
-    COLOR_NAME_SECONDARY="{{ role_users.privileged.colors.secondary }}"
-    COLOR_NAME_TERTIARY="{{ role_users.privileged.colors.tertiary }}"
-
-elif [ "$(whoami)" == "{{ names.users.non_privileged }}" ]; then
-    COLOR_NAME_PRIMARY="{{ role_users.non_privileged.colors.primary }}"
-    COLOR_NAME_SECONDARY="{{ role_users.non_privileged.colors.secondary }}"
-    COLOR_NAME_TERTIARY="{{ role_users.non_privileged.colors.tertiary }}"
+if [ "${MSYSTEM}" == 'MINGW64' ]; then
+    COLOR_NAME_PRIMARY='red'
+    COLOR_NAME_SECONDARY='white'
+    COLOR_NAME_TERTIARY='lightgrey'
 
 else
-    COLOR_NAME_PRIMARY="green"
-    COLOR_NAME_SECONDARY="white"
-    COLOR_NAME_TERTIARY="lightgrey"
+    COLOR_NAME_PRIMARY="{{ item.profile.colors.primary }}"
+    COLOR_NAME_SECONDARY="{{ item.profile.colors.secondary }}"
+    COLOR_NAME_TERTIARY="{{ item.profile.colors.tertiary }}"
 
 fi
-
-###########################################################
 
 resolve_color_code() {
     color_name_query="${1}"
@@ -71,12 +57,15 @@ export_ps1() {
 
     s_regular="0"
     s_bold="1"
+    s_dim="2"
+    s_italics="3"
+    s_underline="4"
 
     export PS1="\n \
-[ ${c_escape}${s_bold};${c_primary}${c_close}\u${c_reset} ] \
-${c_escape}${s_bold};${c_secondary}${c_close}\H${c_reset}:\
+[ ${c_escape}${s_regular};${c_primary}${c_close}\u${c_reset} ] \
+${c_escape}${s_regular};${c_secondary}${c_close}\H${c_reset} \
 ${c_escape}${s_regular};${c_tertiary}${c_close}\w${c_reset} \
-( ${c_escape}${s_regular};${c_primary}${c_close}\d${c_reset} - \
+( ${c_escape}${s_regular};${c_primary}${c_close}\d${c_reset} | \
 ${c_escape}${s_regular};${c_primary}${c_close}\t${c_reset} )\n   \
 ${c_escape}${s_regular};${c_primary}${c_close}\$${c_reset} "
 }

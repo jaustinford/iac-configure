@@ -3,9 +3,9 @@
   ansible.builtin.uri:
     url: "{{ beats.download_url }}/{{ item.name }}/{{ item.name }}-{{ lab.elastic_version }}-{{ os_distro }}.deb"
     method: GET
-    dest: "/home/{{ names.users.privileged }}/{{ item.name }}-{{ lab.elastic_version }}-{{ os_distro }}.deb"
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
+    dest: "/home/{{ names.users.host.iac }}/{{ item.name }}-{{ lab.elastic_version }}-{{ os_distro }}.deb"
+    owner: "{{ names.users.host.iac }}"
+    group: "{{ names.users.host.iac }}"
     mode: "0660"
     status_code:
       - 200
@@ -13,7 +13,7 @@
 
 - name: INSTALL - install beat packages
   ansible.builtin.apt:
-    deb: "/home/{{ names.users.privileged }}/{{ item.name }}-{{ lab.elastic_version }}-{{ os_distro }}.deb"
+    deb: "/home/{{ names.users.host.iac }}/{{ item.name }}-{{ lab.elastic_version }}-{{ os_distro }}.deb"
     state: "{{ item.package_state }}"
     update_cache: true
   become: true

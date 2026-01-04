@@ -1,0 +1,7 @@
+---
+- name: "GROUPS - create group - {{ item.groupname }}"
+  ansible.builtin.group:
+    name: "{{ item.groupname }}"
+    gid: "{{ item.gid }}"
+    state: "{{ item.state }}"
+  become: true

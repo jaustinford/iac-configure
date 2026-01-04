@@ -8,9 +8,6 @@
     mode: '0644'
   become: true
 
-- name: LAB - include ssh tasks
-  ansible.builtin.include_tasks: ssh.yml
-
 - name: LAB - find nexus apt repository
   ansible.builtin.uri:
     url: "https://artifact.proxy-int.{{ lab.domain }}"

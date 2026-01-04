@@ -31,10 +31,10 @@ container:
   env:
     TZ: "{{ names.local_timezone }}"
     PUID: "{{ assignments.deluge.uid }}"
-    PGID: "{{ names.raid_vol.group.gid }}"
+    PGID: "{{ names.groups.raid.id }}"
   ports: []
   volumes:
-    - "/root/smb/mounts/{{ names.raid_vol.name }}-black:/downloads:rw"
+    - "/root/smb/mounts/{{ names.raid }}-black:/downloads:rw"
     - "{{ lab.dirs.config }}/deluge/auth:/config/auth:ro"
     - "{{ lab.dirs.config }}/deluge/core.conf:/config/core.conf:ro"
     - "{{ lab.dirs.config }}/deluge/hostlist.conf:/config/hostlist.conf:ro"

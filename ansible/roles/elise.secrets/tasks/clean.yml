@@ -6,8 +6,9 @@
   vars:
     secrets:
       users:
-        docker00:
-          privileged: ""
+        host:
+          iac:
+            docker00: ""
   delegate_to: "{{ vault.persisted_host.name }}"
 
 - name: CLEAN - remove local secrets

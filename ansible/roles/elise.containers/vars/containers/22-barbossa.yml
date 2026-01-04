@@ -11,7 +11,7 @@
 container:
   name: barbossa
   image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_hosted }}/elise/barbossa:main"
-  user: "0:{{ names.raid_vol.group.gid }}"
+  user: "0:{{ names.groups.raid.id }}"
   command:
     - python3
     - src
@@ -33,5 +33,5 @@ container:
   ports: []
   volumes:
     - /root/approle/barbossa.json:/approle/barbossa.json:ro
-    - "/root/smb/mounts/{{ names.raid_vol.name }}-black:/downloads:rw"
+    - "/root/smb/mounts/{{ names.raid }}-black:/downloads:rw"
   wait_port: "0"

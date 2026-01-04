@@ -6,6 +6,6 @@ autossh -N -T \
     -o ExitOnForwardFailure=yes \
     -o StrictHostKeyChecking=no \
     -o UserKnownHostsFile=/dev/null \
-    -i /root/tunnel-ssh.key \
+    -i /root/ssh-tunnel.key \
     -R {{ item.external_port }}:{{ item.ipv4 }}:{{ item.internal_port }} \
     root@portal.{{ lab.domain }}

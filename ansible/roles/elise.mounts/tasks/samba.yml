@@ -4,7 +4,7 @@
     path: "{{ item.path }}"
     state: directory
     owner: root
-    group: "{{ names.raid_vol.group.name }}"
+    group: "{{ names.groups.raid.name }}"
     mode: '0770'
   become: true
 
@@ -27,7 +27,7 @@
     opts:
       "credentials=/root/smb/credentials/{{ item.username }}.txt,\
       uid=0,\
-      gid={{ names.raid_vol.group.gid }},\
+      gid={{ names.groups.raid.id }},\
       dir_mode=0770,\
       file_mode=0660,\
       seal,\

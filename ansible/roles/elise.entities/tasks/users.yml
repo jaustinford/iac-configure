@@ -1,0 +1,55 @@
+---
+- name: "USERS - manage user - {{ item.role }}"
+  ansible.builtin.user:
+    name: "{{ item.username }}"
+    shell: /bin/bash
+    uid: "{{ item.uid }}"
+    state: "{{ item.profile.state }}"
+    groups: "{{ item.groups }}"
+    force: true
+    remove: true
+  become: true
+  when:
+    item.host != "nas" and
+    item.role != "super"
+
+- name: "USERS - manage user password - {{ item.role }}"
+  ansible.builtin.user:
+    name: "{{ item.username }}"
+    password: "{{ item.password | password_hash('sha512') }}"
+  changed_when: false
+  become: true
+  when:
+    item.host != "nas" and
+    item.profile.state == "present"
+
+- name: "USERS - copy user ssh keys - {{ item.role }}"
+  ansible.posix.authorized_key:
+    user: "{{ item.username }}"
+    key: "{{ sshkey }}"
+    state: present
+  loop_control:
+    loop_var: sshkey
+  become: true
+  when:
+    item.host != "nas" and
+    item.role != "super" and
+    item.profile.state == "present"
+  with_items:
+    - "{{ item.sshkeys | flatten(levels=1) }}"
+
+- name: "USERS - copy user bash files - {{ item.role }}"
+  ansible.builtin.template:
+    src: "{{ file_name }}"
+    dest: "{{ item.home }}/{{ file_name }}"
+    owner: "{{ item.uid }}"
+    group: "{{ item.uid }}"
+    mode: '0750'
+  loop_control:
+    loop_var: file_name
+  become: true
+  when: item.profile.state == "present"
+  with_items:
+    - .bash_profile
+    - .hushlogin
+    - .vimrc

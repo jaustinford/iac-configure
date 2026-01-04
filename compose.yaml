@@ -28,6 +28,11 @@ services:
         target: /tfstate
         read_only: false
 
+      - type: bind
+        source: ${USER_MOUNTFILE}
+        target: /root/ansible-vault-mount.txt
+        read_only: true
+
     network_mode: host
 
     logging:
@@ -70,7 +75,7 @@ services:
 
       - type: bind
         source: ${USER_KEYFILE}
-        target: /root/ansible-ssh.key
+        target: /root/iac-configure.key
         read_only: true
 
       - type: bind
@@ -127,7 +132,7 @@ services:
 
       - type: bind
         source: ${USER_KEYFILE}
-        target: /root/ssh.key
+        target: /root/iac-configure.key
         read_only: false
 
       - type: bind

@@ -1,31 +1,15 @@
 ---
-############################################################
-
 ansible_python_interpreter: /usr/bin/python3
 
-ansible_user: "{{ names.users.privileged }}"
-ansible_password: "{{ secrets.users.docker02.privileged }}"
-ansible_become_password: "{{ secrets.users.docker02.privileged }}"
+# ansible_user: "{{ names.users.host.super }}"
+# ansible_password: "{{ secrets.users.host.super.docker02 }}"
+# ansible_become_password: "{{ secrets.users.host.super.docker02 }}"
 
-ansible_ssh_private_key_file: /root/ansible-ssh.key
+ansible_user: "{{ names.users.host.iac }}"
+ansible_password: "{{ secrets.users.host.iac.docker02 }}"
+ansible_become_password: "{{ secrets.users.host.iac.docker02 }}"
 
-############################################################
-
-host_users:
-  superuser:
-    uid: "0"
-    home_dir: /root
-    group: root
-
-  privileged:
-    uid: "32612"
-    home_dir: "/home/{{ names.users.privileged }}"
-    group: "{{ names.users.privileged }}"
-
-  non_privileged:
-    uid: "32613"
-    home_dir: "/home/{{ names.users.non_privileged }}"
-    group: "{{ names.users.non_privileged }}"
+ansible_ssh_private_key_file: /root/iac-configure.key
 
 poweroff:
   enabled: true

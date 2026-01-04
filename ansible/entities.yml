@@ -1,7 +1,7 @@
 ---
-- name: USERS - apply elise.users role
+- name: ENTITIES - apply elise.entities role
   hosts: all
   roles:
-    - elise.users
+    - elise.entities
   vars_files:
     - group_vars/all/secrets.yml

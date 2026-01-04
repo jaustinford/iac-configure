@@ -8,6 +8,8 @@
 
 - name: CONTAINERS - apply docker prune
   hosts: lab_onprem_docker
+  vars_files:
+    - group_vars/all/secrets.yml
   tasks:
     - name: CONTAINERS - prune unused docker resources
       community.docker.docker_prune:

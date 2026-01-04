@@ -1,0 +1,337 @@
+---
+entities:
+  groups:
+    - gid: "{{ names.groups.raid.id }}"
+      groupname: "{{ names.groups.raid.name }}"
+      host: docker01
+      state: present
+
+    - gid: "{{ names.groups.raid.id }}"
+      groupname: "{{ names.groups.raid.name }}"
+      host: docker02
+      state: present
+
+    - gid: "{{ names.groups.devops.id }}"
+      groupname: "{{ names.groups.devops.name }}"
+      host: docker00
+      state: present
+
+    - gid: "{{ names.groups.devops.id }}"
+      groupname: "{{ names.groups.devops.name }}"
+      host: docker01
+      state: present
+
+    - gid: "{{ names.groups.devops.id }}"
+      groupname: "{{ names.groups.devops.name }}"
+      host: docker02
+      state: present
+
+  users:
+
+      ############################################################
+      # associate
+      ############################################################
+
+    - uid: 32611
+      role: associate
+      username: "{{ names.users.host.associate }}"
+      password: "{{ secrets.users.host.associate.docker00 }}"
+      host: docker00
+      profile: "{{ profiles.associate }}"
+      groups:
+        - "{{ names.groups.devops.name }}"
+      home: "/home/{{ names.users.host.associate }}"
+      sshkeys:
+        - "{{ sshkeys.founder }}"
+
+    - uid: 32612
+      role: associate
+      username: "{{ names.users.host.associate }}"
+      password: "{{ secrets.users.host.associate.docker00 }}"
+      host: docker01
+      profile: "{{ profiles.associate }}"
+      groups:
+        - "{{ names.groups.devops.name }}"
+      home: "/home/{{ names.users.host.associate }}"
+      sshkeys:
+        - "{{ sshkeys.founder }}"
+
+    - uid: 32613
+      role: associate
+      username: "{{ names.users.host.associate }}"
+      password: "{{ secrets.users.host.associate.docker00 }}"
+      host: docker02
+      profile: "{{ profiles.associate }}"
+      groups:
+        - "{{ names.groups.devops.name }}"
+      home: "/home/{{ names.users.host.associate }}"
+      sshkeys:
+        - "{{ sshkeys.founder }}"
+
+    - uid: 32614
+      role: associate
+      username: "{{ names.users.host.associate }}"
+      password: ""
+      host: nas
+      profile: "{{ profiles.associate }}"
+      groups: []
+      home: "/mnt/{{ names.raid }}/{{ names.users.host.associate }}"
+      sshkeys:
+        - "{{ sshkeys.founder }}"
+        - "{{ sshkeys.citizens }}"
+
+    - uid: 32615
+      role: associate
+      username: "{{ names.users.host.associate }}"
+      password: "{{ secrets.users.host.associate.portal }}"
+      host: portal
+      profile: "{{ profiles.associate }}"
+      groups: []
+      home: "/home/{{ names.users.host.associate }}"
+      sshkeys:
+        - "{{ sshkeys.founder }}"
+        - "{{ sshkeys.ssh_tunnel }}"
+
+      ############################################################
+      # engineer
+      ############################################################
+
+    - uid: 32616
+      role: engineer
+      username: "{{ names.users.host.engineer }}"
+      password: "{{ secrets.users.host.engineer.docker00 }}"
+      host: docker00
+      profile: "{{ profiles.engineer }}"
+      groups:
+        - "{{ names.groups.devops.name }}"
+      home: "/home/{{ names.users.host.engineer }}"
+      sshkeys:
+        - "{{ sshkeys.founder }}"
+        - "{{ sshkeys.citizens }}"
+
+    - uid: 32617
+      role: engineer
+      username: "{{ names.users.host.engineer }}"
+      password: "{{ secrets.users.host.engineer.docker01 }}"
+      host: docker01
+      profile: "{{ profiles.engineer }}"
+      groups:
+        - "{{ names.groups.devops.name }}"
+      home: "/home/{{ names.users.host.engineer }}"
+      sshkeys:
+        - "{{ sshkeys.founder }}"
+        - "{{ sshkeys.citizens }}"
+
+    - uid: 32618
+      role: engineer
+      username: "{{ names.users.host.engineer }}"
+      password: "{{ secrets.users.host.engineer.docker02 }}"
+      host: docker02
+      profile: "{{ profiles.engineer }}"
+      groups:
+        - "{{ names.groups.devops.name }}"
+      home: "/home/{{ names.users.host.engineer }}"
+      sshkeys:
+        - "{{ sshkeys.founder }}"
+        - "{{ sshkeys.citizens }}"
+
+    - uid: 32619
+      role: engineer
+      username: "{{ names.users.host.engineer }}"
+      password: "{{ secrets.users.host.engineer.portal }}"
+      host: portal
+      profile: "{{ profiles.engineer }}"
+      groups: []
+      home: "/home/{{ names.users.host.engineer }}"
+      sshkeys:
+        - "{{ sshkeys.founder }}"
+        - "{{ sshkeys.citizens }}"
+
+      ############################################################
+      # iac
+      ############################################################
+
+    - uid: 32620
+      role: iac
+      username: "{{ names.users.host.iac }}"
+      password: "{{ secrets.users.host.iac.docker00 }}"
+      host: docker00
+      profile: "{{ profiles.iac }}"
+      groups:
+        - "{{ names.groups.devops.name }}"
+      home: "/home/{{ names.users.host.iac }}"
+      sshkeys:
+        - "{{ sshkeys.founder }}"
+        - "{{ sshkeys.iac_configure }}"
+        - "{{ sshkeys.iac_deploy }}"
+
+    - uid: 32621
+      role: iac
+      username: "{{ names.users.host.iac }}"
+      password: "{{ secrets.users.host.iac.docker01 }}"
+      host: docker01
+      profile: "{{ profiles.iac }}"
+      groups:
+        - "{{ names.groups.devops.name }}"
+      home: "/home/{{ names.users.host.iac }}"
+      sshkeys:
+        - "{{ sshkeys.founder }}"
+        - "{{ sshkeys.iac_configure }}"
+
+    - uid: 32622
+      role: iac
+      username: "{{ names.users.host.iac }}"
+      password: "{{ secrets.users.host.iac.docker02 }}"
+      host: docker02
+      profile: "{{ profiles.iac }}"
+      groups:
+        - "{{ names.groups.devops.name }}"
+      home: "/home/{{ names.users.host.iac }}"
+      sshkeys:
+        - "{{ sshkeys.founder }}"
+        - "{{ sshkeys.iac_configure }}"
+
+    - uid: 32623
+      role: iac
+      username: "{{ names.users.host.iac }}"
+      password: "{{ secrets.users.host.iac.nas }}"
+      host: nas
+      profile: "{{ profiles.iac }}"
+      groups: []
+      home: "/mnt/{{ names.raid }}/{{ names.users.host.iac }}"
+      sshkeys:
+        - "{{ sshkeys.founder }}"
+        - "{{ sshkeys.iac_configure }}"
+
+    - uid: 32624
+      role: iac
+      username: "{{ names.users.host.iac }}"
+      password: "{{ secrets.users.host.iac.portal }}"
+      host: portal
+      profile: "{{ profiles.iac }}"
+      groups: []
+      home: "/home/{{ names.users.host.iac }}"
+      sshkeys:
+        - "{{ sshkeys.founder }}"
+        - "{{ sshkeys.iac_configure }}"
+
+      ############################################################
+      # admin
+      ############################################################
+
+    - uid: 32625
+      role: admin
+      username: "{{ names.users.host.admin }}"
+      password: "{{ secrets.users.host.admin.docker00 }}"
+      host: docker00
+      profile: "{{ profiles.admin }}"
+      groups:
+        - "{{ names.users.host.engineer }}"
+        - "{{ names.groups.devops.name }}"
+      home: "/home/{{ names.users.host.admin }}"
+      sshkeys:
+        - "{{ sshkeys.founder }}"
+
+    - uid: 32626
+      role: admin
+      username: "{{ names.users.host.admin }}"
+      password: "{{ secrets.users.host.admin.docker01 }}"
+      host: docker01
+      profile: "{{ profiles.admin }}"
+      groups:
+        - "{{ names.users.host.engineer }}"
+        - "{{ names.groups.devops.name }}"
+        - "{{ names.groups.raid.name }}"
+      home: "/home/{{ names.users.host.admin }}"
+      sshkeys:
+        - "{{ sshkeys.founder }}"
+
+    - uid: 32627
+      role: admin
+      username: "{{ names.users.host.admin }}"
+      password: "{{ secrets.users.host.admin.docker02 }}"
+      host: docker02
+      profile: "{{ profiles.admin }}"
+      groups:
+        - "{{ names.users.host.engineer }}"
+        - "{{ names.groups.devops.name }}"
+        - "{{ names.groups.raid.name }}"
+      home: "/home/{{ names.users.host.admin }}"
+      sshkeys:
+        - "{{ sshkeys.founder }}"
+
+    - uid: 32628
+      role: admin
+      username: "{{ names.users.host.admin }}"
+      password: ""
+      host: nas
+      profile: "{{ profiles.admin }}"
+      groups: []
+      home: "/mnt/{{ names.raid }}/{{ names.users.host.admin }}"
+      sshkeys:
+        - "{{ sshkeys.founder }}"
+
+    - uid: 32629
+      role: admin
+      username: "{{ names.users.host.admin }}"
+      password: "{{ secrets.users.host.admin.portal }}"
+      host: portal
+      profile: "{{ profiles.admin }}"
+      groups: []
+      home: "/home/{{ names.users.host.admin }}"
+      sshkeys:
+        - "{{ sshkeys.founder }}"
+
+      ############################################################
+      # super
+      ############################################################
+
+    - uid: 0
+      role: super
+      username: "{{ names.users.host.super }}"
+      password: "{{ secrets.users.host.super.docker00 }}"
+      host: docker00
+      profile: "{{ profiles.super }}"
+      groups: []
+      home: "/{{ names.users.host.super }}"
+      sshkeys: []
+
+    - uid: 0
+      role: super
+      username: "{{ names.users.host.super }}"
+      password: "{{ secrets.users.host.super.docker01 }}"
+      host: docker01
+      profile: "{{ profiles.super }}"
+      groups: []
+      home: "/{{ names.users.host.super }}"
+      sshkeys: []
+
+    - uid: 0
+      role: super
+      username: "{{ names.users.host.super }}"
+      password: "{{ secrets.users.host.super.docker02 }}"
+      host: docker02
+      profile: "{{ profiles.super }}"
+      groups: []
+      home: "/{{ names.users.host.super }}"
+      sshkeys: []
+
+    - uid: 0
+      role: super
+      username: "{{ names.users.host.super }}"
+      password: ""
+      host: nas
+      profile: "{{ profiles.super }}"
+      groups: []
+      home: "/{{ names.users.host.super }}"
+      sshkeys: []
+
+    - uid: 0
+      role: super
+      username: "{{ names.users.host.super }}"
+      password: "{{ secrets.users.host.super.portal }}"
+      host: portal
+      profile: "{{ profiles.super }}"
+      groups: []
+      home: "/{{ names.users.host.super }}"
+      sshkeys: []

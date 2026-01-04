@@ -4,5 +4,5 @@
     "port": 80,
     "log": "stdout",
     "database": "/database/filebrowser.db",
-    "root": "/{{ names.raid_vol.name }}"
+    "root": "/{{ names.raid }}"
 }

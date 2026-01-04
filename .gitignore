@@ -1,4 +1,3 @@
 approle/
-env/.env-secrets
 ansible/group_vars/all/secrets.yml
 ansible/library/__pycache__

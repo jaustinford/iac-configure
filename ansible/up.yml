@@ -23,8 +23,8 @@
 - name: UP - import hosts playbook
   import_playbook: hosts.yml
 
-- name: UP - import users playbook
-  import_playbook: users.yml
+- name: UP - import entities playbook
+  import_playbook: entities.yml
 
 - name: UP - import sudoers playbook
   import_playbook: sudoers.yml

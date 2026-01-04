@@ -31,12 +31,12 @@ container:
   env:
     TZ: "{{ names.local_timezone }}"
     PUID: "{{ assignments.filebrowser.uid }}"
-    PGID: "{{ names.raid_vol.group.gid }}"
+    PGID: "{{ names.groups.raid.id }}"
   ports:
     - "{{ filebrowser_vlan_40_address }}:{{ ports.filebrowser_web }}:80/tcp"
   volumes:
     - "{{ lab.dirs.config }}/filebrowser/settings.json:/config/settings.json:ro"
     - "{{ lab.dirs.app_data }}/filebrowser/filebrowser.db:/database/filebrowser.db:rw"
     - "{{ lab.dirs.app_data }}/filebrowser/branding:/branding:rw"
-    - "/root/smb/mounts/{{ names.raid_vol.name }}-blue:/{{ names.raid_vol.name }}:ro"
+    - "/root/smb/mounts/{{ names.raid }}-blue:/{{ names.raid }}:ro"
   wait_port: "{{ ports.filebrowser_web }}"

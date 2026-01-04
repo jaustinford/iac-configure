@@ -21,3 +21,6 @@
   become: true
   with_items:
     - "{{ ubuntu.python_packages }}"
+
+- name: MAIN - include ssh tasks
+  ansible.builtin.include_tasks: ssh.yml
