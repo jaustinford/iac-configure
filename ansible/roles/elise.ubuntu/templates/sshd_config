@@ -90,7 +90,11 @@ UsePAM yes
 
 #AllowAgentForwarding yes
 #AllowTcpForwarding yes
-#GatewayPorts no
+{% if ansible_system_vendor != "Linode" %}
+GatewayPorts no
+{% else %}
+GatewayPorts yes
+{% endif %}
 X11Forwarding yes
 #X11DisplayOffset 10
 #X11UseLocalhost yes

@@ -34,11 +34,3 @@
     state: "{{ nginx.service_state }}"
     enabled: false
   become: true
-
-- name: MAIN - ensure ssh gateway ports
-  ansible.builtin.lineinfile:
-    path: /etc/ssh/sshd_config
-    regexp: '^ # GatewayPorts'
-    line: GatewayPorts yes
-  become: true
-  notify: MAIN - systemctl restart ssh
