@@ -26,11 +26,11 @@ Cmnd_Alias DOCKER_PASSWD = \
 # assignments
 ############################################################
 
-{{ names.users.host.admin }}    ALL=(ALL) NOPASSWD: ALL
-{{ names.users.host.iac }}      ALL=(ALL) ALL
+{{ names.users.host.admin }}    ALL=(root) NOPASSWD: ALL
+{{ names.users.host.iac }}      ALL=(root) ALL
 
 {% if inventory_hostname != "nas" %}
-{{ names.users.host.engineer }} DOCKER_HOSTS=(ALL) \
+{{ names.users.host.engineer }} DOCKER_HOSTS=(root) \
     NOPASSWD: DOCKER_NOPASSWD,\
     DOCKER_PASSWD
 {% endif %}
