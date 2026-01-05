@@ -22,8 +22,7 @@ container:
   detach: false
   interactive: true
   shm_size: "{{ containers_globals.shm_size }}"
-  devices:
-    - /dev/sdb
+  devices: []
   capabilities: []
   network_mode: "{{ containers_globals.network_mode }}"
   dns_servers: "{{ containers_globals.dns_servers }}"
@@ -32,9 +31,9 @@ container:
     TZ: "{{ names.local_timezone }}"
     BACKUP_OBJECT: raidvol-1
     BACKUP_DISK_NAME: BACKUP_1
-    BACKUP_DISK_DEVICE: /dev/sdb1
     BACKUP_DISK_MOUNTPOINT: /grail-dst
   ports: []
   volumes:
     - /root/approle/grail.json:/approle/grail.json:ro
+    - /root/grail:/grail-dst:rw
   wait_port: "0"
