@@ -64,9 +64,7 @@ export_ps1() {
     export PS1="\n \
 [ ${c_escape}${s_regular};${c_primary}${c_close}\u${c_reset} ] \
 ${c_escape}${s_regular};${c_secondary}${c_close}\H${c_reset} \
-${c_escape}${s_regular};${c_tertiary}${c_close}\w${c_reset} \
-( ${c_escape}${s_regular};${c_primary}${c_close}\d${c_reset} | \
-${c_escape}${s_regular};${c_primary}${c_close}\t${c_reset} )\n   \
+${c_escape}${s_regular};${c_tertiary}${c_close}\w${c_reset}\n   \
 ${c_escape}${s_regular};${c_primary}${c_close}\$${c_reset} "
 }
 

@@ -32,8 +32,6 @@
     loop_var: sshkey
   become: true
   when:
-    item.host != "nas" and
-    item.role != "super" and
     item.profile.state == "present"
   with_items:
     - "{{ item.sshkeys | flatten(levels=1) }}"
