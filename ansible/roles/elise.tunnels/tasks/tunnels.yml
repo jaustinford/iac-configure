@@ -1,14 +1,4 @@
 ---
-- name: TUNNELS - copy ssh key
-  ansible.builtin.copy:
-    src: /root/iac-configure.key
-    dest: /root/ssh-tunnel.key
-    owner: root
-    group: root
-    mode: '0600'
-  become: true
-  when: item.host == inventory_hostname
-
 - name: "TUNNELS - create directory for tunnel-{{ item.name }}"
   ansible.builtin.file:
     state: directory

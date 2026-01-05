@@ -1,10 +1,36 @@
 ############################################################
-# lab_sudoers
+# hosts
+############################################################
+
+Host_Alias DOCKER_HOSTS = \
+    {{ names.hosts.docker00 }}.{{ lab.domain }},\
+    {{ names.hosts.docker01 }}.{{ lab.domain }},\
+    {{ names.hosts.docker02 }}.{{ lab.domain }}
+
+############################################################
+# commands
+############################################################
+
+Cmnd_Alias DOCKER_NOPASSWD = \
+    /usr/bin/docker ps*,\
+    /usr/bin/docker image*,\
+    /usr/bin/docker logs*
+
+Cmnd_Alias DOCKER_PASSWD = \
+    /usr/bin/docker start*,\
+    /usr/bin/docker restart*,\
+    /usr/bin/docker login*,\
+    /usr/bin/docker pull*
+
+############################################################
+# assignments
 ############################################################
 
 {{ names.users.host.admin }}    ALL=(ALL) NOPASSWD: ALL
 {{ names.users.host.iac }}      ALL=(ALL) ALL
 
-{% if ansible_fqdn != "nas" %}
-{{ names.users.host.engineer }} ALL=(ALL) /usr/bin/netstat
+{% if inventory_hostname != "nas" %}
+{{ names.users.host.engineer }} DOCKER_HOSTS=(ALL) \
+    NOPASSWD: DOCKER_NOPASSWD,\
+    DOCKER_PASSWD
 {% endif %}
