@@ -20,9 +20,6 @@ find_internet() {
 
 find_internet
 
-cat /root/ansible-vault-mount.txt > /root/ansible-vault-password.txt
-chmod 600 /root/ansible-vault-password.txt
-
 cat <<EOF > /etc/ansible_hosts
 [all:vars]
 internet_found='${INTERNET_FOUND}'
@@ -48,7 +45,7 @@ if [ "${INTERNET_FOUND}" == 'yes' ] || [ "${CYCLE_MODE}" == 'up' ]; then
     echo " "
 
     cat <<EOF >> /etc/ansible_hosts
-portal ansible_host="{{ ( lookup('ansible.builtin.file', '/tmp/portal.json') | from_json )['ip_address'] }}"
+portal ansible_host="{{ (lookup('ansible.builtin.file', '/tmp/portal.json') | from_json)['ip_address'] }}"
 EOF
 
 else

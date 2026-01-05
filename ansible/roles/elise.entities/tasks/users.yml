@@ -31,8 +31,7 @@
   loop_control:
     loop_var: sshkey
   become: true
-  when:
-    item.profile.state == "present"
+  when: item.profile.state == "present"
   with_items:
     - "{{ item.sshkeys | flatten(levels=1) }}"
 

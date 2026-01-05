@@ -74,13 +74,13 @@ services:
         read_only: true
 
       - type: bind
-        source: ${USER_KEYFILE}
-        target: /root/iac-configure.key
+        source: ${USER_MOUNTFILE}
+        target: /root/ansible-vault-password
         read_only: true
 
       - type: bind
-        source: ${USER_MOUNTFILE}
-        target: /root/ansible-vault-mount.txt
+        source: ${USER_KEYFILE}
+        target: /root/iac-configure.key
         read_only: true
 
       - type: bind
