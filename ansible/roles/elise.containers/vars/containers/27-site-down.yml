@@ -44,7 +44,7 @@ container:
   ports: []
   volumes:
     - /root/approle/iac-configure.json:/approle/iac-configure.json:ro
-    - /root/ansible-vault-mount.txt:/root/ansible-vault-mount.txt:ro
+    - /root/ansible-vault-password:/root/ansible-vault-password:ro
     - /root/iac-configure.key:/root/iac-configure.key:ro
     - /var/run/docker.sock:/var/run/docker.sock:rw
     - /root/.docker:/root/.docker:rw
