@@ -35,6 +35,6 @@ container:
   ports: []
   volumes:
     - /root/approle/grail.json:/approle/grail.json:ro
-    - /mnt/grail:/grail-dst:rw
+    - /mnt/grail:/grail-disk:rw
     - /mnt/dfs_lvm/lab_dfs:/grail-src:rw
   wait_port: "0"
