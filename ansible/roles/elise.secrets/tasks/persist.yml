@@ -1,7 +1,7 @@
 ---
 - name: PERSIST - retrieve secrets from persisted host
   ansible.builtin.fetch:
-    src: "/home/merlin/{{ vault.persisted_host.path }}"
+    src: "/home/{{ names.users.host.iac }}/secrets.yml"
     dest: "{{ playbook_dir }}/group_vars/all/secrets.yml"
     flat: true
   vars:
@@ -10,5 +10,5 @@
         host:
           iac:
             docker00: ""
-  delegate_to: "{{ vault.persisted_host.name }}"
+  delegate_to: "{{ vault.persisted_host }}"
   changed_when: false

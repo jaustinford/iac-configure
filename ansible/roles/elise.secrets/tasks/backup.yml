@@ -2,9 +2,9 @@
 - name: BACKUP - copy secrets to persisted host
   ansible.builtin.copy:
     src: "{{ playbook_dir }}/group_vars/all/secrets.yml"
-    dest: "{{ vault.persisted_host.path }}"
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
+    dest: "/home/{{ names.users.host.iac }}/secrets.yml"
+    owner: "{{ names.users.host.iac }}"
+    group: "{{ names.users.host.iac }}"
     mode: "0600"
     decrypt: false
   vars:
@@ -13,7 +13,7 @@
         host:
           iac:
             docker00: ""
-  delegate_to: "{{ vault.persisted_host.name }}"
+  delegate_to: "{{ vault.persisted_host }}"
 
 - name: BACKUP - remove local secrets
   ansible.builtin.file:

@@ -1,7 +1,7 @@
 ---
 - name: CLEAN - remove secrets from persisted host
   ansible.builtin.file:
-    path: "{{ vault.persisted_host.path }}"
+    path: "/home/{{ names.users.host.iac }}/secrets.yml"
     state: absent
   vars:
     secrets:
@@ -9,7 +9,7 @@
         host:
           iac:
             docker00: ""
-  delegate_to: "{{ vault.persisted_host.name }}"
+  delegate_to: "{{ vault.persisted_host }}"
 
 - name: CLEAN - remove local secrets
   ansible.builtin.file:

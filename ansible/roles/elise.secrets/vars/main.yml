@@ -1,11 +1,9 @@
 ---
 vault:
+  persisted_host: docker00
+
   mount_point: lab/kv
   ipv4: "192.168.40.1"
-
-  persisted_host:
-    name: docker00
-    path: secrets.yml
 
   secret_paths:
     - certificates/nginx
