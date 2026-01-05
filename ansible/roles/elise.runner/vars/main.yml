@@ -8,9 +8,10 @@ runner:
   docker_privileged: "true"
   docker_volumes:
     - /root/approle:/approle:ro
-    - /root/ansible-vault-mount.txt:/root/ansible-vault-mount.txt:ro
-    - /root/ansible-vault-mount.txt:/root/ansible-vault-password.txt:ro
-    - /root/ansible-ssh.key:/root/ansible-ssh.key:ro
+    - /root/ansible-vault-password:/root/ansible-vault-password:ro
+    - /root/iac-configure.key:/root/iac-configure.key:ro
+    - /root/iac-deploy.key:/root/iac-deploy.key:ro
+    - /root/linode-token:/root/linode-token:ro
     - /var/run/docker.sock:/var/run/docker.sock:rw
     - /root/.docker:/root/.docker:rw
     - "/root/smb/mounts/{{ names.raid }}-green:/tfstate:rw"

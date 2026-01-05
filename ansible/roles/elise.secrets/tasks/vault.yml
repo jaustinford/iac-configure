@@ -24,7 +24,7 @@
 
 - name: VAULT - set secrets vault_password
   ansible.builtin.set_fact:
-    vault_password: "{{ lookup('ansible.builtin.file', '/root/ansible-vault-password.txt') }}"
+    vault_password: "{{ lookup('ansible.builtin.file', '/root/ansible-vault-password') }}"
   no_log: true
 
 - name: VAULT - encrypt local secrets
