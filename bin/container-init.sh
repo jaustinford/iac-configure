@@ -18,7 +18,17 @@ find_internet() {
     fi
 }
 
+convert_mounted_files() {
+    cp /automation/ansible-vault-password /ansible-vault-password
+    cp /automation/iac-configure.key /iac-configure.key
+
+    chmod 600 \
+        /ansible-vault-password \
+        /iac-configure.key
+}
+
 find_internet
+convert_mounted_files
 
 cat <<EOF > /etc/ansible_hosts
 [all:vars]
@@ -40,18 +50,9 @@ nas ansible_host='192.168.40.5'
 EOF
 
 if [ "${INTERNET_FOUND}" == 'yes' ] || [ "${CYCLE_MODE}" == 'up' ]; then
-    echo " "
-    echo -e "[ \033[31m*\033[0m ] Adding Portal host to inventory"
-    echo " "
-
     cat <<EOF >> /etc/ansible_hosts
 portal ansible_host="{{ (lookup('ansible.builtin.file', '/tmp/portal.json') | from_json)['ip_address'] }}"
 EOF
-
-else
-    echo " "
-    echo -e "[ \033[31m*\033[0m ] Ignoring Portal host for inventory"
-    echo " "
 
 fi
 

@@ -3,8 +3,8 @@
 ############################################################
 
 Host_Alias DOCKER_HOSTS = \
-    {{ names.hosts.docker00 }}.{{ lab.domain }},\
-    {{ names.hosts.docker01 }}.{{ lab.domain }},\
+    {{ names.hosts.docker00 }}.{{ lab.domain }}, \
+    {{ names.hosts.docker01 }}.{{ lab.domain }}, \
     {{ names.hosts.docker02 }}.{{ lab.domain }}
 
 ############################################################
@@ -12,15 +12,15 @@ Host_Alias DOCKER_HOSTS = \
 ############################################################
 
 Cmnd_Alias DOCKER_NOPASSWD = \
-    /usr/bin/docker ps*,\
-    /usr/bin/docker image*,\
-    /usr/bin/docker logs*
+    /usr/bin/docker ps, \
+    /usr/bin/docker image ls, \
+    /usr/bin/docker logs *
 
 Cmnd_Alias DOCKER_PASSWD = \
-    /usr/bin/docker start*,\
-    /usr/bin/docker restart*,\
-    /usr/bin/docker login*,\
-    /usr/bin/docker pull*
+    /usr/bin/docker start *, \
+    /usr/bin/docker restart *, \
+    /usr/bin/docker login *, \
+    /usr/bin/docker pull *
 
 ############################################################
 # assignments
@@ -30,7 +30,6 @@ Cmnd_Alias DOCKER_PASSWD = \
 {{ names.users.host.iac }}      ALL=(root) ALL
 
 {% if inventory_hostname != "nas" %}
-{{ names.users.host.engineer }} DOCKER_HOSTS=(root) \
-    NOPASSWD: DOCKER_NOPASSWD,\
-    DOCKER_PASSWD
+{{ names.users.host.engineer }} \
+    DOCKER_HOSTS=(root) DOCKER_PASSWD, NOPASSWD: DOCKER_NOPASSWD
 {% endif %}

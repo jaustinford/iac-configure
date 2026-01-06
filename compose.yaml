@@ -24,13 +24,8 @@ services:
 
     volumes:
       - type: bind
-        source: ${IAC_CONFIGURE_PROJECT_DIR}/tfstate
-        target: /tfstate
-        read_only: false
-
-      - type: bind
-        source: ${USER_MOUNTFILE}
-        target: /root/ansible-vault-mount.txt
+        source: ${USER_KEYFOLDER}
+        target: /automation
         read_only: true
 
     network_mode: host
@@ -74,13 +69,8 @@ services:
         read_only: true
 
       - type: bind
-        source: ${USER_MOUNTFILE}
-        target: /root/ansible-vault-password
-        read_only: true
-
-      - type: bind
-        source: ${USER_KEYFILE}
-        target: /root/iac-configure.key
+        source: ${USER_KEYFOLDER}
+        target: /automation
         read_only: true
 
       - type: bind
@@ -126,18 +116,13 @@ services:
 
     volumes:
       - type: bind
+        source: ${USER_KEYFOLDER}
+        target: /automation
+        read_only: true
+
+      - type: bind
         source: ${IAC_CONFIGURE_PROJECT_DIR}/ansible
         target: /etc/ansible
-        read_only: false
-
-      - type: bind
-        source: ${USER_KEYFILE}
-        target: /root/iac-configure.key
-        read_only: false
-
-      - type: bind
-        source: ${IAC_CONFIGURE_PROJECT_DIR}/tfstate
-        target: /tfstate
         read_only: false
 
     network_mode: host
