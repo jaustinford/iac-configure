@@ -228,6 +228,7 @@ entities:
       groups:
         - "{{ names.users.host.engineer }}"
         - "{{ names.groups.devops.name }}"
+        - "{{ names.groups.raid.name }}"
       home: "/home/{{ names.users.host.admin }}"
       sshkeys:
         - "{{ sshkeys.founder }}"
