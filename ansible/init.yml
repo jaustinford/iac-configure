@@ -1,0 +1,7 @@
+---
+- name: INIT - apply elise.init role
+  hosts: lab_onprem_docker
+  roles:
+    - elise.init
+  vars_files:
+    - group_vars/all/secrets.yml

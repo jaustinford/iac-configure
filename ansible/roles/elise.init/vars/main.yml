@@ -1,0 +1,56 @@
+---
+lab_filesystem:
+  - path: "/{{ names.folders.root }}"
+    owner: "{{ names.users.host.admin }}"
+    group: "{{ names.groups.devops.name }}"
+    mode: "0750"
+
+  - path: "/{{ names.folders.root }}/automation"
+    owner: "{{ names.users.host.iac }}"
+    group: "{{ names.users.host.admin }}"
+    mode: "0750"
+
+  - path: "/{{ names.folders.root }}/container"
+    owner: "{{ names.users.host.iac }}"
+    group: "{{ names.users.host.engineer }}"
+    mode: "0750"
+
+  - path: "/{{ names.folders.root }}/container/app"
+    owner: "{{ names.users.host.iac }}"
+    group: "{{ names.users.host.engineer }}"
+    mode: "0750"
+
+  - path: "/{{ names.folders.root }}/container/config"
+    owner: "{{ names.users.host.iac }}"
+    group: "{{ names.users.host.engineer }}"
+    mode: "0750"
+
+  - path: "/{{ names.folders.root }}/{{ names.folders.secrets }}"
+    owner: "{{ names.users.host.admin }}"
+    group: "{{ names.users.host.iac }}"
+    mode: "0750"
+
+  - path: "/{{ names.folders.root }}/{{ names.folders.secrets }}/approle"
+    owner: "{{ names.users.host.admin }}"
+    group: "{{ names.users.host.admin }}"
+    mode: "0700"
+
+  - path: "/{{ names.folders.root }}/{{ names.folders.secrets }}/automation"
+    owner: "{{ names.users.host.admin }}"
+    group: "{{ names.users.host.admin }}"
+    mode: "0700"
+
+  - path: "/{{ names.folders.root }}/{{ names.folders.secrets }}/{{ names.folders.raid }}"
+    owner: "{{ names.users.host.iac }}"
+    group: "{{ names.users.host.admin }}"
+    mode: "0750"
+
+  - path: "/{{ names.folders.root }}/{{ names.folders.raid }}"
+    owner: "{{ names.users.host.iac }}"
+    group: "{{ names.groups.raid.name }}"
+    mode: "0750"
+
+  - path: "/{{ names.folders.root }}/ssh-tunnels"
+    owner: "{{ names.users.host.iac }}"
+    group: "{{ names.groups.devops.name }}"
+    mode: "0750"

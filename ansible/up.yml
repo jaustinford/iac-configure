@@ -29,6 +29,9 @@
 - name: UP - import sudoers playbook
   import_playbook: sudoers.yml
 
+- name: UP - import init playbook
+  import_playbook: init.yml
+
 - name: UP - import ubuntu playbook
   import_playbook: ubuntu.yml
 

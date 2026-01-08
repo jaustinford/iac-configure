@@ -10,6 +10,12 @@ else
     COLOR_NAME_SECONDARY="{{ item.profile.colors.secondary }}"
     COLOR_NAME_TERTIARY="{{ item.profile.colors.tertiary }}"
 
+    if [ "$(hostname)" != "{{ names.hosts.nas }}.{{ lab.domain }}" ] && \
+       [ "$(hostname)" != "{{ names.hosts.portal }}.{{ lab.domain }}" ]; then
+        cd "/{{ names.folders.root }}"
+
+    fi
+
 fi
 
 resolve_color_code() {

@@ -45,7 +45,7 @@ names:
   users:
     host:
       super: root       # The Lord, our God Allmighty.
-      admin: king       # His Majesty, Ælfræd the Great.
+      admin: king       # Above whom there is only God.
       iac: queen        # Powerful matriach and executor.
       engineer: knight  # Defender of the Realm, ample privileges.
       associate: squire # Meager candidate, no privileges.
@@ -57,7 +57,7 @@ names:
       black_rw: lancelot  # Most famous knight, betrayer of Arthur.
 
   hosts:
-    docker00: eastanglia  # Kingdom of the East-Angles.
+    docker00: eastanglia  # Kingdom of the Eastern Angles.
     docker01: mercia      # Kingdom of the Midlands.
     docker02: northumbria # Kingdom of the North.
     nas: wessex           # Mightiest of Saxon kingdoms.
@@ -68,3 +68,8 @@ names:
     vlan_30: wtr # Water, Gateway Routing.
     vlan_40: fre # Fire, Container and Host Services.
     vlan_50: air # Air, Managed Switch Configuration.
+
+  folders:
+    root: castle  # Where the Kingdom lives.
+    secrets: keep # Where the King lives.
+    raid: stone   # Where Xcalibr can always be found in Anglia.
