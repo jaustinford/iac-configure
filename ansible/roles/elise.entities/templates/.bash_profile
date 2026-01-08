@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [ "${MSYSTEM}" == 'MINGW64' ]; then
-    COLOR_NAME_PRIMARY='lightcyan'
+    COLOR_NAME_PRIMARY='red'
     COLOR_NAME_SECONDARY='white'
     COLOR_NAME_TERTIARY='lightgrey'
 
