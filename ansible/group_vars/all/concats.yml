@@ -1,5 +1,26 @@
 ---
 ############################################################
+# folders
+############################################################
+
+folder_root: "/{{ names.folders.root }}"
+
+folder_automation: "{{ folder_root }}/automation"
+
+folder_container: "{{ folder_root }}/container"
+folder_container_app: "{{ folder_container }}/app"
+folder_container_config: "{{ folder_container }}/config"
+
+folder_secrets: "{{ folder_root }}/{{ names.folders.secrets }}"
+folder_secrets_approle: "{{ folder_secrets }}/approle"
+folder_secrets_automation: "{{ folder_secrets }}/automation"
+folder_secrets_raid: "{{ folder_secrets }}/{{ names.folders.raid }}"
+
+folder_ssh_tunnels: "{{ folder_root }}/ssh-tunnels"
+
+folder_raid: "{{ folder_root }}/{{ names.folders.raid }}"
+
+############################################################
 # hosts
 ############################################################
 

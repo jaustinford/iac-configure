@@ -47,6 +47,6 @@ container:
     - "{{ plex_vlan_40_address }}:{{ ports.plex_web }}:32400/tcp"
   volumes:
     - "{{ lab.dirs.app_data }}/plex/Application Support:/config/Library/Application Support:rw"
-    - "/root/smb/mounts/{{ names.raid }}-red:/plex_libraries:ro"
+    - "{{ folder_raid }}/{{ names.raid }}-red_ro:/plex_libraries:ro"
     - /tmp/transcode:/transcode:rw
   wait_port: "{{ ports.plex_web }}"

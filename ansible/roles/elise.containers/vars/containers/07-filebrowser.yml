@@ -38,5 +38,5 @@ container:
     - "{{ lab.dirs.config }}/filebrowser/settings.json:/config/settings.json:ro"
     - "{{ lab.dirs.app_data }}/filebrowser/filebrowser.db:/database/filebrowser.db:rw"
     - "{{ lab.dirs.app_data }}/filebrowser/branding:/branding:rw"
-    - "/root/smb/mounts/{{ names.raid }}-blue:/{{ names.raid }}:ro"
+    - "{{ folder_raid }}/{{ names.raid }}-blue_ro:/{{ names.raid }}:ro"
   wait_port: "{{ ports.filebrowser_web }}"

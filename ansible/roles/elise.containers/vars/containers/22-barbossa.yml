@@ -33,5 +33,5 @@ container:
   ports: []
   volumes:
     - /root/approle/barbossa.json:/approle/barbossa.json:ro
-    - "/root/smb/mounts/{{ names.raid }}-black:/downloads:rw"
+    - "{{ folder_raid }}/{{ names.raid }}-black_rw:/downloads:rw"
   wait_port: "0"

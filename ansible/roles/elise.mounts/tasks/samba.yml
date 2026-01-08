@@ -3,9 +3,9 @@
   ansible.builtin.file:
     path: "{{ item.path }}"
     state: directory
-    owner: root
+    owner: "{{ names.users.host.admin }}"
     group: "{{ names.groups.raid.name }}"
-    mode: '0770'
+    mode: "0770"
   become: true
 
 - name: "SAMBA - create credentials file {{ item.path }}"
@@ -13,10 +13,10 @@
     content: |
       username={{ item.username }}
       password={{ item.password }}
-    dest: "/root/smb/credentials/{{ item.username }}.txt"
-    owner: root
-    group: root
-    mode: '0600'
+    dest: "{{ folder_secrets_raid }}/{{ item.path.split('-')[-1] }}"
+    owner: "{{ names.users.host.admin }}"
+    group: "{{ names.users.host.admin }}"
+    mode: "0600"
   become: true
   no_log: true
 
@@ -25,9 +25,9 @@
     fstype: cifs
     src: "{{ item.src }}"
     opts:
-      "credentials=/root/smb/credentials/{{ item.username }}.txt,\
-      uid=0,\
-      gid={{ names.groups.raid.id }},\
+      "credentials={{ folder_secrets_raid }}/{{ item.path.split('-')[-1] }},\
+      uid={{ names.users.host.admin }},\
+      gid={{ names.groups.raid.name }},\
       dir_mode=0770,\
       file_mode=0660,\
       seal,\

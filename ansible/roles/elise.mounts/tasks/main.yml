@@ -1,17 +1,4 @@
 ---
-- name: MAIN - ensure root smb paths
-  ansible.builtin.file:
-    path: "{{ item }}"
-    state: directory
-    owner: root
-    group: root
-    mode: '0770'
-  become: true
-  with_items:
-    - /root/smb
-    - /root/smb/credentials
-    - /root/smb/mounts
-
 - name: MAIN - include samba tasks
   ansible.builtin.include_tasks: samba.yml
   no_log: true

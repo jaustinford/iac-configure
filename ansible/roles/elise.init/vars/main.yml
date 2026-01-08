@@ -1,56 +1,56 @@
 ---
 lab_filesystem:
-  - path: "/{{ names.folders.root }}"
+  - path: "{{ folder_root }}"
     owner: "{{ names.users.host.admin }}"
     group: "{{ names.groups.devops.name }}"
     mode: "0750"
 
-  - path: "/{{ names.folders.root }}/automation"
+  - path: "{{ folder_automation }}"
     owner: "{{ names.users.host.iac }}"
     group: "{{ names.users.host.admin }}"
     mode: "0750"
 
-  - path: "/{{ names.folders.root }}/container"
+  - path: "{{ folder_container }}"
     owner: "{{ names.users.host.iac }}"
     group: "{{ names.users.host.engineer }}"
     mode: "0750"
 
-  - path: "/{{ names.folders.root }}/container/app"
+  - path: "{{ folder_container_app }}"
     owner: "{{ names.users.host.iac }}"
     group: "{{ names.users.host.engineer }}"
     mode: "0750"
 
-  - path: "/{{ names.folders.root }}/container/config"
+  - path: "{{ folder_container_config }}"
     owner: "{{ names.users.host.iac }}"
     group: "{{ names.users.host.engineer }}"
     mode: "0750"
 
-  - path: "/{{ names.folders.root }}/{{ names.folders.secrets }}"
+  - path: "{{ folder_secrets }}"
     owner: "{{ names.users.host.admin }}"
     group: "{{ names.users.host.iac }}"
     mode: "0750"
 
-  - path: "/{{ names.folders.root }}/{{ names.folders.secrets }}/approle"
+  - path: "{{ folder_secrets_approle }}"
     owner: "{{ names.users.host.admin }}"
     group: "{{ names.users.host.admin }}"
     mode: "0700"
 
-  - path: "/{{ names.folders.root }}/{{ names.folders.secrets }}/automation"
+  - path: "{{ folder_secrets_automation }}"
     owner: "{{ names.users.host.admin }}"
     group: "{{ names.users.host.admin }}"
     mode: "0700"
 
-  - path: "/{{ names.folders.root }}/{{ names.folders.secrets }}/{{ names.folders.raid }}"
+  - path: "{{ folder_secrets_raid }}"
     owner: "{{ names.users.host.iac }}"
     group: "{{ names.users.host.admin }}"
     mode: "0750"
 
-  - path: "/{{ names.folders.root }}/{{ names.folders.raid }}"
-    owner: "{{ names.users.host.iac }}"
-    group: "{{ names.groups.raid.name }}"
-    mode: "0750"
-
-  - path: "/{{ names.folders.root }}/ssh-tunnels"
+  - path: "{{ folder_ssh_tunnels }}"
     owner: "{{ names.users.host.iac }}"
     group: "{{ names.groups.devops.name }}"
+    mode: "0750"
+
+  - path: "{{ folder_raid }}"
+    owner: "{{ names.users.host.iac }}"
+    group: "{{ names.groups.raid.name }}"
     mode: "0750"
