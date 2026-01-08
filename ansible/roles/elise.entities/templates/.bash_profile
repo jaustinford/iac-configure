@@ -10,10 +10,10 @@ else
     COLOR_NAME_SECONDARY="{{ item.profile.colors.secondary }}"
     COLOR_NAME_TERTIARY="{{ item.profile.colors.tertiary }}"
 
-    if [ "$(hostname)" != "{{ names.hosts.nas }}.{{ lab.domain }}" ] && \
-       [ "$(hostname)" != "{{ names.hosts.portal }}.{{ lab.domain }}" ]; then
-        cd "/{{ names.folders.root }}"
-
+    if [ "$(hostname)" == "{{ names.hosts.nas }}.{{ lab.domain }}" ]; then cd "/mnt/{{ names.folders.root }}/root"
+    elif [ "$(hostname)" == "{{ names.hosts.docker00 }}.{{ lab.domain }}" ]; then cd "{{ folder_root }}"
+    elif [ "$(hostname)" == "{{ names.hosts.docker01 }}.{{ lab.domain }}" ]; then cd "{{ folder_root }}"
+    elif [ "$(hostname)" == "{{ names.hosts.docker02 }}.{{ lab.domain }}" ]; then cd "{{ folder_root }}"
     fi
 
 fi
