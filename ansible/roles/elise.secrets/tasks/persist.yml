@@ -1,7 +1,7 @@
 ---
 - name: PERSIST - retrieve secrets from persisted host
   ansible.builtin.fetch:
-    src: "/home/{{ names.users.host.iac }}/secrets.yml"
+    src: "{{ folder_automation }}/secrets.yml"
     dest: "{{ playbook_dir }}/group_vars/all/secrets.yml"
     flat: true
   vars:

@@ -1,7 +1,7 @@
 ---
 - name: CLEAN - remove secrets from persisted host
   ansible.builtin.file:
-    path: "/home/{{ names.users.host.iac }}/secrets.yml"
+    dest: "{{ folder_automation }}/secrets.yml"
     state: absent
   vars:
     secrets:

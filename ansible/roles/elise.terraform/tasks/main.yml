@@ -1,7 +1,7 @@
 ---
 - name: MAIN - find instance metadata files
   ansible.builtin.find:
-    paths: "/home/{{ names.users.host.iac }}"
+    paths: "{{ folder_automation }}"
     patterns: "{{ lab.domain | replace('.com', '') }}-*.json"
   register: instance_metadata
 

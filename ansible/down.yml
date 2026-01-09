@@ -4,8 +4,7 @@
   vars:
     secrets_mode: start
 
-- name: DOWN - import terraform playbook
-  import_playbook: terraform.yml
+- {name: DOWN - import terraform playbook, import_playbook: terraform.yml}
 
 - name: DOWN - gather facts
   hosts: all
@@ -14,29 +13,14 @@
   vars_files:
     - group_vars/all/secrets.yml
 
-- name: DOWN - import beats playbook
-  import_playbook: beats.yml
-
-- name: DOWN - import tunnels playbook
-  import_playbook: tunnels.yml
-
-- name: DOWN - import portal playbook
-  import_playbook: portal.yml
-
-- name: DOWN - import containers playbook
-  import_playbook: containers.yml
-
-- name: DOWN - import glusterfs playbook
-  import_playbook: glusterfs.yml
-
-- name: DOWN - import mounts playbook
-  import_playbook: mounts.yml
-
-- name: DOWN - import linode playbook
-  import_playbook: linode.yml
-
-- name: DOWN - import poweroff playbook
-  import_playbook: poweroff.yml
+- {name: DOWN - import beats playbook, import_playbook: beats.yml}
+- {name: DOWN - import tunnels playbook, import_playbook: tunnels.yml}
+- {name: DOWN - import portal playbook, import_playbook: portal.yml}
+- {name: DOWN - import containers playbook, import_playbook: containers.yml}
+- {name: DOWN - import glusterfs playbook, import_playbook: glusterfs.yml}
+- {name: DOWN - import mounts playbook, import_playbook: mounts.yml}
+- {name: DOWN - import linode playbook, import_playbook: linode.yml}
+- {name: DOWN - import poweroff playbook, import_playbook: poweroff.yml}
 
 - name: DOWN - import secrets playbook
   import_playbook: secrets.yml

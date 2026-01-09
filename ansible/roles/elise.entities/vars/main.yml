@@ -226,6 +226,7 @@ entities:
       host: docker00
       profile: "{{ profiles.admin }}"
       groups:
+        - "{{ names.users.host.iac }}"
         - "{{ names.users.host.engineer }}"
         - "{{ names.groups.devops.name }}"
         - "{{ names.groups.raid.name }}"
@@ -240,6 +241,7 @@ entities:
       host: docker01
       profile: "{{ profiles.admin }}"
       groups:
+        - "{{ names.users.host.iac }}"
         - "{{ names.users.host.engineer }}"
         - "{{ names.groups.devops.name }}"
         - "{{ names.groups.raid.name }}"
@@ -254,6 +256,7 @@ entities:
       host: docker02
       profile: "{{ profiles.admin }}"
       groups:
+        - "{{ names.users.host.iac }}"
         - "{{ names.users.host.engineer }}"
         - "{{ names.groups.devops.name }}"
         - "{{ names.groups.raid.name }}"

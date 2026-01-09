@@ -7,7 +7,7 @@ lab_filesystem:
 
   - path: "{{ folder_automation }}"
     owner: "{{ names.users.host.iac }}"
-    group: "{{ names.users.host.admin }}"
+    group: "{{ names.users.host.iac }}"
     mode: "0750"
 
   - path: "{{ folder_container }}"
@@ -27,8 +27,8 @@ lab_filesystem:
 
   - path: "{{ folder_secrets }}"
     owner: "{{ names.users.host.admin }}"
-    group: "{{ names.users.host.iac }}"
-    mode: "0750"
+    group: "{{ names.users.host.admin }}"
+    mode: "0700"
 
   - path: "{{ folder_secrets_approle }}"
     owner: "{{ names.users.host.admin }}"
@@ -41,9 +41,9 @@ lab_filesystem:
     mode: "0700"
 
   - path: "{{ folder_secrets_raid }}"
-    owner: "{{ names.users.host.iac }}"
+    owner: "{{ names.users.host.admin }}"
     group: "{{ names.users.host.admin }}"
-    mode: "0750"
+    mode: "0700"
 
   - path: "{{ folder_ssh_tunnels }}"
     owner: "{{ names.users.host.iac }}"
@@ -51,6 +51,6 @@ lab_filesystem:
     mode: "0750"
 
   - path: "{{ folder_raid }}"
-    owner: "{{ names.users.host.iac }}"
+    owner: "{{ names.users.host.admin }}"
     group: "{{ names.groups.raid.name }}"
-    mode: "0750"
+    mode: "0770"

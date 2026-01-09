@@ -2,10 +2,10 @@
 - name: BACKUP - copy secrets to persisted host
   ansible.builtin.copy:
     src: "{{ playbook_dir }}/group_vars/all/secrets.yml"
-    dest: "/home/{{ names.users.host.iac }}/secrets.yml"
+    dest: "{{ folder_automation }}/secrets.yml"
     owner: "{{ names.users.host.iac }}"
     group: "{{ names.users.host.iac }}"
-    mode: "0600"
+    mode: "0640"
     decrypt: false
   vars:
     secrets:
