@@ -35,7 +35,7 @@ container:
   ports: []
   volumes:
     - "{{ folder_secrets_approle }}/lazarus.json:/approle/lazarus.json:ro"
-    - "{{ lab.dirs.app_data }}/lazarus/data:/lazarus/data:rw"
+    - "{{ folder_container_app }}/lazarus/data:/lazarus/data:rw"
     - /var/run/docker.sock:/var/run/docker.sock:rw
     - /tmp:/tmp:rw
   wait_port: "0"
