@@ -3,8 +3,9 @@ Description={{ item.description }}
 After=network.target auditd.service
 
 [Service]
-WorkingDirectory=/root/tunnel-{{ item.name }}
-ExecStart=/root/tunnel-{{ item.name }}/tunnel-{{ item.name }}.sh
+User={{ names.users.host.associate }}
+WorkingDirectory={{ folder_ssh_tunnels }}
+ExecStart={{ folder_ssh_tunnels }}/tunnel-{{ item.name }}.sh
 KillMode=control-group
 Type=simple
 StandardOutput=append:/dev/null

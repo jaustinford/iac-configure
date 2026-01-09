@@ -1,21 +1,11 @@
 ---
-- name: "TUNNELS - create directory for tunnel-{{ item.name }}"
-  ansible.builtin.file:
-    state: directory
-    path: "/root/tunnel-{{ item.name }}"
-    owner: root
-    group: root
-    mode: '0770'
-  become: true
-  when: item.host == inventory_hostname
-
 - name: "TUNNELS - create script for tunnel-{{ item.name }}"
   ansible.builtin.template:
     src: tunnel.sh
-    dest: "/root/tunnel-{{ item.name }}/tunnel-{{ item.name }}.sh"
-    owner: root
-    group: root
-    mode: '0750'
+    dest: "{{ folder_ssh_tunnels }}/tunnel-{{ item.name }}.sh"
+    owner: "{{ names.users.host.associate }}"
+    group: "{{ names.groups.devops.name }}"
+    mode: '0740'
   become: true
   notify: "MAIN - systemctl restart tunnel-{{ item.name }}"
   when: item.host == inventory_hostname
