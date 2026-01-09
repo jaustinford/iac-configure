@@ -14,6 +14,7 @@ folder_container_config: "{{ folder_container }}/config"
 folder_secrets: "{{ folder_root }}/{{ names.folders.secrets }}"
 folder_secrets_approle: "{{ folder_secrets }}/approle"
 folder_secrets_automation: "{{ folder_secrets }}/automation"
+folder_secrets_docker: "{{ folder_secrets }}/docker"
 folder_secrets_raid: "{{ folder_secrets }}/{{ names.folders.raid }}"
 
 folder_ssh_tunnels: "{{ folder_root }}/ssh-tunnels"

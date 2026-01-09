@@ -40,6 +40,11 @@ lab_filesystem:
     group: "{{ names.users.host.admin }}"
     mode: "0700"
 
+  - path: "{{ folder_secrets_docker }}"
+    owner: "{{ names.users.host.admin }}"
+    group: "{{ names.users.host.admin }}"
+    mode: "0700"
+
   - path: "{{ folder_secrets_raid }}"
     owner: "{{ names.users.host.admin }}"
     group: "{{ names.users.host.admin }}"
