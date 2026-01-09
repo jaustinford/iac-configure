@@ -34,8 +34,8 @@ container:
     ELASTICSEARCH_ENDPOINT: "{{ elasticsearch_vlan_40_address }}:{{ ports.elasticsearch_db }}"
   ports: []
   volumes:
-    - /root/approle/lazarus.json:/approle/lazarus.json:ro
+    - "{{ folder_secrets_approle }}/lazarus.json:/approle/lazarus.json:ro"
+    - "{{ lab.dirs.app_data }}/lazarus/data:/lazarus/data:rw"
     - /var/run/docker.sock:/var/run/docker.sock:rw
     - /tmp:/tmp:rw
-    - "{{ lab.dirs.app_data }}/lazarus/data:/lazarus/data:rw"
   wait_port: "0"

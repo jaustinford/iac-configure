@@ -7,11 +7,8 @@ runner:
   description: lab_runner
   docker_privileged: "true"
   docker_volumes:
-    - /root/approle:/approle:ro
-    - /root/ansible-vault-password:/automation/ansible-vault-password:ro
-    - /root/iac-configure.key:/automation/iac-configure.key:ro
-    - /root/iac-deploy.key:/automation/iac-deploy.key:ro
-    - /root/linode-token:/automation/linode-token:ro
+    - "{{ folder_secrets_approle }}:/approle:ro"
+    - "{{ folder_secrets_automation }}:/automation:ro"
+    - "{{ folder_raid }}/{{ names.raid }}-green:/tfstate:rw"
     - /var/run/docker.sock:/var/run/docker.sock:rw
     - /root/.docker:/root/.docker:rw
-    - "/root/smb/mounts/{{ names.raid }}-green:/tfstate:rw"

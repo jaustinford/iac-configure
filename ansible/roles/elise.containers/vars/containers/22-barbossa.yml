@@ -32,6 +32,6 @@ container:
     TZ: "{{ names.local_timezone }}"
   ports: []
   volumes:
-    - /root/approle/barbossa.json:/approle/barbossa.json:ro
+    - "{{ folder_secrets_approle }}/barbossa.json:/approle/barbossa.json:ro"
     - "{{ folder_raid }}/{{ names.raid }}-black_rw:/downloads:rw"
   wait_port: "0"

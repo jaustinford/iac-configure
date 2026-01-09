@@ -43,9 +43,9 @@ container:
     ELISE_PROJECT_EXPRESSVPN_SERVER: "{{ lookup('env', 'ELISE_PROJECT_EXPRESSVPN_SERVER') }}"
   ports: []
   volumes:
-    - /root/approle/iac-configure.json:/approle/iac-configure.json:ro
-    - /root/ansible-vault-password:/automation/ansible-vault-password:ro
-    - /root/iac-configure.key:/automation/iac-configure.key:ro
+    - "{{ folder_secrets_approle }}/iac-configure.json:/approle/iac-configure.json:ro"
+    - "{{ folder_secrets_automation }}/ansible-vault-password:/automation/ansible-vault-password:ro"
+    - "{{ folder_secrets_automation }}/iac-configure.key:/automation/iac-configure.key:ro"
     - /var/run/docker.sock:/var/run/docker.sock:rw
     - /root/.docker:/root/.docker:rw
   wait_port: "0"

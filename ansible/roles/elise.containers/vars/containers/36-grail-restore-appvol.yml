@@ -34,7 +34,7 @@ container:
     BACKUP_DISK_MOUNTPOINT: /grail-src
   ports: []
   volumes:
-    - /root/approle/grail.json:/approle/grail.json:ro
+    - "{{ folder_secrets_approle }}/grail.json:/approle/grail.json:ro"
     - /mnt/grail:/grail-disk:rw
     - /mnt/dfs_lvm/lab_dfs:/grail-dst:rw
   wait_port: "0"
