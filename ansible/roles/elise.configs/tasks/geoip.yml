@@ -2,9 +2,9 @@
 - name: GEOIP - download database
   ansible.builtin.get_url:
     url: "https://download.maxmind.com/app/geoip_download?edition_id={{ item }}&license_key={{ secrets.external.maxmind.license_key }}&suffix=tar.gz"
-    dest: /root/geoip
-    owner: root
-    group: root
+    dest: "{{ folder_container_app }}/nginx/geoip/download"
+    owner: "{{ assignments.nginx.uid }}"
+    group: "{{ assignments.nginx.uid }}"
     mode: '0640'
   when: internet_found == 'yes'
   become: true
@@ -12,11 +12,10 @@
 - name: GEOIP - discover directory
   ansible.builtin.command: |
     /bin/bash -c '
-      find /root/geoip -type f -name '*.tar.gz' \
+      find {{ folder_container_app }}/nginx/geoip/download -type f -name '*.tar.gz' -exec basename {} \; \
         | grep '{{ item }}' \
         | sort \
         | tail -1 \
-        | cut -d '/' -f4 \
         | cut -d '.' -f1
     '
   register: db_directory
@@ -25,8 +24,8 @@
 
 - name: GEOIP - unarchive database
   ansible.builtin.unarchive:
-    src: "/root/geoip/{{ db_directory.stdout }}.tar.gz"
-    dest: /root/geoip
+    src: "{{ folder_container_app }}/nginx/geoip/download/{{ db_directory.stdout }}.tar.gz"
+    dest: "{{ folder_container_app }}/nginx/geoip/download"
     owner: "{{ assignments.nginx.uid }}"
     group: "{{ assignments.nginx.uid }}"
     mode: '0640'
@@ -35,8 +34,8 @@
 
 - name: GEOIP - move database
   ansible.builtin.copy:
-    src: "/root/geoip/{{ db_directory.stdout }}/{{ item }}.mmdb"
-    dest: "{{ lab.dirs.app_data }}/nginx/geoip/{{ item }}.mmdb"
+    src: "{{ folder_container_app }}/nginx/geoip/download/{{ db_directory.stdout }}/{{ item }}.mmdb"
+    dest: "{{ folder_container_app }}/nginx/geoip/{{ item }}.mmdb"
     owner: "{{ assignments.nginx.uid }}"
     group: "{{ assignments.nginx.uid }}"
     mode: '0640'
