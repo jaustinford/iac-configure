@@ -34,8 +34,8 @@ container:
     TZ: "{{ names.local_timezone }}"
   ports: []
   volumes:
-    - "{{ lab.dirs.app_data }}/runner/config:/etc/gitlab-runner:rw"
-    - "{{ lab.dirs.app_data }}/runner/cache:/cache:rw"
+    - "{{ folder_container_app }}/runner/config:/etc/gitlab-runner:rw"
+    - "{{ folder_container_app }}/runner/cache:/cache:rw"
     - "{{ folder_secrets_docker }}:/root/.docker:rw"
     - /var/run/docker.sock:/var/run/docker.sock:rw
   wait_port: "0"

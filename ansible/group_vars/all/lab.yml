@@ -2,13 +2,6 @@
 lab:
   domain: pendragonlab.com
 
-  dirs:
-    app_data: /lab/app_data
-    config: /lab/config
-    owner: root
-    group: root
-    mode: '0770'
-
   elastic_version: 9.1.5
 
   task_globals:

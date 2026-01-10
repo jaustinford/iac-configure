@@ -33,5 +33,5 @@ container:
     TZ: "{{ names.local_timezone }}"
   ports: []
   volumes:
-    - "{{ lab.dirs.config }}/squid/squid.conf:/etc/squid/squid.conf:ro"
+    - "{{ folder_container_config }}/squid/squid.conf:/etc/squid/squid.conf:ro"
   wait_port: "{{ ports.expressvpn_squid }}"

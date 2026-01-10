@@ -40,5 +40,5 @@ container:
   ports:
     - "{{ keycloak_vlan_40_address }}:{{ ports.keycloak_web }}:8080/tcp"
   volumes:
-    - "{{ lab.dirs.app_data }}/keycloak/data:/opt/keycloak/data:rw"
+    - "{{ folder_container_app }}/keycloak/data:/opt/keycloak/data:rw"
   wait_port: "{{ ports.keycloak_web }}"

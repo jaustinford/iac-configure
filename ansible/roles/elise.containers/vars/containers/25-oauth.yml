@@ -37,5 +37,5 @@ container:
   ports:
     - "{{ oauth_vlan_40_address }}:{{ ports.oauth_web }}:4180/tcp"
   volumes:
-    - "{{ lab.dirs.config }}/oauth/oauth2-proxy.cfg:/etc/oauth2-proxy.cfg:ro"
+    - "{{ folder_container_config }}/oauth/oauth2-proxy.cfg:/etc/oauth2-proxy.cfg:ro"
   wait_port: "0"

@@ -38,5 +38,5 @@ container:
     - "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_hosted }}:{{ ports.nexus_docker_hosted }}/tcp"
     - "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}:{{ ports.nexus_docker_proxy }}/tcp"
   volumes:
-    - "{{ lab.dirs.app_data }}/nexus/data:/nexus-data:rw"
+    - "{{ folder_container_app }}/nexus/data:/nexus-data:rw"
   wait_port: "{{ ports.nexus_docker_proxy }}"

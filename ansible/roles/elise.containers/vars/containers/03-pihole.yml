@@ -38,5 +38,5 @@ container:
     - "{{ pihole_vlan_40_address }}:53:53/udp"
     - "{{ pihole_vlan_40_address }}:{{ ports.pihole_web }}:80/tcp"
   volumes:
-    - "{{ lab.dirs.app_data }}/pihole/data:/etc/pihole:rw"
+    - "{{ folder_container_app }}/pihole/data:/etc/pihole:rw"
   wait_port: "{{ ports.pihole_web }}"

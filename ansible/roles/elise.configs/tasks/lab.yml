@@ -1,13 +1,4 @@
 ---
-- name: LAB - ensure config directory
-  ansible.builtin.file:
-    path: "{{ lab.dirs.config }}"
-    state: directory
-    owner: "{{ lab.dirs.owner }}"
-    group: "{{ lab.dirs.group }}"
-    mode: "{{ lab.dirs.mode }}"
-  become: true
-
 - name: "LAB - resolve expressvpn server"
   delegate_to: localhost
   expressvpn_selector:

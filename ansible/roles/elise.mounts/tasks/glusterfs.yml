@@ -3,9 +3,9 @@
   ansible.builtin.file:
     path: "{{ item.path }}"
     state: directory
-    owner: "{{ lab.dirs.owner }}"
-    group: "{{ lab.dirs.group }}"
-    mode: "{{ lab.dirs.mode }}"
+    owner: root
+    group: root
+    mode: "0700"
   become: true
 
 - name: "GLUSTERFS - mount volume {{ item.path }}"

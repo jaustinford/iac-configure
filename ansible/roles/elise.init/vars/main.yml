@@ -16,13 +16,13 @@ lab_filesystem:
     mode: "0750"
 
   - path: "{{ folder_container_app }}"
-    owner: "{{ names.users.host.iac }}"
-    group: "{{ names.users.host.engineer }}"
+    owner: root
+    group: "{{ names.groups.devops.name }}"
     mode: "0750"
 
   - path: "{{ folder_container_config }}"
-    owner: "{{ names.users.host.iac }}"
-    group: "{{ names.users.host.engineer }}"
+    owner: root
+    group: "{{ names.groups.devops.name }}"
     mode: "0750"
 
   - path: "{{ folder_secrets }}"

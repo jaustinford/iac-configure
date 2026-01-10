@@ -2,13 +2,3 @@
 - name: MAIN - include pi tasks
   ansible.builtin.include_tasks: pi.yml
   when: ansible_architecture == "aarch64"
-
-- name: MAIN - ensure app_data directory
-  ansible.builtin.file:
-    path: "{{ lab.dirs.app_data }}"
-    state: directory
-    owner: "{{ lab.dirs.owner }}"
-    group: "{{ lab.dirs.group }}"
-    mode: "{{ lab.dirs.mode }}"
-  become: true
-  when: ansible_architecture == "aarch64"

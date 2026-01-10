@@ -9,9 +9,9 @@
   notify: MAIN - docker restart nginx
   with_items:
     - src: nginx.crt
-      dest: "{{ lab.dirs.config }}/nginx/nginx.crt"
+      dest: "{{ folder_container_config }}/nginx/nginx.crt"
       mode: '0644'
 
     - src: nginx.crt.key
-      dest: "{{ lab.dirs.config }}/nginx/nginx.crt.key"
+      dest: "{{ folder_container_config }}/nginx/nginx.crt.key"
       mode: '0600'

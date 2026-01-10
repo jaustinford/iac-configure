@@ -35,8 +35,8 @@ container:
   ports:
     - "{{ zoneminder_vlan_40_address }}:{{ ports.zoneminder_web }}:80/tcp"
   volumes:
-    - "{{ lab.dirs.app_data }}/zoneminder/config:/config:rw"
-    - "{{ lab.dirs.app_data }}/zoneminder/recordings:/zm_recordings:rw"
-    - "{{ lab.dirs.config }}/zoneminder/ssmtp.conf:/etc/ssmtp/ssmtp.conf:ro"
-    - "{{ lab.dirs.config }}/zoneminder/revaliases:/etc/ssmtp/revaliases:ro"
+    - "{{ folder_container_app }}/zoneminder/config:/config:rw"
+    - "{{ folder_container_app }}/zoneminder/recordings:/zm_recordings:rw"
+    - "{{ folder_container_config }}/zoneminder/ssmtp.conf:/etc/ssmtp/ssmtp.conf:ro"
+    - "{{ folder_container_config }}/zoneminder/revaliases:/etc/ssmtp/revaliases:ro"
   wait_port: "{{ ports.zoneminder_web }}"

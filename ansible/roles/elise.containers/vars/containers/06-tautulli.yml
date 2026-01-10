@@ -37,5 +37,5 @@ container:
   ports:
     - "{{ tautulli_vlan_40_address }}:{{ ports.tautulli_web }}:8181/tcp"
   volumes:
-    - "{{ lab.dirs.app_data }}/tautulli/config:/config:rw"
+    - "{{ folder_container_app }}/tautulli/config:/config:rw"
   wait_port: "{{ ports.tautulli_web }}"

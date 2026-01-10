@@ -38,7 +38,7 @@ container:
   ports:
     - "{{ gitlab_vlan_40_address }}:{{ ports.gitlab_web }}:80/tcp"
   volumes:
-    - "{{ lab.dirs.app_data }}/gitlab/config:/etc/gitlab:rw"
-    - "{{ lab.dirs.app_data }}/gitlab/logs:/var/log/gitlab:rw"
-    - "{{ lab.dirs.app_data }}/gitlab/data:/var/opt/gitlab:rw"
+    - "{{ folder_container_app }}/gitlab/config:/etc/gitlab:rw"
+    - "{{ folder_container_app }}/gitlab/logs:/var/log/gitlab:rw"
+    - "{{ folder_container_app }}/gitlab/data:/var/opt/gitlab:rw"
   wait_port: "{{ ports.gitlab_web }}"

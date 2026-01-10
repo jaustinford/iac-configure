@@ -34,6 +34,6 @@ container:
   ports:
     - "{{ elasticsearch_vlan_40_address }}:{{ ports.elasticsearch_db }}:9200/tcp"
   volumes:
-    - "{{ lab.dirs.app_data }}/elasticsearch/data:/usr/share/elasticsearch/data:rw"
-    - "{{ lab.dirs.config }}/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro"
+    - "{{ folder_container_app }}/elasticsearch/data:/usr/share/elasticsearch/data:rw"
+    - "{{ folder_container_config }}/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro"
   wait_port: "{{ ports.elasticsearch_db }}"

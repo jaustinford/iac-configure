@@ -40,5 +40,5 @@ container:
     - "{{ openvpnas_vlan_30_address }}:{{ ports.openvpnas_vpn }}:1194/tcp"
     - "{{ openvpnas_vlan_40_address }}:{{ ports.openvpnas_vpn }}:1194/tcp"
   volumes:
-    - "{{ lab.dirs.app_data }}/openvpnas/openvpn:/openvpn:rw"
+    - "{{ folder_container_app }}/openvpnas/openvpn:/openvpn:rw"
   wait_port: "{{ ports.openvpnas_vpn }}"

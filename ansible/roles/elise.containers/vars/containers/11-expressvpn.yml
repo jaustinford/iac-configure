@@ -40,5 +40,5 @@ container:
     - "{{ expressvpn_vlan_30_address }}:{{ ports.expressvpn_squid }}:3128/tcp"
     - "{{ expressvpn_vlan_40_address }}:{{ ports.expressvpn_deluge }}:8112/tcp"
   volumes:
-    - "{{ lab.dirs.config }}/expressvpn/vpn:/vpn:ro"
+    - "{{ folder_container_config }}/expressvpn/vpn:/vpn:ro"
   wait_port: "0"

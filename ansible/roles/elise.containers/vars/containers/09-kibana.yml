@@ -35,5 +35,5 @@ container:
   ports:
     - "{{ kibana_vlan_40_address }}:{{ ports.kibana_web }}:5601/tcp"
   volumes:
-    - "{{ lab.dirs.config }}/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml:ro"
+    - "{{ folder_container_config }}/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml:ro"
   wait_port: "{{ ports.kibana_web }}"

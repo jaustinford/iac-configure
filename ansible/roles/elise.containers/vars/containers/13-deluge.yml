@@ -34,10 +34,10 @@ container:
     PGID: "{{ names.groups.raid.id }}"
   ports: []
   volumes:
+    - "{{ folder_container_app }}/deluge/plugins:/config/plugins:rw"
+    - "{{ folder_container_config }}/deluge/auth:/config/auth:ro"
+    - "{{ folder_container_config }}/deluge/core.conf:/config/core.conf:ro"
+    - "{{ folder_container_config }}/deluge/hostlist.conf:/config/hostlist.conf:ro"
+    - "{{ folder_container_config }}/deluge/web.conf:/config/web.conf:ro"
     - "{{ folder_raid }}/{{ names.raid }}-black_rw:/downloads:rw"
-    - "{{ lab.dirs.config }}/deluge/auth:/config/auth:ro"
-    - "{{ lab.dirs.config }}/deluge/core.conf:/config/core.conf:ro"
-    - "{{ lab.dirs.config }}/deluge/hostlist.conf:/config/hostlist.conf:ro"
-    - "{{ lab.dirs.config }}/deluge/web.conf:/config/web.conf:ro"
-    - "{{ lab.dirs.app_data }}/deluge/plugins:/config/plugins:rw"
   wait_port: "{{ ports.expressvpn_deluge }}"
