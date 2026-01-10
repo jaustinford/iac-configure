@@ -10,5 +10,5 @@ runner:
     - "{{ folder_secrets_approle }}:/approle:ro"
     - "{{ folder_secrets_automation }}:/automation:ro"
     - "{{ folder_secrets_docker }}:/root/.docker:rw"
-    - "{{ folder_raid }}/{{ names.raid }}-green:/tfstate:rw"
+    - "{{ folder_raid }}/{{ names.raid }}-green_rw:/tfstate:rw"
     - /var/run/docker.sock:/var/run/docker.sock:rw
