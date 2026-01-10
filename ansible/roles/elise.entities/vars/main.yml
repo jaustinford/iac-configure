@@ -158,7 +158,6 @@ entities:
       host: docker00
       profile: "{{ profiles.iac }}"
       groups:
-        - "{{ names.users.host.engineer }}"
         - "{{ names.groups.devops.name }}"
       home: "/home/{{ names.users.host.iac }}"
       sshkeys:
@@ -173,7 +172,6 @@ entities:
       host: docker01
       profile: "{{ profiles.iac }}"
       groups:
-        - "{{ names.users.host.engineer }}"
         - "{{ names.groups.devops.name }}"
       home: "/home/{{ names.users.host.iac }}"
       sshkeys:
@@ -187,7 +185,6 @@ entities:
       host: docker02
       profile: "{{ profiles.iac }}"
       groups:
-        - "{{ names.users.host.engineer }}"
         - "{{ names.groups.devops.name }}"
       home: "/home/{{ names.users.host.iac }}"
       sshkeys:

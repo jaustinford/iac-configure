@@ -35,5 +35,5 @@ container:
   ports: []
   volumes:
     - "{{ folder_secrets_approle }}/grail.json:/approle/grail.json:ro"
-    - /mnt/grail:/grail-disk:rw
+    - "{{ folder_raid_grail }}/grail:/grail-disk:rw"
   wait_port: "0"
