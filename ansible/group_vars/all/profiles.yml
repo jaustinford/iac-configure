@@ -20,7 +20,7 @@ profiles:
 
   iac:
     state: present
-    greeting: Your Majesty
+    greeting: Your Royal Highness
     colors:
       primary: purple
       secondary: white
