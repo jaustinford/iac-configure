@@ -93,7 +93,7 @@ export TZ="America/Denver"
 
 if [ "${MSYSTEM}" != 'MINGW64' ]; then
     first_word="{{ item.profile.greeting.split()[0] }}"
-    other_words="\033[3;${primary_color}m{{ item.profile.greeting.split()[1:] }}\033[0;0m"
+    other_words="\033[3;${primary_color}m{{ item.profile.greeting.split()[1:].join(' ') }}\033[0;0m"
 
     clear
     cat ~/.motd
