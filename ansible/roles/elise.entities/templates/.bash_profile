@@ -101,7 +101,8 @@ if [ "${MSYSTEM}" != 'MINGW64' ]; then
     first_word="{{ item.profile.greeting.split()[0] }}"
     other_words="\033[3;${primary_color}m{{ item.profile.greeting.split()[1:] | join(' ') }}\033[0;0m"
 
-    if [ "$(hostname)" != "{{ names.hosts.portal }}.{{ lab.domain }}" ]; then
+    if [ "$(hostname)" != "{{ names.hosts.portal }}.{{ lab.domain }}" ] && \
+       [ "$(whoami)" != 'root' ]; then
         clear
         cat ~/.motd
 
