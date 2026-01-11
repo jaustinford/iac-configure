@@ -3,6 +3,8 @@
   ansible.builtin.template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
+    owner: "{{ assignments.nginx.uid }}"
+    group: "{{ assignments.nginx.uid }}"
     mode: "{{ item.mode }}"
   become: true
   no_log: true
