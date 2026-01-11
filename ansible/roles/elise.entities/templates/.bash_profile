@@ -101,7 +101,11 @@ if [ "${MSYSTEM}" != 'MINGW64' ]; then
     first_word="{{ item.profile.greeting.split()[0] }}"
     other_words="\033[3;${primary_color}m{{ item.profile.greeting.split()[1:] | join(' ') }}\033[0;0m"
 
-    cat ~/.motd
+    if [ "$(hostname)" != "{{ names.hosts.portal }}.{{ lab.domain }}" ]; then
+        clear
+        cat ~/.motd
+
+    fi
 
     echo -e "\n      ${first_word} ${other_words},"
 
