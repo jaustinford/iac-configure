@@ -2,40 +2,6 @@
 services:
 
   ############################################################
-  # setup
-  ############################################################
-
-  setup:
-    image: docker-hosted.proxy-int.pendragonlab.com/elise/iac-configure:main
-    entrypoint:
-      - /bin/bash
-      - -c
-      - |
-        /bin/container-init.sh ;
-        ansible ${SETUP_TARGET} \
-            --module-name ansible.builtin.setup \
-            -vv
-
-    profiles:
-      - setup
-
-    environment:
-      - TZ=America/Denver
-
-    volumes:
-      - type: bind
-        source: ${USER_KEYFOLDER}
-        target: /automation
-        read_only: true
-
-    network_mode: host
-
-    logging:
-      options:
-        max-size: 10m
-        max-file: '10'
-
-  ############################################################
   # site
   ############################################################
 
@@ -76,48 +42,6 @@ services:
       - type: bind
         source: ${USER_HOME}/.docker
         target: /root/.docker
-        read_only: true
-
-      - type: bind
-        source: ${IAC_CONFIGURE_PROJECT_DIR}/ansible
-        target: /etc/ansible
-        read_only: false
-
-    network_mode: host
-
-    logging:
-      options:
-        max-size: 10m
-        max-file: '10'
-
-  ############################################################
-  # ping
-  ############################################################
-
-  ping:
-    image: docker-hosted.proxy-int.pendragonlab.com/elise/iac-configure:main
-    entrypoint:
-      - /bin/bash
-      - -c
-      - |
-        /bin/container-init.sh ;
-        ansible-playbook \
-            /etc/ansible/linode.yml \
-            --extra-vars '{"cycle_mode": "{{ cycles.up }}", "internet_check": {"status": 200}}' ;
-        ansible all \
-            --module-name ansible.builtin.ping \
-            -vv
-
-    profiles:
-      - ping
-
-    environment:
-      - TZ=America/Denver
-
-    volumes:
-      - type: bind
-        source: ${USER_KEYFOLDER}
-        target: /automation
         read_only: true
 
       - type: bind

@@ -3,6 +3,7 @@ ports:
   nexus_web: "32500"
   nexus_docker_hosted: "32501"
   nexus_docker_proxy: "32502"
+  vault_web: "32524"
   pihole_web: "32503"
   nginx_web: "32504"
   plex_web: "32505"
@@ -24,4 +25,3 @@ ports:
   keycloak_web: "32521"
   redis_db: "32522"
   oauth_web: "32523"
-  vault_web: "32524"

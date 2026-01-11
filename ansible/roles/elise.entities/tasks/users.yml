@@ -50,3 +50,4 @@
     - .bash_profile
     - .hushlogin
     - .vimrc
+    - .motd

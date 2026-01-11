@@ -79,15 +79,30 @@ ${c_escape}${s_regular};${c_tertiary}${c_close}\w${c_reset}\n   \
 ${c_escape}${s_regular};${c_primary}${c_close}\$${c_reset} "
 }
 
+primary_color=$(resolve_color_code "${COLOR_NAME_PRIMARY}")
+secondary_color=$(resolve_color_code "${COLOR_NAME_SECONDARY}")
+tertiary_color=$(resolve_color_code "${COLOR_NAME_TERTIARY}")
+
 alias tree="tree -aC"
-alias ls="ls --color=auto"
+alias ls="ls --color=auto -G"
 alias grep="grep --color=auto"
 alias egrep="egrep --color=auto"
 alias _source="source ~/.bash_profile"
 
 export TZ="America/Denver"
 
+if [ "${MSYSTEM}" != 'MINGW64' ]; then
+    first_word="{{ item.profile.greeting.split()[0] }}"
+    second_word="\033[3;${primary_color}m{{ item.profile.greeting.split()[1] }}\033[0;0m"
+
+    clear
+    cat ~/.motd
+
+    echo -e "\n      ${first_word} ${second_word},"
+
+fi
+
 export_ps1 \
-    $(resolve_color_code "${COLOR_NAME_PRIMARY}") \
-    $(resolve_color_code "${COLOR_NAME_SECONDARY}") \
-    $(resolve_color_code "${COLOR_NAME_TERTIARY}")
+    ${primary_color} \
+    ${secondary_color} \
+    ${tertiary_color}
