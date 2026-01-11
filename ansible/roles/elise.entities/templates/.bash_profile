@@ -10,9 +10,16 @@ else
     COLOR_NAME_SECONDARY="{{ item.profile.colors.secondary }}"
     COLOR_NAME_TERTIARY="{{ item.profile.colors.tertiary }}"
 
-    if [ "$(hostname)" == "{{ names.hosts.nas }}.{{ lab.domain }}" ] && \
-       [ "$(whoami)" == "{{ names.users.host.admin }}" ]; then
-        cd "/mnt/{{ names.raid }}/root"
+    if [ "$(hostname)" == "{{ names.hosts.nas }}.{{ lab.domain }}" ]; then
+        alias ls="ls -G"
+
+        if [ "$(whoami)" == "{{ names.users.host.admin }}" ]; then
+            cd "/mnt/{{ names.raid }}/root"
+
+        fi
+
+    else
+        alias ls="ls --color=auto"
 
     fi
 
@@ -84,7 +91,6 @@ secondary_color=$(resolve_color_code "${COLOR_NAME_SECONDARY}")
 tertiary_color=$(resolve_color_code "${COLOR_NAME_TERTIARY}")
 
 alias tree="tree -aC"
-alias ls="ls --color=auto -G"
 alias grep="grep --color=auto"
 alias egrep="egrep --color=auto"
 alias _source="source ~/.bash_profile"
@@ -95,7 +101,6 @@ if [ "${MSYSTEM}" != 'MINGW64' ]; then
     first_word="{{ item.profile.greeting.split()[0] }}"
     other_words="\033[3;${primary_color}m{{ item.profile.greeting.split()[1:] | join(' ') }}\033[0;0m"
 
-    clear
     cat ~/.motd
 
     echo -e "\n      ${first_word} ${other_words},"
