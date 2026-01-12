@@ -7,14 +7,20 @@ Host_Alias DOCKER_HOSTS = \
     {{ names.hosts.docker01 }}.{{ lab.domain }}, \
     {{ names.hosts.docker02 }}.{{ lab.domain }}
 
+Host_Alias UBUNTU_HOSTS = \
+    DOCKER_HOSTS, \
+    {{ names.hosts.portal }}.{{ lab.domain }}
+
 ############################################################
 # commands
 ############################################################
 
-Cmnd_Alias DOCKER_NOPASSWD = \
-    /usr/bin/docker ps, \
-    /usr/bin/docker image ls, \
-    /usr/bin/docker logs *
+Cmnd_Alias GENERAL_PASSWD = \
+    /usr/bin/systemctl restart tunnel-*, \
+    /usr/bin/systemctl restart nginx
+
+Cmnd_Alias GENERAL_NOPASSWD = \
+    /usr/bin/netstat *
 
 Cmnd_Alias DOCKER_PASSWD = \
     /usr/bin/docker start *, \
@@ -22,14 +28,28 @@ Cmnd_Alias DOCKER_PASSWD = \
     /usr/bin/docker login *, \
     /usr/bin/docker pull *
 
+Cmnd_Alias DOCKER_NOPASSWD = \
+    /usr/bin/docker ps, \
+    /usr/bin/docker ps *, \
+    /usr/bin/docker image ls, \
+    /usr/bin/docker volume ls, \
+    /usr/bin/docker logs *
+
+Cmnd_Alias ANSIBLE_WRAPPER = \
+    /bin/sh -c \
+        echo BECOME-SUCCESS-* ; \
+        */python3 */.ansible/tmp/ansible-tmp-*/*.py
+
 ############################################################
 # assignments
 ############################################################
 
 {{ names.users.host.admin }}    ALL=(root) NOPASSWD: ALL
-{{ names.users.host.iac }}      ALL=(root) ALL
+{{ names.users.host.iac }}      ALL=(root) ANSIBLE_WRAPPER
 
 {% if inventory_hostname != "nas" %}
 {{ names.users.host.engineer }} \
     DOCKER_HOSTS=(root) DOCKER_PASSWD, NOPASSWD: DOCKER_NOPASSWD
+{{ names.users.host.engineer }} \
+    UBUNTU_HOSTS=(root) GENERAL_PASSWD, NOPASSWD: GENERAL_NOPASSWD
 {% endif %}
