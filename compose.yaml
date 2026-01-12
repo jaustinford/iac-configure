@@ -44,11 +44,6 @@ services:
         target: /root/.docker
         read_only: true
 
-      - type: bind
-        source: ${IAC_CONFIGURE_PROJECT_DIR}/ansible
-        target: /etc/ansible
-        read_only: false
-
     network_mode: host
 
     logging:

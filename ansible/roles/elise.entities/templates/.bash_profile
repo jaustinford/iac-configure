@@ -1,35 +1,5 @@
 #!/usr/bin/env bash
 
-if [ "${MSYSTEM}" == 'MINGW64' ]; then
-    COLOR_NAME_PRIMARY='red'
-    COLOR_NAME_SECONDARY='white'
-    COLOR_NAME_TERTIARY='lightgrey'
-
-else
-    COLOR_NAME_PRIMARY="{{ item.profile.colors.primary }}"
-    COLOR_NAME_SECONDARY="{{ item.profile.colors.secondary }}"
-    COLOR_NAME_TERTIARY="{{ item.profile.colors.tertiary }}"
-
-    if [ "$(hostname)" == "{{ names.hosts.nas }}.{{ lab.domain }}" ]; then
-        alias ls="ls -G"
-
-        if [ "$(whoami)" == "{{ names.users.host.admin }}" ]; then
-            cd "/mnt/{{ names.raid }}/root"
-
-        fi
-
-    else
-        alias ls="ls --color=auto"
-
-    fi
-
-    if [ "$(hostname)" == "{{ names.hosts.docker00 }}.{{ lab.domain }}" ]; then cd "{{ folder_root }}"
-    elif [ "$(hostname)" == "{{ names.hosts.docker01 }}.{{ lab.domain }}" ]; then cd "{{ folder_root }}"
-    elif [ "$(hostname)" == "{{ names.hosts.docker02 }}.{{ lab.domain }}" ]; then cd "{{ folder_root }}"
-    fi
-
-fi
-
 resolve_color_code() {
     color_name_query="${1}"
 
@@ -86,6 +56,55 @@ ${c_escape}${s_regular};${c_tertiary}${c_close}\w${c_reset}\n   \
 ${c_escape}${s_regular};${c_primary}${c_close}\$${c_reset} "
 }
 
+print_greeting() {
+    c_primary="${1}"
+
+    if [ "${MSYSTEM}" != 'MINGW64' ]; then
+        first_word="{{ item.profile.greeting.split()[0] }}"
+        other_words="\033[3;${c_primary}m{{ item.profile.greeting.split()[1:] | join(' ') }}\033[0;0m"
+
+        if [ "$(hostname)" != "{{ names.hosts.portal }}.{{ lab.domain }}" ] && \
+           [ "$(whoami)" != 'root' ]; then
+            clear
+            cat ~/.motd
+
+        fi
+
+        echo -e "\n      ${first_word} ${other_words},"
+
+    fi
+}
+
+if [ "${MSYSTEM}" == 'MINGW64' ]; then
+    COLOR_NAME_PRIMARY='red'
+    COLOR_NAME_SECONDARY='white'
+    COLOR_NAME_TERTIARY='lightgrey'
+
+else
+    COLOR_NAME_PRIMARY="{{ item.profile.colors.primary }}"
+    COLOR_NAME_SECONDARY="{{ item.profile.colors.secondary }}"
+    COLOR_NAME_TERTIARY="{{ item.profile.colors.tertiary }}"
+
+    if [ "$(hostname)" == "{{ names.hosts.nas }}.{{ lab.domain }}" ]; then
+        alias ls="ls -G"
+
+        if [ "$(whoami)" == "{{ names.users.host.admin }}" ]; then
+            cd "/mnt/{{ names.raid }}/root"
+
+        fi
+
+    else
+        alias ls="ls --color=auto"
+
+    fi
+
+    if [ "$(hostname)" == "{{ names.hosts.docker00 }}.{{ lab.domain }}" ]; then cd "{{ folder_root }}"
+    elif [ "$(hostname)" == "{{ names.hosts.docker01 }}.{{ lab.domain }}" ]; then cd "{{ folder_root }}"
+    elif [ "$(hostname)" == "{{ names.hosts.docker02 }}.{{ lab.domain }}" ]; then cd "{{ folder_root }}"
+    fi
+
+fi
+
 primary_color=$(resolve_color_code "${COLOR_NAME_PRIMARY}")
 secondary_color=$(resolve_color_code "${COLOR_NAME_SECONDARY}")
 tertiary_color=$(resolve_color_code "${COLOR_NAME_TERTIARY}")
@@ -97,20 +116,7 @@ alias _source="source ~/.bash_profile"
 
 export TZ="America/Denver"
 
-if [ "${MSYSTEM}" != 'MINGW64' ]; then
-    first_word="{{ item.profile.greeting.split()[0] }}"
-    other_words="\033[3;${primary_color}m{{ item.profile.greeting.split()[1:] | join(' ') }}\033[0;0m"
-
-    if [ "$(hostname)" != "{{ names.hosts.portal }}.{{ lab.domain }}" ] && \
-       [ "$(whoami)" != 'root' ]; then
-        clear
-        cat ~/.motd
-
-    fi
-
-    echo -e "\n      ${first_word} ${other_words},"
-
-fi
+print_greeting ${primary_color}
 
 export_ps1 \
     ${primary_color} \
