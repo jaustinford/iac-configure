@@ -4,8 +4,8 @@
     url: "{{ beats.download_url }}/{{ item.name }}/{{ item.name }}-{{ lab.elastic_version }}-{{ os_distro }}.deb"
     method: GET
     dest: "/var/tmp/{{ item.name }}-{{ lab.elastic_version }}-{{ os_distro }}.deb"
-    owner: "{{ names.users.host.iac }}"
-    group: "{{ names.users.host.iac }}"
+    owner: "{{ names.users.host.iac.name }}"
+    group: "{{ names.users.host.iac.name }}"
     mode: "0640"
     status_code:
       - 200

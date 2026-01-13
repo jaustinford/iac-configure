@@ -1,18 +1,18 @@
 ---
 lab_filesystem:
   - path: "{{ folder_root }}"
-    owner: "{{ names.users.host.admin }}"
+    owner: "{{ names.users.host.admin.name }}"
     group: "{{ names.groups.devops.name }}"
     mode: "0750"
 
   - path: "{{ folder_automation }}"
-    owner: "{{ names.users.host.iac }}"
-    group: "{{ names.users.host.iac }}"
+    owner: "{{ names.users.host.iac.name }}"
+    group: "{{ names.users.host.iac.name }}"
     mode: "0750"
 
   - path: "{{ folder_container }}"
-    owner: "{{ names.users.host.iac }}"
-    group: "{{ names.users.host.engineer }}"
+    owner: "{{ names.users.host.iac.name }}"
+    group: "{{ names.users.host.engineer.name }}"
     mode: "0750"
 
   - path: "{{ folder_container_app }}"
@@ -26,41 +26,41 @@ lab_filesystem:
     mode: "0750"
 
   - path: "{{ folder_secrets }}"
-    owner: "{{ names.users.host.admin }}"
-    group: "{{ names.users.host.admin }}"
+    owner: "{{ names.users.host.admin.name }}"
+    group: "{{ names.users.host.admin.name }}"
     mode: "0700"
 
   - path: "{{ folder_secrets_approle }}"
-    owner: "{{ names.users.host.admin }}"
-    group: "{{ names.users.host.admin }}"
+    owner: "{{ names.users.host.admin.name }}"
+    group: "{{ names.users.host.admin.name }}"
     mode: "0700"
 
   - path: "{{ folder_secrets_automation }}"
-    owner: "{{ names.users.host.admin }}"
-    group: "{{ names.users.host.admin }}"
+    owner: "{{ names.users.host.admin.name }}"
+    group: "{{ names.users.host.admin.name }}"
     mode: "0700"
 
   - path: "{{ folder_secrets_docker }}"
-    owner: "{{ names.users.host.admin }}"
-    group: "{{ names.users.host.admin }}"
+    owner: "{{ names.users.host.admin.name }}"
+    group: "{{ names.users.host.admin.name }}"
     mode: "0700"
 
   - path: "{{ folder_secrets_raid }}"
-    owner: "{{ names.users.host.admin }}"
-    group: "{{ names.users.host.admin }}"
+    owner: "{{ names.users.host.admin.name }}"
+    group: "{{ names.users.host.admin.name }}"
     mode: "0700"
 
   - path: "{{ folder_ssh_tunnels }}"
-    owner: "{{ names.users.host.iac }}"
+    owner: "{{ names.users.host.iac.name }}"
     group: "{{ names.groups.devops.name }}"
     mode: "0750"
 
   - path: "{{ folder_raid }}"
-    owner: "{{ names.users.host.admin }}"
+    owner: "{{ names.users.host.admin.name }}"
     group: "{{ names.groups.raid.name }}"
     mode: "0770"
 
   - path: "{{ folder_raid_grail }}"
-    owner: "{{ names.users.host.admin }}"
+    owner: "{{ names.users.host.admin.name }}"
     group: "{{ names.groups.raid.name }}"
     mode: "0770"

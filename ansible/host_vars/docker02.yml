@@ -1,11 +1,11 @@
 ---
 ansible_python_interpreter: /usr/bin/python3
 
-# ansible_user: "{{ names.users.host.super }}"
+# ansible_user: "{{ names.users.host.super.name }}"
 # ansible_password: "{{ secrets.users.host.super.docker02 }}"
 # ansible_become_password: "{{ secrets.users.host.super.docker02 }}"
 
-ansible_user: "{{ names.users.host.iac }}"
+ansible_user: "{{ names.users.host.iac.name }}"
 ansible_password: "{{ secrets.users.host.iac.docker02 }}"
 ansible_become_password: "{{ secrets.users.host.iac.docker02 }}"
 

@@ -3,7 +3,7 @@
   ansible.builtin.template:
     src: tunnel.sh
     dest: "{{ folder_ssh_tunnels }}/tunnel-{{ item.name }}.sh"
-    owner: "{{ names.users.host.associate }}"
+    owner: "{{ names.users.host.associate.name }}"
     group: "{{ names.groups.devops.name }}"
     mode: '0740'
   become: true

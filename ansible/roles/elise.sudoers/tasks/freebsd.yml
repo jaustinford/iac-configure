@@ -28,5 +28,5 @@
     mode: '0644'
   become: true
   with_items:
-    - "{{ names.users.host.admin }}"
-    - "{{ names.users.host.iac }}"
+    - "{{ names.users.host.admin.name }}"
+    - "{{ names.users.host.iac.name }}"

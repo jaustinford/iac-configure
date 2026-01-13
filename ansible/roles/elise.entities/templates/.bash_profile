@@ -60,8 +60,8 @@ print_greeting() {
     c_primary="${1}"
 
     if [ "${MSYSTEM}" != 'MINGW64' ]; then
-        first_word="{{ item.profile.greeting.split()[0] }}"
-        other_words="\033[3;${c_primary}m{{ item.profile.greeting.split()[1:] | join(' ') }}\033[0;0m"
+        first_word="{{ names.users.host[item.role].greeting.split()[0] }}"
+        other_words="\033[3;${c_primary}m{{ names.users.host[item.role].greeting.split()[1:] | join(' ') }}\033[0;0m"
 
         if [ "$(hostname)" != "{{ names.hosts.portal }}.{{ lab.domain }}" ] && \
            [ "$(whoami)" != 'root' ]; then
@@ -88,7 +88,7 @@ else
     if [ "$(hostname)" == "{{ names.hosts.nas }}.{{ lab.domain }}" ]; then
         alias ls="ls -G"
 
-        if [ "$(whoami)" == "{{ names.users.host.admin }}" ]; then
+        if [ "$(whoami)" == "{{ names.users.host.admin.name }}" ]; then
             cd "/mnt/{{ names.raid }}/root"
 
         fi

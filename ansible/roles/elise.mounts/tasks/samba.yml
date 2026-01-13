@@ -3,7 +3,7 @@
   ansible.builtin.file:
     path: "{{ item.path }}"
     state: directory
-    owner: "{{ names.users.host.admin }}"
+    owner: "{{ names.users.host.admin.name }}"
     group: "{{ names.groups.raid.name }}"
     mode: "0770"
   become: true
@@ -14,8 +14,8 @@
       username={{ item.username }}
       password={{ item.password }}
     dest: "{{ folder_secrets_raid }}/{{ item.path.split('-')[-1] }}"
-    owner: "{{ names.users.host.admin }}"
-    group: "{{ names.users.host.admin }}"
+    owner: "{{ names.users.host.admin.name }}"
+    group: "{{ names.users.host.admin.name }}"
     mode: "0600"
   become: true
   no_log: true
@@ -26,7 +26,7 @@
     src: "{{ item.src }}"
     opts:
       "credentials={{ folder_secrets_raid }}/{{ item.path.split('-')[-1] }},\
-      uid={{ names.users.host.admin }},\
+      uid={{ names.users.host.admin.name }},\
       gid={{ names.groups.raid.name }},\
       dir_mode=0770,\
       file_mode=0660,\

@@ -44,11 +44,25 @@ names:
 
   users:
     host:
-      super: root       # The Lord, our God Allmighty.
-      admin: king       # Above whom there is only God.
-      iac: queen        # Powerful matriach and executor.
-      engineer: knight  # Defender of the Realm, ample privileges.
-      associate: squire # Meager candidate, no privileges.
+      super:
+        name: root            # The Lord
+        greeting: Holy Father # our God Allmighty.
+
+      admin:
+        name: king             # Above whom
+        greeting: Your Majesty # There is only God.
+
+      iac:
+        name: queen                   # Powerful matriach
+        greeting: Your Royal Highness # and executor.
+
+      engineer:
+        name: knight               # Defender of the Realm
+        greeting: Welcome Good Sir # Ample privileges.
+
+      associate:
+        name: squire                  # Meager candidate
+        greeting: Greetings Candidate # No privileges.
 
     raid:
       red_ro: gawain     # Loyal knight, good friend of Arthur.

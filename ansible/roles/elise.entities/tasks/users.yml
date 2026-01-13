@@ -4,7 +4,7 @@
     name: "{{ item.username }}"
     shell: /bin/bash
     uid: "{{ item.uid }}"
-    state: "{{ item.profile.state }}"
+    state: "{{ item.state }}"
     groups: "{{ item.groups }}"
     force: true
     remove: true
@@ -21,7 +21,7 @@
   become: true
   when:
     item.host != "nas" and
-    item.profile.state == "present"
+    item.state == "present"
 
 - name: "USERS - copy user ssh keys - {{ item.role }}"
   ansible.posix.authorized_key:
@@ -31,7 +31,7 @@
   loop_control:
     loop_var: sshkey
   become: true
-  when: item.profile.state == "present"
+  when: item.state == "present"
   with_items:
     - "{{ item.sshkeys | flatten(levels=1) }}"
 
@@ -45,7 +45,7 @@
   loop_control:
     loop_var: file_name
   become: true
-  when: item.profile.state == "present"
+  when: item.state == "present"
   with_items:
     - .bash_profile
     - .hushlogin

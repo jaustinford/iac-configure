@@ -1,8 +1,6 @@
 ---
 profiles:
   super:
-    state: present
-    greeting: My Lord
     colors:
       primary: lightyellow
       secondary: white
@@ -10,8 +8,6 @@ profiles:
       vim: elflord
 
   admin:
-    state: present
-    greeting: Your Majesty
     colors:
       primary: red
       secondary: white
@@ -19,8 +15,6 @@ profiles:
       vim: elflord
 
   iac:
-    state: present
-    greeting: Your Royal Highness
     colors:
       primary: purple
       secondary: white
@@ -28,8 +22,6 @@ profiles:
       vim: elflord
 
   engineer:
-    state: present
-    greeting: Good Sir
     colors:
       primary: lightblue
       secondary: white
@@ -37,8 +29,6 @@ profiles:
       vim: elflord
 
   associate:
-    state: present
-    greeting: Welcome Candidate
     colors:
       primary: lightgreen
       secondary: white

@@ -3,7 +3,7 @@ Description={{ item.description }}
 After=network.target auditd.service
 
 [Service]
-User={{ names.users.host.associate }}
+User={{ names.users.host.associate.name }}
 WorkingDirectory={{ folder_ssh_tunnels }}
 ExecStart={{ folder_ssh_tunnels }}/tunnel-{{ item.name }}.sh
 KillMode=control-group

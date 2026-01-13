@@ -52,8 +52,8 @@
 
     - src: config.json
       dest: "{{ folder_secrets_docker }}/config.json"
-      owner: "{{ names.users.host.admin }}"
-      group: "{{ names.users.host.admin }}"
+      owner: "{{ names.users.host.admin.name }}"
+      group: "{{ names.users.host.admin.name }}"
       mode: '0600'
 
 - name: MAIN - flush handlers

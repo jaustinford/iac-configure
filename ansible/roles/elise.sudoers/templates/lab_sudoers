@@ -38,12 +38,12 @@ Cmnd_Alias ANSIBLE_WRAPPERS = \
 # assignments
 ############################################################
 
-{{ names.users.host.admin }}    ALL=(root) NOPASSWD: ALL
-{{ names.users.host.iac }}      ALL=(root) ANSIBLE_WRAPPERS
+{{ names.users.host.admin.name }}    ALL=(root) NOPASSWD: ALL
+{{ names.users.host.iac.name }}      ALL=(root) ANSIBLE_WRAPPERS
 
 {% if inventory_hostname != "nas" %}
 {% if inventory_hostname != "portal" %}
-{{ names.users.host.engineer }} {{ ansible_hostname }}=(root) DOCKER_PASSWD, NOPASSWD: DOCKER_NOPASSWD
+{{ names.users.host.engineer.name }} {{ ansible_hostname }}=(root) DOCKER_PASSWD, NOPASSWD: DOCKER_NOPASSWD
 {% endif %}
-{{ names.users.host.engineer }} {{ ansible_hostname }}=(root) GENERAL_PASSWD, NOPASSWD: GENERAL_NOPASSWD
+{{ names.users.host.engineer.name }} {{ ansible_hostname }}=(root) GENERAL_PASSWD, NOPASSWD: GENERAL_NOPASSWD
 {% endif %}
