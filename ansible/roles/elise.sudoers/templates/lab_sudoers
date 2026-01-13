@@ -1,29 +1,15 @@
-{% if inventory_hostname != "nas" %}
-############################################################
-# hosts
-############################################################
-
-Host_Alias DOCKER_HOSTS = \
-    {{ names.hosts.docker00 }}.{{ lab.domain }}, \
-    {{ names.hosts.docker01 }}.{{ lab.domain }}, \
-    {{ names.hosts.docker02 }}.{{ lab.domain }}
-
-Host_Alias UBUNTU_HOSTS = \
-    DOCKER_HOSTS, \
-    {{ names.hosts.portal }}.{{ lab.domain }}
-
-{% endif %}
 ############################################################
 # commands
 ############################################################
-{% if inventory_hostname != "nas" %}
 
+{% if inventory_hostname != "nas" %}
 Cmnd_Alias GENERAL_PASSWD = \
     /usr/bin/systemctl restart tunnel-*, \
     /usr/bin/systemctl restart nginx
 
 Cmnd_Alias GENERAL_NOPASSWD = \
     /usr/bin/netstat *
+{% if inventory_hostname != "portal" %}
 
 Cmnd_Alias DOCKER_PASSWD = \
     /usr/bin/docker start *, \
@@ -38,6 +24,7 @@ Cmnd_Alias DOCKER_NOPASSWD = \
     /usr/bin/docker volume ls, \
     /usr/bin/docker logs *
 {% endif %}
+{% endif %}
 
 Cmnd_Alias ANSIBLE_WRAPPERS = \
     /bin/sh -c \
@@ -45,7 +32,7 @@ Cmnd_Alias ANSIBLE_WRAPPERS = \
         */python3 {{ (lookup("ansible.builtin.file", "/ansible-tmp-path.json") | from_json)[inventory_hostname] }}/*.py, \
     /bin/sh -c \
         echo BECOME-SUCCESS-* ; \
-        /sbin/shutdown -h 0 "Shut down initiated by Ansible"
+        */shutdown -h 0 "Shut down initiated by Ansible"
 
 ############################################################
 # assignments
@@ -55,6 +42,8 @@ Cmnd_Alias ANSIBLE_WRAPPERS = \
 {{ names.users.host.iac }}      ALL=(root) ANSIBLE_WRAPPERS
 
 {% if inventory_hostname != "nas" %}
-{{ names.users.host.engineer }} DOCKER_HOSTS=(root) DOCKER_PASSWD, NOPASSWD: DOCKER_NOPASSWD
-{{ names.users.host.engineer }} UBUNTU_HOSTS=(root) GENERAL_PASSWD, NOPASSWD: GENERAL_NOPASSWD
+{% if inventory_hostname != "portal" %}
+{{ names.users.host.engineer }} {{ ansible_hostname }}=(root) DOCKER_PASSWD, NOPASSWD: DOCKER_NOPASSWD
+{% endif %}
+{{ names.users.host.engineer }} {{ ansible_hostname }}=(root) GENERAL_PASSWD, NOPASSWD: GENERAL_NOPASSWD
 {% endif %}
