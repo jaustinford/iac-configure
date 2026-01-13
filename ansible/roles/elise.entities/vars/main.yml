@@ -281,7 +281,8 @@ entities:
       password: "{{ secrets.users.host.admin.portal }}"
       host: portal
       profile: "{{ profiles.admin }}"
-      groups: []
+      groups:
+        - "{{ names.users.host.iac }}"
       home: "/home/{{ names.users.host.admin }}"
       sshkeys:
         - "{{ sshkeys.founder }}"

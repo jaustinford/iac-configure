@@ -21,10 +21,12 @@ find_internet() {
 convert_mounted_files() {
     cp /automation/ansible-vault-password /ansible-vault-password
     cp /automation/iac-configure.key /iac-configure.key
+    cp /automation/ansible-tmp-path.json /ansible-tmp-path.json
 
     chmod 600 \
         /ansible-vault-password \
-        /iac-configure.key
+        /iac-configure.key \
+        /ansible-tmp-path.json
 }
 
 find_internet
@@ -39,19 +41,27 @@ lab_onprem_docker
 lab_onprem_nas
 
 [lab_onprem_docker]
-docker01 ansible_host='192.168.40.1'
-docker02 ansible_host='192.168.40.2'
-docker00 ansible_host='192.168.40.4'
+docker00 ansible_host='192.168.40.4' ansible_remote_tmp="{{ (lookup('ansible.builtin.file', '/ansible-tmp-path.json') | from_json)['docker00'] }}"
+docker01 ansible_host='192.168.40.1' ansible_remote_tmp="{{ (lookup('ansible.builtin.file', '/ansible-tmp-path.json') | from_json)['docker01'] }}"
+docker02 ansible_host='192.168.40.2' ansible_remote_tmp="{{ (lookup('ansible.builtin.file', '/ansible-tmp-path.json') | from_json)['docker02'] }}"
 
 [lab_onprem_nas]
-nas ansible_host='192.168.40.5'
+nas
+
+[lab_onprem_nas:vars]
+ansible_host='192.168.40.5'
+ansible_remote_tmp="{{ (lookup('ansible.builtin.file', '/ansible-tmp-path.json') | from_json)['nas'] }}"
+
+[lab_linode:vars]
+ansible_host="{{ (lookup('ansible.builtin.file', '/tmp/portal.json') | from_json)['ip_address'] }}"
+ansible_remote_tmp="{{ (lookup('ansible.builtin.file', '/ansible-tmp-path.json') | from_json)['portal'] }}"
 
 [lab_linode]
 EOF
 
 if [ "${INTERNET_FOUND}" == 'yes' ] || [ "${CYCLE_MODE}" == 'up' ]; then
     cat <<EOF >> /etc/ansible_hosts
-portal ansible_host="{{ (lookup('ansible.builtin.file', '/tmp/portal.json') | from_json)['ip_address'] }}"
+portal
 EOF
 
 fi

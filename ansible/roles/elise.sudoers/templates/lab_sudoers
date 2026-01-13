@@ -1,3 +1,4 @@
+{% if inventory_hostname != "nas" %}
 ############################################################
 # hosts
 ############################################################
@@ -11,9 +12,11 @@ Host_Alias UBUNTU_HOSTS = \
     DOCKER_HOSTS, \
     {{ names.hosts.portal }}.{{ lab.domain }}
 
+{% endif %}
 ############################################################
 # commands
 ############################################################
+{% if inventory_hostname != "nas" %}
 
 Cmnd_Alias GENERAL_PASSWD = \
     /usr/bin/systemctl restart tunnel-*, \
@@ -34,22 +37,24 @@ Cmnd_Alias DOCKER_NOPASSWD = \
     /usr/bin/docker image ls, \
     /usr/bin/docker volume ls, \
     /usr/bin/docker logs *
+{% endif %}
 
-Cmnd_Alias ANSIBLE_WRAPPER = \
+Cmnd_Alias ANSIBLE_WRAPPERS = \
     /bin/sh -c \
         echo BECOME-SUCCESS-* ; \
-        */python3 */.ansible/tmp/ansible-tmp-*/*.py
+        */python3 {{ (lookup("ansible.builtin.file", "/ansible-tmp-path.json") | from_json)[inventory_hostname] }}/*.py, \
+    /bin/sh -c \
+        echo BECOME-SUCCESS-* ; \
+        /sbin/shutdown -h 0 "Shut down initiated by Ansible"
 
 ############################################################
 # assignments
 ############################################################
 
 {{ names.users.host.admin }}    ALL=(root) NOPASSWD: ALL
-{{ names.users.host.iac }}      ALL=(root) ANSIBLE_WRAPPER
+{{ names.users.host.iac }}      ALL=(root) ANSIBLE_WRAPPERS
 
 {% if inventory_hostname != "nas" %}
-{{ names.users.host.engineer }} \
-    DOCKER_HOSTS=(root) DOCKER_PASSWD, NOPASSWD: DOCKER_NOPASSWD
-{{ names.users.host.engineer }} \
-    UBUNTU_HOSTS=(root) GENERAL_PASSWD, NOPASSWD: GENERAL_NOPASSWD
+{{ names.users.host.engineer }} DOCKER_HOSTS=(root) DOCKER_PASSWD, NOPASSWD: DOCKER_NOPASSWD
+{{ names.users.host.engineer }} UBUNTU_HOSTS=(root) GENERAL_PASSWD, NOPASSWD: GENERAL_NOPASSWD
 {% endif %}

@@ -44,8 +44,7 @@ container:
   ports: []
   volumes:
     - "{{ folder_secrets_approle }}/iac-configure.json:/approle/iac-configure.json:ro"
-    - "{{ folder_secrets_automation }}/ansible-vault-password:/automation/ansible-vault-password:ro"
-    - "{{ folder_secrets_automation }}/iac-configure.key:/automation/iac-configure.key:ro"
+    - "{{ folder_secrets_automation }}:/automation:ro"
     - "{{ folder_secrets_docker }}:/root/.docker:rw"
     - /var/run/docker.sock:/var/run/docker.sock:rw
   wait_port: "0"
