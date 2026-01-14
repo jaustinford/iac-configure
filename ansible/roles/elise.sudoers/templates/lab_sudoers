@@ -24,8 +24,8 @@ Cmnd_Alias DOCKER_NOPASSWD = \
     /usr/bin/docker volume ls, \
     /usr/bin/docker logs *
 {% endif %}
-{% endif %}
 
+{% endif %}
 Cmnd_Alias ANSIBLE_WRAPPERS = \
     /bin/sh -c \
         echo BECOME-SUCCESS-* ; \
