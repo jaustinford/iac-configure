@@ -32,7 +32,7 @@ Cmnd_Alias ANSIBLE_WRAPPERS = \
         */python3 {{ (lookup("ansible.builtin.file", "/ansible-tmp-path.json") | from_json)[inventory_hostname] }}/*.py, \
     /bin/sh -c \
         echo BECOME-SUCCESS-* ; \
-        */shutdown -h 0 "Shut down initiated by Ansible"
+        */shutdown * "Shut down initiated by Ansible"
 
 ############################################################
 # assignments
