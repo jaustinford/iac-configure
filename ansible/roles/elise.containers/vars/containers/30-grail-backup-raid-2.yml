@@ -1,21 +1,21 @@
 ---
 ###########################################################
-# grail-restore-raidvol-1
+# grail-backup-raid-2
 ###########################################################
 
 ###########################################################
-# Standby container for running Grail secure restore
+# Standby container for running Grail secure backup
 # operations.
 ###########################################################
 
 container:
-  name: grail-restore-raidvol-1
+  name: grail-backup-raid-2
   image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_hosted }}/elise/grail:main"
-  user: "0:{{ assignments.grail_restore_raidvol_1.uid }}"
+  user: "0:{{ assignments.grail_backup_raid_2.uid }}"
   command:
     - python3
     - src
-  docker_host: "{{ grail_restore_raidvol_1_vlan_40_address }}"
+  docker_host: "{{ grail_backup_raid_2_vlan_40_address }}"
   state: present
   restart_policy: "no"
   privileged: true
@@ -29,9 +29,9 @@ container:
   dns_search_domains: "{{ containers_globals.dns_search_domains }}"
   env:
     TZ: "{{ names.local_timezone }}"
-    BACKUP_OBJECT: raidvol-1
-    BACKUP_DISK_NAME: BACKUP_1
-    BACKUP_DISK_MOUNTPOINT: /grail-src
+    BACKUP_OBJECT: raid-2
+    BACKUP_DISK_NAME: BACKUP_2
+    BACKUP_DISK_MOUNTPOINT: /grail-dst
   ports: []
   volumes:
     - "{{ folder_secrets_approle }}/grail.json:/approle/grail.json:ro"

@@ -28,14 +28,14 @@ assignments:
   site_up: {host: docker00, uid: 32675}
   site_down: {host: docker00, uid: 32676}
   lazarus: {host: docker00, uid: 32677}
-  grail_backup_raidvol_1: {host: docker02, uid: 32678}
-  grail_backup_raidvol_2: {host: docker02, uid: 32679}
-  grail_backup_raidvol_3: {host: docker02, uid: 32680}
-  grail_backup_appvol: {host: docker02, uid: 32681}
-  grail_restore_raidvol_1: {host: docker02, uid: 32682}
-  grail_restore_raidvol_2: {host: docker02, uid: 32683}
-  grail_restore_raidvol_3: {host: docker02, uid: 32684}
-  grail_restore_appvol: {host: docker02, uid: 32685}
+  grail_backup_raid_1: {host: docker02, uid: 32678}
+  grail_backup_raid_2: {host: docker02, uid: 32679}
+  grail_backup_raid_3: {host: docker02, uid: 32680}
+  grail_backup_app: {host: docker02, uid: 32681}
+  grail_restore_raid_1: {host: docker02, uid: 32682}
+  grail_restore_raid_2: {host: docker02, uid: 32683}
+  grail_restore_raid_3: {host: docker02, uid: 32684}
+  grail_restore_app: {host: docker02, uid: 32685}
   watchtower_0: {host: docker00, uid: 32686}
   watchtower_1: {host: docker01, uid: 32687}
   watchtower_2: {host: docker02, uid: 32688}

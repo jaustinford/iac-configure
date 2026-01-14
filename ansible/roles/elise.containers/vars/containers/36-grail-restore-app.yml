@@ -1,21 +1,21 @@
 ---
 ###########################################################
-# grail-backup-appvol
+# grail-restore-app
 ###########################################################
 
 ###########################################################
-# Standby container for running Grail secure backup
+# Standby container for running Grail secure restore
 # operations.
 ###########################################################
 
 container:
-  name: grail-backup-appvol
+  name: grail-restore-app
   image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_hosted }}/elise/grail:main"
-  user: "0:{{ assignments.grail_backup_appvol.uid }}"
+  user: "0:{{ assignments.grail_restore_app.uid }}"
   command:
     - python3
     - src
-  docker_host: "{{ grail_backup_appvol_vlan_40_address }}"
+  docker_host: "{{ grail_restore_app_vlan_40_address }}"
   state: present
   restart_policy: "no"
   privileged: true
@@ -29,12 +29,12 @@ container:
   dns_search_domains: "{{ containers_globals.dns_search_domains }}"
   env:
     TZ: "{{ names.local_timezone }}"
-    BACKUP_OBJECT: appvol
+    BACKUP_OBJECT: app
     BACKUP_DISK_NAME: BACKUP_1
-    BACKUP_DISK_MOUNTPOINT: /grail-dst
+    BACKUP_DISK_MOUNTPOINT: /grail-src
   ports: []
   volumes:
     - "{{ folder_secrets_approle }}/grail.json:/approle/grail.json:ro"
     - "{{ folder_raid_grail }}:/grail-disk:rw"
-    - /mnt/dfs_lvm/lab_dfs:/grail-src:rw
+    - /mnt/dfs_lvm/lab_dfs:/grail-dst:rw
   wait_port: "0"
