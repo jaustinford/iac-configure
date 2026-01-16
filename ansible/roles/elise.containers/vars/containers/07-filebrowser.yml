@@ -14,7 +14,7 @@
 container:
   name: filebrowser
   image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/filebrowser/filebrowser:v2.42.5-amd64-s6"
-  user: "0:0"
+  user: "0:{{ names.groups.tenants.id }}"
   command: null
   docker_host: "{{ filebrowser_vlan_40_address }}"
   state: "{{ cycle_mode.state.containers }}"
@@ -31,7 +31,7 @@ container:
   env:
     TZ: "{{ names.local_timezone }}"
     PUID: "{{ assignments.filebrowser.uid }}"
-    PGID: "{{ names.groups.raid.id }}"
+    PGID: "{{ names.groups.tenants.id }}"
   ports:
     - "{{ filebrowser_vlan_40_address }}:{{ ports.filebrowser_web }}:80/tcp"
   volumes:

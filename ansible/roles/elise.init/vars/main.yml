@@ -57,8 +57,8 @@ lab_filesystem:
 
   - path: "{{ folder_raid }}"
     owner: "{{ names.users.host.admin.name }}"
-    group: "{{ names.groups.raid.name }}"
-    mode: "0770"
+    group: "{{ names.groups.tenants.name }}"
+    mode: "0750"
 
   - path: "{{ folder_raid_grail }}"
     owner: "{{ names.users.host.admin.name }}"

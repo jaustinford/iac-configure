@@ -1,16 +1,6 @@
 ---
 entities:
   groups:
-    - gid: "{{ names.groups.raid.id }}"
-      groupname: "{{ names.groups.raid.name }}"
-      host: docker01
-      state: present
-
-    - gid: "{{ names.groups.raid.id }}"
-      groupname: "{{ names.groups.raid.name }}"
-      host: docker02
-      state: present
-
     - gid: "{{ names.groups.devops.id }}"
       groupname: "{{ names.groups.devops.name }}"
       host: docker00
@@ -23,6 +13,21 @@ entities:
 
     - gid: "{{ names.groups.devops.id }}"
       groupname: "{{ names.groups.devops.name }}"
+      host: docker02
+      state: present
+
+    - gid: "{{ names.groups.tenants.id }}"
+      groupname: "{{ names.groups.tenants.name }}"
+      host: docker00
+      state: present
+
+    - gid: "{{ names.groups.tenants.id }}"
+      groupname: "{{ names.groups.tenants.name }}"
+      host: docker01
+      state: present
+
+    - gid: "{{ names.groups.tenants.id }}"
+      groupname: "{{ names.groups.tenants.name }}"
       host: docker02
       state: present
 
@@ -32,24 +37,11 @@ entities:
       # associate
       ############################################################
 
-    - uid: 32611
-      role: associate
-      username: "{{ names.users.host.associate.name }}"
-      password: "{{ secrets.users.host.associate.docker00 }}"
-      host: docker00
-      state: present
-      profile: "{{ profiles.associate }}"
-      groups:
-        - "{{ names.groups.devops.name }}"
-      home: "/home/{{ names.users.host.associate.name }}"
-      sshkeys:
-        - "{{ sshkeys.founder }}"
-
     - uid: 32612
       role: associate
       username: "{{ names.users.host.associate.name }}"
       password: "{{ secrets.users.host.associate.docker00 }}"
-      host: docker01
+      host: docker00
       state: present
       profile: "{{ profiles.associate }}"
       groups:
@@ -62,7 +54,7 @@ entities:
       role: associate
       username: "{{ names.users.host.associate.name }}"
       password: "{{ secrets.users.host.associate.docker00 }}"
-      host: docker02
+      host: docker01
       state: present
       profile: "{{ profiles.associate }}"
       groups:
@@ -72,6 +64,19 @@ entities:
         - "{{ sshkeys.founder }}"
 
     - uid: 32614
+      role: associate
+      username: "{{ names.users.host.associate.name }}"
+      password: "{{ secrets.users.host.associate.docker00 }}"
+      host: docker02
+      state: present
+      profile: "{{ profiles.associate }}"
+      groups:
+        - "{{ names.groups.devops.name }}"
+      home: "/home/{{ names.users.host.associate.name }}"
+      sshkeys:
+        - "{{ sshkeys.founder }}"
+
+    - uid: 32615
       role: associate
       username: "{{ names.users.host.associate.name }}"
       password: ""
@@ -84,7 +89,7 @@ entities:
         - "{{ sshkeys.founder }}"
         - "{{ sshkeys.citizens }}"
 
-    - uid: 32615
+    - uid: 32616
       role: associate
       username: "{{ names.users.host.associate.name }}"
       password: "{{ secrets.users.host.associate.portal }}"
@@ -101,7 +106,7 @@ entities:
       # engineer
       ############################################################
 
-    - uid: 32616
+    - uid: 32617
       role: engineer
       username: "{{ names.users.host.engineer.name }}"
       password: "{{ secrets.users.host.engineer.docker00 }}"
@@ -115,7 +120,7 @@ entities:
         - "{{ sshkeys.founder }}"
         - "{{ sshkeys.citizens }}"
 
-    - uid: 32617
+    - uid: 32618
       role: engineer
       username: "{{ names.users.host.engineer.name }}"
       password: "{{ secrets.users.host.engineer.docker01 }}"
@@ -129,7 +134,7 @@ entities:
         - "{{ sshkeys.founder }}"
         - "{{ sshkeys.citizens }}"
 
-    - uid: 32618
+    - uid: 32619
       role: engineer
       username: "{{ names.users.host.engineer.name }}"
       password: "{{ secrets.users.host.engineer.docker02 }}"
@@ -143,7 +148,7 @@ entities:
         - "{{ sshkeys.founder }}"
         - "{{ sshkeys.citizens }}"
 
-    - uid: 32619
+    - uid: 32620
       role: engineer
       username: "{{ names.users.host.engineer.name }}"
       password: "{{ secrets.users.host.engineer.portal }}"
@@ -160,7 +165,7 @@ entities:
       # iac
       ############################################################
 
-    - uid: 32620
+    - uid: 32621
       role: iac
       username: "{{ names.users.host.iac.name }}"
       password: "{{ secrets.users.host.iac.docker00 }}"
@@ -175,7 +180,7 @@ entities:
         - "{{ sshkeys.iac_configure }}"
         - "{{ sshkeys.iac_deploy }}"
 
-    - uid: 32621
+    - uid: 32622
       role: iac
       username: "{{ names.users.host.iac.name }}"
       password: "{{ secrets.users.host.iac.docker01 }}"
@@ -189,7 +194,7 @@ entities:
         - "{{ sshkeys.founder }}"
         - "{{ sshkeys.iac_configure }}"
 
-    - uid: 32622
+    - uid: 32623
       role: iac
       username: "{{ names.users.host.iac.name }}"
       password: "{{ secrets.users.host.iac.docker02 }}"
@@ -203,7 +208,7 @@ entities:
         - "{{ sshkeys.founder }}"
         - "{{ sshkeys.iac_configure }}"
 
-    - uid: 32623
+    - uid: 32624
       role: iac
       username: "{{ names.users.host.iac.name }}"
       password: "{{ secrets.users.host.iac.nas }}"
@@ -216,7 +221,7 @@ entities:
         - "{{ sshkeys.founder }}"
         - "{{ sshkeys.iac_configure }}"
 
-    - uid: 32624
+    - uid: 32625
       role: iac
       username: "{{ names.users.host.iac.name }}"
       password: "{{ secrets.users.host.iac.portal }}"
@@ -233,7 +238,7 @@ entities:
       # admin
       ############################################################
 
-    - uid: 32625
+    - uid: 32626
       role: admin
       username: "{{ names.users.host.admin.name }}"
       password: "{{ secrets.users.host.admin.docker00 }}"
@@ -244,12 +249,11 @@ entities:
         - "{{ names.users.host.iac.name }}"
         - "{{ names.users.host.engineer.name }}"
         - "{{ names.groups.devops.name }}"
-        - "{{ names.groups.raid.name }}"
       home: "/home/{{ names.users.host.admin.name }}"
       sshkeys:
         - "{{ sshkeys.founder }}"
 
-    - uid: 32626
+    - uid: 32627
       role: admin
       username: "{{ names.users.host.admin.name }}"
       password: "{{ secrets.users.host.admin.docker01 }}"
@@ -260,12 +264,11 @@ entities:
         - "{{ names.users.host.iac.name }}"
         - "{{ names.users.host.engineer.name }}"
         - "{{ names.groups.devops.name }}"
-        - "{{ names.groups.raid.name }}"
       home: "/home/{{ names.users.host.admin.name }}"
       sshkeys:
         - "{{ sshkeys.founder }}"
 
-    - uid: 32627
+    - uid: 32628
       role: admin
       username: "{{ names.users.host.admin.name }}"
       password: "{{ secrets.users.host.admin.docker02 }}"
@@ -276,12 +279,11 @@ entities:
         - "{{ names.users.host.iac.name }}"
         - "{{ names.users.host.engineer.name }}"
         - "{{ names.groups.devops.name }}"
-        - "{{ names.groups.raid.name }}"
       home: "/home/{{ names.users.host.admin.name }}"
       sshkeys:
         - "{{ sshkeys.founder }}"
 
-    - uid: 32628
+    - uid: 32629
       role: admin
       username: "{{ names.users.host.admin.name }}"
       password: ""
@@ -293,7 +295,7 @@ entities:
       sshkeys:
         - "{{ sshkeys.founder }}"
 
-    - uid: 32629
+    - uid: 32630
       role: admin
       username: "{{ names.users.host.admin.name }}"
       password: "{{ secrets.users.host.admin.portal }}"
@@ -302,6 +304,7 @@ entities:
       profile: "{{ profiles.admin }}"
       groups:
         - "{{ names.users.host.iac.name }}"
+        - "{{ names.users.host.engineer.name }}"
       home: "/home/{{ names.users.host.admin.name }}"
       sshkeys:
         - "{{ sshkeys.founder }}"

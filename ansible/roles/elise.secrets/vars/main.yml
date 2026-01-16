@@ -45,6 +45,6 @@ vault:
     - users/host/associate/docker/02
     - users/host/associate/portal
     - users/raid/red_ro
-    - users/raid/green_rw
     - users/raid/blue_ro
+    - users/raid/green_rw
     - users/raid/black_rw

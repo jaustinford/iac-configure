@@ -15,7 +15,7 @@
 container:
   name: plex
   image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/plexinc/pms-docker:1.42.1.10060-4e8b05daf"
-  user: "0:0"
+  user: "0:{{ names.groups.tenants.id }}"
   command: null
   docker_host: "{{ plex_vlan_40_address }}"
   state: "{{ cycle_mode.state.containers }}"
@@ -32,7 +32,7 @@ container:
   env:
     TZ: "{{ names.local_timezone }}"
     PLEX_UID: "{{ assignments.plex.uid }}"
-    PLEX_GID: "{{ names.groups.raid.id }}"
+    PLEX_GID: "{{ names.groups.tenants.id }}"
     PLEX_CLAIM: "{{ secrets.containers.plex.plex_claim }}"
     ADVERTISE_IP: |
       http://192.168.60.6:{{ ports.plex_web }},

@@ -42,6 +42,10 @@ names:
       name: angles # The Tribes of the Eastern Kingdoms.
       id: 32610
 
+    tenants:
+      name: witan # Members of the King's Council.
+      id: 32611
+
   users:
     host:
       super:
@@ -57,17 +61,17 @@ names:
         greeting: Your Royal Highness # and executor.
 
       engineer:
-        name: knight               # Defender of the Realm
-        greeting: Welcome Good Sir # Ample privileges.
+        name: knight                # Defender of the Realm
+        greeting: Welcome Brave Sir # Ample privileges.
 
       associate:
         name: squire                  # Meager candidate
         greeting: Greetings Candidate # No privileges.
 
     raid:
-      red_ro: gawain     # Loyal knight, good friend of Arthur.
-      green_rw: bedivere # The knight who returned the Sword.
+      red_ro: percival   # One of the first finders of the Grail.
       blue_ro: tristan   # Skilled knight, warrior musician.
+      green_rw: bedivere # The knight who returned the Sword.
       black_rw: lancelot # Most famous knight, betrayer of Arthur.
 
   hosts:

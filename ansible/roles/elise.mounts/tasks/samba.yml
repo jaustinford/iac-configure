@@ -4,8 +4,8 @@
     path: "{{ item.path }}"
     state: directory
     owner: "{{ names.users.host.admin.name }}"
-    group: "{{ names.groups.raid.name }}"
-    mode: "0770"
+    group: "{{ names.groups.tenants.name }}"
+    mode: "{{ item.dir_mode }}"
   become: true
 
 - name: "SAMBA - create credentials file {{ item.path }}"
@@ -27,9 +27,9 @@
     opts:
       "credentials={{ folder_secrets_raid }}/{{ item.path.split('-')[-1] }},\
       uid={{ names.users.host.admin.name }},\
-      gid={{ names.groups.raid.name }},\
-      dir_mode=0770,\
-      file_mode=0660,\
+      gid={{ names.groups.tenants.name }},\
+      dir_mode={{ item.dir_mode }},\
+      file_mode={{ item.file_mode }},\
       seal,\
       vers=3.1.1"
     path: "{{ item.path }}"
