@@ -3,8 +3,6 @@
   ansible.builtin.copy:
     src: "{{ playbook_dir }}/group_vars/all/secrets.yml"
     dest: "{{ folder_automation }}/secrets.yml"
-    owner: "{{ names.users.host.iac.name }}"
-    group: "{{ names.users.host.iac.name }}"
     mode: "0640"
     decrypt: false
   vars:
