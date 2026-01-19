@@ -20,8 +20,7 @@ Cmnd_Alias DOCKER_PASSWD = \
 Cmnd_Alias DOCKER_NOPASSWD = \
     /usr/bin/docker ps, \
     /usr/bin/docker ps *, \
-    /usr/bin/docker image ls, \
-    /usr/bin/docker volume ls, \
+    /usr/bin/docker * ls, \
     /usr/bin/docker logs *
 {% endif %}
 
@@ -39,7 +38,7 @@ Cmnd_Alias ANSIBLE_WRAPPERS = \
 ############################################################
 
 {{ names.users.host.admin.name }}    {{ ansible_hostname }}=(root) NOPASSWD: ALL
-{{ names.users.host.iac.name }}      {{ ansible_hostname }}=(root) ANSIBLE_WRAPPERS
+{{ names.users.host.iac.name }}      {{ ansible_hostname }}=(root) ANSIBLE_WRAPPERS, NOPASSWD: DOCKER_NOPASSWD
 
 {% if inventory_hostname != "nas" %}
 {% if inventory_hostname != "portal" %}

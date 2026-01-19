@@ -1,5 +1,5 @@
 ---
-- name: "USERS - manage user - {{ item.role }}"
+- name: "USERS - manage user - {{ item.uid }}"
   ansible.builtin.user:
     name: "{{ item.username }}"
     shell: /bin/bash
@@ -9,21 +9,25 @@
     force: true
     remove: true
   become: true
+  no_log: true
   when:
+    item.host == inventory_hostname and
     item.host != "nas" and
     item.role != "super"
 
-- name: "USERS - manage user password - {{ item.role }}"
+- name: "USERS - manage user password - {{ item.uid }}"
   ansible.builtin.user:
     name: "{{ item.username }}"
     password: "{{ item.password | password_hash('sha512') }}"
   changed_when: false
   become: true
+  no_log: true
   when:
+    item.host == inventory_hostname and
     item.host != "nas" and
     item.state == "present"
 
-- name: "USERS - copy user ssh keys - {{ item.role }}"
+- name: "USERS - copy user ssh keys - {{ item.uid }}"
   ansible.posix.authorized_key:
     user: "{{ item.username }}"
     key: "{{ sshkey }}"
@@ -31,11 +35,14 @@
   loop_control:
     loop_var: sshkey
   become: true
-  when: item.state == "present"
+  no_log: true
+  when:
+    item.host == inventory_hostname and
+    item.state == "present"
   with_items:
     - "{{ item.sshkeys | flatten(levels=1) }}"
 
-- name: "USERS - copy user bash files - {{ item.role }}"
+- name: "USERS - copy user bash files - {{ item.uid }}"
   ansible.builtin.template:
     src: "{{ file_name }}"
     dest: "{{ item.home }}/{{ file_name }}"
@@ -45,7 +52,10 @@
   loop_control:
     loop_var: file_name
   become: true
-  when: item.state == "present"
+  no_log: true
+  when:
+    item.host == inventory_hostname and
+    item.state == "present"
   with_items:
     - .bash_profile
     - .hushlogin

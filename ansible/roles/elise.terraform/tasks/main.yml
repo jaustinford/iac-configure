@@ -3,6 +3,7 @@
   ansible.builtin.find:
     paths: "{{ folder_automation }}"
     patterns: "{{ lab.domain | replace('.com', '') }}-*.json"
+  no_log: true
   register: instance_metadata
 
 - name: MAIN - create local instance metadata file

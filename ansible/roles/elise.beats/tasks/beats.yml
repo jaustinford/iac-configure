@@ -13,7 +13,7 @@
     dest: "/etc/{{ item.name }}/{{ item.name }}.yml"
     owner: root
     group: root
-    mode: '0750'
+    mode: '0640'
   become: true
   notify: "MAIN - systemctl restart {{ item.name }}"
 

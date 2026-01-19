@@ -1,7 +1,9 @@
 ---
-- name: "GROUPS - create group - {{ item.groupname }}"
+- name: "GROUPS - create group - {{ item.gid }}"
   ansible.builtin.group:
     name: "{{ item.groupname }}"
     gid: "{{ item.gid }}"
     state: "{{ item.state }}"
   become: true
+  no_log: true
+  when: item.host == inventory_hostname
