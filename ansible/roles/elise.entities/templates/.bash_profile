@@ -72,14 +72,16 @@ print_greeting() {
 
         echo -e "\n      ${first_word} ${other_words},"
 
-        if [ "$(hostname)" == "{{ names.hosts.nas }}.{{ lab.domain }}" ]; then
+        if [ "$(hostname)" == "{{ names.hosts.nas }}.{{ lab.domain }}" ] && \
+           [ "$(whoami)" == "{{ names.users.host.admin.name }}" ]; then
             sudo smbstatus
 
         elif [ "$(hostname)" == "{{ names.hosts.docker00 }}.{{ lab.domain }}" ] || \
              [ "$(hostname)" == "{{ names.hosts.docker01 }}.{{ lab.domain }}" ] || \
              [ "$(hostname)" == "{{ names.hosts.docker02 }}.{{ lab.domain }}" ]; then
 
-            if [ "$(whoami)" != "{{ names.users.host.associate.name }}" ]; then
+            if [ "$(whoami)" == "{{ names.users.host.admin.name }}" ] || \
+               [ "$(whoami)" == "{{ names.users.host.engineer.name }}" ]; then
                 echo " "
                 sudo docker ps
 

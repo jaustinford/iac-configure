@@ -38,7 +38,7 @@ Cmnd_Alias ANSIBLE_WRAPPERS = \
 ############################################################
 
 {{ names.users.host.admin.name }}    {{ ansible_hostname }}=(root) NOPASSWD: ALL
-{{ names.users.host.iac.name }}      {{ ansible_hostname }}=(root) ANSIBLE_WRAPPERS, NOPASSWD: DOCKER_NOPASSWD
+{{ names.users.host.iac.name }}      {{ ansible_hostname }}=(root) ANSIBLE_WRAPPERS
 
 {% if inventory_hostname != "nas" %}
 {% if inventory_hostname != "portal" %}
