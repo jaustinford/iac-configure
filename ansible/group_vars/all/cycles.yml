@@ -15,7 +15,7 @@ cycles:
     volumes:
       app_data: mounted
       dfs_lvm: mounted
-      raid: mounted
+      raid: ephemeral
 
   down:
     name: down
