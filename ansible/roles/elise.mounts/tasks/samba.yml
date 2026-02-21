@@ -31,7 +31,7 @@
       dir_mode={{ item.dir_mode }},\
       file_mode={{ item.file_mode }},\
       seal,\
-      vers=1.0"
+      vers=3.11"
     path: "{{ item.path }}"
     state: "{{ item.state }}"
   become: true
