@@ -35,3 +35,5 @@
     path: "{{ item.path }}"
     state: "{{ item.state }}"
   become: true
+  retries: 3
+  delay: 2
