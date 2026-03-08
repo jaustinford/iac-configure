@@ -30,7 +30,9 @@
       gid={{ names.groups.tenants.name }},\
       dir_mode={{ item.dir_mode }},\
       file_mode={{ item.file_mode }},\
-      seal"
+      vers=3.11,\
+      seal,\
+      nofail"
     path: "{{ item.path }}"
     state: "{{ item.state }}"
   become: true
