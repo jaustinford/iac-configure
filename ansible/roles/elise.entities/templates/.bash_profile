@@ -83,7 +83,7 @@ print_greeting() {
             if [ "$(whoami)" == "{{ names.users.host.admin.name }}" ] || \
                [ "$(whoami)" == "{{ names.users.host.engineer.name }}" ]; then
                 echo " "
-                sudo docker ps --format "table {{ .ID }}\\t{{ .Image }}\\t{{ .Command }}\\t{{ .RunningFor }}\\t{{ .Status}}\\t{{ .Names }}"
+                sudo docker ps --format 'table {{ .ID }}\\t{{ .Image }}\\t{{ .Command }}\\t{{ .RunningFor }}\\t{{ .Status}}\\t{{ .Names }}'
 
             fi
 
