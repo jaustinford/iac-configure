@@ -14,7 +14,7 @@
 
 container:
   name: plex
-  image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/plexinc/pms-docker:1.42.1.10060-4e8b05daf"
+  image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/plexinc/pms-docker:1.43.1.10611-1e34174b1"
   user: "0:{{ names.groups.tenants.id }}"
   command: null
   docker_host: "{{ plex_vlan_40_address }}"

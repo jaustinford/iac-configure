@@ -12,7 +12,7 @@
 
 container:
   name: runner
-  image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/gitlab/gitlab-runner:v18.4.0"
+  image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/gitlab/gitlab-runner:v18.10.1"
   user: "0:0"
   command:
     - run

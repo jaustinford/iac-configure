@@ -15,7 +15,7 @@
 
 container:
   name: tautulli
-  image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/linuxserver/tautulli:amd64-v2.15.3-ls199"
+  image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/linuxserver/tautulli:2.17.0"
   user: "0:0"
   command: null
   docker_host: "{{ tautulli_vlan_40_address }}"

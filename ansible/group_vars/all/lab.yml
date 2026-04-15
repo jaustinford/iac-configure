@@ -2,7 +2,7 @@
 lab:
   domain: pendragonlab.com
 
-  elastic_version: 9.1.5
+  elastic_version: 9.3.3
 
   task_globals:
     discover_uri:
