@@ -1,11 +1,11 @@
 ---
 - name: BEATS - include onprem tasks
   ansible.builtin.include_tasks: onprem.yml
-  when: cycle_mode.name == "up" and internet_found is defined
+  when: cycle_mode.name == "full" and internet_found is defined
 
 - name: BEATS - include linode tasks
   ansible.builtin.include_tasks: linode.yml
-  when: cycle_mode.name == "up" and internet_found is undefined
+  when: cycle_mode.name == "full" and internet_found is undefined
 
 - name: BEATS - copy templates
   ansible.builtin.template:

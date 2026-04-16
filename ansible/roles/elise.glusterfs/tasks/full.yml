@@ -1,0 +1,17 @@
+---
+- name: FULL - install glusterfs-server package
+  ansible.builtin.apt:
+    name: glusterfs-server
+    state: present
+    update_cache: true
+  become: true
+  when: internet_found == 'yes'
+
+- name: FULL - include service tasks
+  ansible.builtin.include_tasks: service.yml
+
+- name: FULL - include dfs tasks
+  ansible.builtin.include_tasks: dfs.yml
+
+- name: FULL - include mount tasks
+  ansible.builtin.include_tasks: mount.yml

@@ -1,7 +1,7 @@
 ---
 - name: MAIN - include container tasks in deploy mode
   ansible.builtin.include_tasks: container.yml
-  when: cycle_mode.name == "up"
+  when: cycle_mode.name == "full" or cycle_mode.name == "up"
   no_log: true
   with_items:
     - "{{ lookup('community.general.filetree', 'vars/containers') | sort(attribute='src') }}"

@@ -7,15 +7,15 @@
 
 - name: MAIN - include persist tasks
   ansible.builtin.include_tasks: persist.yml
-  when: vault_check.status != 200 and cycle_mode.name == "up" and secrets_mode == "start"
+  when: vault_check.status != 200 and ( cycle_mode.name == "full" or cycle_mode.name == "up" ) and secrets_mode == "start"
 
 - name: MAIN - include clean tasks
   ansible.builtin.include_tasks: clean.yml
-  when: vault_check.status == 200 and cycle_mode.name == "up" and secrets_mode == "stop"
+  when: vault_check.status == 200 and ( cycle_mode.name == "full" or cycle_mode.name == "up" ) and secrets_mode == "stop"
 
 - name: MAIN - include vault tasks
   ansible.builtin.include_tasks: vault.yml
-  when: vault_check.status == 200 and cycle_mode.name == "up" and secrets_mode == "start"
+  when: vault_check.status == 200 and ( cycle_mode.name == "full" or cycle_mode.name == "up" ) and secrets_mode == "start"
 
 - name: MAIN - include vault tasks
   ansible.builtin.include_tasks: vault.yml

@@ -8,7 +8,7 @@
     id: "{{ (lookup('ansible.builtin.file', '/tmp/portal.json') | from_json)['id'] }}"
     state: "{{ 'restarted' if external_check.status == 200
       and internal_check.status != 200
-      and cycle_mode.name == 'up'
+      and ( cycle_mode.name == 'full' or cycle_mode.name == 'up' )
       else cycle_mode.state.portal.linode
       }}"
   when: internet_found == "yes"

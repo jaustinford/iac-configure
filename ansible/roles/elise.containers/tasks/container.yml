@@ -38,8 +38,8 @@
 
 - name: CONTAINER - include elastic tasks
   ansible.builtin.include_tasks: elastic.yml
-  when: container.name == "elasticsearch" and cycle_mode.name == "up"
+  when: container.name == "elasticsearch" and ( cycle_mode.name == "full" or cycle_mode.name == "up" )
 
 - name: CONTAINER - include vault tasks
   ansible.builtin.include_tasks: vault.yml
-  when: container.name == "vault" and cycle_mode.name == "up"
+  when: container.name == "vault" and ( cycle_mode.name == "full" or cycle_mode.name == "up" )

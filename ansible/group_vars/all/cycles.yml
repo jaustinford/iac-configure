@@ -1,5 +1,22 @@
 ---
 cycles:
+  full:
+    name: full
+    state:
+      glusterfs: started
+      containers: started
+      tunnels:
+        nginx: started
+        openvpnas: started
+      portal:
+        nginx: started
+        linode: started
+      beats: started
+    volumes:
+      app_data: mounted
+      dfs_lvm: mounted
+      raid: mounted
+
   up:
     name: up
     state:

@@ -1,4 +1,8 @@
 ---
+- name: MAIN - include full tasks
+  ansible.builtin.include_tasks: full.yml
+  when: lan_ints.vlan_20 is defined and cycle_mode.name == "full"
+
 - name: MAIN - include up tasks
   ansible.builtin.include_tasks: up.yml
   when: lan_ints.vlan_20 is defined and cycle_mode.name == "up"
