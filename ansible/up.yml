@@ -15,6 +15,7 @@
   vars_files:
     - group_vars/all/secrets.yml
 
+- {name: UP - import sudoers playbook, import_playbook: sudoers.yml}
 - {name: UP - import mounts playbook, import_playbook: mounts.yml}
 - {name: UP - import glusterfs playbook, import_playbook: glusterfs.yml}
 - {name: UP - import containers playbook, import_playbook: containers.yml}

@@ -39,3 +39,6 @@ assignments:
   watchtower_0: {host: docker00, uid: 32686}
   watchtower_1: {host: docker01, uid: 32687}
   watchtower_2: {host: docker02, uid: 32688}
+  temper_0: {host: docker00, uid: 32689}
+  temper_1: {host: docker01, uid: 32690}
+  temper_2: {host: docker02, uid: 32691}

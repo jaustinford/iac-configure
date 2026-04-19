@@ -109,3 +109,6 @@ grail_restore_app_vlan_40_address: "{{ hostvars[assignments.grail_restore_app.ho
 watchtower_0_vlan_40_address: "{{ hostvars[assignments.watchtower_0.host]['ansible_' + hostvars[assignments.watchtower_0.host].lan_ints.vlan_40].ipv4.address }}"
 watchtower_1_vlan_40_address: "{{ hostvars[assignments.watchtower_1.host]['ansible_' + hostvars[assignments.watchtower_1.host].lan_ints.vlan_40].ipv4.address }}"
 watchtower_2_vlan_40_address: "{{ hostvars[assignments.watchtower_2.host]['ansible_' + hostvars[assignments.watchtower_2.host].lan_ints.vlan_40].ipv4.address }}"
+temper_0_vlan_40_address: "{{ hostvars[assignments.temper_0.host]['ansible_' + hostvars[assignments.temper_0.host].lan_ints.vlan_40].ipv4.address }}"
+temper_1_vlan_40_address: "{{ hostvars[assignments.temper_1.host]['ansible_' + hostvars[assignments.temper_1.host].lan_ints.vlan_40].ipv4.address }}"
+temper_2_vlan_40_address: "{{ hostvars[assignments.temper_2.host]['ansible_' + hostvars[assignments.temper_2.host].lan_ints.vlan_40].ipv4.address }}"
