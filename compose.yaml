@@ -30,17 +30,17 @@ services:
 
     volumes:
       - type: bind
-        source: ${IAC_CONFIGURE_PROJECT_DIR}/approle
+        source: ${USER_APPROLE_FOLDER}
         target: /approle
         read_only: true
 
       - type: bind
-        source: ${USER_KEYFOLDER}
+        source: ${USER_AUTOMATION_FOLDER}
         target: /automation
         read_only: true
 
       - type: bind
-        source: ${USER_HOME}/.docker
+        source: ~/.docker
         target: /root/.docker
         read_only: true
 
