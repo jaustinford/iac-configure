@@ -29,7 +29,6 @@ RUN \
 WORKDIR /etc/ansible
 
 COPY --chmod=755 \
-    bin/container-init.sh \
-    /bin/container-init.sh
+    bin/ ./bin/
 
 COPY ansible/ ./

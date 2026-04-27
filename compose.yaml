@@ -16,9 +16,6 @@ services:
             /etc/ansible/site.yml \
             -vv
 
-    profiles:
-      - site
-
     environment:
       - TZ=America/Denver
       - CYCLE_MODE=${CYCLE_MODE}
