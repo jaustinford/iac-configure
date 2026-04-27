@@ -29,6 +29,6 @@ RUN \
 WORKDIR /etc/ansible
 
 COPY --chmod=755 \
-    bin/ ./bin/
+    bin/ /bin/
 
 COPY ansible/ ./
