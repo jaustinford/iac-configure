@@ -1,0 +1,39 @@
+---
+###########################################################
+# grail-backup-raid-4
+###########################################################
+
+###########################################################
+# Standby container for running Grail secure backup
+# operations.
+###########################################################
+
+container:
+  name: grail-backup-raid-4
+  image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_hosted }}/elise/grail:main"
+  user: "0:{{ assignments.grail_backup_raid_4.uid }}"
+  command:
+    - python4
+    - src
+  docker_host: "{{ grail_backup_raid_4_vlan_40_address }}"
+  state: present
+  restart_policy: "no"
+  privileged: true
+  detach: false
+  interactive: true
+  shm_size: "{{ containers_globals.shm_size }}"
+  devices: []
+  capabilities: []
+  network_mode: "{{ containers_globals.network_mode }}"
+  dns_servers: "{{ containers_globals.dns_servers }}"
+  dns_search_domains: "{{ containers_globals.dns_search_domains }}"
+  env:
+    TZ: "{{ names.local_timezone }}"
+    BACKUP_OBJECT: raid-4
+    BACKUP_DISK_NAME: BACKUP_4
+    BACKUP_DISK_MOUNTPOINT: /grail-dst
+  ports: []
+  volumes:
+    - "{{ folder_secrets_approle }}/grail.json:/approle/grail.json:ro"
+    - "{{ folder_raid_grail }}:/grail-disk:rw"
+  wait_port: "0"
