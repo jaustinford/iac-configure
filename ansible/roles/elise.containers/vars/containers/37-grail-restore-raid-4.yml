@@ -13,7 +13,7 @@ container:
   image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_hosted }}/elise/grail:main"
   user: "0:{{ assignments.grail_restore_raid_4.uid }}"
   command:
-    - python4
+    - python3
     - src
   docker_host: "{{ grail_restore_raid_4_vlan_40_address }}"
   state: present
