@@ -30,7 +30,6 @@ container:
   env:
     TZ: "{{ names.local_timezone }}"
     BACKUP_OBJECT: raid-2
-    BACKUP_DISK_NAME: BACKUP_2
     BACKUP_DISK_MOUNTPOINT: /grail-dst
   ports: []
   volumes:
