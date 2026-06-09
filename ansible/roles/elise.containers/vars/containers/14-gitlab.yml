@@ -48,6 +48,7 @@ container:
       gitlab_rails['gitlab_shell_ssh_port'] = {{ ports.gitlab_ssh }}
   ports:
     - "{{ gitlab_vlan_40_address }}:{{ ports.gitlab_web }}:80/tcp"
+    - "{{ gitlab_vlan_40_address }}:{{ ports.gitlab_ssh }}:{{ ports.gitlab_ssh }}/tcp"
   volumes:
     - "{{ folder_container_app }}/gitlab/config:/etc/gitlab:rw"
     - "{{ folder_container_app }}/gitlab/logs:/var/log/gitlab:rw"
