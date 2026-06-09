@@ -12,3 +12,10 @@
     state: restarted
     daemon_reload: true
   become: true
+
+- name: MAIN - systemctl restart tunnel-gitlab
+  ansible.builtin.systemd:
+    name: tunnel-gitlab
+    state: restarted
+    daemon_reload: true
+  become: true

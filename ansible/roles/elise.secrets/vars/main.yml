@@ -16,6 +16,7 @@ vault:
     - containers/expressvpn/users/admin
     - containers/gitlab/users/admin
     - containers/gitlab/runner
+    - containers/gitlab/smtp
     - containers/kibana/encryption_keys
     - containers/nexus/users/admin
     - containers/oauth

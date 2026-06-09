@@ -31,6 +31,7 @@ container:
     TZ: "{{ names.local_timezone }}"
     BACKUP_OBJECT: raid-1
     BACKUP_DISK_MOUNTPOINT: /grail-src
+    VAULT_ENDPOINT: "{{ vault_vlan_40_address }}:{{ ports.vault_web }}"
   ports: []
   volumes:
     - "{{ folder_secrets_approle }}/grail.json:/approle/grail.json:ro"

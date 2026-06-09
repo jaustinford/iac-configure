@@ -35,8 +35,8 @@ container:
     PLEX_GID: "{{ names.groups.tenants.id }}"
     PLEX_CLAIM: "{{ secrets.containers.plex.plex_claim }}"
     ADVERTISE_IP: |
-      http://192.168.60.6:{{ ports.plex_web }},
       http://{{ plex_vlan_40_address }}:{{ ports.plex_web }},
+      http://192.168.60.6:32400,
       https://media.{{ lab.domain }}
     ALLOWED_NETWORKS: |
       192.168.30.0/29,

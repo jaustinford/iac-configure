@@ -8,6 +8,7 @@ cycles:
       tunnels:
         nginx: started
         openvpnas: started
+        gitlab: started
       portal:
         nginx: started
         linode: started
@@ -25,6 +26,7 @@ cycles:
       tunnels:
         nginx: started
         openvpnas: started
+        gitlab: started
       portal:
         nginx: started
         linode: started
@@ -42,6 +44,7 @@ cycles:
       tunnels:
         nginx: stopped
         openvpnas: stopped
+        gitlab: stopped
       portal:
         nginx: stopped
         linode: stopped

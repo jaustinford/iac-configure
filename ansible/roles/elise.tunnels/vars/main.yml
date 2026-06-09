@@ -15,3 +15,11 @@ tunnels:
     ipv4: "{{ openvpnas_vlan_40_address }}"
     external_port: "1194"
     internal_port: "{{ ports.openvpnas_vpn }}"
+
+  - name: gitlab
+    description: gitlab ssh tunnel
+    state: "{{ cycle_mode.state.tunnels.gitlab }}"
+    host: "{{ assignments.gitlab.host }}"
+    ipv4: "{{ gitlab_vlan_40_address }}"
+    external_port: "{{ ports.gitlab_ssh }}"
+    internal_port: "{{ ports.gitlab_ssh }}"
