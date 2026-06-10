@@ -11,6 +11,8 @@
     login_port: "{{ ports.elasticsearch_db }}"
     login_user: elastic
     login_password: "{{ secrets.containers.elasticsearch.elastic }}"
+  async: 60
+  poll: 5
   vars:
     ansible_python_interpreter: /usr/local/bin/python3
   loop_control:
