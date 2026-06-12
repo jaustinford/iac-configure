@@ -15,21 +15,21 @@
   vars_files:
     - group_vars/all/secrets.yml
 
-# - {name: FULL - import hosts playbook, import_playbook: hosts.yml}
-# - {name: FULL - import entities playbook, import_playbook: entities.yml}
-# - {name: FULL - import sudoers playbook, import_playbook: sudoers.yml}
-# - {name: FULL - import init playbook, import_playbook: init.yml}
-# - {name: FULL - import ubuntu playbook, import_playbook: ubuntu.yml}
-# - {name: FULL - import raspberrypi playbook, import_playbook: raspberrypi.yml}
-# - {name: FULL - import mounts playbook, import_playbook: mounts.yml}
-# - {name: FULL - import glusterfs playbook, import_playbook: glusterfs.yml}
-# - {name: FULL - import docker playbook, import_playbook: docker.yml}
+- {name: FULL - import hosts playbook, import_playbook: hosts.yml}
+- {name: FULL - import entities playbook, import_playbook: entities.yml}
+- {name: FULL - import sudoers playbook, import_playbook: sudoers.yml}
+- {name: FULL - import init playbook, import_playbook: init.yml}
+- {name: FULL - import ubuntu playbook, import_playbook: ubuntu.yml}
+- {name: FULL - import raspberrypi playbook, import_playbook: raspberrypi.yml}
+- {name: FULL - import mounts playbook, import_playbook: mounts.yml}
+- {name: FULL - import glusterfs playbook, import_playbook: glusterfs.yml}
+- {name: FULL - import docker playbook, import_playbook: docker.yml}
 - {name: FULL - import configs playbook, import_playbook: configs.yml}
-# - {name: FULL - import containers playbook, import_playbook: containers.yml}
-# - {name: FULL - import runner playbook, import_playbook: runner.yml}
-# - {name: FULL - import portal playbook, import_playbook: portal.yml}
-# - {name: FULL - import tunnels playbook, import_playbook: tunnels.yml}
-# - {name: FULL - import beats playbook, import_playbook: beats.yml}
+- {name: FULL - import containers playbook, import_playbook: containers.yml}
+- {name: FULL - import runner playbook, import_playbook: runner.yml}
+- {name: FULL - import portal playbook, import_playbook: portal.yml}
+- {name: FULL - import tunnels playbook, import_playbook: tunnels.yml}
+- {name: FULL - import beats playbook, import_playbook: beats.yml}
 
 - name: FULL - import secrets playbook
   import_playbook: secrets.yml
