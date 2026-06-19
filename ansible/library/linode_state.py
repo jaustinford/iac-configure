@@ -49,6 +49,25 @@ def api_get(token: str, endpoint: str):
 
     return json.loads(http_return.text)
 
+def api_find_instance(token: str, label_prefix: str):
+    """
+    Return the ID for an instance
+    fitting the 'label_prefix'.
+    """
+
+    found_instance = {}
+
+    all_instances = api_get(
+        token,
+        "instances"
+    )
+
+    for instance in all_instances["data"]:
+        if instance["label"].startswith(label_prefix):
+            found_instance = instance
+
+    return str(found_instance["id"])
+
 def api_get_instance_status(token: str, instance_id: str):
     """
     Use API data to and query the
@@ -77,7 +96,7 @@ def main():
             "type": "str",
             "required": True,
         },
-        "id": {
+        "label_prefix": {
             "type": "str",
             "required": True
         },
@@ -89,35 +108,40 @@ def main():
 
     module = AnsibleModule(argument_spec=module_args)
 
-    arg_token = module.params["token"]
-    arg_id    = module.params["id"]
-    arg_state = module.params["state"]
+    arg_token        = module.params["token"]
+    arg_label_prefix = module.params["label_prefix"]
+    arg_state        = module.params["state"]
+
+    found_instance_id = api_find_instance(
+        arg_token,
+        arg_label_prefix
+    )
 
     if arg_state == "started":
         execute_return = api_post(
             arg_token,
-            "instances/" + arg_id + "/boot"
+            "instances/" + found_instance_id + "/boot"
         )
 
-        while api_get_instance_status(arg_token, arg_id) != "running":
+        while api_get_instance_status(arg_token, found_instance_id) != "running":
             time.sleep(1)
 
     elif arg_state == "stopped":
         execute_return = api_post(
             arg_token,
-            "instances/" + arg_id + "/shutdown"
+            "instances/" + found_instance_id + "/shutdown"
         )
 
-        while api_get_instance_status(arg_token, arg_id) != "offline":
+        while api_get_instance_status(arg_token, found_instance_id) != "offline":
             time.sleep(1)
 
     elif arg_state == "restarted":
         execute_return = api_post(
             arg_token,
-            "instances/" + arg_id + "/reboot"
+            "instances/" + found_instance_id + "/reboot"
         )
 
-        while api_get_instance_status(arg_token, arg_id) != "running":
+        while api_get_instance_status(arg_token, found_instance_id) != "running":
             time.sleep(1)
 
     execute_json = json.loads(execute_return)

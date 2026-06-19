@@ -53,7 +53,7 @@ ansible_host='192.168.40.5'
 ansible_remote_tmp="{{ (lookup('ansible.builtin.file', '/ansible-tmp-path.json') | from_json)['nas'] }}"
 
 [lab_linode:vars]
-ansible_host="{{ (lookup('ansible.builtin.file', '/tmp/portal.json') | from_json)['ip_address'] }}"
+ansible_host='portal.pendragonlab.com'
 ansible_remote_tmp="{{ (lookup('ansible.builtin.file', '/ansible-tmp-path.json') | from_json)['portal'] }}"
 
 [lab_linode]

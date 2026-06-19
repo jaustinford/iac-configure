@@ -18,6 +18,7 @@ RUN \
         elasticsearch==8.13.2 \
         docker \
         hvac \
+        dnspython \
         passlib
 
 RUN \

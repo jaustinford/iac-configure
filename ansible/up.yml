@@ -5,7 +5,6 @@
     secrets_mode: start
 
 - {name: UP - import wake playbook, import_playbook: wake.yml}
-- {name: UP - import terraform playbook, import_playbook: terraform.yml}
 - {name: UP - import linode playbook, import_playbook: linode.yml}
 
 - name: UP - gather facts

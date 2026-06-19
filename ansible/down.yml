@@ -4,8 +4,6 @@
   vars:
     secrets_mode: start
 
-- {name: DOWN - import terraform playbook, import_playbook: terraform.yml}
-
 - name: DOWN - gather facts
   hosts: all
   gather_facts: true
