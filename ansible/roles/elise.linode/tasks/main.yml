@@ -9,13 +9,16 @@
     state: "{{ 'restarted' if external_check.status == 200
       and internal_check.status != 200
       and ( cycle_mode.name == 'full' or cycle_mode.name == 'up' )
-      else cycle_mode.state.portal.linode
+      else 'stopped' if ( cycle_mode.name == 'down' and lookup('env', 'DOWN_POWEROFF') == 'true' )
+      else 'started'
       }}"
   when: internet_found == "yes"
 
 - name: MAIN - waiting on host port 22
   ansible.builtin.wait_for:
     host: "portal.{{ lab.domain }}"
-    state: "{{ cycle_mode.state.portal.linode }}"
+    state: "{{ 'stopped' if ( cycle_mode.name == 'down' and lookup('env', 'DOWN_POWEROFF') == 'true' )
+      else 'started'
+      }}"
     port: 22
   when: internet_found == "yes"

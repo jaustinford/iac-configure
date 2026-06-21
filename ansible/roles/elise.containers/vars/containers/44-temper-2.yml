@@ -16,7 +16,7 @@ container:
     - python3
     - src
   docker_host: "{{ temper_2_vlan_40_address }}"
-  state: started
+  state: "{{ cycle_mode.state.containers }}"
   restart_policy: unless-stopped
   privileged: false
   detach: true

@@ -11,7 +11,6 @@ cycles:
         gitlab: started
       portal:
         nginx: started
-        linode: started
       beats: started
     volumes:
       app_data: mounted
@@ -29,7 +28,6 @@ cycles:
         gitlab: started
       portal:
         nginx: started
-        linode: started
       beats: started
     volumes:
       app_data: mounted
@@ -47,7 +45,6 @@ cycles:
         gitlab: stopped
       portal:
         nginx: stopped
-        linode: stopped
       beats: stopped
     volumes:
       app_data: unmounted

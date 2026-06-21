@@ -36,6 +36,8 @@ container:
   env:
     TZ: "{{ names.local_timezone }}"
     CYCLE_MODE: down
+    DOWN_DESTROY: "false"
+    DOWN_POWEROFF: "true"
     ELISE_PROJECT_CRON_TRIGGER: "false"
     ELISE_PROJECT_EXPRESSVPN_CONTINENT: "{{ lookup('env', 'ELISE_PROJECT_EXPRESSVPN_CONTINENT') }}"
     ELISE_PROJECT_EXPRESSVPN_REGION: "{{ lookup('env', 'ELISE_PROJECT_EXPRESSVPN_REGION') }}"

@@ -1,4 +1,8 @@
 ---
+- name: ELASTIC - pause to allow elasticsearch bootup
+  ansible.builtin.pause:
+    seconds: 10
+
 - name: ELASTIC - deploy ingest pipelines
   community.elastic.elastic_pipeline:
     name: "{{ pipeline.name }}"
@@ -11,8 +15,6 @@
     login_port: "{{ ports.elasticsearch_db }}"
     login_user: elastic
     login_password: "{{ secrets.containers.elasticsearch.elastic }}"
-  async: 60
-  poll: 5
   vars:
     ansible_python_interpreter: /usr/local/bin/python3
   loop_control:

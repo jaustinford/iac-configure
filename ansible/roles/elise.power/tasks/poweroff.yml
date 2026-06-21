@@ -2,7 +2,7 @@
 - name: POWEROFF - shutdown host
   community.general.shutdown:
   become: true
-  when: poweroff.enabled
+  when: lookup('env', 'DOWN_POWEROFF') == "true" and poweroff.enabled
 
 - name: "POWEROFF - waiting on host port {{ wol.wait_port }}"
   delegate_to: localhost
@@ -10,4 +10,4 @@
     host: "{{ ansible_host }}"
     port: "{{ wol.wait_port }}"
     state: stopped
-  when: poweroff.enabled
+  when: lookup('env', 'DOWN_POWEROFF') == "true" and poweroff.enabled
