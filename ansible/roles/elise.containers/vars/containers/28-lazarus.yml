@@ -16,7 +16,9 @@ container:
     - python3
     - src
   docker_host: "{{ lazarus_vlan_40_address }}"
-  state: "{{ cycle_mode.state.containers }}"
+  state: "{{ 'stopped'
+    if ( cycle_mode.name == 'down' and lookup('env', 'DOWN_POWEROFF') == 'true' )
+    else cycle_mode.state.containers }}"
   restart_policy: unless-stopped
   privileged: false
   detach: true
