@@ -1,0 +1,17 @@
+---
+- name: MAIN - retrieve tfstate file 
+  ansible.builtin.fetch:
+    src: "/mnt/{{ names.raid }}/root/green/lab.json"
+    dest: /tmp/lab.json
+    flat: true
+  become: true
+  when: tasks_phase == "begin"
+  changed_when: false
+
+- name: MAIN - remove local tfstate file 
+  ansible.builtin.file:
+    path: /tmp/lab.json
+    state: absent
+  delegate_to: localhost
+  when: tasks_phase == "end"
+  changed_when: false

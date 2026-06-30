@@ -1,0 +1,7 @@
+---
+- name: TFSTATE - apply elise.tfstate role
+  hosts: lab_onprem_nas
+  roles:
+    - elise.tfstate
+  vars_files:
+    - group_vars/all/secrets.yml

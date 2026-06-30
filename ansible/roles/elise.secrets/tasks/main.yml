@@ -7,20 +7,20 @@
 
 - name: MAIN - include persist tasks
   ansible.builtin.include_tasks: persist.yml
-  when: vault_check.status != 200 and ( cycle_mode.name == "full" or cycle_mode.name == "up" ) and secrets_mode == "start"
+  when: vault_check.status != 200 and ( cycle_mode.name == "full" or cycle_mode.name == "up" ) and tasks_phase == "begin"
 
 - name: MAIN - include clean tasks
   ansible.builtin.include_tasks: clean.yml
-  when: vault_check.status == 200 and ( cycle_mode.name == "full" or cycle_mode.name == "up" ) and secrets_mode == "stop"
+  when: vault_check.status == 200 and ( cycle_mode.name == "full" or cycle_mode.name == "up" ) and tasks_phase == "end"
 
 - name: MAIN - include vault tasks
   ansible.builtin.include_tasks: vault.yml
-  when: vault_check.status == 200 and ( cycle_mode.name == "full" or cycle_mode.name == "up" ) and secrets_mode == "start"
+  when: vault_check.status == 200 and ( cycle_mode.name == "full" or cycle_mode.name == "up" ) and tasks_phase == "begin"
 
 - name: MAIN - include vault tasks
   ansible.builtin.include_tasks: vault.yml
-  when: vault_check.status == 200 and cycle_mode.name == "down" and secrets_mode == "start"
+  when: vault_check.status == 200 and cycle_mode.name == "down" and tasks_phase == "begin"
 
 - name: MAIN - include backup tasks
   ansible.builtin.include_tasks: backup.yml
-  when: vault_check.status != 200 and cycle_mode.name == "down" and secrets_mode == "stop"
+  when: vault_check.status != 200 and cycle_mode.name == "down" and tasks_phase == "end"

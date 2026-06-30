@@ -2,10 +2,15 @@
 - name: FULL - import secrets playbook
   import_playbook: secrets.yml
   vars:
-    secrets_mode: start
+    tasks_phase: begin
 
 - {name: FULL - import wake playbook, import_playbook: wake.yml}
 - {name: FULL - import linode playbook, import_playbook: linode.yml}
+
+- name: FULL - import tfstate playbook
+  import_playbook: tfstate.yml
+  vars:
+    tasks_phase: begin
 
 - name: FULL - gather facts
   hosts: all
@@ -30,7 +35,12 @@
 - {name: FULL - import tunnels playbook, import_playbook: tunnels.yml}
 - {name: FULL - import beats playbook, import_playbook: beats.yml}
 
+- name: FULL - import tfstate playbook
+  import_playbook: tfstate.yml
+  vars:
+    tasks_phase: end
+
 - name: FULL - import secrets playbook
   import_playbook: secrets.yml
   vars:
-    secrets_mode: stop
+    tasks_phase: end

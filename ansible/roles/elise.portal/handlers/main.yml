@@ -12,5 +12,7 @@
   become: true
 
 - name: MAIN - reboot
-  ansible.builtin.reboot:
-  become: true
+  linode_state:
+    token: "{{ secrets.external.linode.token }}"
+    label_prefix: "{{ lab.domain | regex_replace('.com$', '') }}-portal"
+    state: restarted

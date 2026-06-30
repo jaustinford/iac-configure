@@ -6,7 +6,6 @@ vault:
   ipv4: "192.168.40.1"
 
   secret_paths:
-    - certificates/nginx
     - certificates/expressvpn
     - external/linode
     - external/maxmind
