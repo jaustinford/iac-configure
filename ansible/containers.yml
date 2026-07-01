@@ -11,16 +11,14 @@
   vars_files:
     - group_vars/all/secrets.yml
   tasks:
-    - name: CONTAINERS - prune unused docker resources
+    - name: CONTAINERS - prune docker resources
       community.docker.docker_prune:
         containers: true
-        containers_filters:
-          "label!": lab_container=true
         images: true
         images_filters:
           dangling: false
         networks: true
         volumes: true
         builder_cache: true
-      when: lookup('env', 'ELISE_PROJECT_CRON_TRIGGER') == "true"
+      when: cycle_mode.name == "down" and lookup('env', 'DOWN_DESTROY') == "true"
       become: true

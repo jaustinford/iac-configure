@@ -2,3 +2,6 @@
 - name: MAIN - reboot
   ansible.builtin.reboot:
   become: true
+
+- name: MAIN - waiting on host
+  ansible.builtin.wait_for_connection:

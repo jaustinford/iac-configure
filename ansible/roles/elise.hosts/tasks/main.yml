@@ -9,7 +9,9 @@
     mode: "{{ item.mode }}"
   when: ansible_architecture == "aarch64"
   become: true
-  notify: MAIN - reboot
+  notify:
+    - MAIN - reboot
+    - MAIN - waiting on host
   with_items:
     - path: /boot/firmware/user-data
       line: "hostname: {{ names.hosts[inventory_hostname] }}.{{ lab.domain }}"
@@ -29,4 +31,6 @@
   ansible.builtin.hostname:
     name: "{{ names.hosts[inventory_hostname] }}.{{ lab.domain }}"
   become: true
-  notify: MAIN - reboot
+  notify:
+    - MAIN - reboot
+    - MAIN - waiting on host

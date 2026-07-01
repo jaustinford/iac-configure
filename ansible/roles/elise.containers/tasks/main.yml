@@ -12,27 +12,3 @@
   no_log: true
   with_items:
     - "{{ lookup('community.general.filetree', 'vars/containers') | sort(attribute='src', reverse=True) }}"
-
-- name: MAIN - remove all docker containers
-  community.docker.docker_prune:
-    docker_host: "tcp://{{ hostvars[item]['ansible_host'] }}:2375"
-    containers: true
-    volumes: true
-  vars:
-    ansible_python_interpreter: /usr/local/bin/python3
-  when: cycle_mode.name == "down" and lookup('env', 'DOWN_DESTROY') == "true"
-  with_inventory_hostnames:
-    - lab_onprem_docker
-
-- name: MAIN - remove all remaining docker resources
-  community.docker.docker_prune:
-    docker_host: "tcp://{{ hostvars[item]['ansible_host'] }}:2375"
-    images: true
-    images_filters:
-      dangling: false
-    builder_cache: true
-  vars:
-    ansible_python_interpreter: /usr/local/bin/python3
-  when: cycle_mode.name == "down" and lookup('env', 'DOWN_DESTROY') == "true"
-  with_inventory_hostnames:
-    - lab_onprem_docker
