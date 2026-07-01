@@ -16,3 +16,7 @@
     token: "{{ secrets.external.linode.token }}"
     label_prefix: "{{ lab.domain | regex_replace('.com$', '') }}-portal"
     state: restarted
+  delegate_to: localhost
+
+- name: MAIN - waiting on host
+  ansible.builtin.wait_for_connection:

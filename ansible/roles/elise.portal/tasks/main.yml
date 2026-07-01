@@ -3,7 +3,9 @@
   ansible.builtin.hostname:
     name: "{{ names.hosts[inventory_hostname] }}.{{ lab.domain }}"
   become: true
-  notify: MAIN - reboot
+  notify:
+    - MAIN - reboot
+    - MAIN - waiting on host
 
 - name: MAIN - flush handlers
   ansible.builtin.meta: flush_handlers
