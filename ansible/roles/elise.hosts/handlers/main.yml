@@ -1,12 +1,4 @@
 ---
 - name: MAIN - reboot
   ansible.builtin.reboot:
-    connect_timeout: 5
-    reboot_timeout: 300
-    pre_reboot_delay: 5
   become: true
-
-- name: MAIN - waiting on host
-  ansible.builtin.wait_for_connection:
-    delay: 10
-    timeout: 300

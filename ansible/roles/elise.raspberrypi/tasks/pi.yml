@@ -42,3 +42,12 @@
     group: root
     mode: '0755'
   become: true
+
+- name: PI - disable cloud-init
+  ansible.builtin.file:
+    path: /etc/cloud/cloud-init.disabled
+    state: touch
+    owner: root
+    group: root
+    mode: '0644'
+  become: true
