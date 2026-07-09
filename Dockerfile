@@ -15,7 +15,7 @@ RUN \
         ansible-core==2.15.11 \
         requests \
         jmespath \
-        elasticsearch==8.13.2 \
+        elasticsearch==9.1.3 \
         docker \
         hvac \
         dnspython \
