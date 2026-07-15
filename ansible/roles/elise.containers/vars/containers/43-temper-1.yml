@@ -29,8 +29,8 @@ container:
   dns_search_domains: "{{ containers_globals.dns_search_domains }}"
   env:
     TZ: "{{ names.local_timezone }}"
-    VAULT_ENDPOINT: "{{ vault_vlan_40_address }}:{{ ports.vault_web }}"
-    ELASTIC_ENDPOINT: "{{ elasticsearch_vlan_40_address }}:{{ ports.elasticsearch_db }}"
+    VAULT_ENDPOINT: "http://{{ vault_vlan_40_address }}:{{ ports.vault_web }}"
+    ELASTIC_ENDPOINT: "http://{{ elasticsearch_vlan_40_address }}:{{ ports.elasticsearch_db }}"
     HOST_HOSTNAME: "{{ names.hosts[assignments.temper_1.host] }}.{{ lab.domain }}"
   ports: []
   volumes:
