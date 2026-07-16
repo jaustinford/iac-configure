@@ -31,7 +31,13 @@ container:
     TZ: "{{ names.local_timezone }}"
     BACKUP_OBJECT: raid-3
     BACKUP_DISK_MOUNTPOINT: /grail-dst
-    VAULT_ENDPOINT: "{{ vault_vlan_40_address }}:{{ ports.vault_web }}"
+    VAULT_ENDPOINT: "http://{{ vault_vlan_40_address }}:{{ ports.vault_web }}"
+    SMB_SHARE_HOST: 192.168.20.5
+    SMB_SHARE_NAME: "{{ names.raid }}-root"
+    SMB_SHARE_UID: "32628"
+    SMB_SHARE_GID: "32628"
+    SMB_APPROLE: grail
+    SMB_VAULT_PATH: root_rw
   ports: []
   volumes:
     - "{{ folder_secrets_approle }}/grail.json:/approle/grail.json:ro"
