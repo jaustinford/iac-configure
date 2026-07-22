@@ -1,0 +1,36 @@
+---
+###########################################################
+# prowlarr
+###########################################################
+
+###########################################################
+# A centralized indexer manager and proxy for media
+# automation. It acts as a single hub to search and manage
+# hundreds of torrent trackers and Usenet indexers.
+###########################################################
+
+container:
+  name: prowlarr
+  image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/linuxserver/prowlarr:2.4.0"
+  user: "0:{{ assignments.prowlarr.uid }}"
+  command: null
+  docker_host: "{{ prowlarr_vlan_40_address }}"
+  state: "{{ cycle_mode.state.containers }}"
+  restart_policy: unless-stopped
+  privileged: false
+  detach: true
+  interactive: false
+  shm_size: "{{ containers_globals.shm_size }}"
+  devices: []
+  capabilities: []
+  network_mode: container:gluetun
+  dns_servers: []
+  dns_search_domains: []
+  env:
+    TZ: "{{ names.local_timezone }}"
+    PUID: "{{ assignments.prowlarr.uid }}"
+    PGID: "{{ assignments.prowlarr.uid }}"
+  ports: []
+  volumes:
+    - "{{ folder_container_app }}/prowlarr:/config:rw"
+  wait_port: "{{ ports.gluetun_prowlarr }}"

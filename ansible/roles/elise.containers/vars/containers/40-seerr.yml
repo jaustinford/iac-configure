@@ -1,0 +1,36 @@
+---
+###########################################################
+# seerr
+###########################################################
+
+###########################################################
+# Free, open-source application that acts as a central hub
+# for managing and requesting media on personal home media
+# servers like Plex, Jellyfin, and Emby.
+###########################################################
+
+container:
+  name: seerr
+  image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/seerr/seerr:sha-bf5323f"
+  user: "0:{{ assignments.seerr.uid }}"
+  command: null
+  docker_host: "{{ seerr_vlan_40_address }}"
+  state: "{{ cycle_mode.state.containers }}"
+  restart_policy: unless-stopped
+  privileged: false
+  detach: true
+  interactive: false
+  shm_size: "{{ containers_globals.shm_size }}"
+  devices: []
+  capabilities: []
+  network_mode: container:gluetun
+  dns_servers: []
+  dns_search_domains: []
+  env:
+    TZ: "{{ names.local_timezone }}"
+    PUID: "{{ assignments.seerr.uid }}"
+    PGID: "{{ assignments.seerr.uid }}"
+  ports: []
+  volumes:
+    - "{{ folder_container_app }}/seerr:/app/config:rw"
+  wait_port: "{{ ports.gluetun_seerr }}"

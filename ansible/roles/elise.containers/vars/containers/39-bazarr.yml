@@ -1,0 +1,36 @@
+---
+###########################################################
+# bazarr
+###########################################################
+
+###########################################################
+# Companion application to Sonarr and Radarr that manages
+# and downloads subtitles based on your requirements.
+###########################################################
+
+container:
+  name: bazarr
+  image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/linuxserver/bazarr:1.6.0"
+  user: "0:{{ names.groups.tenants.id }}"
+  command: null
+  docker_host: "{{ bazarr_vlan_40_address }}"
+  state: "{{ cycle_mode.state.containers }}"
+  restart_policy: unless-stopped
+  privileged: false
+  detach: true
+  interactive: false
+  shm_size: "{{ containers_globals.shm_size }}"
+  devices: []
+  capabilities: []
+  network_mode: container:gluetun
+  dns_servers: []
+  dns_search_domains: []
+  env:
+    TZ: "{{ names.local_timezone }}"
+    PUID: "{{ assignments.bazarr.uid }}"
+    PGID: "{{ names.groups.tenants.id }}"
+  ports: []
+  volumes:
+    - "{{ folder_container_app }}/bazarr:/config:rw"
+    - "{{ folder_raid }}/{{ names.raid }}-red_rw:/media:rw"
+  wait_port: "{{ ports.gluetun_bazarr }}"

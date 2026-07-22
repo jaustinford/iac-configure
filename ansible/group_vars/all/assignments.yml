@@ -1,46 +1,87 @@
 ---
 assignments:
-  nexus: {host: docker01, uid: 32650}
-  vault: {host: docker01, uid: 32651}
-  pihole: {host: docker02, uid: 32652}
-  nginx: {host: docker02, uid: 32653}
-  plex: {host: docker01, uid: 32654}
-  tautulli: {host: docker02, uid: 32655}
-  filebrowser: {host: docker02, uid: 32656}
-  elasticsearch: {host: docker01, uid: 32657}
-  kibana: {host: docker01, uid: 32658}
-  zoneminder: {host: docker02, uid: 32659}
-  expressvpn: {host: docker01, uid: 32660}
-  squid: {host: docker01, uid: 32661}
-  deluge: {host: docker01, uid: 32662}
-  gitlab: {host: docker02, uid: 32663}
-  runner: {host: docker02, uid: 32664}
-  openvpnas: {host: docker02, uid: 32665}
-  docs: {host: docker01, uid: 32666}
-  resume: {host: docker01, uid: 32667}
-  fourohfour: {host: docker02, uid: 32668}
-  fiveohx: {host: docker01, uid: 32669}
-  fourohthree: {host: docker02, uid: 32670}
-  barbossa: {host: docker02, uid: 32671}
-  keycloak: {host: docker01, uid: 32672}
-  redis: {host: docker02, uid: 32673}
-  oauth: {host: docker01, uid: 32674}
-  site_up: {host: docker00, uid: 32675}
-  site_down: {host: docker00, uid: 32676}
-  lazarus: {host: docker00, uid: 32677}
-  grail_backup_raid_1: {host: docker02, uid: 32678}
-  grail_backup_raid_2: {host: docker02, uid: 32679}
-  grail_backup_raid_3: {host: docker02, uid: 32680}
-  grail_backup_raid_4: {host: docker02, uid: 32681}
-  grail_backup_app: {host: docker02, uid: 32682}
-  grail_restore_raid_1: {host: docker02, uid: 32683}
-  grail_restore_raid_2: {host: docker02, uid: 32684}
-  grail_restore_raid_3: {host: docker02, uid: 32685}
-  grail_restore_raid_4: {host: docker02, uid: 32686}
-  grail_restore_app: {host: docker02, uid: 32687}
-  watchtower_0: {host: docker00, uid: 32688}
-  watchtower_1: {host: docker01, uid: 32689}
-  watchtower_2: {host: docker02, uid: 32690}
-  temper_0: {host: docker00, uid: 32691}
-  temper_1: {host: docker01, uid: 32692}
-  temper_2: {host: docker02, uid: 32693}
+
+  ##################################################
+  # core
+  ##################################################
+
+  nexus:     {host: docker01, uid: 32650}
+  vault:     {host: docker01, uid: 32651}
+  pihole:    {host: docker02, uid: 32652}
+  openvpnas: {host: docker02, uid: 32653}
+
+  ##################################################
+  # web
+  ##################################################
+
+  nginx:       {host: docker02, uid: 32654}
+  fourohfour:  {host: docker02, uid: 32655}
+  fourohthree: {host: docker02, uid: 32656}
+  fiveohx:     {host: docker02, uid: 32657}
+  docs:        {host: docker02, uid: 32658}
+  resume:      {host: docker02, uid: 32659}
+  keycloak:    {host: docker01, uid: 32660}
+  redis:       {host: docker02, uid: 32661}
+  oauth:       {host: docker01, uid: 32662}
+
+  ##################################################
+  # data
+  ##################################################
+
+  elasticsearch: {host: docker01, uid: 32663}
+  kibana:        {host: docker02, uid: 32664}
+  temper_0:      {host: docker00, uid: 32665}
+  temper_1:      {host: docker01, uid: 32666}
+  temper_2:      {host: docker02, uid: 32667}
+  zoneminder:    {host: docker02, uid: 32668}
+
+  ##################################################
+  # devops
+  ##################################################
+
+  gitlab:       {host: docker02, uid: 32669}
+  runner_admin: {host: docker01, uid: 32670}
+  runner_user:  {host: docker02, uid: 32671}
+  watchtower_0: {host: docker00, uid: 32672}
+  watchtower_1: {host: docker01, uid: 32673}
+  watchtower_2: {host: docker02, uid: 32674}
+  lazarus:      {host: docker00, uid: 32675}
+  site_full:    {host: docker00, uid: 32676}
+  site_up:      {host: docker00, uid: 32677}
+  site_down:    {host: docker00, uid: 32678}
+
+  ##################################################
+  # media
+  ##################################################
+
+  plex:        {host: docker02, uid: 32679}
+  tautulli:    {host: docker01, uid: 32680}
+  filebrowser: {host: docker02, uid: 32681}
+
+  ##################################################
+  # download
+  ##################################################
+
+  gluetun:      {host: docker01, uid: 32682}
+  qbittorrent:  {host: docker01, uid: 32683}
+  flaresolverr: {host: docker01, uid: 32684}
+  prowlarr:     {host: docker01, uid: 32685}
+  radarr:       {host: docker01, uid: 32686}
+  sonarr:       {host: docker01, uid: 32687}
+  bazarr:       {host: docker01, uid: 32688}
+  seerr:        {host: docker01, uid: 32689}
+
+  ##################################################
+  # backup
+  ##################################################
+
+  grail_backup_raid_1:  {host: docker02, uid: 32690}
+  grail_backup_raid_2:  {host: docker02, uid: 32691}
+  grail_backup_raid_3:  {host: docker02, uid: 32692}
+  grail_backup_raid_4:  {host: docker02, uid: 32693}
+  grail_backup_app:     {host: docker02, uid: 32694}
+  grail_restore_raid_1: {host: docker02, uid: 32695}
+  grail_restore_raid_2: {host: docker02, uid: 32696}
+  grail_restore_raid_3: {host: docker02, uid: 32697}
+  grail_restore_raid_4: {host: docker02, uid: 32698}
+  grail_restore_app:    {host: docker02, uid: 32699}

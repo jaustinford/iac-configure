@@ -1,41 +1,5 @@
 ---
-- name: MAIN - discover registered runner
-  ansible.builtin.command: |
-    /bin/bash -c '
-      if [ ! -z "$(docker ps --quiet --filter status=running --filter name=runner)" ]; then
-        docker exec runner \
-          /bin/bash -c "
-            if [ -z \"\$(grep {{ runner.description }} /etc/gitlab-runner/config.toml)\" ]; then
-              echo \"unregistered\"
-            else
-              echo \"registered\"
-            fi
-          "
-      fi
-    '
-  become: true
-  register: is_registered
-  changed_when: false
-  when:
-    - assignments.runner.host == inventory_hostname
-
-- name: MAIN - register gitlab runner
-  ansible.builtin.command: |
-    docker exec runner \
-      gitlab-runner register \
-        --non-interactive \
-        --url {{ runner.url }} \
-        --clone-url {{ runner.clone_url }} \
-        --executor {{ runner.executor }} \
-        --token {{ secrets.containers.gitlab.runner_authentication_token }} \
-        --docker-image {{ runner.docker_image }} \
-        --description {{ runner.description }} \
-        --docker-privileged={{ runner.docker_privileged }} \
-    {% for docker_volume in runner.docker_volumes %}
-        --docker-volumes {{ docker_volume }} \
-    {% endfor %}
-  become: true
-  changed_when: false
-  when:
-    - assignments.runner.host == inventory_hostname
-    - is_registered.stdout == "unregistered"
+- name: MAIN - include register tasks
+  ansible.builtin.include_tasks: register.yml
+  with_items:
+    - "{{ runners }}"

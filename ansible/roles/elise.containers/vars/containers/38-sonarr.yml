@@ -1,0 +1,39 @@
+---
+###########################################################
+# sonarr
+###########################################################
+
+###########################################################
+# Acts as a smart manager that monitors multiple RSS feeds
+# for your favorite TV shows, automatically grabs new
+# episodes, sorts them, and renames them to integrate
+# seamlessly with media servers like Plex or Jellyfin.
+###########################################################
+
+container:
+  name: sonarr
+  image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/linuxserver/sonarr:4.0.19"
+  user: "0:{{ names.groups.tenants.id }}"
+  command: null
+  docker_host: "{{ sonarr_vlan_40_address }}"
+  state: "{{ cycle_mode.state.containers }}"
+  restart_policy: unless-stopped
+  privileged: false
+  detach: true
+  interactive: false
+  shm_size: "{{ containers_globals.shm_size }}"
+  devices: []
+  capabilities: []
+  network_mode: container:gluetun
+  dns_servers: []
+  dns_search_domains: []
+  env:
+    TZ: "{{ names.local_timezone }}"
+    PUID: "{{ assignments.sonarr.uid }}"
+    PGID: "{{ names.groups.tenants.id }}"
+  ports: []
+  volumes:
+    - "{{ folder_container_app }}/sonarr:/config:rw"
+    - "{{ folder_raid }}/{{ names.raid }}-red_rw:/media:rw"
+    - "{{ folder_raid }}/{{ names.raid }}-black_rw:/downloads:rw"
+  wait_port: "{{ ports.gluetun_sonarr }}"

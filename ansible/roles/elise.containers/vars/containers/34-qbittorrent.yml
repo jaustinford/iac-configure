@@ -1,0 +1,36 @@
+---
+###########################################################
+# qbittorrent
+###########################################################
+
+###########################################################
+# Free, open-source BitTorrent client used to download and
+# share files over a peer-to-peer (P2P) network.
+###########################################################
+
+container:
+  name: qbittorrent
+  image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/linuxserver/qbittorrent:5.2.3"
+  user: "0:{{ names.groups.tenants.id }}"
+  command: null
+  docker_host: "{{ qbittorrent_vlan_40_address }}"
+  state: "{{ cycle_mode.state.containers }}"
+  restart_policy: unless-stopped
+  privileged: false
+  detach: true
+  interactive: false
+  shm_size: "{{ containers_globals.shm_size }}"
+  devices: []
+  capabilities: []
+  network_mode: container:gluetun
+  dns_servers: []
+  dns_search_domains: []
+  env:
+    TZ: "{{ names.local_timezone }}"
+    PUID: "1000"
+    PGID: "{{ names.groups.tenants.id }}"
+  ports: []
+  volumes:
+    - "{{ folder_container_app }}/qbittorrent:/config:rw"
+    - "{{ folder_raid }}/{{ names.raid }}-black_rw:/downloads:rw"
+  wait_port: "{{ ports.gluetun_qbittorrent }}"

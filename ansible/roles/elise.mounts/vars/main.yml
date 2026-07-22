@@ -10,12 +10,12 @@ mounts:
       dir_mode: "0770"
       file_mode: "0660"
 
-    - host: "{{ names.hosts.docker02 }}.{{ lab.domain }}"
+    - host: "{{ names.hosts.docker01 }}.{{ lab.domain }}"
       state: "{{ cycle_mode.volumes.raid }}"
-      src: "//{{ nas_vlan_20_address }}/{{ names.raid }}-black"
-      path: "{{ folder_raid }}/{{ names.raid }}-black_rw"
-      username: "{{ names.users.raid.black_rw }}"
-      password: "{{ secrets.users.raid.black_rw }}"
+      src: "//{{ nas_vlan_20_address }}/{{ names.raid }}-red"
+      path: "{{ folder_raid }}/{{ names.raid }}-red_rw"
+      username: "{{ names.users.raid.red_rw }}"
+      password: "{{ secrets.users.raid.red_rw }}"
       dir_mode: "0770"
       file_mode: "0660"
 
@@ -28,7 +28,7 @@ mounts:
       dir_mode: "0750"
       file_mode: "0640"
 
-    - host: "{{ names.hosts.docker02 }}.{{ lab.domain }}"
+    - host: "{{ names.hosts.docker01 }}.{{ lab.domain }}"
       state: "{{ cycle_mode.volumes.raid }}"
       src: "//{{ nas_vlan_20_address }}/{{ names.raid }}-green"
       path: "{{ folder_raid }}/{{ names.raid }}-green_rw"
@@ -37,7 +37,7 @@ mounts:
       dir_mode: "0770"
       file_mode: "0660"
 
-    - host: "{{ names.hosts.docker01 }}.{{ lab.domain }}"
+    - host: "{{ names.hosts.docker02 }}.{{ lab.domain }}"
       state: "{{ cycle_mode.volumes.raid }}"
       src: "//{{ nas_vlan_20_address }}/{{ names.raid }}-red"
       path: "{{ folder_raid }}/{{ names.raid }}-red_ro"

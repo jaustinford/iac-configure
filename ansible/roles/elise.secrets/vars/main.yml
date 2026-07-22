@@ -6,16 +6,15 @@ vault:
   ipv4: "192.168.40.1"
 
   secret_paths:
-    - certificates/expressvpn
     - external/linode
     - external/maxmind
-    - containers/deluge
     - containers/elasticsearch/users/elastic
     - containers/elasticsearch/users/kibana_system
-    - containers/expressvpn/users/admin
-    - containers/gitlab/users/admin
-    - containers/gitlab/runner
+    - containers/gitlab/runner_authentication_tokens/runner_admin
+    - containers/gitlab/runner_authentication_tokens/runner_user
     - containers/gitlab/smtp
+    - containers/gitlab/users/admin
+    - containers/gluetun/users/expressvpn
     - containers/kibana/encryption_keys
     - containers/nexus/users/admin
     - containers/oauth
@@ -44,6 +43,7 @@ vault:
     - users/host/associate/docker/01
     - users/host/associate/docker/02
     - users/host/associate/portal
+    - users/raid/red_rw
     - users/raid/red_ro
     - users/raid/blue_ro
     - users/raid/green_rw

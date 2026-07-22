@@ -1,0 +1,52 @@
+---
+###########################################################
+# site-full
+###########################################################
+
+###########################################################
+# Standby container for Lazarus triggers of the
+# elise/infrastructure/iac-configure project in full cycle
+# mode.
+###########################################################
+
+container:
+  name: site-full
+  image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_hosted }}/elise/iac-configure:main"
+  user: "0:{{ assignments.site_full.uid }}"
+  command:
+    - /bin/bash
+    - -c
+    - |
+      /bin/container-init.sh ;
+      ansible-playbook \
+          /etc/ansible/site.yml \
+          -vv
+  docker_host: "{{ site_full_vlan_40_address }}"
+  state: present
+  restart_policy: "no"
+  privileged: false
+  detach: false
+  interactive: true
+  shm_size: "{{ containers_globals.shm_size }}"
+  devices: []
+  capabilities: []
+  network_mode: host
+  dns_servers: "{{ containers_globals.dns_servers }}"
+  dns_search_domains: "{{ containers_globals.dns_search_domains }}"
+  env:
+    TZ: "{{ names.local_timezone }}"
+    CYCLE_MODE: full
+    DOWN_DESTROY: "false"
+    DOWN_POWEROFF: "true"
+    ELISE_PROJECT_CRON_TRIGGER: "false"
+    ELISE_PROJECT_EXPRESSVPN_CONTINENT: "{{ lookup('env', 'ELISE_PROJECT_EXPRESSVPN_CONTINENT') }}"
+    ELISE_PROJECT_EXPRESSVPN_REGION: "{{ lookup('env', 'ELISE_PROJECT_EXPRESSVPN_REGION') }}"
+    ELISE_PROJECT_EXPRESSVPN_COUNTRY: "{{ lookup('env', 'ELISE_PROJECT_EXPRESSVPN_COUNTRY') }}"
+    ELISE_PROJECT_EXPRESSVPN_SERVER: "{{ lookup('env', 'ELISE_PROJECT_EXPRESSVPN_SERVER') }}"
+  ports: []
+  volumes:
+    - "{{ folder_secrets_approle }}/iac-configure.json:/approle/iac-configure.json:ro"
+    - "{{ folder_secrets_automation }}:/automation:ro"
+    - "{{ folder_secrets_docker }}:/root/.docker:rw"
+    - /var/run/docker.sock:/var/run/docker.sock:rw
+  wait_port: "0"

@@ -1,28 +1,64 @@
 ---
 ports:
-  nexus_web: "32500"
+
+  ##################################################
+  # core
+  ##################################################
+
+  nexus_web:           "32500"
   nexus_docker_hosted: "32501"
-  nexus_docker_proxy: "32502"
-  vault_web: "32503"
-  pihole_web: "32504"
-  nginx_web: "32505"
-  plex_web: "32506"
-  tautulli_web: "32507"
-  filebrowser_web: "32508"
-  elasticsearch_db: "32509"
-  kibana_web: "32510"
-  zoneminder_web: "32511"
-  expressvpn_squid: "32512"
-  expressvpn_deluge: "32513"
-  gitlab_web: "32514"
-  gitlab_ssh: "32515"
-  openvpnas_web: "32516"
-  openvpnas_vpn: "32517"
-  docs_web: "32518"
-  resume_web: "32519"
-  fourohfour_web: "32520"
-  fiveohx_web: "32521"
-  fourohthree_web: "32522"
-  keycloak_web: "32523"
-  redis_db: "32524"
-  oauth_web: "32525"
+  nexus_docker_proxy:  "32502"
+  vault_web:           "32503"
+  pihole_web:          "32504"
+  openvpnas_web:       "32505"
+  openvpnas_vpn:       "32506"
+
+  ##################################################
+  # web
+  ##################################################
+
+  nginx_web:       "32507"
+  fourohfour_web:  "32508"
+  fourohthree_web: "32509"
+  fiveohx_web:     "32510"
+  docs_web:        "32511"
+  resume_web:      "32512"
+  keycloak_web:    "32513"
+  redis_db:        "32514"
+  oauth_web:       "32515"
+
+  ##################################################
+  # data
+  ##################################################
+
+  elasticsearch_db: "32516"
+  kibana_web:       "32517"
+  zoneminder_web:   "32518"
+
+  ##################################################
+  # devops
+  ##################################################
+
+  gitlab_web: "32519"
+  gitlab_ssh: "32520"
+
+  ##################################################
+  # media
+  ##################################################
+
+  plex_web:        "32521"
+  tautulli_web:    "32522"
+  filebrowser_web: "32523"
+
+  ##################################################
+  # backup
+  ##################################################
+
+  gluetun_proxy:        "32524"
+  gluetun_qbittorrent:  "32525"
+  gluetun_flaresolverr: "32526"
+  gluetun_prowlarr:     "32527"
+  gluetun_radarr:       "32528"
+  gluetun_sonarr:       "32529"
+  gluetun_bazarr:       "32530"
+  gluetun_seerr:        "32531"

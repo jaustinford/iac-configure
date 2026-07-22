@@ -1,0 +1,33 @@
+---
+###########################################################
+# flaresolverr
+###########################################################
+
+###########################################################
+# A centralized indexer manager and proxy for media
+# automation. It acts as a single hub to search and manage
+# hundreds of torrent trackers and Usenet indexers.
+###########################################################
+
+container:
+  name: flaresolverr
+  image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/flaresolverr/flaresolverr:v3.5.0"
+  user: "0:{{ assignments.flaresolverr.uid }}"
+  command: null
+  docker_host: "{{ flaresolverr_vlan_40_address }}"
+  state: "{{ cycle_mode.state.containers }}"
+  restart_policy: unless-stopped
+  privileged: false
+  detach: true
+  interactive: false
+  shm_size: "{{ containers_globals.shm_size }}"
+  devices: []
+  capabilities: []
+  network_mode: container:gluetun
+  dns_servers: []
+  dns_search_domains: []
+  env:
+    TZ: "{{ names.local_timezone }}"
+  ports: []
+  volumes: []
+  wait_port: "{{ ports.gluetun_flaresolverr }}"

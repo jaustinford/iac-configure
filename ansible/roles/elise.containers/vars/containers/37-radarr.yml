@@ -1,0 +1,38 @@
+---
+###########################################################
+# radarr
+###########################################################
+
+###########################################################
+# Monitors RSS feeds and lists, automatically finds,
+# downloads, and organizes your movies, and can even upgrade
+# files to higher qualities as they become available.
+###########################################################
+
+container:
+  name: radarr
+  image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/linuxserver/radarr:6.3.0"
+  user: "0:{{ names.groups.tenants.id }}"
+  command: null
+  docker_host: "{{ radarr_vlan_40_address }}"
+  state: "{{ cycle_mode.state.containers }}"
+  restart_policy: unless-stopped
+  privileged: false
+  detach: true
+  interactive: false
+  shm_size: "{{ containers_globals.shm_size }}"
+  devices: []
+  capabilities: []
+  network_mode: container:gluetun
+  dns_servers: []
+  dns_search_domains: []
+  env:
+    TZ: "{{ names.local_timezone }}"
+    PUID: "{{ assignments.radarr.uid }}"
+    PGID: "{{ names.groups.tenants.id }}"
+  ports: []
+  volumes:
+    - "{{ folder_container_app }}/radarr:/config:rw"
+    - "{{ folder_raid }}/{{ names.raid }}-red_rw:/media:rw"
+    - "{{ folder_raid }}/{{ names.raid }}-black_rw:/downloads:rw"
+  wait_port: "{{ ports.gluetun_radarr }}"

@@ -1,0 +1,41 @@
+---
+- name: "REGISTER - discover container {{ item.container }}"
+  ansible.builtin.command: |
+    /bin/bash -c '
+      if [ ! -z "$(docker ps --quiet --filter status=running --filter name={{ item.container }})" ]; then
+        docker exec {{ item.container }} \
+          /bin/bash -c "
+            if [ -z \"\$(grep {{ item.description }} /etc/gitlab-runner/config.toml)\" ]; then
+              echo \"unregistered\"
+            else
+              echo \"registered\"
+            fi
+          "
+      fi
+    '
+  become: true
+  register: is_registered
+  changed_when: false
+  when:
+    - assignments[item.container | replace('-', '_')].host == inventory_hostname
+
+- name: "REGISTER - register container {{ item.container }}"
+  ansible.builtin.command: |
+    docker exec {{ item.container }} \
+      gitlab-runner register \
+        --non-interactive \
+        --url {{ item.url }} \
+        --clone-url {{ item.clone_url }} \
+        --executor {{ item.executor }} \
+        --token {{ item.token }} \
+        --docker-image {{ item.docker_image }} \
+        --description {{ item.description }} \
+        --docker-privileged={{ item.docker_privileged }} \
+    {% for docker_volume in item.docker_volumes %}
+        --docker-volumes {{ docker_volume }} \
+    {% endfor %}
+  become: true
+  changed_when: false
+  when:
+    - assignments[item.container | replace('-', '_')].host == inventory_hostname
+    - is_registered.stdout == "unregistered"

@@ -37,7 +37,7 @@ container:
     ADVERTISE_IP: |
       http://{{ plex_vlan_40_address }}:{{ ports.plex_web }},
       http://192.168.60.6:32400,
-      https://media.{{ lab.domain }}
+      https://stream-theater.{{ lab.domain }}
     ALLOWED_NETWORKS: |
       192.168.30.0/29,
       192.168.40.0/29,

@@ -60,44 +60,79 @@ nas_vlan_40_fqdn: "{{ names.hosts.nas }}-{{ names.networks.vlan_40 }}.{{ lab.dom
 # containers
 ############################################################
 
+# vlan20
+
 pihole_vlan_20_address: "{{ hostvars[assignments.pihole.host]['ansible_' + hostvars[assignments.pihole.host].lan_ints.vlan_20].ipv4.address }}"
 
+# vlan30
+
 pihole_vlan_30_address: "{{ hostvars[assignments.pihole.host]['ansible_' + hostvars[assignments.pihole.host].lan_ints.vlan_30].ipv4.address }}"
+openvpnas_vlan_30_address: "{{ hostvars[assignments.openvpnas.host]['ansible_' + hostvars[assignments.openvpnas.host].lan_ints.vlan_30].ipv4.address }}"
 nginx_vlan_30_address: "{{ hostvars[assignments.nginx.host]['ansible_' + hostvars[assignments.nginx.host].lan_ints.vlan_30].ipv4.address }}"
 plex_vlan_30_address: "{{ hostvars[assignments.plex.host]['ansible_' + hostvars[assignments.plex.host].lan_ints.vlan_30].ipv4.address }}"
-expressvpn_vlan_30_address: "{{ hostvars[assignments.expressvpn.host]['ansible_' + hostvars[assignments.expressvpn.host].lan_ints.vlan_30].ipv4.address }}"
-openvpnas_vlan_30_address: "{{ hostvars[assignments.openvpnas.host]['ansible_' + hostvars[assignments.openvpnas.host].lan_ints.vlan_30].ipv4.address }}"
+gluetun_vlan_30_address: "{{ hostvars[assignments.gluetun.host]['ansible_' + hostvars[assignments.gluetun.host].lan_ints.vlan_30].ipv4.address }}"
 
-nginx_vlan_40_fqdn: "{{ names.hosts[assignments.nginx.host] }}-{{ names.networks.vlan_40 }}.{{ lab.domain }}"
+# vlan40 - core
 
 nexus_vlan_40_address: "{{ hostvars[assignments.nexus.host]['ansible_' + hostvars[assignments.nexus.host].lan_ints.vlan_40].ipv4.address }}"
 vault_vlan_40_address: "{{ hostvars[assignments.vault.host]['ansible_' + hostvars[assignments.vault.host].lan_ints.vlan_40].ipv4.address }}"
 pihole_vlan_40_address: "{{ hostvars[assignments.pihole.host]['ansible_' + hostvars[assignments.pihole.host].lan_ints.vlan_40].ipv4.address }}"
-nginx_vlan_40_address: "{{ hostvars[assignments.nginx.host]['ansible_' + hostvars[assignments.nginx.host].lan_ints.vlan_40].ipv4.address }}"
-plex_vlan_40_address: "{{ hostvars[assignments.plex.host]['ansible_' + hostvars[assignments.plex.host].lan_ints.vlan_40].ipv4.address }}"
-tautulli_vlan_40_address: "{{ hostvars[assignments.tautulli.host]['ansible_' + hostvars[assignments.tautulli.host].lan_ints.vlan_40].ipv4.address }}"
-filebrowser_vlan_40_address: "{{ hostvars[assignments.filebrowser.host]['ansible_' + hostvars[assignments.filebrowser.host].lan_ints.vlan_40].ipv4.address }}"
-elasticsearch_vlan_40_address: "{{ hostvars[assignments.elasticsearch.host]['ansible_' + hostvars[assignments.elasticsearch.host].lan_ints.vlan_40].ipv4.address }}"
-kibana_vlan_40_address: "{{ hostvars[assignments.kibana.host]['ansible_' + hostvars[assignments.kibana.host].lan_ints.vlan_40].ipv4.address }}"
-zoneminder_vlan_40_address: "{{ hostvars[assignments.zoneminder.host]['ansible_' + hostvars[assignments.zoneminder.host].lan_ints.vlan_40].ipv4.address }}"
-expressvpn_vlan_40_address: "{{ hostvars[assignments.expressvpn.host]['ansible_' + hostvars[assignments.expressvpn.host].lan_ints.vlan_40].ipv4.address }}"
-squid_vlan_40_address: "{{ hostvars[assignments.squid.host]['ansible_' + hostvars[assignments.squid.host].lan_ints.vlan_40].ipv4.address }}"
-deluge_vlan_40_address: "{{ hostvars[assignments.deluge.host]['ansible_' + hostvars[assignments.deluge.host].lan_ints.vlan_40].ipv4.address }}"
-gitlab_vlan_40_address: "{{ hostvars[assignments.gitlab.host]['ansible_' + hostvars[assignments.gitlab.host].lan_ints.vlan_40].ipv4.address }}"
-runner_vlan_40_address: "{{ hostvars[assignments.runner.host]['ansible_' + hostvars[assignments.runner.host].lan_ints.vlan_40].ipv4.address }}"
 openvpnas_vlan_40_address: "{{ hostvars[assignments.openvpnas.host]['ansible_' + hostvars[assignments.openvpnas.host].lan_ints.vlan_40].ipv4.address }}"
+
+# vlan40 - web
+
+nginx_vlan_40_fqdn: "{{ names.hosts[assignments.nginx.host] }}-{{ names.networks.vlan_40 }}.{{ lab.domain }}"
+nginx_vlan_40_address: "{{ hostvars[assignments.nginx.host]['ansible_' + hostvars[assignments.nginx.host].lan_ints.vlan_40].ipv4.address }}"
+fourohfour_vlan_40_address: "{{ hostvars[assignments.fourohfour.host]['ansible_' + hostvars[assignments.fourohfour.host].lan_ints.vlan_40].ipv4.address }}"
+fourohthree_vlan_40_address: "{{ hostvars[assignments.fourohthree.host]['ansible_' + hostvars[assignments.fourohthree.host].lan_ints.vlan_40].ipv4.address }}"
+fiveohx_vlan_40_address: "{{ hostvars[assignments.fiveohx.host]['ansible_' + hostvars[assignments.fiveohx.host].lan_ints.vlan_40].ipv4.address }}"
 docs_vlan_40_address: "{{ hostvars[assignments.docs.host]['ansible_' + hostvars[assignments.docs.host].lan_ints.vlan_40].ipv4.address }}"
 resume_vlan_40_address: "{{ hostvars[assignments.resume.host]['ansible_' + hostvars[assignments.resume.host].lan_ints.vlan_40].ipv4.address }}"
-fourohfour_vlan_40_address: "{{ hostvars[assignments.fourohfour.host]['ansible_' + hostvars[assignments.fourohfour.host].lan_ints.vlan_40].ipv4.address }}"
-fiveohx_vlan_40_address: "{{ hostvars[assignments.fiveohx.host]['ansible_' + hostvars[assignments.fiveohx.host].lan_ints.vlan_40].ipv4.address }}"
-fourohthree_vlan_40_address: "{{ hostvars[assignments.fourohthree.host]['ansible_' + hostvars[assignments.fourohthree.host].lan_ints.vlan_40].ipv4.address }}"
-barbossa_vlan_40_address: "{{ hostvars[assignments.barbossa.host]['ansible_' + hostvars[assignments.barbossa.host].lan_ints.vlan_40].ipv4.address }}"
 keycloak_vlan_40_address: "{{ hostvars[assignments.keycloak.host]['ansible_' + hostvars[assignments.keycloak.host].lan_ints.vlan_40].ipv4.address }}"
 redis_vlan_40_address: "{{ hostvars[assignments.redis.host]['ansible_' + hostvars[assignments.redis.host].lan_ints.vlan_40].ipv4.address }}"
 oauth_vlan_40_address: "{{ hostvars[assignments.oauth.host]['ansible_' + hostvars[assignments.oauth.host].lan_ints.vlan_40].ipv4.address }}"
+
+# vlan40 - data
+
+elasticsearch_vlan_40_address: "{{ hostvars[assignments.elasticsearch.host]['ansible_' + hostvars[assignments.elasticsearch.host].lan_ints.vlan_40].ipv4.address }}"
+kibana_vlan_40_address: "{{ hostvars[assignments.kibana.host]['ansible_' + hostvars[assignments.kibana.host].lan_ints.vlan_40].ipv4.address }}"
+temper_0_vlan_40_address: "{{ hostvars[assignments.temper_0.host]['ansible_' + hostvars[assignments.temper_0.host].lan_ints.vlan_40].ipv4.address }}"
+temper_1_vlan_40_address: "{{ hostvars[assignments.temper_1.host]['ansible_' + hostvars[assignments.temper_1.host].lan_ints.vlan_40].ipv4.address }}"
+temper_2_vlan_40_address: "{{ hostvars[assignments.temper_2.host]['ansible_' + hostvars[assignments.temper_2.host].lan_ints.vlan_40].ipv4.address }}"
+zoneminder_vlan_40_address: "{{ hostvars[assignments.zoneminder.host]['ansible_' + hostvars[assignments.zoneminder.host].lan_ints.vlan_40].ipv4.address }}"
+
+# vlan40 - devops
+
+gitlab_vlan_40_address: "{{ hostvars[assignments.gitlab.host]['ansible_' + hostvars[assignments.gitlab.host].lan_ints.vlan_40].ipv4.address }}"
+runner_admin_vlan_40_address: "{{ hostvars[assignments.runner_admin.host]['ansible_' + hostvars[assignments.runner_admin.host].lan_ints.vlan_40].ipv4.address }}"
+runner_user_vlan_40_address: "{{ hostvars[assignments.runner_user.host]['ansible_' + hostvars[assignments.runner_user.host].lan_ints.vlan_40].ipv4.address }}"
+watchtower_0_vlan_40_address: "{{ hostvars[assignments.watchtower_0.host]['ansible_' + hostvars[assignments.watchtower_0.host].lan_ints.vlan_40].ipv4.address }}"
+watchtower_1_vlan_40_address: "{{ hostvars[assignments.watchtower_1.host]['ansible_' + hostvars[assignments.watchtower_1.host].lan_ints.vlan_40].ipv4.address }}"
+watchtower_2_vlan_40_address: "{{ hostvars[assignments.watchtower_2.host]['ansible_' + hostvars[assignments.watchtower_2.host].lan_ints.vlan_40].ipv4.address }}"
+lazarus_vlan_40_address: "{{ hostvars[assignments.lazarus.host]['ansible_' + hostvars[assignments.lazarus.host].lan_ints.vlan_40].ipv4.address }}"
+site_full_vlan_40_address: "{{ hostvars[assignments.site_full.host]['ansible_' + hostvars[assignments.site_full.host].lan_ints.vlan_40].ipv4.address }}"
 site_up_vlan_40_address: "{{ hostvars[assignments.site_up.host]['ansible_' + hostvars[assignments.site_up.host].lan_ints.vlan_40].ipv4.address }}"
 site_down_vlan_40_address: "{{ hostvars[assignments.site_down.host]['ansible_' + hostvars[assignments.site_down.host].lan_ints.vlan_40].ipv4.address }}"
-lazarus_vlan_40_address: "{{ hostvars[assignments.lazarus.host]['ansible_' + hostvars[assignments.lazarus.host].lan_ints.vlan_40].ipv4.address }}"
+
+# vlan40 - media
+
+plex_vlan_40_address: "{{ hostvars[assignments.plex.host]['ansible_' + hostvars[assignments.plex.host].lan_ints.vlan_40].ipv4.address }}"
+tautulli_vlan_40_address: "{{ hostvars[assignments.tautulli.host]['ansible_' + hostvars[assignments.tautulli.host].lan_ints.vlan_40].ipv4.address }}"
+filebrowser_vlan_40_address: "{{ hostvars[assignments.filebrowser.host]['ansible_' + hostvars[assignments.filebrowser.host].lan_ints.vlan_40].ipv4.address }}"
+
+# vlan40 - download
+
+gluetun_vlan_40_address: "{{ hostvars[assignments.gluetun.host]['ansible_' + hostvars[assignments.gluetun.host].lan_ints.vlan_40].ipv4.address }}"
+qbittorrent_vlan_40_address: "{{ hostvars[assignments.qbittorrent.host]['ansible_' + hostvars[assignments.qbittorrent.host].lan_ints.vlan_40].ipv4.address }}"
+flaresolverr_vlan_40_address: "{{ hostvars[assignments.flaresolverr.host]['ansible_' + hostvars[assignments.flaresolverr.host].lan_ints.vlan_40].ipv4.address }}"
+prowlarr_vlan_40_address: "{{ hostvars[assignments.prowlarr.host]['ansible_' + hostvars[assignments.prowlarr.host].lan_ints.vlan_40].ipv4.address }}"
+radarr_vlan_40_address: "{{ hostvars[assignments.radarr.host]['ansible_' + hostvars[assignments.radarr.host].lan_ints.vlan_40].ipv4.address }}"
+sonarr_vlan_40_address: "{{ hostvars[assignments.sonarr.host]['ansible_' + hostvars[assignments.sonarr.host].lan_ints.vlan_40].ipv4.address }}"
+bazarr_vlan_40_address: "{{ hostvars[assignments.bazarr.host]['ansible_' + hostvars[assignments.bazarr.host].lan_ints.vlan_40].ipv4.address }}"
+seerr_vlan_40_address: "{{ hostvars[assignments.seerr.host]['ansible_' + hostvars[assignments.seerr.host].lan_ints.vlan_40].ipv4.address }}"
+
+# vlan40 - backup
+
 grail_backup_raid_1_vlan_40_address: "{{ hostvars[assignments.grail_backup_raid_1.host]['ansible_' + hostvars[assignments.grail_backup_raid_1.host].lan_ints.vlan_40].ipv4.address }}"
 grail_backup_raid_2_vlan_40_address: "{{ hostvars[assignments.grail_backup_raid_2.host]['ansible_' + hostvars[assignments.grail_backup_raid_2.host].lan_ints.vlan_40].ipv4.address }}"
 grail_backup_raid_3_vlan_40_address: "{{ hostvars[assignments.grail_backup_raid_3.host]['ansible_' + hostvars[assignments.grail_backup_raid_3.host].lan_ints.vlan_40].ipv4.address }}"
@@ -108,9 +143,3 @@ grail_restore_raid_2_vlan_40_address: "{{ hostvars[assignments.grail_restore_rai
 grail_restore_raid_3_vlan_40_address: "{{ hostvars[assignments.grail_restore_raid_3.host]['ansible_' + hostvars[assignments.grail_restore_raid_3.host].lan_ints.vlan_40].ipv4.address }}"
 grail_restore_raid_4_vlan_40_address: "{{ hostvars[assignments.grail_restore_raid_4.host]['ansible_' + hostvars[assignments.grail_restore_raid_4.host].lan_ints.vlan_40].ipv4.address }}"
 grail_restore_app_vlan_40_address: "{{ hostvars[assignments.grail_restore_app.host]['ansible_' + hostvars[assignments.grail_restore_app.host].lan_ints.vlan_40].ipv4.address }}"
-watchtower_0_vlan_40_address: "{{ hostvars[assignments.watchtower_0.host]['ansible_' + hostvars[assignments.watchtower_0.host].lan_ints.vlan_40].ipv4.address }}"
-watchtower_1_vlan_40_address: "{{ hostvars[assignments.watchtower_1.host]['ansible_' + hostvars[assignments.watchtower_1.host].lan_ints.vlan_40].ipv4.address }}"
-watchtower_2_vlan_40_address: "{{ hostvars[assignments.watchtower_2.host]['ansible_' + hostvars[assignments.watchtower_2.host].lan_ints.vlan_40].ipv4.address }}"
-temper_0_vlan_40_address: "{{ hostvars[assignments.temper_0.host]['ansible_' + hostvars[assignments.temper_0.host].lan_ints.vlan_40].ipv4.address }}"
-temper_1_vlan_40_address: "{{ hostvars[assignments.temper_1.host]['ansible_' + hostvars[assignments.temper_1.host].lan_ints.vlan_40].ipv4.address }}"
-temper_2_vlan_40_address: "{{ hostvars[assignments.temper_2.host]['ansible_' + hostvars[assignments.temper_2.host].lan_ints.vlan_40].ipv4.address }}"

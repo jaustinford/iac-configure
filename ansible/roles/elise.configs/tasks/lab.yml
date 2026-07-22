@@ -1,13 +1,4 @@
 ---
-- name: "LAB - resolve expressvpn server"
-  delegate_to: localhost
-  expressvpn_selector:
-    continent: "{{ lookup('env', 'ELISE_PROJECT_EXPRESSVPN_CONTINENT') }}"
-    region: "{{ lookup('env', 'ELISE_PROJECT_EXPRESSVPN_REGION') }}"
-    country: "{{ lookup('env', 'ELISE_PROJECT_EXPRESSVPN_COUNTRY') }}"
-    server: "{{ lookup('env', 'ELISE_PROJECT_EXPRESSVPN_SERVER') }}"
-  register: expressvpn_selected_server
-
 - name: LAB - include directories tasks
   ansible.builtin.include_tasks: directories.yml
   when: item.state == 'directory'

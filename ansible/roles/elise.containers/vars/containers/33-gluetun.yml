@@ -1,0 +1,53 @@
+---
+###########################################################
+# gluetun
+###########################################################
+
+###########################################################
+# Virtual private network (VPN) service that enhances
+# online privacy and security by encrypting internet
+# traffic and masking your IP address and location. It
+# creates a secure, encrypted tunnel between your device
+# and the internet, making it difficult for third parties
+# to track your online activity or access your data.
+###########################################################
+
+container:
+  name: gluetun
+  image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/qmcgaw/gluetun:latest"
+  user: "0:{{ assignments.flaresolverr.uid }}"
+  command: []
+  docker_host: "{{ gluetun_vlan_40_address }}"
+  state: "{{ cycle_mode.state.containers }}"
+  restart_policy: unless-stopped
+  privileged: false
+  detach: true
+  interactive: false
+  shm_size: "{{ containers_globals.shm_size }}"
+  devices:
+    - /dev/net/tun
+  capabilities:
+    - net_admin
+  network_mode: "{{ containers_globals.network_mode }}"
+  dns_servers: "{{ containers_globals.dns_servers }}"
+  dns_search_domains: "{{ containers_globals.dns_search_domains }}"
+  env:
+    TZ: "{{ names.local_timezone }}"
+    HTTPPROXY: "on"
+    VPN_SERVICE_PROVIDER: expressvpn
+    OPENVPN_USER: "{{ secrets.containers.gluetun.username }}"
+    OPENVPN_PASSWORD: "{{ secrets.containers.gluetun.password }}"
+    SERVER_COUNTRIES: "{{ lookup('env', 'GLUETUN_EXPRESSVPN_COUNTRIES') }}"
+  ports:
+    - "{{ gluetun_vlan_30_address }}:{{ ports.gluetun_proxy }}:8888/tcp"
+    - "{{ gluetun_vlan_40_address }}:{{ ports.gluetun_proxy }}:8888/tcp"
+    - "{{ gluetun_vlan_40_address }}:{{ ports.gluetun_qbittorrent }}:8080/tcp"
+    - "{{ gluetun_vlan_40_address }}:{{ ports.gluetun_flaresolverr }}:8191/tcp"
+    - "{{ gluetun_vlan_40_address }}:{{ ports.gluetun_prowlarr }}:9696/tcp"
+    - "{{ gluetun_vlan_40_address }}:{{ ports.gluetun_radarr }}:7878/tcp"
+    - "{{ gluetun_vlan_40_address }}:{{ ports.gluetun_sonarr }}:8989/tcp"
+    - "{{ gluetun_vlan_40_address }}:{{ ports.gluetun_bazarr }}:6767/tcp"
+    - "{{ gluetun_vlan_40_address }}:{{ ports.gluetun_seerr }}:5055/tcp"
+  volumes:
+    - "{{ folder_container_app }}/gluetun:/gluetun:rw"
+  wait_port: "0"

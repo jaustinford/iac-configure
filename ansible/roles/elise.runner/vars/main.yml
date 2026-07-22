@@ -1,14 +1,28 @@
 ---
-runner:
-  url: "http://{{ gitlab_vlan_40_address }}:{{ ports.gitlab_web }}"
-  clone_url: "http://{{ gitlab_vlan_40_address }}:{{ ports.gitlab_web }}"
-  executor: docker
-  docker_image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/docker:28-dind"
-  description: lab_runner
-  docker_privileged: "true"
-  docker_volumes:
-    - "{{ folder_secrets_approle }}:/approle:ro"
-    - "{{ folder_secrets_automation }}:/automation:ro"
-    - "{{ folder_secrets_docker }}:/root/.docker:rw"
-    - "{{ folder_raid }}/{{ names.raid }}-green_rw:/tfstate:rw"
-    - /var/run/docker.sock:/var/run/docker.sock:rw
+runners:
+  - container: runner-admin
+    url: "http://{{ gitlab_vlan_40_address }}:{{ ports.gitlab_web }}"
+    clone_url: "http://{{ gitlab_vlan_40_address }}:{{ ports.gitlab_web }}"
+    executor: docker
+    token: "{{ secrets.containers.gitlab.runner_authentication_token.runner_admin }}"
+    docker_image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/docker:28-dind"
+    description: runner-admin
+    docker_privileged: "true"
+    docker_volumes:
+      - "{{ folder_secrets_approle }}:/approle:ro"
+      - "{{ folder_secrets_automation }}:/automation:ro"
+      - "{{ folder_secrets_docker }}:/root/.docker:rw"
+      - "{{ folder_raid }}/{{ names.raid }}-green_rw:/tfstate:rw"
+      - /var/run/docker.sock:/var/run/docker.sock:rw
+
+  - container: runner-user
+    url: "http://{{ gitlab_vlan_40_address }}:{{ ports.gitlab_web }}"
+    clone_url: "http://{{ gitlab_vlan_40_address }}:{{ ports.gitlab_web }}"
+    executor: docker
+    token: "{{ secrets.containers.gitlab.runner_authentication_token.runner_user }}"
+    docker_image: "{{ nexus_vlan_40_address }}:{{ ports.nexus_docker_proxy }}/docker:28-dind"
+    description: runner-user
+    docker_privileged: "false"
+    docker_volumes:
+      - "{{ folder_secrets_docker }}:/root/.docker:rw"
+      - /var/run/docker.sock:/var/run/docker.sock:rw
