@@ -38,11 +38,8 @@ container:
     CYCLE_MODE: full
     DOWN_DESTROY: "false"
     DOWN_POWEROFF: "true"
+    GLUETUN_EXPRESSVPN_COUNTRIES: "{{ lookup('env', 'GLUETUN_EXPRESSVPN_COUNTRIES') }}"
     ELISE_PROJECT_CRON_TRIGGER: "false"
-    ELISE_PROJECT_EXPRESSVPN_CONTINENT: "{{ lookup('env', 'ELISE_PROJECT_EXPRESSVPN_CONTINENT') }}"
-    ELISE_PROJECT_EXPRESSVPN_REGION: "{{ lookup('env', 'ELISE_PROJECT_EXPRESSVPN_REGION') }}"
-    ELISE_PROJECT_EXPRESSVPN_COUNTRY: "{{ lookup('env', 'ELISE_PROJECT_EXPRESSVPN_COUNTRY') }}"
-    ELISE_PROJECT_EXPRESSVPN_SERVER: "{{ lookup('env', 'ELISE_PROJECT_EXPRESSVPN_SERVER') }}"
   ports: []
   volumes:
     - "{{ folder_secrets_approle }}/iac-configure.json:/approle/iac-configure.json:ro"
