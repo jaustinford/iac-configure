@@ -2,16 +2,6 @@
 ssmtp:
   email_server: smtp.gmail.com:587
 
-deluge:
-  add_paused: "false"
-  completed_dir: completed
-  incoming_dir: incoming
-  max_active_downloading: 20
-  max_active_limit: 20
-  max_download_speed: 3000
-  move_completed: "true"
-  torrent_dir: torrents
-
 oauth:
   client_id: oauth2-proxy
 
@@ -33,11 +23,19 @@ nginx:
         group: partners,operators,clients
 
   geoip_whitelists:
-    country:
-      - United States
+    general:
+      countries:
+        - United States
 
-    city: [
-      "Broomfield", "Superior", "Louisville", "Lafayette", "Westminster",
-      "Boulder", "Federal Heights", "Northglenn", "Thornton", "Commerce City",
-      "Denver", "Wheat Ridge", "Arvada", "Lakewood", "Edgewater", "Aurora"
-    ]
+      cities: [
+        "Broomfield", "Superior", "Louisville", "Lafayette", "Westminster",
+        "Boulder", "Federal Heights", "Northglenn", "Thornton", "Commerce City",
+        "Denver", "Wheat Ridge", "Arvada", "Lakewood", "Edgewater", "Aurora"
+      ]
+
+    plex:
+      countries:
+        - United States
+        - Switzerland
+        - Iceland
+        - Panama

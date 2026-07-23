@@ -1,13 +1,35 @@
 ---
-- name: MAIN - docker restart pihole
+- name: MAIN - docker restart elasticsearch
   ansible.builtin.command: |
     /bin/bash -c "
-      if [ ! -z \"$(docker ps --quiet --filter status=running --filter name=pihole)\" ]; then
-        docker restart pihole
+      if [ ! -z \"$(docker ps --quiet --filter status=running --filter name=elasticsearch)\" ]; then
+        docker restart elasticsearch
       fi
     "
   become: true
-  when: inventory_hostname == assignments.pihole.host
+  when: inventory_hostname == assignments.elasticsearch.host
+  changed_when: false
+
+- name: MAIN - docker restart filebrowser
+  ansible.builtin.command: |
+    /bin/bash -c "
+      if [ ! -z \"$(docker ps --quiet --filter status=running --filter name=filebrowser)\" ]; then
+        docker restart filebrowser
+      fi
+    "
+  become: true
+  when: inventory_hostname == assignments.filebrowser.host
+  changed_when: false
+
+- name: MAIN - docker restart kibana
+  ansible.builtin.command: |
+    /bin/bash -c "
+      if [ ! -z \"$(docker ps --quiet --filter status=running --filter name=kibana)\" ]; then
+        docker restart kibana
+      fi
+    "
+  become: true
+  when: inventory_hostname == assignments.kibana.host
   changed_when: false
 
 - name: MAIN - docker restart nginx
@@ -22,83 +44,6 @@
   no_log: true
   become: true
   when: inventory_hostname == assignments.nginx.host
-  changed_when: false
-
-- name: MAIN - docker restart filebrowser
-  ansible.builtin.command: |
-    /bin/bash -c "
-      if [ ! -z \"$(docker ps --quiet --filter status=running --filter name=filebrowser)\" ]; then
-        docker restart filebrowser
-      fi
-    "
-  become: true
-  when: inventory_hostname == assignments.filebrowser.host
-  changed_when: false
-
-- name: MAIN - docker restart elasticsearch
-  ansible.builtin.command: |
-    /bin/bash -c "
-      if [ ! -z \"$(docker ps --quiet --filter status=running --filter name=elasticsearch)\" ]; then
-        docker restart elasticsearch
-      fi
-    "
-  become: true
-  when: inventory_hostname == assignments.elasticsearch.host
-  changed_when: false
-
-- name: MAIN - docker restart kibana
-  ansible.builtin.command: |
-    /bin/bash -c "
-      if [ ! -z \"$(docker ps --quiet --filter status=running --filter name=kibana)\" ]; then
-        docker restart kibana
-      fi
-    "
-  become: true
-  when: inventory_hostname == assignments.kibana.host
-  changed_when: false
-
-- name: MAIN - docker restart zoneminder
-  ansible.builtin.command: |
-    /bin/bash -c "
-      if [ ! -z \"$(docker ps --quiet --filter status=running --filter name=zoneminder)\" ]; then
-        docker restart zoneminder
-      fi
-    "
-  become: true
-  when: inventory_hostname == assignments.zoneminder.host
-  changed_when: false
-
-- name: MAIN - docker restart expressvpn
-  ansible.builtin.command: |
-    /bin/bash -c "
-      if [ ! -z \"$(docker ps --quiet --filter status=running --filter name=expressvpn)\" ]; then
-        docker restart expressvpn squid deluge
-      fi
-    "
-  become: true
-  when: inventory_hostname == assignments.expressvpn.host
-  changed_when: false
-
-- name: MAIN - docker restart squid
-  ansible.builtin.command: |
-    /bin/bash -c "
-      if [ ! -z \"$(docker ps --quiet --filter status=running --filter name=squid)\" ]; then
-        docker restart squid
-      fi
-    "
-  become: true
-  when: inventory_hostname == assignments.squid.host
-  changed_when: false
-
-- name: MAIN - docker restart deluge
-  ansible.builtin.command: |
-    /bin/bash -c "
-      if [ ! -z \"$(docker ps --quiet --filter status=running --filter name=deluge)\" ]; then
-        docker restart deluge
-      fi
-    "
-  become: true
-  when: inventory_hostname == assignments.deluge.host
   changed_when: false
 
 - name: MAIN - docker restart oauth
@@ -121,4 +66,15 @@
     "
   become: true
   when: inventory_hostname == assignments.vault.host
+  changed_when: false
+
+- name: MAIN - docker restart zoneminder
+  ansible.builtin.command: |
+    /bin/bash -c "
+      if [ ! -z \"$(docker ps --quiet --filter status=running --filter name=zoneminder)\" ]; then
+        docker restart zoneminder
+      fi
+    "
+  become: true
+  when: inventory_hostname == assignments.zoneminder.host
   changed_when: false
