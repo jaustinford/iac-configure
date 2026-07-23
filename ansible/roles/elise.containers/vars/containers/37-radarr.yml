@@ -33,6 +33,6 @@ container:
   ports: []
   volumes:
     - "{{ folder_container_app }}/radarr:/config:rw"
-    - "{{ folder_raid }}/{{ names.raid }}-red_rw:/media:rw"
+    - "{{ folder_raid }}/{{ names.raid }}-red_rw:/plex_libraries:rw"
     - "{{ folder_raid }}/{{ names.raid }}-black_rw:/downloads:rw"
   wait_port: "{{ ports.gluetun_radarr }}"

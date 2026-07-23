@@ -32,5 +32,5 @@ container:
   ports: []
   volumes:
     - "{{ folder_container_app }}/bazarr:/config:rw"
-    - "{{ folder_raid }}/{{ names.raid }}-red_rw:/media:rw"
+    - "{{ folder_raid }}/{{ names.raid }}-red_rw:/plex_libraries:rw"
   wait_port: "{{ ports.gluetun_bazarr }}"
