@@ -35,6 +35,7 @@ container:
     TZ: "{{ names.local_timezone }}"
     HTTPPROXY: "on"
     VPN_SERVICE_PROVIDER: expressvpn
+    FIREWALL_OUTBOUND_SUBNETS: 192.168.40.0/29
     OPENVPN_USER: "{{ secrets.containers.gluetun.username }}"
     OPENVPN_PASSWORD: "{{ secrets.containers.gluetun.password }}"
     SERVER_COUNTRIES: "{{ lookup('env', 'GLUETUN_EXPRESSVPN_COUNTRIES') }}"

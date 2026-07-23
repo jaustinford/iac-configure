@@ -32,10 +32,3 @@ nginx:
         "Boulder", "Federal Heights", "Northglenn", "Thornton", "Commerce City",
         "Denver", "Wheat Ridge", "Arvada", "Lakewood", "Edgewater", "Aurora"
       ]
-
-    plex:
-      countries:
-        - United States
-        - Switzerland
-        - Iceland
-        - Panama
